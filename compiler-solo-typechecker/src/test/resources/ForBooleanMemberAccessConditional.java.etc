@@ -1,0 +1,31 @@
+FBMAC ==> class FBMAC {
+"StaticJavaLib.assertTrue(b == false)" in "StaticJavaLib.assertTrue(b == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"b" in "b == false" ==> boolean b;
+"b" in "b=false" ==> boolean b;
+"b" in "b=true" ==> boolean b;
+"new FBMAC()" in "o=new FBMAC()" ==> class FBMAC {
+"o" in "o.b" ==> FBMAC o;
+"o" in "o=new FBMAC()" ==> FBMAC o;
+"o.b" in "for (; o.b; ) {" ==> public boolean b;
+"o.b" in "o.b=false" ==> public boolean b;
+
+"FBMAC o;" in "{": FBMAC
+"StaticJavaLib.assertTrue(b == false)" in "StaticJavaLib.assertTrue(b == false);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"b == false" in "StaticJavaLib.assertTrue(b == false)": boolean
+"b" in "b == false": boolean
+"b" in "b=false": boolean
+"b" in "b=true": boolean
+"boolean b;" in "{": boolean
+"class FBMAC {" in "public class ForBooleanMemberAccessConditional {": FBMAC
+"false" in "b == false": boolean
+"false" in "b=false": boolean
+"false" in "o.b=false": boolean
+"new FBMAC()" in "o=new FBMAC()": FBMAC
+"o" in "o.b": FBMAC
+"o" in "o=new FBMAC()": FBMAC
+"o.b" in "for (; o.b; ) {": boolean
+"o.b" in "o.b=false": boolean
+"public boolean b;" in "class FBMAC {": boolean
+"public class ForBooleanMemberAccessConditional {" in "public class ForBooleanMemberAccessConditional {": ForBooleanMemberAccessConditional
+"true" in "b=true": boolean

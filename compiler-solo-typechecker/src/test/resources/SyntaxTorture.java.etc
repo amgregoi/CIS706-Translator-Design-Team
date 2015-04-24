@@ -1,0 +1,321 @@
+Empty ==> class Empty {
+ManyTypes ==> class ManyTypes {
+"SyntaxTorture.returnVoid()" in "SyntaxTorture.returnVoid();" ==> static void returnVoid(){
+"b" in "b ? null : ((m))" ==> boolean b;
+"b" in "b=false" ==> boolean b;
+"b" in "b=true" ==> boolean b;
+"b" in "true && b" ==> boolean b;
+"b_array" in "b_array=new boolean[]{true}" ==> boolean[] b_array;
+"b_array" in "b_array=returnBooleanArray(m.b_array)" ==> boolean[] b_array;
+"b_array" in "m.b_array=b_array" ==> boolean[] b_array;
+"c" in "!c" ==> boolean c;
+"c" in "(c)" ==> boolean[] c;
+"c" in "c=new boolean[]{true,false,false}" ==> boolean[] c;
+"c" in "c=true" ==> boolean c;
+"e" in "return e;" ==> Empty[] e
+"f" in "f=new Empty()" ==> Empty f;
+"f" in "return f;" ==> Empty f;
+"i" in "+4 != i" ==> int i;
+"i" in "+i" ==> int i;
+"i" in "3 == i" ==> int i;
+"i" in "i != 0" ==> int i;
+"i" in "i + i" ==> int i;
+"i" in "i <= 0" ==> int i;
+"i" in "i == -1" ==> int i;
+"i" in "i > 2" ==> int i;
+"i" in "i >= -1" ==> int i;
+"i" in "i >>> +-1" ==> int i;
+"i" in "i++" ==> int i;
+"i" in "i--" ==> int i;
+"i" in "i=0" ==> int i;
+"i" in "i=2" ==> int i;
+"i" in "i=4" ==> int i;
+"i" in "i=i + i" ==> int i;
+"i" in "i=i >>> +-1" ==> int i;
+"i" in "i=j" ==> int i;
+"i" in "i=new int[(1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9) + 3]" ==> int[] i;
+"i" in "j == i" ==> int i;
+"i" in "j=i" ==> int i;
+"i" in "new ManyTypes[i]" ==> int i;
+"i" in "return i;" ==> int i;
+"i" in "return i;" ==> int[] i;
+"i" in "{0,i,j,7}" ==> int i;
+"i" in "~9 <= i" ==> int i;
+"i_array" in "i_array=new int[]{0,i,j,7}" ==> int[] i_array;
+"i_array" in "i_array[m.i]" ==> int[] i_array;
+"i_array" in "i_array[returnInt()]" ==> int[] i_array;
+"i_array" in "i_array[returnIntArray()[2]]" ==> int[] i_array;
+"j" in "+7 << ~(-5) == j" ==> int j;
+"j" in "i=j" ==> int j;
+"j" in "j < (+i << 4)" ==> int j;
+"j" in "j == i" ==> int j;
+"j" in "j++" ==> int j;
+"j" in "j=0" ==> int j;
+"j" in "j=i" ==> int j;
+"j" in "m_array[j]" ==> int j;
+"j" in "{0,i,j,7}" ==> int j;
+"m" in "(m)" ==> ManyTypes m;
+"m" in "m.b" ==> ManyTypes m;
+"m" in "m.b_array" ==> ManyTypes m;
+"m" in "m.i" ==> ManyTypes m;
+"m" in "m=b ? null : ((m))" ==> ManyTypes m;
+"m" in "m=new ManyTypes()" ==> ManyTypes m;
+"m" in "m=null" ==> ManyTypes m;
+"m" in "m_array[0]=m" ==> ManyTypes m;
+"m.b" in "m.b=false" ==> public boolean b;
+"m.b_array" in "m.b_array=b_array" ==> public boolean[] b_array;
+"m.b_array" in "returnBooleanArray(m.b_array)" ==> public boolean[] b_array;
+"m.i" in "i_array[m.i]" ==> public int i;
+"m.i" in "m.i=0" ==> public int i;
+"m_array" in "m_array=new ManyTypes[i]" ==> ManyTypes[] m_array;
+"m_array" in "m_array[0]" ==> ManyTypes[] m_array;
+"m_array" in "m_array[i_array[m.i]]" ==> ManyTypes[] m_array;
+"m_array" in "m_array[j]" ==> ManyTypes[] m_array;
+"new Empty()" in "f=new Empty()" ==> class Empty {
+"new ManyTypes()" in "m=new ManyTypes()" ==> class ManyTypes {
+"returnBooleanArray(m.b_array)" in "b_array=returnBooleanArray(m.b_array)" ==> static boolean[] returnBooleanArray(boolean[] b){
+"returnInt()" in "i_array[returnInt()]" ==> static int returnInt(){
+"returnInt()" in "returnInt();" ==> static int returnInt(){
+"returnIntArray()" in "returnIntArray()[2]" ==> static int[] returnIntArray(){
+
+"!!((!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i) || 3 < 5 && ~1 <= -+~2)" in "return !!((!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i) || 3 < 5 && ~1 <= -+~2);": boolean
+"!((!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i) || 3 < 5 && ~1 <= -+~2)" in "!!((!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i) || 3 < 5 && ~1 <= -+~2)": boolean
+"!(i != 0)" in "for (i=0; !(i != 0); i--, i++, i--) {": boolean
+"!c" in "(!c)": boolean
+"(!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i) || 3 < 5 && ~1 <= -+~2" in "((!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i) || 3 < 5 && ~1 <= -+~2)": boolean
+"(!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i)" in "(!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i) || 3 < 5 && ~1 <= -+~2": boolean
+"(!c) && (false || true) || (i > 2 && i >= -1)" in "(!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i)": boolean
+"(!c) && (false || true)" in "(!c) && (false || true) || (i > 2 && i >= -1)": boolean
+"(!c)" in "(!c) && (false || true)": boolean
+"((!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i) || 3 < 5 && ~1 <= -+~2)" in "!((!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i) || 3 < 5 && ~1 <= -+~2)": boolean
+"((2 - 3) * 4) / (5 % 6 << 7)" in "1 + ((2 - 3) * 4) / (5 % 6 << 7)": int
+"((2 - 3) * 4)" in "((2 - 3) * 4) / (5 % 6 << 7)": int
+"((m))" in "b ? null : ((m))": ManyTypes
+"(+4 != i)" in "3 == i && (+4 != i)": boolean
+"(+i << 4)" in "j < (+i << 4)": int
+"(-5)" in "~(-5)": int
+"(1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9) + 3" in "new int[(1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9) + 3]": int
+"(1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9)" in "(1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9) + 3": int
+"(2 - 3) * 4" in "((2 - 3) * 4)": int
+"(2 - 3)" in "(2 - 3) * 4": int
+"(5 % 6 << 7)" in "((2 - 3) * 4) / (5 % 6 << 7)": int
+"(8)" in "1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8)": int
+"(c)" in "return (c);": boolean[]
+"(false || true)" in "(!c) && (false || true)": boolean
+"(i != 0)" in "!(i != 0)": boolean
+"(i <= 0)" in "if ((i <= 0)) {": boolean
+"(i > 2 && i >= -1)" in "(!c) && (false || true) || (i > 2 && i >= -1)": boolean
+"(m)" in "((m))": ManyTypes
+"+-1" in "i >>> +-1": int
+"+4 != i" in "(+4 != i)": boolean
+"+4" in "+4 != i": int
+"+7 << ~(-5) == j" in "do {": boolean
+"+7 << ~(-5)" in "+7 << ~(-5) == j": int
+"+7" in "+7 << ~(-5)": int
+"+i << 4" in "(+i << 4)": int
+"+i" in "+i << 4": int
+"+~2" in "-+~2": int
+"-+~2" in "~1 <= -+~2": int
+"-1" in "+-1": int
+"-1" in "i == -1": int
+"-1" in "i >= -1": int
+"-5" in "(-5)": int
+"0" in "i != 0": int
+"0" in "i <= 0": int
+"0" in "i=0": int
+"0" in "j=0": int
+"0" in "m.i=0": int
+"0" in "m_array[0]": int
+"0" in "{0,i,j,7}": int
+"1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9" in "(1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9)": int
+"1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8)" in "1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9": int
+"1 + ((2 - 3) * 4) / (5 % 6 << 7)" in "1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8)": int
+"1" in "-1": int
+"1" in "1 + ((2 - 3) * 4) / (5 % 6 << 7)": int
+"1" in "~1": int
+"2 - 3" in "(2 - 3)": int
+"2" in "2 - 3": int
+"2" in "i > 2": int
+"2" in "i=2": int
+"2" in "returnIntArray()[2]": int
+"2" in "~2": int
+"3 < 5 && ~1 <= -+~2" in "(!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i) || 3 < 5 && ~1 <= -+~2": boolean
+"3 < 5" in "3 < 5 && ~1 <= -+~2": boolean
+"3 == i && (+4 != i)" in "(!c) && (false || true) || (i > 2 && i >= -1) || 3 == i && (+4 != i)": boolean
+"3 == i" in "3 == i && (+4 != i)": boolean
+"3" in "(1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9) + 3": int
+"3" in "2 - 3": int
+"3" in "3 < 5": int
+"3" in "3 == i": int
+"4" in "(2 - 3) * 4": int
+"4" in "+4": int
+"4" in "+i << 4": int
+"4" in "i=4": int
+"5 % 6 << 7" in "(5 % 6 << 7)": int
+"5 % 6" in "5 % 6 << 7": int
+"5" in "-5": int
+"5" in "3 < 5": int
+"5" in "5 % 6": int
+"6" in "5 % 6": int
+"7" in "+7": int
+"7" in "5 % 6 << 7": int
+"7" in "{0,i,j,7}": int
+"8" in "(8)": int
+"9" in "1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9": int
+"9" in "~9": int
+"Empty e" in "static Empty returnEmpty(int i,Empty e){": Empty
+"Empty f;" in "{": Empty
+"Empty[] e" in "static Empty[] returnObjectArray(int[] i,Empty[] e){": Empty[]
+"ManyTypes m;" in "{": ManyTypes
+"ManyTypes[] m_array;" in "{": ManyTypes[]
+"String[] str" in "public static void main(String[] str){": java.lang.String[]
+"SyntaxTorture.returnVoid()" in "SyntaxTorture.returnVoid();": void
+"b ? null : ((m))" in "m=b ? null : ((m))": ManyTypes
+"b" in "b ? null : ((m))": boolean
+"b" in "b=false": boolean
+"b" in "b=true": boolean
+"b" in "true && b": boolean
+"b_array" in "b_array=new boolean[]{true}": boolean[]
+"b_array" in "b_array=returnBooleanArray(m.b_array)": boolean[]
+"b_array" in "m.b_array=b_array": boolean[]
+"boolean b" in "static boolean returnBoolean(boolean b){": boolean
+"boolean b;" in "{": boolean
+"boolean c;" in "{": boolean
+"boolean[] b" in "static boolean[] returnBooleanArray(boolean[] b){": boolean[]
+"boolean[] b_array;" in "{": boolean[]
+"boolean[] c;" in "{": boolean[]
+"c" in "!c": boolean
+"c" in "(c)": boolean[]
+"c" in "c=new boolean[]{true,false,false}": boolean[]
+"c" in "c=true": boolean
+"class Empty {" in "class Empty {": Empty
+"class ManyTypes {" in "class Empty {": ManyTypes
+"e" in "return e;": Empty[]
+"f" in "f=new Empty()": Empty
+"f" in "return f;": Empty
+"false || true" in "(false || true)": boolean
+"false" in "b=false": boolean
+"false" in "false || true": boolean
+"false" in "m.b=false": boolean
+"false" in "{true,false,false}": boolean
+"i != 0" in "(i != 0)": boolean
+"i + i" in "i=i + i": int
+"i <= 0" in "(i <= 0)": boolean
+"i == -1" in "~9 <= i && i == -1": boolean
+"i > 2 && i >= -1" in "(i > 2 && i >= -1)": boolean
+"i > 2" in "i > 2 && i >= -1": boolean
+"i >= -1" in "i > 2 && i >= -1": boolean
+"i >>> +-1" in "i=i >>> +-1": int
+"i" in "+4 != i": int
+"i" in "+i": int
+"i" in "3 == i": int
+"i" in "i != 0": int
+"i" in "i + i": int
+"i" in "i <= 0": int
+"i" in "i == -1": int
+"i" in "i > 2": int
+"i" in "i >= -1": int
+"i" in "i >>> +-1": int
+"i" in "i++": int
+"i" in "i--": int
+"i" in "i=0": int
+"i" in "i=2": int
+"i" in "i=4": int
+"i" in "i=i + i": int
+"i" in "i=i >>> +-1": int
+"i" in "i=j": int
+"i" in "i=new int[(1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9) + 3]": int[]
+"i" in "j == i": int
+"i" in "j=i": int
+"i" in "new ManyTypes[i]": int
+"i" in "return i;": int
+"i" in "return i;": int[]
+"i" in "{0,i,j,7}": int
+"i" in "~9 <= i": int
+"i_array" in "i_array=new int[]{0,i,j,7}": int[]
+"i_array" in "i_array[m.i]": int[]
+"i_array" in "i_array[returnInt()]": int[]
+"i_array" in "i_array[returnIntArray()[2]]": int[]
+"i_array[m.i]" in "m_array[i_array[m.i]]": int
+"i_array[returnInt()]" in "i_array[returnInt()]=i_array[returnIntArray()[2]]": int
+"i_array[returnIntArray()[2]]" in "i_array[returnInt()]=i_array[returnIntArray()[2]]": int
+"int i" in "static Empty returnEmpty(int i,Empty e){": int
+"int i;" in "{": int
+"int j;" in "{": int
+"int[] i" in "static Empty[] returnObjectArray(int[] i,Empty[] e){": int[]
+"int[] i;" in "{": int[]
+"int[] i_array;" in "{": int[]
+"j < (+i << 4) && j == i" in "for (i=2, i=j; j < (+i << 4) && j == i; j++, i--) {": boolean
+"j < (+i << 4)" in "j < (+i << 4) && j == i": boolean
+"j == i" in "j < (+i << 4) && j == i": boolean
+"j" in "+7 << ~(-5) == j": int
+"j" in "i=j": int
+"j" in "j < (+i << 4)": int
+"j" in "j == i": int
+"j" in "j++": int
+"j" in "j=0": int
+"j" in "j=i": int
+"j" in "m_array[j]": int
+"j" in "{0,i,j,7}": int
+"m" in "(m)": ManyTypes
+"m" in "m.b": ManyTypes
+"m" in "m.b_array": ManyTypes
+"m" in "m.i": ManyTypes
+"m" in "m=b ? null : ((m))": ManyTypes
+"m" in "m=new ManyTypes()": ManyTypes
+"m" in "m=null": ManyTypes
+"m" in "m_array[0]=m": ManyTypes
+"m.b" in "m.b=false": boolean
+"m.b_array" in "m.b_array=b_array": boolean[]
+"m.b_array" in "returnBooleanArray(m.b_array)": boolean[]
+"m.i" in "i_array[m.i]": int
+"m.i" in "m.i=0": int
+"m_array" in "m_array=new ManyTypes[i]": ManyTypes[]
+"m_array" in "m_array[0]": ManyTypes[]
+"m_array" in "m_array[i_array[m.i]]": ManyTypes[]
+"m_array" in "m_array[j]": ManyTypes[]
+"m_array[0]" in "m_array[0]=m": ManyTypes
+"m_array[i_array[m.i]]" in "m_array[i_array[m.i]]=m_array[j]": ManyTypes
+"m_array[j]" in "m_array[i_array[m.i]]=m_array[j]": ManyTypes
+"new Empty()" in "f=new Empty()": Empty
+"new ManyTypes()" in "m=new ManyTypes()": ManyTypes
+"new ManyTypes[i]" in "m_array=new ManyTypes[i]": ManyTypes[]
+"new boolean[]{true,false,false}" in "c=new boolean[]{true,false,false}": boolean[]
+"new boolean[]{true}" in "b_array=new boolean[]{true}": boolean[]
+"new int[(1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9) + 3]" in "i=new int[(1 + ((2 - 3) * 4) / (5 % 6 << 7) >> (8) >>> 9) + 3]": int[]
+"new int[]{0,i,j,7}" in "i_array=new int[]{0,i,j,7}": int[]
+"null" in "b ? null : ((m))": null
+"null" in "m=null": null
+"public Empty e;" in "class ManyTypes {": Empty
+"public Empty[] e_array;" in "class ManyTypes {": Empty[]
+"public boolean b;" in "class ManyTypes {": boolean
+"public boolean[] b_array;" in "class ManyTypes {": boolean[]
+"public class SyntaxTorture {" in "class Empty {": SyntaxTorture
+"public int i;" in "class ManyTypes {": int
+"public int[] i_array;" in "class ManyTypes {": int[]
+"returnBooleanArray(m.b_array)" in "b_array=returnBooleanArray(m.b_array)": boolean[]
+"returnInt()" in "i_array[returnInt()]": int
+"returnInt()" in "returnInt();": int
+"returnIntArray()" in "returnIntArray()[2]": int[]
+"returnIntArray()[2]" in "i_array[returnIntArray()[2]]": int
+"static Empty cc;" in "public class SyntaxTorture {": Empty
+"static Empty[] ff;" in "public class SyntaxTorture {": Empty[]
+"static boolean bb;" in "public class SyntaxTorture {": boolean
+"static boolean[] ee;" in "public class SyntaxTorture {": boolean[]
+"static int aa;" in "public class SyntaxTorture {": int
+"static int g;" in "public class SyntaxTorture {": int
+"static int[] dd;" in "public class SyntaxTorture {": int[]
+"true && b" in "while (true && b) {": boolean
+"true" in "b=true": boolean
+"true" in "c=true": boolean
+"true" in "false || true": boolean
+"true" in "true && b": boolean
+"true" in "{true,false,false}": boolean
+"true" in "{true}": boolean
+"~(-5)" in "+7 << ~(-5)": int
+"~1 <= -+~2" in "3 < 5 && ~1 <= -+~2": boolean
+"~1" in "~1 <= -+~2": int
+"~2" in "+~2": int
+"~9 <= i && i == -1" in "while (~9 <= i && i == -1) {": boolean
+"~9 <= i" in "~9 <= i && i == -1": boolean
+"~9" in "~9 <= i": int

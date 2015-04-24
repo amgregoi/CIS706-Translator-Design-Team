@@ -1,0 +1,12 @@
+AC ==> class AC {
+"acs" in "acs=new AC[]{null,new AC()}" ==> AC[] acs;
+"new AC()" in "{null,new AC()}" ==> class AC {
+
+"AC[] acs;" in "{": AC[]
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"acs" in "acs=new AC[]{null,new AC()}": AC[]
+"class AC {" in "public class ArrayCreation {": AC
+"new AC()" in "{null,new AC()}": AC
+"new AC[]{null,new AC()}" in "acs=new AC[]{null,new AC()}": AC[]
+"null" in "{null,new AC()}": null
+"public class ArrayCreation {" in "public class ArrayCreation {": ArrayCreation

@@ -1,0 +1,152 @@
+Data ==> class Data {
+LinkedList ==> class LinkedList {
+LinkedNode ==> class LinkedNode {
+"StaticJavaLib.assertTrue(ll != null && data != null)" in "StaticJavaLib.assertTrue(ll != null && data != null);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(ll != null)" in "StaticJavaLib.assertTrue(ll != null);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(ll.size > 0)" in "StaticJavaLib.assertTrue(ll.size > 0);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.println(d.i)" in "StaticJavaLib.println(d.i);" ==> public static void StaticJavaLib.println(int)
+"d" in "d.i" ==> Data d;
+"d" in "d=llRemoveFirst(ll)" ==> Data d;
+"d" in "d=new Data()" ==> Data d;
+"d" in "llAddLast(ll,d)" ==> Data d;
+"d.i" in "StaticJavaLib.println(d.i)" ==> public int i;
+"d.i" in "d.i=i + 1" ==> public int i;
+"data" in "data != null" ==> Data data
+"data" in "ll.last.data=data" ==> Data data
+"i" in "i + 1" ==> int i;
+"i" in "i < 10" ==> int i;
+"i" in "i++" ==> int i;
+"i" in "i=0" ==> int i;
+"ll" in "ll != null" ==> LinkedList ll
+"ll" in "ll.head" ==> LinkedList ll
+"ll" in "ll.last" ==> LinkedList ll
+"ll" in "ll.size" ==> LinkedList ll
+"ll" in "ll=llNewLinkedList()" ==> LinkedList ll;
+"ll" in "llAddLast(ll,d)" ==> LinkedList ll;
+"ll" in "llIsEmpty(ll)" ==> LinkedList ll;
+"ll" in "llRemoveFirst(ll)" ==> LinkedList ll;
+"ll.head" in "ll.head.next" ==> public LinkedNode head;
+"ll.head" in "ll.head=ll.head.next" ==> public LinkedNode head;
+"ll.head.next" in "ll.head.next.data" ==> public LinkedNode next;
+"ll.head.next" in "ll.head=ll.head.next" ==> public LinkedNode next;
+"ll.head.next.data" in "result=ll.head.next.data" ==> public Data data;
+"ll.last" in "ll.last.data" ==> public LinkedNode last;
+"ll.last" in "ll.last.next" ==> public LinkedNode last;
+"ll.last" in "ll.last=ll.last.next" ==> public LinkedNode last;
+"ll.last.data" in "ll.last.data=data" ==> public Data data;
+"ll.last.next" in "ll.last.next=new LinkedNode()" ==> public LinkedNode next;
+"ll.last.next" in "ll.last=ll.last.next" ==> public LinkedNode next;
+"ll.size" in "ll.size == 0" ==> public int size;
+"ll.size" in "ll.size > 0" ==> public int size;
+"ll.size" in "ll.size++" ==> public int size;
+"ll.size" in "ll.size--" ==> public int size;
+"llAddLast(ll,d)" in "llAddLast(ll,d);" ==> static void llAddLast(LinkedList ll,Data data){
+"llIsEmpty(ll)" in "!llIsEmpty(ll)" ==> static boolean llIsEmpty(LinkedList ll){
+"llNewLinkedList()" in "ll=llNewLinkedList()" ==> static LinkedList llNewLinkedList(){
+"llRemoveFirst(ll)" in "d=llRemoveFirst(ll)" ==> static Data llRemoveFirst(LinkedList ll){
+"new Data()" in "d=new Data()" ==> class Data {
+"new LinkedList()" in "result=new LinkedList()" ==> class LinkedList {
+"new LinkedNode()" in "ll.last.next=new LinkedNode()" ==> class LinkedNode {
+"new LinkedNode()" in "result.head=new LinkedNode()" ==> class LinkedNode {
+"result" in "result.head" ==> LinkedList result;
+"result" in "result.last" ==> LinkedList result;
+"result" in "result=ll.head.next.data" ==> Data result;
+"result" in "result=new LinkedList()" ==> LinkedList result;
+"result" in "return result;" ==> Data result;
+"result" in "return result;" ==> LinkedList result;
+"result.head" in "result.head=new LinkedNode()" ==> public LinkedNode head;
+"result.head" in "result.last=result.head" ==> public LinkedNode head;
+"result.last" in "result.last=result.head" ==> public LinkedNode last;
+
+"!llIsEmpty(ll)" in "while (!llIsEmpty(ll)) {": boolean
+"0" in "i=0": int
+"0" in "ll.size == 0": int
+"0" in "ll.size > 0": int
+"1" in "i + 1": int
+"10" in "i < 10": int
+"Data d;" in "{": Data
+"Data data" in "static void llAddLast(LinkedList ll,Data data){": Data
+"Data result;" in "{": Data
+"LinkedList ll" in "static Data llRemoveFirst(LinkedList ll){": LinkedList
+"LinkedList ll" in "static boolean llIsEmpty(LinkedList ll){": LinkedList
+"LinkedList ll" in "static void llAddLast(LinkedList ll,Data data){": LinkedList
+"LinkedList ll;" in "{": LinkedList
+"LinkedList result;" in "{": LinkedList
+"StaticJavaLib.assertTrue(ll != null && data != null)" in "StaticJavaLib.assertTrue(ll != null && data != null);": void
+"StaticJavaLib.assertTrue(ll != null)" in "StaticJavaLib.assertTrue(ll != null);": void
+"StaticJavaLib.assertTrue(ll.size > 0)" in "StaticJavaLib.assertTrue(ll.size > 0);": void
+"StaticJavaLib.println(d.i)" in "StaticJavaLib.println(d.i);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"class Data {" in "class Data {": Data
+"class LinkedList {" in "class Data {": LinkedList
+"class LinkedNode {" in "class Data {": LinkedNode
+"d" in "d.i": Data
+"d" in "d=llRemoveFirst(ll)": Data
+"d" in "d=new Data()": Data
+"d" in "llAddLast(ll,d)": Data
+"d.i" in "StaticJavaLib.println(d.i)": int
+"d.i" in "d.i=i + 1": int
+"data != null" in "ll != null && data != null": boolean
+"data" in "data != null": Data
+"data" in "ll.last.data=data": Data
+"i + 1" in "d.i=i + 1": int
+"i < 10" in "for (i=0; i < 10; i++) {": boolean
+"i" in "i + 1": int
+"i" in "i < 10": int
+"i" in "i++": int
+"i" in "i=0": int
+"int i;" in "{": int
+"ll != null && data != null" in "StaticJavaLib.assertTrue(ll != null && data != null)": boolean
+"ll != null" in "StaticJavaLib.assertTrue(ll != null)": boolean
+"ll != null" in "ll != null && data != null": boolean
+"ll" in "ll != null": LinkedList
+"ll" in "ll.head": LinkedList
+"ll" in "ll.last": LinkedList
+"ll" in "ll.size": LinkedList
+"ll" in "ll=llNewLinkedList()": LinkedList
+"ll" in "llAddLast(ll,d)": LinkedList
+"ll" in "llIsEmpty(ll)": LinkedList
+"ll" in "llRemoveFirst(ll)": LinkedList
+"ll.head" in "ll.head.next": LinkedNode
+"ll.head" in "ll.head=ll.head.next": LinkedNode
+"ll.head.next" in "ll.head.next.data": LinkedNode
+"ll.head.next" in "ll.head=ll.head.next": LinkedNode
+"ll.head.next.data" in "result=ll.head.next.data": Data
+"ll.last" in "ll.last.data": LinkedNode
+"ll.last" in "ll.last.next": LinkedNode
+"ll.last" in "ll.last=ll.last.next": LinkedNode
+"ll.last.data" in "ll.last.data=data": Data
+"ll.last.next" in "ll.last.next=new LinkedNode()": LinkedNode
+"ll.last.next" in "ll.last=ll.last.next": LinkedNode
+"ll.size == 0" in "return ll.size == 0;": boolean
+"ll.size > 0" in "StaticJavaLib.assertTrue(ll.size > 0)": boolean
+"ll.size" in "ll.size == 0": int
+"ll.size" in "ll.size > 0": int
+"ll.size" in "ll.size++": int
+"ll.size" in "ll.size--": int
+"llAddLast(ll,d)" in "llAddLast(ll,d);": void
+"llIsEmpty(ll)" in "!llIsEmpty(ll)": boolean
+"llNewLinkedList()" in "ll=llNewLinkedList()": LinkedList
+"llRemoveFirst(ll)" in "d=llRemoveFirst(ll)": Data
+"new Data()" in "d=new Data()": Data
+"new LinkedList()" in "result=new LinkedList()": LinkedList
+"new LinkedNode()" in "ll.last.next=new LinkedNode()": LinkedNode
+"new LinkedNode()" in "result.head=new LinkedNode()": LinkedNode
+"null" in "data != null": null
+"null" in "ll != null": null
+"public Data data;" in "class LinkedNode {": Data
+"public LinkedNode head;" in "class LinkedList {": LinkedNode
+"public LinkedNode last;" in "class LinkedList {": LinkedNode
+"public LinkedNode next;" in "class LinkedNode {": LinkedNode
+"public class Queue {" in "class Data {": Queue
+"public int i;" in "class Data {": int
+"public int size;" in "class LinkedList {": int
+"result" in "result.head": LinkedList
+"result" in "result.last": LinkedList
+"result" in "result=ll.head.next.data": Data
+"result" in "result=new LinkedList()": LinkedList
+"result" in "return result;": Data
+"result" in "return result;": LinkedList
+"result.head" in "result.head=new LinkedNode()": LinkedNode
+"result.head" in "result.last=result.head": LinkedNode
+"result.last" in "result.last=result.head": LinkedNode

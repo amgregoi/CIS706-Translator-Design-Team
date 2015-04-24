@@ -1,0 +1,7 @@
+Foo ==> class Foo {
+
+"Foo f;" in "{": Foo
+"Foo[] g;" in "{": Foo[]
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"class Foo {" in "class Foo {": Foo
+"public class TypesID {" in "class Foo {": TypesID

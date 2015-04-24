@@ -1,0 +1,1 @@
+Type mismatch in array initializer element 0 in 'new int[]{b}': int : boolean

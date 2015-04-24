@@ -1,0 +1,14 @@
+"I" in "I=new int[1]" ==> int[] I;
+"I" in "I[0]" ==> int[] I;
+
+"0" in "I[0]": int
+"1" in "I[0]=1": int
+"1" in "new int[1]": int
+"I" in "I=new int[1]": int[]
+"I" in "I[0]": int[]
+"I[0]" in "I[0]++": int
+"I[0]" in "I[0]=1": int
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"int[] I;" in "{": int[]
+"new int[1]" in "I=new int[1]": int[]
+"public class IncIntArrayAccess {" in "public class IncIntArrayAccess {": IncIntArrayAccess

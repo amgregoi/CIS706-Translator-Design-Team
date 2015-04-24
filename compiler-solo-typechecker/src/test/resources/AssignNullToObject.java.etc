@@ -1,0 +1,9 @@
+ANTO ==> class ANTO {
+"o" in "o=null" ==> ANTO o;
+
+"ANTO o;" in "{": ANTO
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"class ANTO {" in "public class AssignNullToObject {": ANTO
+"null" in "o=null": null
+"o" in "o=null": ANTO
+"public class AssignNullToObject {" in "public class AssignNullToObject {": AssignNullToObject

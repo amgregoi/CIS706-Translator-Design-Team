@@ -1,0 +1,26 @@
+"b" in "b=new boolean[4]" ==> boolean[] b;
+"c" in "c=new boolean[]{true,false}" ==> boolean[] c;
+"i" in "i=new int[4]" ==> int[] i;
+"j" in "j=new int[]{1,2,3}" ==> int[] j;
+
+"1" in "{1,2,3}": int
+"2" in "{1,2,3}": int
+"3" in "{1,2,3}": int
+"4" in "new boolean[4]": int
+"4" in "new int[4]": int
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"b" in "b=new boolean[4]": boolean[]
+"boolean[] b;" in "{": boolean[]
+"boolean[] c;" in "{": boolean[]
+"c" in "c=new boolean[]{true,false}": boolean[]
+"false" in "{true,false}": boolean
+"i" in "i=new int[4]": int[]
+"int[] i;" in "{": int[]
+"int[] j;" in "{": int[]
+"j" in "j=new int[]{1,2,3}": int[]
+"new boolean[4]" in "b=new boolean[4]": boolean[]
+"new boolean[]{true,false}" in "c=new boolean[]{true,false}": boolean[]
+"new int[4]" in "i=new int[4]": int[]
+"new int[]{1,2,3}" in "j=new int[]{1,2,3}": int[]
+"public class NewBasic {" in "public class NewBasic {": NewBasic
+"true" in "{true,false}": boolean

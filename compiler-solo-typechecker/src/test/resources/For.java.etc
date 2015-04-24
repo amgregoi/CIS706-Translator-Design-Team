@@ -1,0 +1,53 @@
+"StaticJavaLib.assertTrue(i == 10)" in "StaticJavaLib.assertTrue(i == 10);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(j == 10)" in "StaticJavaLib.assertTrue(j == 10);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(k == 10)" in "StaticJavaLib.assertTrue(k == 10);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"forFor()" in "forFor();" ==> static void forFor(){
+"i" in "i < 10" ==> int i;
+"i" in "i == 10" ==> int i;
+"i" in "i++" ==> int i;
+"i" in "i=0" ==> int i;
+"j" in "j == 10" ==> int j;
+"j" in "j++" ==> int j;
+"j" in "j=0" ==> int j;
+"k" in "k == 10" ==> int k;
+"k" in "k++" ==> int k;
+"k" in "k=0" ==> int k;
+"missingInitFor()" in "missingInitFor();" ==> static void missingInitFor(){
+"multipleFor()" in "multipleFor();" ==> static void multipleFor(){
+
+"0" in "i=0": int
+"0" in "j=0": int
+"0" in "k=0": int
+"10" in "i < 10": int
+"10" in "i == 10": int
+"10" in "j == 10": int
+"10" in "k == 10": int
+"StaticJavaLib.assertTrue(i == 10)" in "StaticJavaLib.assertTrue(i == 10);": void
+"StaticJavaLib.assertTrue(j == 10)" in "StaticJavaLib.assertTrue(j == 10);": void
+"StaticJavaLib.assertTrue(k == 10)" in "StaticJavaLib.assertTrue(k == 10);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"forFor()" in "forFor();": void
+"i < 10" in "for (; i < 10; ) {": boolean
+"i < 10" in "for (; i < 10; i++) {": boolean
+"i < 10" in "for (i=0, j=0, k=0; i < 10; i++, j++, k++) {": boolean
+"i < 10" in "for (i=0; i < 10; ) {": boolean
+"i < 10" in "for (i=0; i < 10; i++) {": boolean
+"i == 10" in "StaticJavaLib.assertTrue(i == 10)": boolean
+"i" in "i < 10": int
+"i" in "i == 10": int
+"i" in "i++": int
+"i" in "i=0": int
+"int i;" in "{": int
+"int j;" in "{": int
+"int k;" in "{": int
+"j == 10" in "StaticJavaLib.assertTrue(j == 10)": boolean
+"j" in "j == 10": int
+"j" in "j++": int
+"j" in "j=0": int
+"k == 10" in "StaticJavaLib.assertTrue(k == 10)": boolean
+"k" in "k == 10": int
+"k" in "k++": int
+"k" in "k=0": int
+"missingInitFor()" in "missingInitFor();": void
+"multipleFor()" in "multipleFor();": void
+"public class For {" in "public class For {": For

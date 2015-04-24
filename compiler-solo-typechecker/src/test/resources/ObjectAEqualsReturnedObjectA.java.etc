@@ -1,0 +1,22 @@
+Object64 ==> class Object64 {
+"StaticJavaLib.assertTrue(o == returnObject(o))" in "StaticJavaLib.assertTrue(o == returnObject(o));" ==> public static void StaticJavaLib.assertTrue(boolean)
+"new Object64()" in "o=new Object64()" ==> class Object64 {
+"o" in "o == returnObject(o)" ==> Object64 o;
+"o" in "o=new Object64()" ==> Object64 o;
+"o" in "return o;" ==> Object64 o
+"o" in "returnObject(o)" ==> Object64 o;
+"returnObject(o)" in "o == returnObject(o)" ==> static Object64 returnObject(Object64 o){
+
+"Object64 o" in "static Object64 returnObject(Object64 o){": Object64
+"Object64 o;" in "{": Object64
+"StaticJavaLib.assertTrue(o == returnObject(o))" in "StaticJavaLib.assertTrue(o == returnObject(o));": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"class Object64 {" in "class Object64 {": Object64
+"new Object64()" in "o=new Object64()": Object64
+"o == returnObject(o)" in "StaticJavaLib.assertTrue(o == returnObject(o))": boolean
+"o" in "o == returnObject(o)": Object64
+"o" in "o=new Object64()": Object64
+"o" in "return o;": Object64
+"o" in "returnObject(o)": Object64
+"public class ObjectAEqualsReturnedObjectA {" in "class Object64 {": ObjectAEqualsReturnedObjectA
+"returnObject(o)" in "o == returnObject(o)": Object64

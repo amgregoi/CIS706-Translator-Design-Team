@@ -1,0 +1,58 @@
+"StaticJavaLib.assertTrue(i == 2)" in "StaticJavaLib.assertTrue(i == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(i == 4)" in "StaticJavaLib.assertTrue(i == 4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"a" in "a=new int[4]" ==> int[] a;
+"i" in "(i)" ==> int i;
+"i" in "i * (i + 0)" ==> int i;
+"i" in "i + 0" ==> int i;
+"i" in "i == 2" ==> int i;
+"i" in "i == 4" ==> int i;
+"i" in "i=(((i) / (2)) - (0))" ==> int i;
+"i" in "i=(2)" ==> int i;
+"i" in "i=(i * (i + 0))" ==> int i;
+"i" in "i=(i + 0)" ==> int i;
+"i" in "i=2" ==> int i;
+"j" in "j=(i)" ==> int j;
+
+"(((i) / (2)) - (0))" in "i=(((i) / (2)) - (0))": int
+"((i) / (2)) - (0)" in "(((i) / (2)) - (0))": int
+"((i) / (2))" in "((i) / (2)) - (0)": int
+"(0)" in "((i) / (2)) - (0)": int
+"(2)" in "(i) / (2)": int
+"(2)" in "i=(2)": int
+"(i * (i + 0))" in "i=(i * (i + 0))": int
+"(i + 0)" in "i * (i + 0)": int
+"(i + 0)" in "i=(i + 0)": int
+"(i) / (2)" in "((i) / (2))": int
+"(i)" in "(i) / (2)": int
+"(i)" in "j=(i)": int
+"0" in "(0)": int
+"0" in "i + 0": int
+"2" in "(2)": int
+"2" in "i == 2": int
+"2" in "i=2": int
+"4" in "i == 4": int
+"4" in "new int[4]": int
+"StaticJavaLib.assertTrue(i == 2)" in "StaticJavaLib.assertTrue(i == 2);": void
+"StaticJavaLib.assertTrue(i == 4)" in "StaticJavaLib.assertTrue(i == 4);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"a" in "a=new int[4]": int[]
+"i * (i + 0)" in "(i * (i + 0))": int
+"i + 0" in "(i + 0)": int
+"i == 2" in "StaticJavaLib.assertTrue(i == 2)": boolean
+"i == 4" in "StaticJavaLib.assertTrue(i == 4)": boolean
+"i" in "(i)": int
+"i" in "i * (i + 0)": int
+"i" in "i + 0": int
+"i" in "i == 2": int
+"i" in "i == 4": int
+"i" in "i=(((i) / (2)) - (0))": int
+"i" in "i=(2)": int
+"i" in "i=(i * (i + 0))": int
+"i" in "i=(i + 0)": int
+"i" in "i=2": int
+"int i;" in "{": int
+"int j;" in "{": int
+"int[] a;" in "{": int[]
+"j" in "j=(i)": int
+"new int[4]" in "a=new int[4]": int[]
+"public class Parens {" in "public class Parens {": Parens

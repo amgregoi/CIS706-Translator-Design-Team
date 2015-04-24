@@ -1,0 +1,14 @@
+"StaticJavaLib.assertTrue(a == 0)" in "StaticJavaLib.assertTrue(a == 0);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"a" in "a == 0" ==> int a;
+"a" in "a=0" ==> int a;
+
+"0" in "a == 0": int
+"0" in "a=0": int
+"StaticJavaLib.assertTrue(a == 0)" in "StaticJavaLib.assertTrue(a == 0);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"a == 0" in "StaticJavaLib.assertTrue(a == 0)": boolean
+"a" in "a == 0": int
+"a" in "a=0": int
+"int a;" in "{": int
+"public class IfTrueEmpty {" in "public class IfTrueEmpty {": IfTrueEmpty
+"true" in "if (true) {": boolean

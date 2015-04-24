@@ -1,0 +1,25 @@
+Bar ==> class Bar {
+Foo ==> class Foo {
+"a" in "a.b" ==> Foo a;
+"a" in "a=new Foo()" ==> Foo a;
+"a.b" in "a.b.x" ==> public Bar b;
+"a.b" in "a.b=new Bar()" ==> public Bar b;
+"a.b.x" in "a.b.x=5" ==> public int x;
+"new Bar()" in "a.b=new Bar()" ==> class Bar {
+"new Foo()" in "a=new Foo()" ==> class Foo {
+
+"5" in "a.b.x=5": int
+"Foo a;" in "{": Foo
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"a" in "a.b": Foo
+"a" in "a=new Foo()": Foo
+"a.b" in "a.b.x": Bar
+"a.b" in "a.b=new Bar()": Bar
+"a.b.x" in "a.b.x=5": int
+"class Bar {" in "public class ForwardClassTest {": Bar
+"class Foo {" in "public class ForwardClassTest {": Foo
+"new Bar()" in "a.b=new Bar()": Bar
+"new Foo()" in "a=new Foo()": Foo
+"public Bar b;" in "class Foo {": Bar
+"public class ForwardClassTest {" in "public class ForwardClassTest {": ForwardClassTest
+"public int x;" in "class Bar {": int

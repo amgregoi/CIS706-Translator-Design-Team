@@ -1,0 +1,5 @@
+
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"boolean[] b;" in "{": boolean[]
+"int[] i;" in "{": int[]
+"public class TypesArray {" in "public class TypesArray {": TypesArray

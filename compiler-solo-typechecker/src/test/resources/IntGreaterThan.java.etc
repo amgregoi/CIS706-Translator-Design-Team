@@ -1,0 +1,53 @@
+"StaticJavaLib.assertTrue(2 > 2 == false)" in "StaticJavaLib.assertTrue(2 > 2 == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(2 > 3 == false)" in "StaticJavaLib.assertTrue(2 > 3 == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(3 > 2 == true)" in "StaticJavaLib.assertTrue(3 > 2 == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(greaterThan(2,2) == false)" in "StaticJavaLib.assertTrue(greaterThan(2,2) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(greaterThan(2,3) == false)" in "StaticJavaLib.assertTrue(greaterThan(2,3) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(greaterThan(3,2) == true)" in "StaticJavaLib.assertTrue(greaterThan(3,2) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"greaterThan(2,2)" in "greaterThan(2,2) == false" ==> static boolean greaterThan(int i,int j){
+"greaterThan(2,3)" in "greaterThan(2,3) == false" ==> static boolean greaterThan(int i,int j){
+"greaterThan(3,2)" in "greaterThan(3,2) == true" ==> static boolean greaterThan(int i,int j){
+"i" in "i > j" ==> int i
+"j" in "i > j" ==> int j
+
+"2 > 2 == false" in "StaticJavaLib.assertTrue(2 > 2 == false)": boolean
+"2 > 2" in "2 > 2 == false": boolean
+"2 > 3 == false" in "StaticJavaLib.assertTrue(2 > 3 == false)": boolean
+"2 > 3" in "2 > 3 == false": boolean
+"2" in "2 > 2": int
+"2" in "2 > 3": int
+"2" in "3 > 2": int
+"2" in "greaterThan(2,2)": int
+"2" in "greaterThan(2,3)": int
+"2" in "greaterThan(3,2)": int
+"3 > 2 == true" in "StaticJavaLib.assertTrue(3 > 2 == true)": boolean
+"3 > 2" in "3 > 2 == true": boolean
+"3" in "2 > 3": int
+"3" in "3 > 2": int
+"3" in "greaterThan(2,3)": int
+"3" in "greaterThan(3,2)": int
+"StaticJavaLib.assertTrue(2 > 2 == false)" in "StaticJavaLib.assertTrue(2 > 2 == false);": void
+"StaticJavaLib.assertTrue(2 > 3 == false)" in "StaticJavaLib.assertTrue(2 > 3 == false);": void
+"StaticJavaLib.assertTrue(3 > 2 == true)" in "StaticJavaLib.assertTrue(3 > 2 == true);": void
+"StaticJavaLib.assertTrue(greaterThan(2,2) == false)" in "StaticJavaLib.assertTrue(greaterThan(2,2) == false);": void
+"StaticJavaLib.assertTrue(greaterThan(2,3) == false)" in "StaticJavaLib.assertTrue(greaterThan(2,3) == false);": void
+"StaticJavaLib.assertTrue(greaterThan(3,2) == true)" in "StaticJavaLib.assertTrue(greaterThan(3,2) == true);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"false" in "2 > 2 == false": boolean
+"false" in "2 > 3 == false": boolean
+"false" in "greaterThan(2,2) == false": boolean
+"false" in "greaterThan(2,3) == false": boolean
+"greaterThan(2,2) == false" in "StaticJavaLib.assertTrue(greaterThan(2,2) == false)": boolean
+"greaterThan(2,2)" in "greaterThan(2,2) == false": boolean
+"greaterThan(2,3) == false" in "StaticJavaLib.assertTrue(greaterThan(2,3) == false)": boolean
+"greaterThan(2,3)" in "greaterThan(2,3) == false": boolean
+"greaterThan(3,2) == true" in "StaticJavaLib.assertTrue(greaterThan(3,2) == true)": boolean
+"greaterThan(3,2)" in "greaterThan(3,2) == true": boolean
+"i > j" in "return i > j;": boolean
+"i" in "i > j": int
+"int i" in "static boolean greaterThan(int i,int j){": int
+"int j" in "static boolean greaterThan(int i,int j){": int
+"j" in "i > j": int
+"public class IntGreaterThan {" in "public class IntGreaterThan {": IntGreaterThan
+"true" in "3 > 2 == true": boolean
+"true" in "greaterThan(3,2) == true": boolean

@@ -1,0 +1,46 @@
+"a" in "a=new int[]{1,2,3}" ==> int[] a;
+"a" in "a[a[i]]" ==> int[] a;
+"a" in "a[b[a[i]]]" ==> int[] a;
+"a" in "a[i]" ==> int[] a;
+"b" in "b=new int[3]" ==> int[] b;
+"b" in "b[a[i] * i]" ==> int[] b;
+"b" in "b[a[i]]" ==> int[] b;
+"b" in "b[i]" ==> int[] b;
+"i" in "a[i] * i" ==> int i;
+"i" in "a[i]" ==> int i;
+"i" in "b[i]" ==> int i;
+"i" in "i=0" ==> int i;
+
+"0" in "i=0": int
+"1" in "{1,2,3}": int
+"2" in "{1,2,3}": int
+"3" in "new int[3]": int
+"3" in "{1,2,3}": int
+"String[] str" in "public static void main(String[] str){": java.lang.String[]
+"a" in "a=new int[]{1,2,3}": int[]
+"a" in "a[a[i]]": int[]
+"a" in "a[b[a[i]]]": int[]
+"a" in "a[i]": int[]
+"a[a[i]]" in "b[i]=a[a[i]]": int
+"a[b[a[i]]]" in "b[a[i] * i]=a[b[a[i]]]": int
+"a[i] * i" in "b[a[i] * i]": int
+"a[i]" in "a[a[i]]": int
+"a[i]" in "a[i] * i": int
+"a[i]" in "b[a[i]]": int
+"b" in "b=new int[3]": int[]
+"b" in "b[a[i] * i]": int[]
+"b" in "b[a[i]]": int[]
+"b" in "b[i]": int[]
+"b[a[i] * i]" in "b[a[i] * i]=a[b[a[i]]]": int
+"b[a[i]]" in "a[b[a[i]]]": int
+"b[i]" in "b[i]=a[a[i]]": int
+"i" in "a[i] * i": int
+"i" in "a[i]": int
+"i" in "b[i]": int
+"i" in "i=0": int
+"int i;" in "{": int
+"int[] a;" in "{": int[]
+"int[] b;" in "{": int[]
+"new int[3]" in "b=new int[3]": int[]
+"new int[]{1,2,3}" in "a=new int[]{1,2,3}": int[]
+"public class ArrayIndex {" in "public class ArrayIndex {": ArrayIndex

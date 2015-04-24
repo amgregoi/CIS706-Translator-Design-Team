@@ -1,0 +1,9 @@
+"i" in "i++" ==> int i;
+"i" in "i=0" ==> int i;
+
+"0" in "i=0": int
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i" in "i++": int
+"i" in "i=0": int
+"int i;" in "{": int
+"public class ForMissingCond {" in "public class ForMissingCond {": ForMissingCond

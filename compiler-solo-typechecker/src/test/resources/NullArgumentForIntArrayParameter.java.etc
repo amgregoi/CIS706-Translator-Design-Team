@@ -1,0 +1,7 @@
+"takeIntArray(null)" in "takeIntArray(null);" ==> static void takeIntArray(int[] I){
+
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"int[] I" in "static void takeIntArray(int[] I){": int[]
+"null" in "takeIntArray(null)": null
+"public class NullArgumentForIntArrayParameter {" in "public class NullArgumentForIntArrayParameter {": NullArgumentForIntArrayParameter
+"takeIntArray(null)" in "takeIntArray(null);": void

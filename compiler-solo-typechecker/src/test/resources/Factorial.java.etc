@@ -1,0 +1,47 @@
+"StaticJavaLib.assertTrue(n >= 1)" in "StaticJavaLib.assertTrue(n >= 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.getIntArgument(args,0)" in "factorial(StaticJavaLib.getIntArgument(args,0))" ==> public static int StaticJavaLib.getIntArgument(java.lang.String[],int)
+"StaticJavaLib.println(factorial(StaticJavaLib.getIntArgument(args,0)))" in "StaticJavaLib.println(factorial(StaticJavaLib.getIntArgument(args,0)));" ==> public static void StaticJavaLib.println(int)
+"args" in "StaticJavaLib.getIntArgument(args,0)" ==> String[] args
+"factorial(StaticJavaLib.getIntArgument(args,0))" in "StaticJavaLib.println(factorial(StaticJavaLib.getIntArgument(args,0)))" ==> static int factorial(int n){
+"i" in "i + 1" ==> int i;
+"i" in "i <= n" ==> int i;
+"i" in "i=2" ==> int i;
+"i" in "i=i + 1" ==> int i;
+"i" in "result * i" ==> int i;
+"n" in "i <= n" ==> int n
+"n" in "n >= 1" ==> int n
+"result" in "result * i" ==> int result;
+"result" in "result=1" ==> int result;
+"result" in "result=result * i" ==> int result;
+"result" in "return result;" ==> int result;
+
+"0" in "StaticJavaLib.getIntArgument(args,0)": int
+"1" in "i + 1": int
+"1" in "n >= 1": int
+"1" in "result=1": int
+"2" in "i=2": int
+"StaticJavaLib.assertTrue(n >= 1)" in "StaticJavaLib.assertTrue(n >= 1);": void
+"StaticJavaLib.getIntArgument(args,0)" in "factorial(StaticJavaLib.getIntArgument(args,0))": int
+"StaticJavaLib.println(factorial(StaticJavaLib.getIntArgument(args,0)))" in "StaticJavaLib.println(factorial(StaticJavaLib.getIntArgument(args,0)));": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"args" in "StaticJavaLib.getIntArgument(args,0)": java.lang.String[]
+"factorial(StaticJavaLib.getIntArgument(args,0))" in "StaticJavaLib.println(factorial(StaticJavaLib.getIntArgument(args,0)))": int
+"i + 1" in "i=i + 1": int
+"i <= n" in "while (i <= n) {": boolean
+"i" in "i + 1": int
+"i" in "i <= n": int
+"i" in "i=2": int
+"i" in "i=i + 1": int
+"i" in "result * i": int
+"int i;" in "{": int
+"int n" in "static int factorial(int n){": int
+"int result;" in "{": int
+"n >= 1" in "StaticJavaLib.assertTrue(n >= 1)": boolean
+"n" in "i <= n": int
+"n" in "n >= 1": int
+"public class Factorial {" in "public class Factorial {": Factorial
+"result * i" in "result=result * i": int
+"result" in "result * i": int
+"result" in "result=1": int
+"result" in "result=result * i": int
+"result" in "return result;": int

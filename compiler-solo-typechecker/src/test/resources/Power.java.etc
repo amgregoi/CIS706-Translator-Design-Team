@@ -1,0 +1,53 @@
+"StaticJavaLib.assertTrue(n >= 1)" in "StaticJavaLib.assertTrue(n >= 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.getIntArgument(args,0)" in "power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1))" ==> public static int StaticJavaLib.getIntArgument(java.lang.String[],int)
+"StaticJavaLib.getIntArgument(args,1)" in "power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1))" ==> public static int StaticJavaLib.getIntArgument(java.lang.String[],int)
+"StaticJavaLib.println(power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1)))" in "StaticJavaLib.println(power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1)));" ==> public static void StaticJavaLib.println(int)
+"args" in "StaticJavaLib.getIntArgument(args,0)" ==> String[] args
+"args" in "StaticJavaLib.getIntArgument(args,1)" ==> String[] args
+"i" in "i + 1" ==> int i;
+"i" in "i < n" ==> int i;
+"i" in "i=0" ==> int i;
+"i" in "i=i + 1" ==> int i;
+"m" in "result * m" ==> int m
+"n" in "i < n" ==> int n
+"n" in "n >= 1" ==> int n
+"power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1))" in "StaticJavaLib.println(power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1)))" ==> static int power(int m,int n){
+"result" in "result * m" ==> int result;
+"result" in "result=1" ==> int result;
+"result" in "result=result * m" ==> int result;
+"result" in "return result;" ==> int result;
+
+"0" in "StaticJavaLib.getIntArgument(args,0)": int
+"0" in "i=0": int
+"1" in "StaticJavaLib.getIntArgument(args,1)": int
+"1" in "i + 1": int
+"1" in "n >= 1": int
+"1" in "result=1": int
+"StaticJavaLib.assertTrue(n >= 1)" in "StaticJavaLib.assertTrue(n >= 1);": void
+"StaticJavaLib.getIntArgument(args,0)" in "power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1))": int
+"StaticJavaLib.getIntArgument(args,1)" in "power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1))": int
+"StaticJavaLib.println(power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1)))" in "StaticJavaLib.println(power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1)));": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"args" in "StaticJavaLib.getIntArgument(args,0)": java.lang.String[]
+"args" in "StaticJavaLib.getIntArgument(args,1)": java.lang.String[]
+"i + 1" in "i=i + 1": int
+"i < n" in "while (i < n) {": boolean
+"i" in "i + 1": int
+"i" in "i < n": int
+"i" in "i=0": int
+"i" in "i=i + 1": int
+"int i;" in "{": int
+"int m" in "static int power(int m,int n){": int
+"int n" in "static int power(int m,int n){": int
+"int result;" in "{": int
+"m" in "result * m": int
+"n >= 1" in "StaticJavaLib.assertTrue(n >= 1)": boolean
+"n" in "i < n": int
+"n" in "n >= 1": int
+"power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1))" in "StaticJavaLib.println(power(StaticJavaLib.getIntArgument(args,0),StaticJavaLib.getIntArgument(args,1)))": int
+"public class Power {" in "public class Power {": Power
+"result * m" in "result=result * m": int
+"result" in "result * m": int
+"result" in "result=1": int
+"result" in "result=result * m": int
+"result" in "return result;": int

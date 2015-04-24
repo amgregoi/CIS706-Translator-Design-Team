@@ -1,0 +1,70 @@
+"StaticJavaLib.assertTrue((false && false) == false)" in "StaticJavaLib.assertTrue((false && false) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue((false && true) == false)" in "StaticJavaLib.assertTrue((false && true) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue((true && false) == false)" in "StaticJavaLib.assertTrue((true && false) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue((true && true) == true)" in "StaticJavaLib.assertTrue((true && true) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(and(false,false) == false)" in "StaticJavaLib.assertTrue(and(false,false) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(and(false,true) == false)" in "StaticJavaLib.assertTrue(and(false,true) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(and(true,false) == false)" in "StaticJavaLib.assertTrue(and(true,false) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(and(true,true) == true)" in "StaticJavaLib.assertTrue(and(true,true) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"and(false,false)" in "and(false,false) == false" ==> static boolean and(boolean b,boolean c){
+"and(false,true)" in "and(false,true) == false" ==> static boolean and(boolean b,boolean c){
+"and(true,false)" in "and(true,false) == false" ==> static boolean and(boolean b,boolean c){
+"and(true,true)" in "and(true,true) == true" ==> static boolean and(boolean b,boolean c){
+"b" in "b && c" ==> boolean b
+"c" in "b && c" ==> boolean c
+
+"(false && false) == false" in "StaticJavaLib.assertTrue((false && false) == false)": boolean
+"(false && false)" in "(false && false) == false": boolean
+"(false && true) == false" in "StaticJavaLib.assertTrue((false && true) == false)": boolean
+"(false && true)" in "(false && true) == false": boolean
+"(true && false) == false" in "StaticJavaLib.assertTrue((true && false) == false)": boolean
+"(true && false)" in "(true && false) == false": boolean
+"(true && true) == true" in "StaticJavaLib.assertTrue((true && true) == true)": boolean
+"(true && true)" in "(true && true) == true": boolean
+"StaticJavaLib.assertTrue((false && false) == false)" in "StaticJavaLib.assertTrue((false && false) == false);": void
+"StaticJavaLib.assertTrue((false && true) == false)" in "StaticJavaLib.assertTrue((false && true) == false);": void
+"StaticJavaLib.assertTrue((true && false) == false)" in "StaticJavaLib.assertTrue((true && false) == false);": void
+"StaticJavaLib.assertTrue((true && true) == true)" in "StaticJavaLib.assertTrue((true && true) == true);": void
+"StaticJavaLib.assertTrue(and(false,false) == false)" in "StaticJavaLib.assertTrue(and(false,false) == false);": void
+"StaticJavaLib.assertTrue(and(false,true) == false)" in "StaticJavaLib.assertTrue(and(false,true) == false);": void
+"StaticJavaLib.assertTrue(and(true,false) == false)" in "StaticJavaLib.assertTrue(and(true,false) == false);": void
+"StaticJavaLib.assertTrue(and(true,true) == true)" in "StaticJavaLib.assertTrue(and(true,true) == true);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"and(false,false) == false" in "StaticJavaLib.assertTrue(and(false,false) == false)": boolean
+"and(false,false)" in "and(false,false) == false": boolean
+"and(false,true) == false" in "StaticJavaLib.assertTrue(and(false,true) == false)": boolean
+"and(false,true)" in "and(false,true) == false": boolean
+"and(true,false) == false" in "StaticJavaLib.assertTrue(and(true,false) == false)": boolean
+"and(true,false)" in "and(true,false) == false": boolean
+"and(true,true) == true" in "StaticJavaLib.assertTrue(and(true,true) == true)": boolean
+"and(true,true)" in "and(true,true) == true": boolean
+"b && c" in "return b && c;": boolean
+"b" in "b && c": boolean
+"boolean b" in "static boolean and(boolean b,boolean c){": boolean
+"boolean c" in "static boolean and(boolean b,boolean c){": boolean
+"c" in "b && c": boolean
+"false && false" in "(false && false)": boolean
+"false && true" in "(false && true)": boolean
+"false" in "(false && false) == false": boolean
+"false" in "(false && true) == false": boolean
+"false" in "(true && false) == false": boolean
+"false" in "and(false,false) == false": boolean
+"false" in "and(false,false)": boolean
+"false" in "and(false,true) == false": boolean
+"false" in "and(false,true)": boolean
+"false" in "and(true,false) == false": boolean
+"false" in "and(true,false)": boolean
+"false" in "false && false": boolean
+"false" in "false && true": boolean
+"false" in "true && false": boolean
+"public class BooleanAnd {" in "public class BooleanAnd {": BooleanAnd
+"true && false" in "(true && false)": boolean
+"true && true" in "(true && true)": boolean
+"true" in "(true && true) == true": boolean
+"true" in "and(false,true)": boolean
+"true" in "and(true,false)": boolean
+"true" in "and(true,true) == true": boolean
+"true" in "and(true,true)": boolean
+"true" in "false && true": boolean
+"true" in "true && false": boolean
+"true" in "true && true": boolean

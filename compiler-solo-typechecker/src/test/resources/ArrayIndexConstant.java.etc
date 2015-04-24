@@ -1,0 +1,15 @@
+"i_array" in "i_array=new int[]{1,2,3}" ==> int[] i_array;
+"i_array" in "i_array[0]" ==> int[] i_array;
+
+"0" in "i_array[0]": int
+"1" in "i_array[0]=1": int
+"1" in "{1,2,3}": int
+"2" in "{1,2,3}": int
+"3" in "{1,2,3}": int
+"String[] str" in "public static void main(String[] str){": java.lang.String[]
+"i_array" in "i_array=new int[]{1,2,3}": int[]
+"i_array" in "i_array[0]": int[]
+"i_array[0]" in "i_array[0]=1": int
+"int[] i_array;" in "{": int[]
+"new int[]{1,2,3}" in "i_array=new int[]{1,2,3}": int[]
+"public class ArrayIndexConstant {" in "public class ArrayIndexConstant {": ArrayIndexConstant

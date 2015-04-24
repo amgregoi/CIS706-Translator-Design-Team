@@ -1,0 +1,15 @@
+"StaticJavaLib.assertTrue(i == 3)" in "StaticJavaLib.assertTrue(i == 3);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"i" in "i == 3" ==> int i;
+"i" in "i++" ==> int i;
+"i" in "i=2" ==> int i;
+
+"2" in "i=2": int
+"3" in "i == 3": int
+"StaticJavaLib.assertTrue(i == 3)" in "StaticJavaLib.assertTrue(i == 3);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i == 3" in "StaticJavaLib.assertTrue(i == 3)": boolean
+"i" in "i == 3": int
+"i" in "i++": int
+"i" in "i=2": int
+"int i;" in "{": int
+"public class IntPostIncrement {" in "public class IntPostIncrement {": IntPostIncrement

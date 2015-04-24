@@ -1,0 +1,14 @@
+"I" in "I=new int[]{i,1}" ==> int[] I;
+"i" in "i=0" ==> int i;
+"i" in "{i,1}" ==> int i;
+
+"0" in "i=0": int
+"1" in "{i,1}": int
+"I" in "I=new int[]{i,1}": int[]
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i" in "i=0": int
+"i" in "{i,1}": int
+"int i;" in "{": int
+"int[] I;" in "{": int[]
+"new int[]{i,1}" in "I=new int[]{i,1}": int[]
+"public class CreateIntArrayWithIntAndIntLiteralInitializers {" in "public class CreateIntArrayWithIntAndIntLiteralInitializers {": CreateIntArrayWithIntAndIntLiteralInitializers

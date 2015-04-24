@@ -1,0 +1,139 @@
+FieldAccessBar ==> class FieldAccessBar {
+FieldAccessFoo ==> class FieldAccessFoo {
+"StaticJavaLib.assertTrue(b.f.i == 2)" in "StaticJavaLib.assertTrue(b.f.i == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(b.f.i == 3)" in "StaticJavaLib.assertTrue(b.f.i == 3);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(b.f.i == 5)" in "StaticJavaLib.assertTrue(b.f.i == 5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(b.f.i == 6)" in "StaticJavaLib.assertTrue(b.f.i == 6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(b.i == 1)" in "StaticJavaLib.assertTrue(b.i == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(f.i == 0)" in "StaticJavaLib.assertTrue(f.i == 0);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(f.i == 3)" in "StaticJavaLib.assertTrue(f.i == 3);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(f.i == 4)" in "StaticJavaLib.assertTrue(f.i == 4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(i == 0)" in "StaticJavaLib.assertTrue(i == 0);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(i == 1)" in "StaticJavaLib.assertTrue(i == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(i == 2)" in "StaticJavaLib.assertTrue(i == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"b" in "b.f" ==> FieldAccessBar b;
+"b" in "b.i" ==> FieldAccessBar b;
+"b" in "b=new FieldAccessBar()" ==> FieldAccessBar b;
+"b.f" in "b.f.i" ==> public FieldAccessFoo f;
+"b.f" in "b.f=f" ==> public FieldAccessFoo f;
+"b.f" in "f=b.f" ==> public FieldAccessFoo f;
+"b.f.i" in "b.f.i == 2" ==> public int i;
+"b.f.i" in "b.f.i == 3" ==> public int i;
+"b.f.i" in "b.f.i == 5" ==> public int i;
+"b.f.i" in "b.f.i == 6" ==> public int i;
+"b.f.i" in "b.f.i++" ==> public int i;
+"b.f.i" in "b.f.i=2" ==> public int i;
+"b.f.i" in "b.f.i=3" ==> public int i;
+"b.f.i" in "b.f.i=4" ==> public int i;
+"b.f.i" in "f.i=b.f.i" ==> public int i;
+"b.f.i" in "i=b.f.i" ==> public int i;
+"b.i" in "b.i == 1" ==> public int i;
+"b.i" in "b.i=1" ==> public int i;
+"b.i" in "i=b.i" ==> public int i;
+"f" in "b.f=f" ==> FieldAccessFoo f;
+"f" in "f.i" ==> FieldAccessFoo f;
+"f" in "f=b.f" ==> FieldAccessFoo f;
+"f" in "f=new FieldAccessFoo()" ==> FieldAccessFoo f;
+"f.i" in "f.i == 0" ==> public int i;
+"f.i" in "f.i == 3" ==> public int i;
+"f.i" in "f.i == 4" ==> public int i;
+"f.i" in "f.i=0" ==> public int i;
+"f.i" in "f.i=5" ==> public int i;
+"f.i" in "f.i=b.f.i" ==> public int i;
+"f.i" in "i=f.i" ==> public int i;
+"i" in "i == 0" ==> int i;
+"i" in "i == 1" ==> int i;
+"i" in "i == 2" ==> int i;
+"i" in "i=b.f.i" ==> int i;
+"i" in "i=b.i" ==> int i;
+"i" in "i=f.i" ==> int i;
+"new FieldAccessBar()" in "b=new FieldAccessBar()" ==> class FieldAccessBar {
+"new FieldAccessFoo()" in "f=new FieldAccessFoo()" ==> class FieldAccessFoo {
+
+"0" in "f.i == 0": int
+"0" in "f.i=0": int
+"0" in "i == 0": int
+"1" in "b.i == 1": int
+"1" in "b.i=1": int
+"1" in "i == 1": int
+"2" in "b.f.i == 2": int
+"2" in "b.f.i=2": int
+"2" in "i == 2": int
+"3" in "b.f.i == 3": int
+"3" in "b.f.i=3": int
+"3" in "f.i == 3": int
+"4" in "b.f.i=4": int
+"4" in "f.i == 4": int
+"5" in "b.f.i == 5": int
+"5" in "f.i=5": int
+"6" in "b.f.i == 6": int
+"FieldAccessBar b;" in "{": FieldAccessBar
+"FieldAccessFoo f;" in "{": FieldAccessFoo
+"StaticJavaLib.assertTrue(b.f.i == 2)" in "StaticJavaLib.assertTrue(b.f.i == 2);": void
+"StaticJavaLib.assertTrue(b.f.i == 3)" in "StaticJavaLib.assertTrue(b.f.i == 3);": void
+"StaticJavaLib.assertTrue(b.f.i == 5)" in "StaticJavaLib.assertTrue(b.f.i == 5);": void
+"StaticJavaLib.assertTrue(b.f.i == 6)" in "StaticJavaLib.assertTrue(b.f.i == 6);": void
+"StaticJavaLib.assertTrue(b.i == 1)" in "StaticJavaLib.assertTrue(b.i == 1);": void
+"StaticJavaLib.assertTrue(f.i == 0)" in "StaticJavaLib.assertTrue(f.i == 0);": void
+"StaticJavaLib.assertTrue(f.i == 3)" in "StaticJavaLib.assertTrue(f.i == 3);": void
+"StaticJavaLib.assertTrue(f.i == 4)" in "StaticJavaLib.assertTrue(f.i == 4);": void
+"StaticJavaLib.assertTrue(i == 0)" in "StaticJavaLib.assertTrue(i == 0);": void
+"StaticJavaLib.assertTrue(i == 1)" in "StaticJavaLib.assertTrue(i == 1);": void
+"StaticJavaLib.assertTrue(i == 2)" in "StaticJavaLib.assertTrue(i == 2);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"b" in "b.f": FieldAccessBar
+"b" in "b.i": FieldAccessBar
+"b" in "b=new FieldAccessBar()": FieldAccessBar
+"b.f" in "b.f.i": FieldAccessFoo
+"b.f" in "b.f=f": FieldAccessFoo
+"b.f" in "f=b.f": FieldAccessFoo
+"b.f.i == 2" in "StaticJavaLib.assertTrue(b.f.i == 2)": boolean
+"b.f.i == 3" in "StaticJavaLib.assertTrue(b.f.i == 3)": boolean
+"b.f.i == 5" in "StaticJavaLib.assertTrue(b.f.i == 5)": boolean
+"b.f.i == 6" in "StaticJavaLib.assertTrue(b.f.i == 6)": boolean
+"b.f.i" in "b.f.i == 2": int
+"b.f.i" in "b.f.i == 3": int
+"b.f.i" in "b.f.i == 5": int
+"b.f.i" in "b.f.i == 6": int
+"b.f.i" in "b.f.i++": int
+"b.f.i" in "b.f.i=2": int
+"b.f.i" in "b.f.i=3": int
+"b.f.i" in "b.f.i=4": int
+"b.f.i" in "f.i=b.f.i": int
+"b.f.i" in "i=b.f.i": int
+"b.i == 1" in "StaticJavaLib.assertTrue(b.i == 1)": boolean
+"b.i" in "b.i == 1": int
+"b.i" in "b.i=1": int
+"b.i" in "i=b.i": int
+"class FieldAccessBar {" in "class FieldAccessFoo {": FieldAccessBar
+"class FieldAccessFoo {" in "class FieldAccessFoo {": FieldAccessFoo
+"f" in "b.f=f": FieldAccessFoo
+"f" in "f.i": FieldAccessFoo
+"f" in "f=b.f": FieldAccessFoo
+"f" in "f=new FieldAccessFoo()": FieldAccessFoo
+"f.i == 0" in "StaticJavaLib.assertTrue(f.i == 0)": boolean
+"f.i == 3" in "StaticJavaLib.assertTrue(f.i == 3)": boolean
+"f.i == 4" in "StaticJavaLib.assertTrue(f.i == 4)": boolean
+"f.i" in "f.i == 0": int
+"f.i" in "f.i == 3": int
+"f.i" in "f.i == 4": int
+"f.i" in "f.i=0": int
+"f.i" in "f.i=5": int
+"f.i" in "f.i=b.f.i": int
+"f.i" in "i=f.i": int
+"i == 0" in "StaticJavaLib.assertTrue(i == 0)": boolean
+"i == 1" in "StaticJavaLib.assertTrue(i == 1)": boolean
+"i == 2" in "StaticJavaLib.assertTrue(i == 2)": boolean
+"i" in "i == 0": int
+"i" in "i == 1": int
+"i" in "i == 2": int
+"i" in "i=b.f.i": int
+"i" in "i=b.i": int
+"i" in "i=f.i": int
+"int i;" in "{": int
+"new FieldAccessBar()" in "b=new FieldAccessBar()": FieldAccessBar
+"new FieldAccessFoo()" in "f=new FieldAccessFoo()": FieldAccessFoo
+"public FieldAccessFoo f;" in "class FieldAccessBar {": FieldAccessFoo
+"public class FieldAccess {" in "class FieldAccessFoo {": FieldAccess
+"public int i;" in "class FieldAccessBar {": int
+"public int i;" in "class FieldAccessFoo {": int

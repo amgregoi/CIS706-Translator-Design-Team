@@ -1,0 +1,27 @@
+"B" in "B=new boolean[1]" ==> boolean[] B;
+"B" in "B[0]" ==> boolean[] B;
+"StaticJavaLib.assertTrue(b == false)" in "StaticJavaLib.assertTrue(b == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"b" in "b == false" ==> boolean b;
+"b" in "b=false" ==> boolean b;
+"b" in "b=true" ==> boolean b;
+
+"0" in "B[0]": int
+"1" in "new boolean[1]": int
+"B" in "B=new boolean[1]": boolean[]
+"B" in "B[0]": boolean[]
+"B[0]" in "B[0]=false": boolean
+"B[0]" in "for (; B[0]; ) {": boolean
+"StaticJavaLib.assertTrue(b == false)" in "StaticJavaLib.assertTrue(b == false);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"b == false" in "StaticJavaLib.assertTrue(b == false)": boolean
+"b" in "b == false": boolean
+"b" in "b=false": boolean
+"b" in "b=true": boolean
+"boolean b;" in "{": boolean
+"boolean[] B;" in "{": boolean[]
+"false" in "B[0]=false": boolean
+"false" in "b == false": boolean
+"false" in "b=false": boolean
+"new boolean[1]" in "B=new boolean[1]": boolean[]
+"public class ForBooleanArrayAccessConditional {" in "public class ForBooleanArrayAccessConditional {": ForBooleanArrayAccessConditional
+"true" in "b=true": boolean

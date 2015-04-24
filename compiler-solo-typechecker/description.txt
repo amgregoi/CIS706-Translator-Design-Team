@@ -1,0 +1,64 @@
+Solo Project Milestone III: Type Checker for Extended Static Java
+
+Due: March 25, 2015; 11:59pm US Central
+
+
+Problem Description
+===================
+Your task in this milestone is to extend the Static Java (SJ) type 
+checker to handle Extended Static Java (ESJ) programs. Most of the work
+in this milestone requires you to override the TypeChecker/ASTVisitor
+visit methods in ExtendedTypeChecker.java to implement the new type rules
+for ESJ. The standard JUnit test case is provided in
+ExtendedTypeCheckerTest.java. 
+
+
+Hints
+=====
+* It is a good idea to write the type rule for each new construct in ESJ
+  first before implementing it.
+
+* In some cases, you need to override some methods that have already been
+  implemented in the SJ TypeChecker, but you should try to reuse them as
+  much as you can.
+
+* To resolve field types, use the fieldTypeMap in the ClassType class
+  (see the constructor of the ExtendedTypeChecker.Visitor class).
+
+* Use the ExtendedTypeChecker.Visitor.convertType method to convert JDT
+  AST Type to SJ/ESJ Type.
+
+
+Submission/Task Instructions
+============================
+
+* Copy this Eclipse project into the local clone of your private GitHub
+  repository for the course.
+  
+* Do an initial commit and push to GitHub (you can choose a descriptive
+  commit message such as "Initial Commit for Solo Project M3"). 
+
+* Modify ExtendedTypeChecker.java to handle Extended Static Java programs 
+  and make sure your solution pass all the provided JUnit test cases.
+  Commit and push often to GitHub (you can choose descriptive commit
+  messages).
+
+* Once you are ready to actually submit your solution, tag your repository
+  with the following tag name "M3".
+    
+  After successfully tagging, make sure that the tag is visible in your
+  online GitHub repository. To check it, go to the online repository at:
+  
+  https://github.com/ksu-cis-706/<your-username>-coursework
+  
+  Click on the "branch: master" drop down button, and select "Tags".
+  If the tagging is successful, then you should see the tag name there.
+  
+  The TA will look for the tag name when grading (and the associated last 
+  commit time to determine late submission).
+  
+  If somehow you want to make modification after submitting,
+  commit and push your changes, re-tag with a new name: M3a, M3b, and 
+  so on. The TA will choose the last tag revision for grading.
+ 
+Points will be deducted if you do not follow the above instructions.
