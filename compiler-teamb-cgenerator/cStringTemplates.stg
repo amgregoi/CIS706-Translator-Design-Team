@@ -1,7 +1,7 @@
 group cStringTemplates;
 
 fielddeclaration(type, name)::= <<
-%type% %name%
+%type% %name%;
 >>
 
 assignment(name, val)::= <<
@@ -10,15 +10,15 @@ assignment(name, val)::= <<
 
 methoddeclaration(type,mname,args,body) ::= <<
 %type% %mname%(%args;separator=", "%){
-   %body;separator=";\n"%;
+   %body;separator="\n"%
 }%\n%
 >>
 
 ifstatement(exp, thenbody, elsebody)::= <<
 if(%exp%){
-   %thenbody;separator=";\n"%;
+   %thenbody;separator="\n"%;
 }%if(elsebody)%else{
-   %elsebody;separator=";\n"%;
+   %elsebody;separator="\n"%;
 }%endif%
 >>
 
@@ -28,12 +28,12 @@ booleanliteral(bool)::= <<
 
 typedeclaration(tname, body) ::= <<
 typedef struct S%tname%{
-   %body;separator=";\n"%;
+   %body;separator="\n"%
 }%tname%;%\n%
 >>
 
 returnstatement(ret) ::= <<
-return %ret%
+return %ret%;
 >>
 
 infixexpression(left, op, right) ::= <<
@@ -43,7 +43,7 @@ infixexpression(left, op, right) ::= <<
 
 forstatement(decl, exp, incdec, body) ::= <<
 for(%decl;separator=","%; %exp%; %incdec;separator=","%){
-   %body;separator=";\n"%;
+   %body;separator="\n"%
 }%\n%
 >>
 
@@ -77,13 +77,13 @@ conditionalexpression(exp, then, elsee) ::= <<
 
 whilestatement(exp, body) ::= <<
 while(%exp%){
-   %body;separator=";\n"%;
+   %body;separator="\n"%
 }%\n%
 >>
 
 dostatement(body, exp) ::= <<
 do{
-   %body;separator=";\n"%;
+   %body;separator=";\n"%
 }while(%exp%);
 >>
 
@@ -98,6 +98,10 @@ typedef struct S%tname% %tname%;
 methodprototype(type,mname,args) ::= <<
 %type% %mname%(%args;separator=", "%);
 >> 
+
+expressionstatement(exp) ::= <<
+%exp%;
+>>
 
 assert(exp) ::= <<
 assert(%exp%)

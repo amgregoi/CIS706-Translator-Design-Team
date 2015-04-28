@@ -14,6 +14,7 @@ import org.eclipse.jdt.core.dom.ClassInstanceCreation;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ConditionalExpression;
 import org.eclipse.jdt.core.dom.DoStatement;
+import org.eclipse.jdt.core.dom.ExpressionStatement;
 import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.ForStatement;
@@ -305,7 +306,7 @@ public class CGenerator {
 		@Override
 		public boolean visit(final Assignment node) {
 			ST a = stg.getInstanceOf("assignment");
-
+			
 			((ASTNode) node.getLeftHandSide()).accept(this);
 			String name = getCode();
 			((ASTNode) node.getRightHandSide()).accept(this);
@@ -367,6 +368,9 @@ public class CGenerator {
 					((ASTNode) node.initializers().get(i)).accept(this);
 					String decl = getCode();
 					decl = decl.replace(" ", "");
+					if (decl.contains(";")) {
+						decl = decl.replace(";", "");
+					}
 					fs.add("decl", decl);
 				}
 			}
@@ -390,6 +394,7 @@ public class CGenerator {
 				((ASTNode) node.getBody()).accept(this);
 				final String body = getCode();
 				fs.add("body", body);
+				
 			}
 
 			String fors = prev + fs.render();
@@ -474,8 +479,8 @@ public class CGenerator {
 					cleft = "(unsigned)" + cleft;
 				}
 			}
-			ie.add("left", cleft);
-			ie.add("right", cright);
+			ie.add("left", "("+cleft);
+			ie.add("right", cright+")");
 			final String c = ie.render();
 			setCode(c);
 			return false;
@@ -522,7 +527,7 @@ public class CGenerator {
 		public boolean visit(final MethodInvocation node) {
 
 			final String methodName = node.getName().getIdentifier();
-			final String prev = getCode() + "\n";
+			final String prev = getCode();
 			if (methodName.equals("assertTrue")) {
 				for (final Object o : node.arguments()) {
 					((ASTNode) o).accept(this);
@@ -712,6 +717,20 @@ public class CGenerator {
 
 			final String c = prev + ds.render();
 			setCode(c);
+			return false;
+		}
+		
+		@Override
+		public boolean visit(final ExpressionStatement node)
+		{
+			ST es = stg.getInstanceOf("expressionstatement");
+			node.getExpression().accept(this);
+			final String exp = getCode();
+			es.add("exp", exp);
+			
+			final String c = es.render();
+			setCode(c);
+			
 			return false;
 		}
 

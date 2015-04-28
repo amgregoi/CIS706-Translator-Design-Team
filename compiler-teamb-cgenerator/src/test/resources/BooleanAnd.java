@@ -15,5 +15,3 @@ public class BooleanAnd {
         return b && c;
     }
 }
-    
-

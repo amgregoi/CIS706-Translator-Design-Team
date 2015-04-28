@@ -1,9 +1,12 @@
 package sjc.test.extended;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -53,41 +56,86 @@ public class CGeneratorTest {
 			// FIXME - prints to .c files
 			// convert .java to .c and write new files
 			String file = filename.substring(0, filename.indexOf('.'));
-			File c = new File("cout/" + file + ".c");
-
+			File c = new File("ccode/" + file + ".c");
 			FileOutputStream cstream = null;
-
 			// intiialize filestreams
 			try {
 				cstream = new FileOutputStream(c);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			System.out.println(result);
+			// System.out.println(result); //prints ccode to terminal
 			cstream.write(result.getBytes());
 			cstream.close();
-			// TODO -- EXECUTE .C AND .JAVA AND COMPARE?
-			// cout
-			// src/test/resources
-			InputStream error;
-			Process c_proc = Runtime.getRuntime().exec(
-					"gcc -o cout/cout/" + file + " cout/" + file + ".c");
-			c_proc.waitFor();
-			if (c_proc.waitFor() != 0) {		// 0 means terminated normally
-				if ((error = c_proc.getErrorStream()) != null) {
-					// print error to file
-				}
-			}
-			
-			
-			Process j_proc = Runtime.getRuntime().exec("javac -d " + "jclass src/test/resources" + file + ".java");
-			j_proc.waitFor();
-			if (j_proc.waitFor() != 0) {		// 0 means terminated normally
-				if ((error = j_proc.getErrorStream()) != null) {
-					// print error to file
-				}
 
+			System.out.println("*** Begin test: " + file);
+			boolean errors = false;
+			InputStream error;
+			InputStreamReader isr;
+			BufferedReader br;
+			
+			// Compiles .c files
+			Process c_proc = Runtime.getRuntime().exec(
+					"gcc -o ccode/cout/" + file + " ccode/" + file + ".c");
+
+			error = c_proc.getErrorStream();
+			isr = new InputStreamReader(error);
+			br = new BufferedReader(isr);
+			String s;
+			if ((s = br.readLine()) != null) {
+				System.out.println(s);
+				if (s.contains("error") || s.contains("fail")) {
+					errors = true;
+				}
+				while ((s = br.readLine()) != null) {
+					if (s.contains("error") || s.contains("fail")) {
+						errors = true;
+					}
+					System.out.println(s);
+				}
+				if (errors) {
+					System.out
+							.println("*** End FAILING test: " + file + ".c\n");
+					Assert.assertTrue(false);
+				}
 			}
+			errors = false;
+			br.close();
+			isr.close();
+			error.close();
+
+			// Run cout files
+			Process c_run = Runtime.getRuntime().exec("./ccode/cout/" + file);
+
+			error = c_run.getErrorStream();
+			isr = new InputStreamReader(error);
+			br = new BufferedReader(isr);
+			if ((s = br.readLine()) != null) {
+				if (s.contains("error") || s.contains("fail")) {
+					errors = true;
+				}
+				System.out.println(s);
+				while ((s = br.readLine()) != null) {
+					if (s.contains("error") || s.contains("fail")) {
+						errors = true;
+					}
+					System.out.println(s);
+				}
+				if (errors) {
+					System.out.println("*** End FAILING to run test: " + file
+							+ ".c\n");
+					Assert.assertTrue(false);
+				}
+			}
+			errors = false;
+			br.close();
+			isr.close();
+			error.close();
+
+			// Process j_proc = Runtime.getRuntime().exec("javac -d " +
+			// "jclass src/test/resources/" + file + ".java");
+			System.out.println("*** End PASSING test: " + file + "\n");
+			Assert.assertTrue(true);
 
 		} catch (final Exception e) {
 			e.printStackTrace();
