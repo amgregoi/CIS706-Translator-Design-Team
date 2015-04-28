@@ -1,0 +1,104 @@
+group cStringTemplates;
+
+fielddeclaration(type, name)::= <<
+%type% %name%
+>>
+
+assignment(name, val)::= <<
+%name% = %val%
+>>
+
+methoddeclaration(type,mname,args,body) ::= <<
+%type% %mname%(%args;separator=", "%){
+   %body;separator=";\n"%;
+}%\n%
+>>
+
+ifstatement(exp, thenbody, elsebody)::= <<
+if(%exp%){
+   %thenbody;separator=";\n"%;
+}%if(elsebody)%else{
+   %elsebody;separator=";\n"%;
+}%endif%
+>>
+
+booleanliteral(bool)::= <<
+%bool%
+>>
+
+typedeclaration(tname, body) ::= <<
+typedef struct S%tname%{
+   %body;separator=";\n"%;
+}%tname%;%\n%
+>>
+
+returnstatement(ret) ::= <<
+return %ret%
+>>
+
+infixexpression(left, op, right) ::= <<
+%left% %op% %right%
+>>
+
+
+forstatement(decl, exp, incdec, body) ::= <<
+for(%decl;separator=","%; %exp%; %incdec;separator=","%){
+   %body;separator=";\n"%;
+}%\n%
+>>
+
+postfix(name, type) ::= <<
+%name%%type%
+>>
+
+prefix(name, type) ::= <<
+%type%%name%
+>>
+
+methodinvoke(method, args) ::= <<
+%method%(%args;separator=","%)
+>>
+
+fieldaccess(exp, id) ::= <<
+%exp%->%id%
+>>
+
+objectcreation(type, size) ::= <<
+malloc(sizeof(%type%)%if(size)%*%size%%endif%)
+>>
+
+arrayinit(args, size, type) ::= <<
+(%type%[%size%]){%args;separator=", "%}
+>>
+
+conditionalexpression(exp, then, elsee) ::= <<
+%exp% ? %then% : %elsee%
+>>
+
+whilestatement(exp, body) ::= <<
+while(%exp%){
+   %body;separator=";\n"%;
+}%\n%
+>>
+
+dostatement(body, exp) ::= <<
+do{
+   %body;separator=";\n"%;
+}while(%exp%);
+>>
+
+arrayaccess(exp, index) ::= <<
+%exp%[%index%]
+>>
+
+structprototype(tname) ::= <<
+typedef struct S%tname% %tname%;
+>>
+
+methodprototype(type,mname,args) ::= <<
+%type% %mname%(%args;separator=", "%);
+>> 
+
+assert(exp) ::= <<
+assert(%exp%)
+>>

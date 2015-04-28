@@ -1032,7 +1032,7 @@ public class ExtendedStaticJavaASTBuilder extends ExtendedStaticJavaBaseVisitor<
   }
   
   public int indention = -1;
-  public boolean debug = true;
+  public boolean debug = false;
   public void Print(String text)
   {
 	  String output = "";
