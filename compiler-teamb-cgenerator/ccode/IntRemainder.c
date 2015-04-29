@@ -13,14 +13,15 @@ void main(){
    assert(((3 % -(2)) == 1));
    assert(((-(3) % 2) == -(1)));
    assert(((-(3) % -(2)) == -(1)));
-   assert((remainder(2,3) == 2));
-   assert((remainder(2,-(3)) == 2));
-   assert((remainder(-(2),3) == -(2)));
-   assert((remainder(-(2),-(3)) == -(2)));
-   assert((remainder(3,2) == 1));
-   assert((remainder(3,-(2)) == 1));
-   assert((remainder(-(3),2) == -(1)));
-   assert((remainder(-(3),-(2)) == -(1)));
+   assert((remainder(2, 3) == 2));
+   assert((remainder(2, -(3)) == 2));
+   assert((remainder(-(2), 3) == -(2)));
+   assert((remainder(-(2), -(3)) == -(2)));
+   assert((remainder(3, 2) == 1));
+   assert((remainder(3, -(2)) == 1));
+   assert((remainder(-(3), 2) == -(1)));
+   assert((remainder(-(3), -(2)) == -(1)));
+
 }
 
 int remainder(int i, int j){

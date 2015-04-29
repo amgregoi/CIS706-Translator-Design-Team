@@ -4,8 +4,8 @@
 
 
 void main(){
-   int i;
-   i = 2;
+   int i;i=2;
    i--;
    assert((i == 1));
+
 }

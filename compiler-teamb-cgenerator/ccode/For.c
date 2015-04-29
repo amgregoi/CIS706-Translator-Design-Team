@@ -18,6 +18,7 @@ void main(){
    missingInitFor();
    forFor();
    multipleFor();
+
 }
 
 void* emptyFor(){
@@ -29,15 +30,13 @@ void* emptyFor(){
 
 void* initOnlyFor(){
    int i;
-
    for(i=0; ; ){
    }
 
 }
 
 void* condOnlyFor(){
-   int i;
-   i = 0;
+   int i;i=0;
 
    for(; (i < 10); ){
    }
@@ -45,8 +44,7 @@ void* condOnlyFor(){
 }
 
 void* incOrDecOnlyFor(){
-   int i;
-   i = 0;
+   int i;i=0;
 
    for(; ; i++){
    }
@@ -55,7 +53,6 @@ void* incOrDecOnlyFor(){
 
 void* missingIncOrDecFor(){
    int i;
-
    for(i=0; (i < 10); ){
    }
 
@@ -63,63 +60,51 @@ void* missingIncOrDecFor(){
 
 void* missingCondFor(){
    int i;
-
    for(i=0; ; i++){
    }
 
 }
 
 void* missingInitFor(){
-   int i;
-   i = 0;
+   int i;i=0;
 
    for(; (i < 10); i++){
    }
-
    assert((i == 10));
+
 }
 
 void* forFor(){
    int i;
-
    for(i=0; (i < 10); i++){
    }
-
    assert((i == 10));
+
 }
 
 void* multipleInitOnlyFor(){
-   int i;
-   int j;
-   int k;
-
-   for(i=0,j=0,k=0; ; ){
+   int i;int j;int k;
+   for(i=0, j=0, k=0; ; ){
    }
 
 }
 
 void* multipleIncOrDecOnlyFor(){
-   int i;
-   int j;
-   int k;
-   i = 0;
-   j = 0;
-   k = 0;
+   int i;int j;int k;i=0;
+   j=0;
+   k=0;
 
-   for(; ; i++,j++,k++){
+   for(; ; i++, j++, k++){
    }
 
 }
 
 void* multipleFor(){
-   int i;
-   int j;
-   int k;
-
-   for(i=0,j=0,k=0; (i < 10); i++,j++,k++){
+   int i;int j;int k;
+   for(i=0, j=0, k=0; (i < 10); i++, j++, k++){
    }
-
    assert((i == 10));
    assert((j == 10));
    assert((k == 10));
+
 }

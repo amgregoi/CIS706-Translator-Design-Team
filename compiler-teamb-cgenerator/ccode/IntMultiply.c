@@ -9,10 +9,11 @@ void main(){
    assert(((2 * -(3)) == -(6)));
    assert(((-(2) * 3) == -(6)));
    assert(((-(2) * -(3)) == 6));
-   assert((multiply(2,3) == 6));
-   assert((multiply(2,-(3)) == -(6)));
-   assert((multiply(-(2),3) == -(6)));
-   assert((multiply(-(2),-(3)) == 6));
+   assert((multiply(2, 3) == 6));
+   assert((multiply(2, -(3)) == -(6)));
+   assert((multiply(-(2), 3) == -(6)));
+   assert((multiply(-(2), -(3)) == 6));
+
 }
 
 int multiply(int i, int j){

@@ -7,8 +7,9 @@ int shiftLeft(int i, int j);
 void main(){
    assert(((2 << 1) == 4));
    assert(((-(2) << 1) == -(4)));
-   assert((shiftLeft(2,1) == 4));
-   assert((shiftLeft(-(2),1) == -(4)));
+   assert((shiftLeft(2, 1) == 4));
+   assert((shiftLeft(-(2), 1) == -(4)));
+
 }
 
 int shiftLeft(int i, int j){

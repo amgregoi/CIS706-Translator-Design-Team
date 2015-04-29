@@ -41,9 +41,6 @@ import sjc.annotation.NonNullElements;
 import sjc.annotation.ReadOnlyElements;
 import sjc.codegen.ByteCodeGenerator;
 import sjc.symboltable.extended.ExtendedSymbolTable;
-import sjc.type.ArrayType;
-import sjc.type.BooleanType;
-import sjc.type.IntType;
 import sjc.type.Type;
 import sjc.type.checker.extended.ExtendedTypeTable;
 import sjc.util.Pair;
@@ -74,7 +71,7 @@ public class CGenerator {
 		public String includes = ""; // holds includes
 		public String methodProtoTypes = ""; // holdes method prototypes
 		public String structProtoTypes = ""; // holds struct prtotypes
-		public String structs = "";
+		public String structs = ""; // holds all structs
 		public String code = ""; // holds code
 		public String ctemp = ""; // temporarily holds code
 		public String doublePtrInit = ""; // holds second part of double ptr
@@ -125,13 +122,25 @@ public class CGenerator {
 			return false;
 		}
 
-		public void setCode(String result) {
-			this.ctemp += result;
+		// TODO ################ HELPER ################
+
+		public void setCode(String c) {
+			this.ctemp += c;
 		}
 
 		public String getCode() {
 			String c = this.ctemp;
 			this.ctemp = "";
+			return c;
+		}
+
+		public void setDoublePtr(String c) {
+			this.doublePtrInit = c;
+		}
+
+		public String getDoublePtr() {
+			final String c = this.doublePtrInit;
+			this.doublePtrInit = "";
 			return c;
 		}
 
@@ -143,6 +152,19 @@ public class CGenerator {
 			this.methodProtoTypes += method + "\n";
 		}
 
+		public void addStruct(String struct) {
+			this.structs += struct;
+		}
+
+		public void addMethod(String method) {
+			this.code += method;
+		}
+
+		/*
+		 * checks if given string type is a primitive type: 
+		 * 1) returns true if it is a primitive; 
+		 * 2) return false if it is not
+		 */
 		public boolean primitiveType(String type) {
 			if ((type.equals("int") || type.equals("bool")
 					|| type.equals("int[]") || type.equals("bool[]")))
@@ -150,41 +172,64 @@ public class CGenerator {
 			return false;
 		}
 
-		// TODO: START
+		/*
+		 * Common method to update type before adding to string template
+		 * 1)changes boolean to bool
+		 * 2) if it isn't a primitive type it makes it a pointer
+		 * 3) replaces array brackets with a pointer
+		 */
+		public String updateTypeBoolPrimArr(String type) {
+			if (type.contains("boolean")) {
+				type = type.replace("boolean", "bool");
+			}
+			if (!(primitiveType(type))) {
+				type = type + "*";
+			}
+			if (type.contains("[]")) {
+				type = type.replace("[]", "*");
+			}
+
+			return type;
+		}
+
+		// TODO: ################ START ################
 
 		@Override
 		public boolean visit(final TypeDeclaration node) {
-			ST td = stg.getInstanceOf("typedeclaration");
-			String name = node.getName().getIdentifier();
-			td.add("tname", name);
-			for (final Object o : node.getFields()) {
-				((ASTNode) o).accept(this);
-				String body = getCode();
-				td.add("body", body);
-			}
-			String c = td.render();
+			final ST td = stg.getInstanceOf("typedeclaration");
+
+			// Makes sure we don't create a struct for the class containing main
 			if (!hasPublicModifier(node.modifiers())) {
-				this.structs += "\n" + c;
-				// Prototype structs
-				ST sp = stg.getInstanceOf("structprototype");
+				String name = node.getName().getIdentifier();
+				td.add("tname", name);
+				for (final Object o : node.getFields()) {
+					((ASTNode) o).accept(this);
+					final String body = getCode();
+					td.add("body", body);
+				}
+				String c = td.render();
+				addStruct("\n" + c);
+				// Prototype struct
+				final ST sp = stg.getInstanceOf("structprototype");
 				sp.add("tname", name);
 				final String structProto = sp.render();
 				addStructProto(structProto);
 
-			}
+			} else {
 
-			for (final Object o : node.getMethods()) {
-				((ASTNode) o).accept(this);
-				String method = getCode();
-				this.code += "\n" + method;
+				for (final Object o : node.getMethods()) {
+					((ASTNode) o).accept(this);
+					String method = getCode();
+					addMethod("\n" + method);
+				}
 			}
 			return false;
 		}
 
 		@Override
 		public boolean visit(final MethodDeclaration node) {
-			ST md = stg.getInstanceOf("methoddeclaration"); // method dec
-			ST mp = stg.getInstanceOf("methodprototype"); // method proto
+			final ST md = stg.getInstanceOf("methoddeclaration"); // method dec
+			final ST mp = stg.getInstanceOf("methodprototype"); // method proto
 
 			final String methodName = node.getName().getIdentifier();
 			if (methodName.equals("main")) {
@@ -192,18 +237,9 @@ public class CGenerator {
 				md.add("mname", "main");
 			} else {
 				// set up method
-				String type = node.getReturnType2().toString();
-				Type t = this.typeMap.get(node);
-				if (type.contains("boolean")) {
-					type = type.replace("boolean", "bool");
-				}
-				if (!(primitiveType(type))) {
-					type = type + "*";
-				}
-				if (type.contains("[]")) {
-					type = type.replace("[]", "*");
-				}
-				// method dec
+				final String type = updateTypeBoolPrimArr(node.getReturnType2()
+						.toString());
+				// method decl
 				md.add("type", type);
 				md.add("mname", methodName);
 				// method prototype
@@ -211,28 +247,22 @@ public class CGenerator {
 				mp.add("mname", methodName);
 
 				for (final Object o : node.parameters()) {
-					((ASTNode) o).accept(this);
 					final SingleVariableDeclaration vds = (SingleVariableDeclaration) o;
-					String temp = getCode();
-					final String localName = vds.getName().getIdentifier();
-					String ptype = this.typeMap.get(vds).name;
+					vds.getName().accept(this);
+					final String localName = getCode();
+					vds.getType().accept(this);
+					final String ptype = updateTypeBoolPrimArr(getCode());
 
-					if (ptype.contains("boolean")) {
-						ptype = ptype.replace("boolean", "bool");
-					}
-					if (!(primitiveType(ptype))) {
-						ptype = ptype + "*";
-					}
-					if (this.typeMap.get(vds) instanceof ArrayType) {
-						ptype = ptype.replace("[]", "*");
-						mp.add("args", ptype + " " + localName);
-						md.add("args", ptype + " " + localName);
-					} else {
-						mp.add("args", ptype + " " + localName);
-						md.add("args", ptype + " " + localName);
-					}
+					// build parameter
+					final ST p = stg.getInstanceOf("parameter");
+					p.add("type", ptype);
+					p.add("name", localName);
+					final String param = p.render();
+
+					mp.add("args", param);
+					md.add("args", param);
 				}
-				String proto = mp.render();
+				final String proto = mp.render();
 				addMethodProto(proto);
 			}
 
@@ -240,88 +270,63 @@ public class CGenerator {
 			for (final Object o : node.getBody().statements()) {
 				if (!(o instanceof VariableDeclarationStatement)) {
 					((ASTNode) o).accept(this);
-					String body = getCode();
+					final String body = getCode();
 					md.add("body", body);
 				} else {
 					// variable declarations
-					ST fd = stg.getInstanceOf("fielddeclaration");
+					final ST fd = stg.getInstanceOf("fielddeclaration");
 					final VariableDeclarationStatement vds = (VariableDeclarationStatement) o;
 					final VariableDeclarationFragment vdf = (VariableDeclarationFragment) vds
 							.fragments().get(0);
 					final String localName = vdf.getName().getIdentifier();
-					String type = this.typeMap.get(vds).name;
-					if (type.contains("boolean")) {
-						type = type.replace("boolean", "bool");
-					}
-					if (!(type.equals("int") || type.equals("bool")
-							|| type.equals("int[]") || type.equals("bool[]"))) {
-						type = type + "*";
-					}
-					if (this.typeMap.get(vds) instanceof ArrayType) {
-						type = type.replace("[]", "*");
-						fd.add("name", localName);
-						fd.add("type", type);
-					} else {
-						fd.add("name", localName);
-						fd.add("type", type);
-					}
-					String c = fd.render();
-					md.add("body", c);
+					final String type = updateTypeBoolPrimArr(this.typeMap
+							.get(vds).name);
+
+					fd.add("name", localName);
+					fd.add("type", type);
+
+					final String body = fd.render();
+					md.add("body", body);
 				}
 			}
-			String c = md.render();
+			final String c = md.render();
 			setCode(c);
 			return false;
 		}
 
 		@Override
 		public boolean visit(final FieldDeclaration node) {
-			ST fd = stg.getInstanceOf("fielddeclaration");
-
-			String type = this.typeMap.get(node).name;
+			final ST fd = stg.getInstanceOf("fielddeclaration");
 			((ASTNode) node.fragments().get(0)).accept(this);
-			String name = getCode();
+			final String name = getCode();
+			final String type = updateTypeBoolPrimArr(this.typeMap.get(node).name);
 
-			if (type.contains("boolean")) {
-				type = type.replace("boolean", "bool");
-			}
-			if (!(type.equals("int") || type.equals("bool")
-					|| type.equals("int[]") || type.equals("bool[]"))) {
-				type = type + "*";
-			}
-			if (this.typeMap.get(node) instanceof ArrayType) {
-				type = type.replace("[]", "*");
-				fd.add("type", type);
-				fd.add("name", name);
-			} else {
-				fd.add("type", type);
-				fd.add("name", name);
-			}
+			fd.add("type", type);
+			fd.add("name", name);
 
-			String c = fd.render();
+			final String c = fd.render();
 			setCode(c);
 			return false;
 		}
 
 		@Override
 		public boolean visit(final Assignment node) {
-			ST a = stg.getInstanceOf("assignment");
-			
+			final ST a = stg.getInstanceOf("assignment");
+
 			((ASTNode) node.getLeftHandSide()).accept(this);
-			String name = getCode();
+			final String name = getCode();
 			((ASTNode) node.getRightHandSide()).accept(this);
-			String val = getCode();
+			final String val = getCode();
 
 			a.add("name", name);
 			a.add("val", val);
-
-			if (!doublePtrInit.equals("")) {
-				String c = a.render();
-				ST a2 = stg.getInstanceOf("assignment");
+			final String dp;
+			if (!((dp = getDoublePtr()).equals(""))) {
+				final String c = a.render();
+				final ST a2 = stg.getInstanceOf("assignment");
 
 				a2.add("name", name);
-				a2.add("val", doublePtrInit);
-				doublePtrInit = "";
+				a2.add("val", dp);
 
 				String c2 = a2.render();
 				setCode(c + ";\n" + c2);
@@ -335,7 +340,7 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final IfStatement node) {
-			ST is = stg.getInstanceOf("ifstatement");
+			final ST is = stg.getInstanceOf("ifstatement");
 			final String prev = getCode() + "\n";
 
 			node.getExpression().accept(this);
@@ -360,74 +365,63 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final ForStatement node) {
-			ST fs = stg.getInstanceOf("forstatement");
+			final ST fs = stg.getInstanceOf("forstatement");
 			final String prev = getCode() + "\n";
 
-			if (node.initializers().size() > 0) {
-				for (int i = 0; i < node.initializers().size(); i++) {
-					((ASTNode) node.initializers().get(i)).accept(this);
-					String decl = getCode();
-					decl = decl.replace(" ", "");
-					if (decl.contains(";")) {
-						decl = decl.replace(";", "");
-					}
-					fs.add("decl", decl);
-				}
+			// initializers
+			for (int i = 0; i < node.initializers().size(); i++) {
+				((ASTNode) node.initializers().get(i)).accept(this);
+				final String decl = getCode();
+				fs.add("decl", decl);
 			}
 
+			// expresion
 			if (node.getExpression() != null) {
 				((ASTNode) node.getExpression()).accept(this);
 				final String exp = getCode();
 				fs.add("exp", exp);
 			}
 
-			if (node.updaters() != null) {
-				for (int i = 0; i < node.updaters().size(); i++) {
-					((ASTNode) node.updaters().get(i)).accept(this);
-					String incdec = getCode();
-					incdec = incdec.replace(";", "");
-					fs.add("incdec", incdec);
-				}
+			// updaters (incdecs)
+			for (int i = 0; i < node.updaters().size(); i++) {
+				((ASTNode) node.updaters().get(i)).accept(this);
+				final String incdec = getCode();
+				fs.add("incdec", incdec);
 			}
 
-			if (node.getBody() != null) {
-				((ASTNode) node.getBody()).accept(this);
-				final String body = getCode();
-				fs.add("body", body);
-				
-			}
+			// body
+			((ASTNode) node.getBody()).accept(this);
+			final String body = getCode();
+			fs.add("body", body);
 
-			String fors = prev + fs.render();
-			setCode(fors);
+			final String c = prev + fs.render();
+			setCode(c);
 			return false;
 		}
 
 		@Override
 		public boolean visit(final BooleanLiteral node) {
-			ST bl = stg.getInstanceOf("booleanliteral");
+			final ST bl = stg.getInstanceOf("booleanliteral");
 
-			if (node.booleanValue()) {
-				bl.add("bool", "true");
-			} else {
-				bl.add("bool", "false");
-			}
+			final String bool = node.toString();
+			bl.add("bool", bool);
 
-			String c = bl.render();
+			final String c = bl.render();
 			setCode(c);
 			return false;
 		}
 
 		@Override
 		public boolean visit(final ReturnStatement node) {
-			ST rs = stg.getInstanceOf("returnstatement");
-			final String ret;
+			final ST rs = stg.getInstanceOf("returnstatement");
+
 			if (node.getExpression() != null) {
+				final String ret;
 				node.getExpression().accept(this);
 				ret = getCode();
-			} else {
-				ret = "";
+				rs.add("ret", ret);
 			}
-			rs.add("ret", ret);
+
 			final String c = rs.render();
 			setCode(c);
 			return false;
@@ -435,7 +429,7 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final InfixExpression node) {
-			ST ie = stg.getInstanceOf("infixexpression");
+			final ST ie = stg.getInstanceOf("infixexpression");
 			final InfixExpression.Operator op = node.getOperator();
 
 			node.getLeftOperand().accept(this);
@@ -479,8 +473,8 @@ public class CGenerator {
 					cleft = "(unsigned)" + cleft;
 				}
 			}
-			ie.add("left", "("+cleft);
-			ie.add("right", cright+")");
+			ie.add("left", "(" + cleft);
+			ie.add("right", cright + ")");
 			final String c = ie.render();
 			setCode(c);
 			return false;
@@ -488,7 +482,7 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final PostfixExpression node) {
-			ST pfe = stg.getInstanceOf("postfix");
+			final ST pfe = stg.getInstanceOf("postfix");
 
 			node.getOperand().accept(this);
 			final String name = getCode();
@@ -503,7 +497,7 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final PrefixExpression node) {
-			ST pfe = stg.getInstanceOf("prefix");
+			final ST pfe = stg.getInstanceOf("prefix");
 
 			node.getOperand().accept(this);
 			final String name = getCode();
@@ -511,6 +505,7 @@ public class CGenerator {
 
 			pfe.add("name", name + ")");
 			pfe.add("type", op + "(");
+
 			final String c = pfe.render();
 			setCode(c);
 
@@ -519,7 +514,8 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final NumberLiteral node) {
-			setCode(node.getToken());
+			final String c = node.getToken();
+			setCode(c);
 			return false;
 		}
 
@@ -530,37 +526,35 @@ public class CGenerator {
 			final String prev = getCode();
 			if (methodName.equals("assertTrue")) {
 				for (final Object o : node.arguments()) {
+					final ST as = stg.getInstanceOf("assert");
+
 					((ASTNode) o).accept(this);
-					ST as = stg.getInstanceOf("assert");
-
-					String exp = getCode();
-					if (exp.contains(";")) {
-						exp = exp.replace(";", "");
-					}
-
+					final String exp = getCode();
 					as.add("exp", exp);
+
 					final String c = prev + as.render();
 					setCode(c);
 					return false;
 				}
 			}
 
-			ST mi = stg.getInstanceOf("methodinvoke");
+			final ST mi = stg.getInstanceOf("methodinvoke");
 
 			for (final Object o : node.arguments()) {
 				((ASTNode) o).accept(this);
 				final String args = getCode();
 				mi.add("args", args);
 			}
+
 			mi.add("method", methodName);
-			String c = prev + mi.render();
+			final String c = prev + mi.render();
 			setCode(c);
 			return false;
 		}
 
 		@Override
 		public boolean visit(final FieldAccess node) {
-			ST fa = stg.getInstanceOf("fieldaccess");
+			final ST fa = stg.getInstanceOf("fieldaccess");
 			node.getExpression().accept(this);
 			final String exp = getCode();
 			node.getName().accept(this);
@@ -576,13 +570,13 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final ArrayCreation node) {
-			ST ac = stg.getInstanceOf("objectcreation");
-			ST ac2 = stg.getInstanceOf("arrayinit");
-			String type = this.typeMap.get(node).name.replace("[]", "");
-			if (type.contains("boolean")) {
-				type = type.replace("boolean", "bool");
-			}
+			final ST ac = stg.getInstanceOf("objectcreation");
+			final ST ac2 = stg.getInstanceOf("arrayinit");
+
+			final String type = updateTypeBoolPrimArr(this.typeMap.get(node).name
+					.replace("[]", ""));
 			ac.add("type", type);
+
 			if (node.dimensions() != null) {
 				for (int i = 0; i < node.dimensions().size(); i++) {
 					((ASTNode) node.dimensions().get(0)).accept(this);
@@ -592,29 +586,24 @@ public class CGenerator {
 			}
 
 			if (node.getInitializer() != null) {
-				/*
-				 * for(int i=0; i<node.getInitializer().expressions().size();
-				 * i++) { ((ASTNode) node.getInitializer().expressions().get(i))
-				 * .accept(this); final String arg = getCode(); ac.add("args",
-				 * arg); }
-				 */
 				final String size = Integer.toString((node.getInitializer()
 						.expressions().size()));
 				ac2.add("size", size);
 				ac2.add("type", type);
+
 				for (final Object o : node.getInitializer().expressions()) {
 					((ASTNode) o).accept(this);
 					final String arg = getCode();
 					ac2.add("args", arg);
 				}
-				if (!(type.equals("int") || type.equals("boolean"))) {
-					doublePtrInit = ac2.render();
+
+				if (!(primitiveType(type))) {
+					setDoublePtr(ac2.render());
 				} else {
 					final String c = ac2.render();
 					setCode(c);
 					return false;
 				}
-
 			}
 
 			final String c = ac.render();
@@ -624,9 +613,9 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final ClassInstanceCreation node) {
-			ST cic = stg.getInstanceOf("objectcreation");
-			final String type = this.typeMap.get(node).toString();
+			final ST cic = stg.getInstanceOf("objectcreation");
 
+			final String type = this.typeMap.get(node).toString();
 			cic.add("type", type);
 
 			final String c = cic.render();
@@ -636,20 +625,20 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final SimpleName node) {
-			setCode(node.getIdentifier());
+			final String c = node.getIdentifier();
+			setCode(c);
 			return false;
 		}
 
 		@Override
 		public boolean visit(final ArrayAccess node) {
-			ST aa = stg.getInstanceOf("arrayaccess");
+			final ST aa = stg.getInstanceOf("arrayaccess");
+
 			node.getArray().accept(this);
 			final String exp = getCode();
 			node.getIndex().accept(this);
-			String index = getCode();
-			if (index.contains(";")) {
-				index = index.replace(";", "");
-			}
+			// current string template will always add ';' to postfixexpression (i++;)
+			final String index = getCode().replace(";", "");
 
 			aa.add("exp", exp);
 			aa.add("index", index);
@@ -661,7 +650,8 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final ConditionalExpression node) {
-			ST ce = stg.getInstanceOf("conditionalexpression");
+			final ST ce = stg.getInstanceOf("conditionalexpression");
+
 			node.getExpression().accept(this);
 			final String exp = getCode();
 			node.getThenExpression().accept(this);
@@ -686,11 +676,11 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final WhileStatement node) {
-			ST ws = stg.getInstanceOf("whilestatement");
+			final ST ws = stg.getInstanceOf("whilestatement");
 			final String prev = getCode();
+
 			node.getExpression().accept(this);
 			final String exp = getCode();
-
 			node.getBody().accept(this);
 			final String body = getCode();
 
@@ -705,7 +695,8 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final DoStatement node) {
-			ST ds = stg.getInstanceOf("dostatement");
+			final ST ds = stg.getInstanceOf("dostatement");
+
 			final String prev = getCode() + "\n";
 			node.getExpression().accept(this);
 			final String exp = getCode();
@@ -719,22 +710,23 @@ public class CGenerator {
 			setCode(c);
 			return false;
 		}
-		
+
 		@Override
-		public boolean visit(final ExpressionStatement node)
-		{
-			ST es = stg.getInstanceOf("expressionstatement");
+		public boolean visit(final ExpressionStatement node) {
+			final ST es = stg.getInstanceOf("expressionstatement");
+
 			node.getExpression().accept(this);
 			final String exp = getCode();
+
 			es.add("exp", exp);
-			
+
 			final String c = es.render();
 			setCode(c);
-			
+
 			return false;
 		}
 
-		// TODO: END
+		// TODO: ################ END ################
 	}
 
 	/**
@@ -766,6 +758,11 @@ public class CGenerator {
 		cu.accept(v);
 
 		// whats being put into output file
+		// includes
+		// struct prototypes
+		// method prototypes
+		// structs
+		// code (methods)
 		final String result = v.includes + "\n\n" + v.structProtoTypes
 				+ v.methodProtoTypes + v.structs + v.code;
 		v.dispose();

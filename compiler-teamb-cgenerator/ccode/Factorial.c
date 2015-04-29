@@ -6,17 +6,16 @@ int factorial(int n);
 
 void main(){
    factorial(4);
+
 }
 
 int factorial(int n){
-   int result;
-   int i;
-   assert((n >= 1));
-   result = 1;
-   i = 2;
+   int result;int i;assert((n >= 1));
+   result=1;
+   i=2;
    while((i <= n)){
-      result = (result * i);i = (i + 1);
+      result=(result * i);
+      i=(i + 1);
    }
-
    return result;
 }

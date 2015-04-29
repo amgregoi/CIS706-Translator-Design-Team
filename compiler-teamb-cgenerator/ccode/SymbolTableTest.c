@@ -14,10 +14,8 @@ typedef struct SB{
 }B;
 
 void main(){
-   A* a;
-   B* b;
-   int z;
-   a = malloc(sizeof(A));
-   b = malloc(sizeof(B));
-   z = (a->x + b->x);
+   A* a;B* b;int z;a=malloc(sizeof(A));
+   b=malloc(sizeof(B));
+   z=(a->x + b->x);
+
 }

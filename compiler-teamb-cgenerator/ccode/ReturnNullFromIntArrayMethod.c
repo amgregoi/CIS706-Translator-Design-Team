@@ -5,8 +5,8 @@
 int* returnIntArray();
 
 void main(){
-   int* i;
-   i = returnIntArray();
+   int* i;i=returnIntArray();
+
 }
 
 int* returnIntArray(){

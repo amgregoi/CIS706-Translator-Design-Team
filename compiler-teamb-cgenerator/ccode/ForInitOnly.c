@@ -9,7 +9,6 @@ void main(){
 
 void* initOnly(){
    int i;
-
    for(i=0; ; ){
    }
 

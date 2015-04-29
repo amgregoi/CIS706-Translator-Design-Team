@@ -7,5 +7,7 @@ public class While {
             i++;
         }
         StaticJavaLib.assertTrue(i == 10);
+        
+        return;
     }
 }

@@ -8,9 +8,10 @@ void main(){
    assert(((2 <= 3) == true));
    assert(((3 <= 2) == false));
    assert(((2 <= 2) == true));
-   assert((lessThanOrEqual(2,3) == true));
-   assert((lessThanOrEqual(3,2) == false));
-   assert((lessThanOrEqual(2,2) == true));
+   assert((lessThanOrEqual(2, 3) == true));
+   assert((lessThanOrEqual(3, 2) == false));
+   assert((lessThanOrEqual(2, 2) == true));
+
 }
 
 bool lessThanOrEqual(int i, int j){

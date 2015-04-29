@@ -8,6 +8,5 @@ typedef struct SFoo{
 }Foo;
 
 void main(){
-   Foo* f;
-   Foo** g;
+   Foo* f;Foo** g;
 }

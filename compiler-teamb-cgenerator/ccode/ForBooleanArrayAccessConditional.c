@@ -4,15 +4,13 @@
 
 
 void main(){
-   bool* B;
-   bool b;
-   b = false;
-   B = malloc(sizeof(bool)*1);
-   B[0] = false;
+   bool* B;bool b;b=false;
+   B=malloc(sizeof(bool)*1);
+   B[0]=false;
 
    for(; B[0]; ){
-      b = true;
+      b=true;
    }
-
    assert((b == false));
+
 }

@@ -8,9 +8,10 @@ void main(){
    assert(((2 == 3) == false));
    assert(((3 == 2) == false));
    assert(((2 == 2) == true));
-   assert((equal(2,3) == false));
-   assert((equal(3,2) == false));
-   assert((equal(2,2) == true));
+   assert((equal(2, 3) == false));
+   assert((equal(3, 2) == false));
+   assert((equal(2, 2) == true));
+
 }
 
 bool equal(int i, int j){

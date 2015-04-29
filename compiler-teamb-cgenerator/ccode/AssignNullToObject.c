@@ -8,6 +8,6 @@ typedef struct SANTO{
 }ANTO;
 
 void main(){
-   ANTO* o;
-   o = NULL;
+   ANTO* o;o=NULL;
+
 }

@@ -14,8 +14,8 @@ typedef struct SBar{
 }Bar;
 
 void main(){
-   Foo2* a;
-   a = malloc(sizeof(Foo2));
-   a->b = malloc(sizeof(Bar));
-   a->b->x = 5;
+   Foo2* a;a=malloc(sizeof(Foo2));
+   a->b=malloc(sizeof(Bar));
+   a->b->x=5;
+
 }

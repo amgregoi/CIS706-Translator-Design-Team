@@ -4,11 +4,11 @@
 
 
 void main(){
-   int a;
-   a = 0;
+   int a;a=0;
 
    if(true){
-      a = 1;;
-   }
-   assert((a == 1));
+      a=1;
+
+   }assert((a == 1));
+
 }

@@ -4,6 +4,5 @@
 
 
 void main(){
-   int* i;
-   bool* b;
+   int* i;bool* b;
 }

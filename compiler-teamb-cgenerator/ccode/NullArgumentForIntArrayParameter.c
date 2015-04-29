@@ -6,6 +6,7 @@ void* takeIntArray(int* I);
 
 void main(){
    takeIntArray(NULL);
+
 }
 
 void* takeIntArray(int* I){

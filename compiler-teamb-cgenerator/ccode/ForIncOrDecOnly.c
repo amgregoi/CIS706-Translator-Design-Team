@@ -8,8 +8,7 @@ void main(){
 }
 
 void* incOrDecOnly(){
-   int i;
-   i = 0;
+   int i;i=0;
 
    for(; ; i++){
    }

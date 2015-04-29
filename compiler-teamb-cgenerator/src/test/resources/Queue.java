@@ -27,6 +27,7 @@ public class Queue
         Data d;
         int i;
 
+
         ll = llNewLinkedList();
         
         for (i = 0; i < 10; i++)
@@ -73,12 +74,21 @@ public class Queue
     static Data llRemoveFirst(LinkedList ll)
     {
         Data result;
+        int i;
+        i=0;
 
         StaticJavaLib.assertTrue(ll.size > 0);
         result = ll.head.next.data;
         ll.head = ll.head.next;
         ll.size--;
-
+        
+        
+        do
+        {
+        	i++;
+        	i++;
+        	i--;
+        }while(i < 10);
         return result;
     }
 }

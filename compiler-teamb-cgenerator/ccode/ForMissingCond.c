@@ -9,7 +9,6 @@ void main(){
 
 void* missingCond(){
    int i;
-
    for(i=0; ; i++){
    }
 

@@ -9,15 +9,13 @@ typedef struct SFBMAC{
 }FBMAC;
 
 void main(){
-   FBMAC* o;
-   bool b;
-   b = false;
-   o = malloc(sizeof(FBMAC));
-   o->b = false;
+   FBMAC* o;bool b;b=false;
+   o=malloc(sizeof(FBMAC));
+   o->b=false;
 
    for(; o->b; ){
-      b = true;
+      b=true;
    }
-
    assert((b == false));
+
 }

@@ -9,6 +9,7 @@ void main(){
    assert((!(true) == false));
    assert((not(false) == true));
    assert((not(true) == false));
+
 }
 
 bool not(bool b){

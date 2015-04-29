@@ -16,6 +16,7 @@ void main(){
    assert(!((returnNull() != NULL)));
    assert(!((NULL != NULL)));
    assert((NULL == returnNull()));
+
 }
 
 NEN* returnNull(){

@@ -10,39 +10,39 @@ void main(){
 }
 
 void* ae(int a, int b){
-   int x;
-   int y;
-   x = (a + b);
-   y = (a * b);
+   int x;int y;x=(a + b);
+   y=(a * b);
    while((y > (a + b))){
-      a = (a + 1);x = (a + b);
+      a=(a + 1);
+      x=(a + b);
    }
 
 }
 
 void* vbe(int a, int b){
-   int x;
-   int y;
-
+   int x;int y;
    if((a > b)){
-      x = (b - a);y = (a - b);;
+      x=(b - a);
+      y=(a - b);
+
    }else{
-      y = (b - a);x = (a - b);;
+      y=(b - a);
+      x=(a - b);
+
    }
 }
 
 void* lv(){
-   int x;
-   int y;
-   int z;
-   x = 2;
-   y = 4;
-   x = 1;
+   int x;int y;int z;x=2;
+   y=4;
+   x=1;
 
    if((y > x)){
-      z = y;;
+      z=y;
+
    }else{
-      z = (y * y);;
-   }
-   x = z;
+      z=(y * y);
+
+   }x=z;
+
 }

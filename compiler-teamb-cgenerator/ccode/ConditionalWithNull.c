@@ -8,7 +8,7 @@ typedef struct SCWN{
 }CWN;
 
 void main(){
-   CWN* o;
-   o = malloc(sizeof(CWN));
-   o = true ? NULL : o;
+   CWN* o;o=malloc(sizeof(CWN));
+   o=true ? NULL : o;
+
 }

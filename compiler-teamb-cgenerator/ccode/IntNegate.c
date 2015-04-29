@@ -9,6 +9,7 @@ void main(){
    assert((-(+(-(2))) == 2));
    assert((negate(2) == -(2)));
    assert((negate(-(2)) == 2));
+
 }
 
 int negate(int i){

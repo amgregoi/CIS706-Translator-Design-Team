@@ -4,8 +4,7 @@
 
 
 void main(){
-   int i;
-   bool b;
-   i = 0;
-   b = true;
+   int i;bool b;i=0;
+   b=true;
+
 }

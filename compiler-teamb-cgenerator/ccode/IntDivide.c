@@ -13,14 +13,15 @@ void main(){
    assert(((3 / -(2)) == -(1)));
    assert(((-(3) / 2) == -(1)));
    assert(((-(3) / -(2)) == 1));
-   assert((divide(2,3) == 0));
-   assert((divide(2,-(3)) == 0));
-   assert((divide(-(2),3) == 0));
-   assert((divide(-(2),-(3)) == 0));
-   assert((divide(3,2) == 1));
-   assert((divide(3,-(2)) == -(1)));
-   assert((divide(-(3),2) == -(1)));
-   assert((divide(-(3),-(2)) == 1));
+   assert((divide(2, 3) == 0));
+   assert((divide(2, -(3)) == 0));
+   assert((divide(-(2), 3) == 0));
+   assert((divide(-(2), -(3)) == 0));
+   assert((divide(3, 2) == 1));
+   assert((divide(3, -(2)) == -(1)));
+   assert((divide(-(3), 2) == -(1)));
+   assert((divide(-(3), -(2)) == 1));
+
 }
 
 int divide(int i, int j){

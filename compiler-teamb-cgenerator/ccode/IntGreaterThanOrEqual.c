@@ -8,9 +8,10 @@ void main(){
    assert(((2 >= 3) == false));
    assert(((3 >= 2) == true));
    assert(((2 >= 2) == true));
-   assert((greaterThanOrEqual(2,3) == false));
-   assert((greaterThanOrEqual(3,2) == true));
-   assert((greaterThanOrEqual(2,2) == true));
+   assert((greaterThanOrEqual(2, 3) == false));
+   assert((greaterThanOrEqual(3, 2) == true));
+   assert((greaterThanOrEqual(2, 2) == true));
+
 }
 
 bool greaterThanOrEqual(int i, int j){

@@ -4,8 +4,8 @@
 
 
 void main(){
-   int* I;
-   I = malloc(sizeof(int)*1);
-   I[0] = 1;
+   int* I;I=malloc(sizeof(int)*1);
+   I[0]=1;
    I[0]++;
+
 }
