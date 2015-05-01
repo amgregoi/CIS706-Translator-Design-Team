@@ -15,10 +15,3 @@ enum eObjectType{
 	PRIMITIVE,
 	REFERENCE
 };
-
-typedef union uValueType{
-	int integer;
-	bool boolean;
-	//Other Class Templates Here
-	/**/
-} ValueType;
