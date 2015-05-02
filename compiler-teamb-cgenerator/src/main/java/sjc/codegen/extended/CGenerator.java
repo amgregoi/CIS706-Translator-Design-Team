@@ -249,9 +249,8 @@ public class CGenerator {
 				for (final Object o : node.parameters()) {
 					final SingleVariableDeclaration vds = (SingleVariableDeclaration) o;
 					vds.getName().accept(this);
-					final String localName = getCode();
-					vds.getType().accept(this);
-					final String ptype = updateTypeBoolPrimArr(getCode());
+					final String localName = getCode();					
+					final String ptype = updateTypeBoolPrimArr(vds.getType().toString());
 
 					// build parameter
 					final ST p = stg.getInstanceOf("parameter");
