@@ -57,6 +57,7 @@ int main()
 	Reference* ref2 = New_Reference(*New_Object((void*)&subStruct, 1));
 	ref2->value.childList[0] = (void*)&(subStruct->pointer);
 	
+	newStruct->pointer = subStruct;
 	
 	printRefs();
 	addRef(newRef);

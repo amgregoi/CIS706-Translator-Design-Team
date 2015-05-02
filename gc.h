@@ -12,7 +12,7 @@ typedef struct	sRefList	RefList;
 typedef union uValueType ValueType;
 typedef enum eReferenceType RefType;
 
-bool currentMark = true;
+bool currentMark = false;
 
 enum eObjectType{
 	PRIMITIVE,
@@ -48,6 +48,7 @@ struct sObject{
 	bool mark;
 	void** pointer;
 	int numChildren;
+	int childIndex;
 	Object** childList;
 };
 
@@ -57,6 +58,7 @@ Object* New_Object(void** ptr, int numChildren)
 	newObj->mark = !currentMark;
 	newObj->pointer = ptr;
 	newObj->numChildren = numChildren;
+	newObj->childIndex = 0;
 	newObj->childList = malloc(sizeof(Object*) * numChildren);
 	
 	return newObj;
@@ -121,6 +123,7 @@ void pushVar(ObjectType, void *);
 void popVar();
 void disposeVars();
 void addRef(Reference*);
+void linkRef(Reference* refAddress);
 void removeRef(Reference*);
 Reference* getRef(void *);
 void disposeRefs();
