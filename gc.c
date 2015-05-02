@@ -2,64 +2,14 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "gc.h"
-#include "generatedFile.h"
 
-struct sObject{
-	bool mark;
-	ObjectType type; //may be unnecessary
-	void** pointer;
-	Object** childList;
-};
-
-struct sStackNode{
-	//Object value;
-	StackNode* next;
-	void * value;
-};
-
-struct sStack{
-	int size;
-	StackNode* head;
-};
-
-struct sReference{
-	Reference* next;
-	Reference* prev;
-	Object value;
-};
-
-struct sRefList{
-	int size;
-	Reference* head;
-	Reference* tail;
-};
-
-//Global Variables
-VarStack gc_variableStack = {0,NULL};
-RefList gc_referenceList = {0,NULL,NULL};
-bool currentMark = true;
-
-//Methods
-void* gc_Malloc(size_t);
-void gc_Free(void *);
-void gc_Mark();
-void gc_Sweep();
-void gc_Dispose();
-void pushVar(ObjectType, ValueType, void *);
-void popVar();
-void disposeVars();
-void addRef(Reference*);
-void removeRef(Reference*);
-Reference* getRef(void *);
-void disposeRefs();
-Reference* generateRef(RefType);
-
+#define typeof(x) (x == "int")? PRIMITIVE : REFERENCE
 
 void printRefs()
 {
 	Reference* currentNode = gc_referenceList.head;
 	
-	printf("RefList = ");
+	printf("RefList %d elements\n\t", gc_referenceList.size);
 	
 	while(currentNode != NULL)
 	{
@@ -73,24 +23,55 @@ void printRefs()
 void printVars()
 {
 	StackNode* currentNode = gc_variableStack.head;
+	void ** variableAddress;
+	void * variableValue;
 	
-	printf("VarStack = ");
+	printf("VarStack %d elements\n\t", gc_variableStack.size);
 	
 	while(currentNode != NULL)
 	{
-		printf(" %p[%p] ->", currentNode->value, *(currentNode->value));
+		variableAddress = &(currentNode->value);
+		variableValue = currentNode->value;
+		
+		printf(" %p[%p] ->", variableAddress, variableValue);
 		currentNode = currentNode->next;
 	}
 	
 	printf(" NULL\n");
 }
 
+typedef struct sTestStruct{
+	struct sTestStruct* pointer;
+} TestStruct;
+
 int main()
 {
+	TestStruct* newStruct = malloc(sizeof(TestStruct));
+	TestStruct* subStruct = malloc(sizeof(TestStruct));
+	
+	newStruct->pointer = NULL;
+	
+	Reference* newRef = New_Reference(*New_Object((void*)&newStruct,1));
+	newRef->value.childList[0] = (void*)&(newStruct->pointer);
+	
+	Reference* ref2 = New_Reference(*New_Object((void*)&subStruct, 1));
+	ref2->value.childList[0] = (void*)&(subStruct->pointer);
+	
+	
+	printRefs();
+	addRef(newRef);
+	printRefs();
+	addRef(ref2);
+	printRefs();
+	
+	gc_Dispose();
+	printf("Disposed of Variable Stack and Reference List\n");
+	printVars();
+	printRefs();
 	return 0;
 }
 
-void* gc_Malloc(size_t size)
+void* gc_Malloc(RefType refType)
 {
 	
 }
@@ -116,14 +97,19 @@ void gc_Dispose()
 	disposeRefs();
 }
 
-void pushVar(ObjectType objType, ValueType valType, void* varAddress)
+void pushVar(ObjectType objType, void* varAddress)
 {
 	StackNode* newNode = (StackNode*)malloc(sizeof(StackNode));
 	
-	newNode->value = varAddress;
-	newNode->next = gc_variableStack.head;
-	gc_variableStack.head = newNode->next;
+	if(newNode == NULL)
+	{
+		printf("Could not allocate any more memory\n");
+		return;
+	}
 	
+	newNode->value = varAddress;
+	newNode->next = gc_variableStack.head;	
+	gc_variableStack.head = newNode;
 	gc_variableStack.size++;
 }
 
@@ -147,12 +133,16 @@ void disposeVars()
 	gc_variableStack.size = 0;
 }
 
+//TODO link with objects that contain this as a child, link it to any children
+//if it has them. Seems like a terrible way to do it
 void addRef(Reference* refAddress)
 {
 	if(gc_referenceList.head == NULL && gc_referenceList.tail == NULL)
 	{
 		gc_referenceList.head = refAddress;
 		gc_referenceList.tail = refAddress;
+		refAddress->next = NULL;
+		refAddress->prev = NULL;
 		return;
 	}
 	
@@ -160,6 +150,13 @@ void addRef(Reference* refAddress)
 	refAddress->next = NULL;
 	gc_referenceList.tail->next = refAddress;
 	gc_referenceList.size++;
+	
+	linkRef(refAddress);
+}
+
+void linkRef(Reference* refAddress)
+{
+	
 }
 
 void removeRef(Reference* refAddress)
@@ -199,26 +196,13 @@ void disposeRefs()
 	
 	while(currentNode != NULL)
 	{
+		free(currentNode->value.childList);
 		nextNode = currentNode->next;
 		free(currentNode);
 		currentNode = nextNode;
 	}
 	
+	gc_referenceList.head = NULL;
+	gc_referenceList.tail = NULL;
 	gc_referenceList.size = 0;
-}
-
-Reference* generateRef(RefType refType)
-{
-	Reference* result = NULL;
-	
-	switch(refType)
-	{
-		case ReferenceType.BASE:
-			break;
-	}
-	
-	if(result != NULL)
-		addRef(result);
-	
-	return result;
 }
