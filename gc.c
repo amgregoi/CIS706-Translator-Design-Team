@@ -1,12 +1,14 @@
-#include "test.h"
+#include "gc.h"
 #include <stdio.h>
+#include <string.h> //for memcpy()
 
-int main()
-{
-	return 0;
-}
+//Global Variables
+VarStack 	variableStack = {0,NULL};
+RefList 	referenceList = {0,NULL,NULL};
+RefList		freeList = {0,NULL,NULL};
+unsigned char	currentMark;
 
-Variable* new_variable(int ID, void* obj)
+Variable* new_variable(int ID, void** addr)
 {
 	Variable* newVar = malloc(sizeof(Variable));
 	if(newVar == NULL){
@@ -16,8 +18,7 @@ Variable* new_variable(int ID, void* obj)
 
 	newVar->ID = ID;
 	newVar->next = NULL;
-	newVar->value = (Object*)obj;
-
+	newVar->address = addr;
 	return newVar;
 }
 
@@ -51,9 +52,14 @@ Object* new_object(int childNum, void** childList)
 	return newObj;
 }
 
-void var_push(int ID, void* obj)
+Object* var_getObject(Variable* var)
 {
-	Variable* newVar = new_variable(ID, obj);
+	return (Object*)(var->address[0]);
+}
+
+void var_push(int ID, void** addr)
+{
+	Variable* newVar = new_variable(ID, addr);
 
 	newVar->next = variableStack.head;
 	variableStack.head = newVar;
@@ -70,16 +76,20 @@ void var_pop()
 	var_dispose(poppedVar);
 }
 
-void* gc_malloc(size_t size)
+void* gc_malloc(size_t size, Object* obj)
 {
-	void* ptr = malloc(size);
+	void** ptr = malloc(size);
 
 	if(ptr == NULL){
 		printf("Could not allocate memory\n");
 		return NULL;
 	}
 
-	ref_add(ptr);
+	ptr[0] = (void*) obj;
+
+	ref_add(*ptr);
+
+	return (void*)ptr;
 }
 
 void gc_mark()
@@ -90,7 +100,7 @@ void gc_mark()
 
 	while(currentNode != NULL)
 	{
-		obj_mark(currentNode->value);
+		obj_mark(var_getObject(currentNode));
 		currentNode = currentNode->next;
 	}
 }
@@ -144,7 +154,7 @@ void gc_collect()
 void ref_add(void* ptr)
 {
 	Reference* ref = new_reference(ptr);
-	
+
 	if(referenceList.head == NULL && referenceList.tail == NULL)
 	{
 		referenceList.head = ref;
@@ -152,7 +162,7 @@ void ref_add(void* ptr)
 		ref->next = NULL;
 		ref->prev = NULL;
 	} else{
-	
+
 		ref->next = NULL;
 		ref->prev = referenceList.tail;
 		referenceList.tail->next = ref;
@@ -172,7 +182,7 @@ void ref_remove(Reference* ref)
 
 	if(ref->prev != NULL)
 		ref->prev->next = ref->next;
-	
+
 	if(ref->next != NULL)
 		ref->next->prev = ref->prev;
 
@@ -209,7 +219,9 @@ void ref_disposeAll()
 
 void var_dispose(Variable* var)
 {
-	obj_dispose(var->value);
+	//should not free the object
+	//the reference list will handle that
+	//obj_dispose(var->value);
 
 	free(var);
 }
@@ -223,7 +235,9 @@ void ref_dispose(Reference* ref)
 
 void obj_dispose(Object* obj)
 {
-	free(obj->childList);
+	if(obj->childList != NULL)
+		free(obj->childList);
+
 	free(obj);
 }
 
@@ -263,7 +277,8 @@ void print_variable(int tabNum, Variable* var)
 {
 	print_tabs(tabNum); printf("var = %p\n", var);
 	print_tabs(tabNum); printf("ID = %d\n", var->ID);
-	print_object(tabNum+1, var->value);
+	print_tabs(tabNum); printf("addr = %p\n", var->address);
+	print_object(tabNum+1, var_getObject(var));
 }
 
 void print_tabs(int tabNum)
@@ -279,6 +294,13 @@ void print_tabs(int tabNum)
 void print_array(int size, void** array)
 {
 	int i;
+
+	if(array == NULL)
+	{
+		printf("NULL\n");
+		return;
+	}
+	if(size >= 10) size = 10;
 
 	printf("{");
 	for(i = 0; i < size; i++)

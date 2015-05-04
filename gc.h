@@ -20,14 +20,14 @@ typedef struct sObject 		Object;
 //Constructor prototypes
 //can be moved to the .c file as "private" methods
 //since they will be used internally
-Variable* 	new_variable(int ID, void* value);
+Variable* 	new_variable(int ID, void** addr);
 Reference* 	new_reference(void* value);
 Object* 	new_object(int childNum, void** childList);
 
 //Method prototypes
-void var_push(int ID, void* obj);
+void var_push(int ID, void** addr);
 void var_pop();
-void* gc_malloc(size_t size);
+void* gc_malloc(size_t size, Object* obj);
 void gc_mark();
 void gc_sweep();
 void gc_dispose();
@@ -43,6 +43,7 @@ void var_dispose(Variable* var);
 void ref_dispose(Reference* ref);
 void obj_dispose(Object* obj);
 void freeReferences();
+Object* var_getObject(Variable* var);
 
 #ifdef DEBUG
 	#include <stdio.h>
@@ -53,7 +54,7 @@ void freeReferences();
 	void print_array(int size, void** array);
 
 	//Global so there's no need for parameters
-	void print_reflist();
+	void print_refList();
 	void print_varStack();
 	void print_freeList();
 	void print_gc();
@@ -69,8 +70,8 @@ struct sStack
 struct sVariable
 {
 	int ID;
+	void** address;
 	Variable* next;
-	Object* value;
 };
 
 struct sRefList
@@ -93,11 +94,4 @@ struct sObject
 	int childNum;
 	Object** childList;
 };
-
-//Global Variables
-//Can be pushed to the .c file as "private" fields
-VarStack 	variableStack = {0,NULL};
-RefList 	referenceList = {0,NULL,NULL};
-RefList		freeList = {0,NULL,NULL};
-unsigned char	currentMark;
 
