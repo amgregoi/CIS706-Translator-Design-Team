@@ -1,130 +1,103 @@
 #pragma once
 #include <stdbool.h>
+#include <stdlib.h>
 
-typedef enum 	eObjectType ObjectType;
-typedef union 	uValueType 	ValueType;
-typedef struct 	sObject 	Object;
-typedef struct 	sStackNode 	StackNode;
-typedef struct	sStack		VarStack;
-typedef struct 	sReference 	Reference;
-typedef struct	sRefList	RefList;
+#define DEBUG
 
-typedef union uValueType ValueType;
-typedef enum eReferenceType RefType;
+//This macro is to set a size to allow the free list to grow
+//to before freeing everything. This can save time as trying
+//to free everything everytime the garbage collector sweeps 
+//could be time consuming
+#define MAXFREELIST 1
 
-bool currentMark = false;
+//Struct typedefs and forward declarations
+typedef struct sStack 		VarStack;
+typedef struct sVariable 	Variable;
+typedef struct sRefList 	RefList;
+typedef struct sReference 	Reference;
+typedef struct sObject 		Object;
 
-enum eObjectType{
-	PRIMITIVE,
-	REFERENCE
-};
+//Constructor prototypes
+//can be moved to the .c file as "private" methods
+//since they will be used internally
+Variable* 	new_variable(int ID, void* value);
+Reference* 	new_reference(void* value);
+Object* 	new_object(int childNum, void** childList);
 
-union uValueType{
-	int integer;
-	bool boolean;
-	//Other Class Templates Here
-	/**/
-};
+//Method prototypes
+void var_push(int ID, void* obj);
+void var_pop();
+void* gc_malloc(size_t size);
+void gc_mark();
+void gc_sweep();
+void gc_dispose();
+void gc_collect();
 
-enum eReferenceType{
-	/**/
-	BASE
-};
+//Can be moved to the .c file as "private" methods
+void obj_mark(Object* obj);
+void ref_add(void* ptr);
+void ref_remove(Reference* ref);
+void var_disposeAll();
+void ref_disposeAll();
+void var_dispose(Variable* var);
+void ref_dispose(Reference* ref);
+void obj_dispose(Object* obj);
+void freeReferences();
 
-Reference* generateRef(RefType refType)
+#ifdef DEBUG
+	#include <stdio.h>
+	void print_object(int tabNum, Object* obj);
+	void print_reference(int tabNum, Reference* ref);
+	void print_variable(int tabNum, Variable* var);
+	void print_tabs(int tabNum);
+	void print_array(int size, void** array);
+
+	//Global so there's no need for parameters
+	void print_reflist();
+	void print_varStack();
+	void print_freeList();
+	void print_gc();
+#endif
+
+//Struct Definitions
+struct sStack
 {
-	Reference* result = NULL;
-	
-	switch(refType)
-	{
-		case BASE:
-			break;
-	}
-	
-	return result;
-}
-
-struct sObject{
-	bool mark;
-	void** pointer;
-	int numChildren;
-	int childIndex;
-	Object** childList;
-};
-
-Object* New_Object(void** ptr, int numChildren)
-{
-	Object* newObj = malloc(sizeof(Object));
-	newObj->mark = !currentMark;
-	newObj->pointer = ptr;
-	newObj->numChildren = numChildren;
-	newObj->childIndex = 0;
-	newObj->childList = malloc(sizeof(Object*) * numChildren);
-	
-	return newObj;
-}
-
-struct sStackNode{
-	//Object value;
-	StackNode* next;
-	void * value;
-};
-
-StackNode* New_StackNode(StackNode* next, void* value)
-{
-	StackNode* result = malloc(sizeof(StackNode));
-	
-	result->next = next;
-	result->value = value;
-	
-	return result;
-}
-
-struct sStack{
 	int size;
-	StackNode* head;
+	Variable* head;
 };
 
-struct sReference{
-	Reference* next;
-	Reference* prev;
-	Object value;
-};
-
-Reference* New_Reference(Object value)
+struct sVariable
 {
-	Reference* result = malloc(sizeof(Reference));
-	
-	result->next = NULL;
-	result->prev = NULL;
-	result->value = value;
-	
-	return result;
-}
+	int ID;
+	Variable* next;
+	Object* value;
+};
 
-struct sRefList{
+struct sRefList
+{
 	int size;
 	Reference* head;
 	Reference* tail;
 };
 
+struct sReference
+{
+	Reference* next;
+	Reference* prev;
+	Object* value;
+};
+
+struct sObject
+{
+	unsigned char mark;
+	int childNum;
+	Object** childList;
+};
+
 //Global Variables
-VarStack gc_variableStack = {0,NULL};
-RefList gc_referenceList = {0,NULL,NULL};
+//Can be pushed to the .c file as "private" fields
+VarStack 	variableStack = {0,NULL};
+RefList 	referenceList = {0,NULL,NULL};
+RefList		freeList = {0,NULL,NULL};
+unsigned char	currentMark;
 
-
-//Methods
-void* gc_Malloc(RefType);
-void gc_Free(void *);
-void gc_Mark();
-void gc_Sweep();
-void gc_Dispose();
-void pushVar(ObjectType, void *);
-void popVar();
-void disposeVars();
-void addRef(Reference*);
-void linkRef(Reference* refAddress);
-void removeRef(Reference*);
-Reference* getRef(void *);
-void disposeRefs();
-Reference* generateRef(RefType);

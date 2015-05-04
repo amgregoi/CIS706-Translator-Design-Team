@@ -1,209 +1,338 @@
-#include <stdlib.h>
+#include "test.h"
 #include <stdio.h>
-#include <stdbool.h>
-#include "gc.h"
-
-#define typeof(x) (x == "int")? PRIMITIVE : REFERENCE
-
-void printRefs()
-{
-	Reference* currentNode = gc_referenceList.head;
-	
-	printf("RefList %d elements\n\t", gc_referenceList.size);
-	
-	while(currentNode != NULL)
-	{
-		printf(" %p ->", currentNode->value.pointer);
-		currentNode = currentNode->next;
-	}
-	
-	printf(" NULL\n");
-}
-
-void printVars()
-{
-	StackNode* currentNode = gc_variableStack.head;
-	void ** variableAddress;
-	void * variableValue;
-	
-	printf("VarStack %d elements\n\t", gc_variableStack.size);
-	
-	while(currentNode != NULL)
-	{
-		variableAddress = &(currentNode->value);
-		variableValue = currentNode->value;
-		
-		printf(" %p[%p] ->", variableAddress, variableValue);
-		currentNode = currentNode->next;
-	}
-	
-	printf(" NULL\n");
-}
-
-typedef struct sTestStruct{
-	struct sTestStruct* pointer;
-} TestStruct;
 
 int main()
 {
-	TestStruct* newStruct = malloc(sizeof(TestStruct));
-	TestStruct* subStruct = malloc(sizeof(TestStruct));
-	
-	newStruct->pointer = NULL;
-	
-	Reference* newRef = New_Reference(*New_Object((void*)&newStruct,1));
-	newRef->value.childList[0] = (void*)&(newStruct->pointer);
-	
-	Reference* ref2 = New_Reference(*New_Object((void*)&subStruct, 1));
-	ref2->value.childList[0] = (void*)&(subStruct->pointer);
-	
-	newStruct->pointer = subStruct;
-	
-	printRefs();
-	addRef(newRef);
-	printRefs();
-	addRef(ref2);
-	printRefs();
-	
-	gc_Dispose();
-	printf("Disposed of Variable Stack and Reference List\n");
-	printVars();
-	printRefs();
 	return 0;
 }
 
-void* gc_Malloc(RefType refType)
+Variable* new_variable(int ID, void* obj)
 {
-	
-}
-
-void gc_Free(void * ptr)
-{
-	
-}
-
-void gc_Mark()
-{
-	
-}
-
-void gc_Sweep()
-{
-	
-}
-
-void gc_Dispose()
-{
-	disposeVars();
-	disposeRefs();
-}
-
-void pushVar(ObjectType objType, void* varAddress)
-{
-	StackNode* newNode = (StackNode*)malloc(sizeof(StackNode));
-	
-	if(newNode == NULL)
-	{
-		printf("Could not allocate any more memory\n");
-		return;
+	Variable* newVar = malloc(sizeof(Variable));
+	if(newVar == NULL){
+		printf("New Variable failed to be allocated\n");
+		return NULL;
 	}
-	
-	newNode->value = varAddress;
-	newNode->next = gc_variableStack.head;	
-	gc_variableStack.head = newNode;
-	gc_variableStack.size++;
+
+	newVar->ID = ID;
+	newVar->next = NULL;
+	newVar->value = (Object*)obj;
+
+	return newVar;
 }
 
-void popVar()
+Reference* new_reference(void* obj)
 {
-	if(gc_variableStack.head == NULL) return;
-	
-	StackNode* tempNode;
-	tempNode = gc_variableStack.head;
-	gc_variableStack.head = gc_variableStack.head->next;
-	free(tempNode);
-	gc_variableStack.size--;
-}
-
-void disposeVars()
-{
-	while(gc_variableStack.head != NULL)
-	{
-		popVar();
+	Reference* newRef = malloc(sizeof(Reference));
+	if(newRef == NULL){
+		printf("New Reference failed to be allocated\n");
+		return NULL;
 	}
-	gc_variableStack.size = 0;
+
+	newRef->next = NULL;
+	newRef->prev = NULL;
+	newRef->value = (Object*)obj;
+
+	return newRef;
 }
 
-//TODO link with objects that contain this as a child, link it to any children
-//if it has them. Seems like a terrible way to do it
-void addRef(Reference* refAddress)
+Object* new_object(int childNum, void** childList)
 {
-	if(gc_referenceList.head == NULL && gc_referenceList.tail == NULL)
-	{
-		gc_referenceList.head = refAddress;
-		gc_referenceList.tail = refAddress;
-		refAddress->next = NULL;
-		refAddress->prev = NULL;
-		return;
+	Object* newObj = malloc(sizeof(Object));
+	if(newObj == NULL){
+		printf("New Object failed to be allocated\n");
+		return NULL;
 	}
-	
-	refAddress->prev = gc_referenceList.tail;
-	refAddress->next = NULL;
-	gc_referenceList.tail->next = refAddress;
-	gc_referenceList.size++;
-	
-	linkRef(refAddress);
+
+	newObj->mark = currentMark;
+	newObj->childNum = childNum;
+	newObj->childList = (Object**) childList;
+
+	return newObj;
 }
 
-void linkRef(Reference* refAddress)
+void var_push(int ID, void* obj)
 {
-	
+	Variable* newVar = new_variable(ID, obj);
+
+	newVar->next = variableStack.head;
+	variableStack.head = newVar;
 }
 
-void removeRef(Reference* refAddress)
+void var_pop()
 {
-	Reference* nextNode = refAddress->next;
-	Reference* prevNode = refAddress->prev;
-	
-	if(nextNode != NULL)
-		nextNode->prev = prevNode;
-	
-	if(prevNode != NULL)
-		prevNode->next = nextNode;
-	
-	free(refAddress);
-	gc_referenceList.size--;
+	Variable* poppedVar = variableStack.head;
+
+	if(poppedVar == NULL) return;
+
+	variableStack.head = variableStack.head->next;
+
+	var_dispose(poppedVar);
 }
 
-Reference* getRef(void* variableValue)
+void* gc_malloc(size_t size)
 {
-	Reference* currentNode = gc_referenceList.head;
-	
+	void* ptr = malloc(size);
+
+	if(ptr == NULL){
+		printf("Could not allocate memory\n");
+		return NULL;
+	}
+
+	ref_add(ptr);
+}
+
+void gc_mark()
+{
+	currentMark++;
+
+	Variable* currentNode = variableStack.head;
+
 	while(currentNode != NULL)
 	{
-		if(currentNode->value.pointer == variableValue)
-			return currentNode;
-		
+		obj_mark(currentNode->value);
 		currentNode = currentNode->next;
 	}
-	
-	return NULL;
 }
 
-void disposeRefs()
+void obj_mark(Object* obj)
 {
-	Reference* currentNode = gc_referenceList.head;
+	int i;
+
+	if(obj == NULL || obj->mark == currentMark) return;
+
+	obj->mark = currentMark;
+
+	for(i = 0; i < obj->childNum; i++)
+	{
+		obj_mark(obj->childList[i]);
+	}
+}
+
+void gc_sweep()
+{
+	Reference* currentNode = referenceList.head;
 	Reference* nextNode;
-	
+
 	while(currentNode != NULL)
 	{
-		free(currentNode->value.childList);
 		nextNode = currentNode->next;
-		free(currentNode);
+		if(currentNode->value->mark != currentMark)
+		{
+			ref_remove(currentNode);
+		}
 		currentNode = nextNode;
 	}
-	
-	gc_referenceList.head = NULL;
-	gc_referenceList.tail = NULL;
-	gc_referenceList.size = 0;
 }
+
+void gc_dispose()
+{
+	var_disposeAll();
+	ref_disposeAll();
+}
+
+void gc_collect()
+{
+	gc_mark();
+	gc_sweep();
+	freeReferences();
+#ifdef DEBUG
+	print_gc();
+#endif
+}
+
+void ref_add(void* ptr)
+{
+	Reference* ref = new_reference(ptr);
+	
+	if(referenceList.head == NULL && referenceList.tail == NULL)
+	{
+		referenceList.head = ref;
+		referenceList.tail = ref;
+		ref->next = NULL;
+		ref->prev = NULL;
+	} else{
+	
+		ref->next = NULL;
+		ref->prev = referenceList.tail;
+		referenceList.tail->next = ref;
+		referenceList.tail = ref;
+	}
+
+	referenceList.size++;
+}
+
+void ref_remove(Reference* ref)
+{
+	if(referenceList.tail == ref)
+		referenceList.tail = ref->prev;
+
+	if(referenceList.head == ref)
+		referenceList.head = ref->next;
+
+	if(ref->prev != NULL)
+		ref->prev->next = ref->next;
+	
+	if(ref->next != NULL)
+		ref->next->prev = ref->prev;
+
+	ref->next = freeList.head;
+	freeList.head = ref;
+	freeList.size++;
+}
+
+void var_disposeAll()
+{
+	while(variableStack.head != NULL)
+	{
+		var_pop();
+	}
+	variableStack.size = 0;
+}
+
+void ref_disposeAll()
+{
+	Reference* currentNode = referenceList.head;
+	Reference* nextNode;
+
+	while(currentNode != NULL)
+	{
+		nextNode = currentNode->next;
+		ref_dispose(currentNode);
+		currentNode = nextNode;
+	}
+
+	referenceList.head = NULL;
+	referenceList.tail = NULL;
+	referenceList.size = 0;
+}
+
+void var_dispose(Variable* var)
+{
+	obj_dispose(var->value);
+
+	free(var);
+}
+
+void ref_dispose(Reference* ref)
+{
+	obj_dispose(ref->value);
+
+	free(ref);
+}
+
+void obj_dispose(Object* obj)
+{
+	free(obj->childList);
+	free(obj);
+}
+
+void freeReferences()
+{
+	Reference* currentNode;
+
+	if(freeList.size < MAXFREELIST) return;
+
+	while(freeList.head != NULL)
+	{
+		currentNode = freeList.head->next;
+		ref_dispose(freeList.head);
+		freeList.head = currentNode;
+	}
+
+	freeList.size = 0;
+}
+
+#ifdef DEBUG
+void print_object(int tabNum, Object* obj)
+{
+	print_tabs(tabNum); printf("obj = %p\n", obj);
+	print_tabs(tabNum); printf("mark = %d\n", obj->mark);
+	print_tabs(tabNum); printf("childNum = %d\n", obj->childNum);
+	print_tabs(tabNum); printf("childList = ");
+	print_array(obj->childNum, (void**)obj->childList); printf("\n");
+}
+
+void print_reference(int tabNum, Reference* ref)
+{
+	print_tabs(tabNum); printf("ref = %p\n", ref);
+	print_object(tabNum+1, ref->value);
+}
+
+void print_variable(int tabNum, Variable* var)
+{
+	print_tabs(tabNum); printf("var = %p\n", var);
+	print_tabs(tabNum); printf("ID = %d\n", var->ID);
+	print_object(tabNum+1, var->value);
+}
+
+void print_tabs(int tabNum)
+{
+	int i;
+
+	for(i = 0; i < tabNum; i++)
+	{
+		printf("\t");
+	}
+}
+
+void print_array(int size, void** array)
+{
+	int i;
+
+	printf("{");
+	for(i = 0; i < size; i++)
+	{
+		printf("%p", array + (i * sizeof(void*)));
+
+		if(i != size-1) printf(",");
+	}
+
+	printf("}");
+}
+
+void print_refList()
+{
+	Reference* currentNode = referenceList.head;
+
+	printf("Reference List:\n");
+
+	while(currentNode != NULL)
+	{
+		print_reference(1, currentNode);
+		currentNode = currentNode->next;
+	}
+}
+
+void print_varStack()
+{
+	Variable* currentNode = variableStack.head;
+
+	printf("Variable Stack:\n");
+
+	while(currentNode != NULL)
+	{
+		print_variable(1, currentNode);
+		currentNode = currentNode->next;
+	}
+}
+
+void print_freeList()
+{
+	Reference* currentNode = referenceList.head;
+	printf("FreeList:\n");
+
+	while(currentNode != NULL)
+	{
+		print_reference(1, currentNode);
+		currentNode = currentNode->next;
+	}
+}
+
+void print_gc()
+{
+	print_varStack();
+	print_refList();
+	print_freeList();
+}
+#endif
