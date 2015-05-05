@@ -8,7 +8,7 @@ RefList 	referenceList = {0,NULL,NULL};
 RefList		freeList = {0,NULL,NULL};
 unsigned char	currentMark;
 
-Variable* new_variable(int ID, void** addr)
+Variable* new_variable(int ID, void* addr)
 {
 	Variable* newVar = malloc(sizeof(Variable));
 	if(newVar == NULL){
@@ -18,7 +18,7 @@ Variable* new_variable(int ID, void** addr)
 
 	newVar->ID = ID;
 	newVar->next = NULL;
-	newVar->address = addr;
+	newVar->address = (void***)addr;
 	return newVar;
 }
 
@@ -54,10 +54,20 @@ Object* new_object(int childNum, void** childList)
 
 Object* var_getObject(Variable* var)
 {
-	return (Object*)(var->address[0]);
+	if(*(var->address) != NULL)
+		return (Object*)**(var->address);
+	else
+		return NULL;
 }
 
-void var_push(int ID, void** addr)
+Object* obj_getChild(void* ptr)
+{
+	if(*(void**) ptr == NULL) return NULL;
+	
+	return (Object*)**((void***)ptr);
+}
+
+void var_push(int ID, void* addr)
 {
 	Variable* newVar = new_variable(ID, addr);
 
@@ -115,7 +125,7 @@ void obj_mark(Object* obj)
 
 	for(i = 0; i < obj->childNum; i++)
 	{
-		obj_mark(obj->childList[i]);
+		obj_mark(obj_getChild(obj->childList[i]));
 	}
 }
 
@@ -147,7 +157,7 @@ void gc_collect()
 	gc_sweep();
 	freeReferences();
 #ifdef DEBUG
-	print_gc();
+	//print_gc();
 #endif
 }
 
@@ -300,12 +310,15 @@ void print_array(int size, void** array)
 		printf("NULL\n");
 		return;
 	}
+	
 	if(size >= 10) size = 10;
 
 	printf("{");
 	for(i = 0; i < size; i++)
 	{
-		printf("%p", array + (i * sizeof(void*)));
+		//printf("%p", *((void**)array[i]));
+		
+		printf("%p", obj_getChild(array[i]));
 
 		if(i != size-1) printf(",");
 	}
@@ -341,7 +354,7 @@ void print_varStack()
 
 void print_freeList()
 {
-	Reference* currentNode = referenceList.head;
+	Reference* currentNode = freeList.head;
 	printf("FreeList:\n");
 
 	while(currentNode != NULL)
@@ -353,6 +366,7 @@ void print_freeList()
 
 void print_gc()
 {
+	printf("Current Mark = %d\n", currentMark);
 	print_varStack();
 	print_refList();
 	print_freeList();
