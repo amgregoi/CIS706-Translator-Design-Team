@@ -66,11 +66,13 @@ void print_header(char header[])
 
 void BasicStructTest();
 void SelfReferentialTest();
+void ArrayTest();
 
 int main()
 {
-	SelfReferentialTest();
+	//SelfReferentialTest();
 	//BasicStructTest();
+	ArrayTest();
 	
 	gc_dispose();
 	print_header("After Disposal:");
@@ -155,6 +157,7 @@ void SelfReferentialTest()
 
 //May need to construct 2 structs to deal with arrays
 //One as an array sentinel and another for the objects
+
 typedef struct sData
 {
 	Object* obj;
@@ -201,34 +204,87 @@ typedef struct sArray
 {
 	Object* obj;
 	int elemNum;
-	size_t elemSize;
-	void* address;
+	void** address;
 } Array;
 
 Array* New_Array(int n)
 {
 	Object* obj;
 	Array* ptr;
-	void** childList = malloc(elementSize * sizeof(void*));
+	void** childList = malloc(sizeof(void*) * n);
 	int i;
 	
 	obj = new_object(n, childList);
 	ptr = gc_malloc(sizeof(Array), obj);
 	
-	for(i = 1; i < n; i++)
-	{
-		ptr[i] = NULL;
-	}
-	
+	ptr->address = malloc(sizeof(void*) * n);
 	for(i = 0; i < n; i++)
 	{
-		childList[i] = &(((void**)ptr)[i]);
+		ptr->address[i] = NULL;
+		childList[i] = &(ptr->address[i]);
 	}
 	
 	return ptr;
 }
 
+void print2DArray(Array* arr, int l1, int l2)
+{
+	int i,j;
+	Array* tempArray;
+	IntElement* tempElement;
+
+	printf("Printing 2D Array: {\n");
+	for(i = 0; i < l1; i++)
+	{
+		tempArray = (Array*)arr->address[i];
+		printf("\tarr->address[%d] = {", i);
+		for(j = 0; j < l2; j++)
+		{
+			tempElement = (IntElement*)tempArray->address[j];
+			printf("%d", tempElement->value);
+			if(j < l2-1) printf(", ");
+			else printf("}\n");
+		}
+	}
+	printf("}\n");
+}
+
 void ArrayTest()
 {
+	Array* arr;
+	Array* arr_2;
+	int n,i,j;
+
+	n = 5;
+
+	var_push(1, &arr);
+	var_push(2, &arr_2);
+
+	arr = New_Array(n);
+	arr_2 = New_Array(n);
+
+	print_header("Initializing Array:");
+
+	for(i = 0; i < n; i++)
+	{
+		arr->address[i] = New_Integer(i*i);
+		arr_2->address[i] = New_Array(n);
+		for(j=0; j < n; j++)
+		{
+			((Array*)arr_2->address[i])->address[j] = New_Integer(i+j);
+		}
+	}
+
+	print_header("After Populating Array:");
+
+	printf("Element Values: {");
 	
+	for(i = 0; i < n; i++)
+	{
+		printf("%d", ((IntElement*)arr->address[i])->value);
+		if(i != n-1)printf(",");
+		else printf("}\n");
+	}
+
+	print2DArray(arr_2, n, n);
 }
