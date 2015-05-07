@@ -1,0 +1,33 @@
+"StaticJavaLib.assertTrue(!false == true)" in "StaticJavaLib.assertTrue(!false == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(!true == false)" in "StaticJavaLib.assertTrue(!true == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(not(false) == true)" in "StaticJavaLib.assertTrue(not(false) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(not(true) == false)" in "StaticJavaLib.assertTrue(not(true) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"b" in "!b" ==> boolean b
+"not(false)" in "not(false) == true" ==> static boolean not(boolean b){
+"not(true)" in "not(true) == false" ==> static boolean not(boolean b){
+
+"!b" in "return !b;": boolean
+"!false == true" in "StaticJavaLib.assertTrue(!false == true)": boolean
+"!false" in "!false == true": boolean
+"!true == false" in "StaticJavaLib.assertTrue(!true == false)": boolean
+"!true" in "!true == false": boolean
+"StaticJavaLib.assertTrue(!false == true)" in "StaticJavaLib.assertTrue(!false == true);": void
+"StaticJavaLib.assertTrue(!true == false)" in "StaticJavaLib.assertTrue(!true == false);": void
+"StaticJavaLib.assertTrue(not(false) == true)" in "StaticJavaLib.assertTrue(not(false) == true);": void
+"StaticJavaLib.assertTrue(not(true) == false)" in "StaticJavaLib.assertTrue(not(true) == false);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"b" in "!b": boolean
+"boolean b" in "static boolean not(boolean b){": boolean
+"false" in "!false": boolean
+"false" in "!true == false": boolean
+"false" in "not(false)": boolean
+"false" in "not(true) == false": boolean
+"not(false) == true" in "StaticJavaLib.assertTrue(not(false) == true)": boolean
+"not(false)" in "not(false) == true": boolean
+"not(true) == false" in "StaticJavaLib.assertTrue(not(true) == false)": boolean
+"not(true)" in "not(true) == false": boolean
+"public class BooleanNot {" in "public class BooleanNot {": BooleanNot
+"true" in "!false == true": boolean
+"true" in "!true": boolean
+"true" in "not(false) == true": boolean
+"true" in "not(true)": boolean

@@ -1,0 +1,15 @@
+"i" in "i=0" ==> int i;
+"j" in "j=0" ==> int j;
+"k" in "k=0" ==> int k;
+
+"0" in "i=0": int
+"0" in "j=0": int
+"0" in "k=0": int
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i" in "i=0": int
+"int i;" in "{": int
+"int j;" in "{": int
+"int k;" in "{": int
+"j" in "j=0": int
+"k" in "k=0": int
+"public class ForMultipleInitOnly {" in "public class ForMultipleInitOnly {": ForMultipleInitOnly

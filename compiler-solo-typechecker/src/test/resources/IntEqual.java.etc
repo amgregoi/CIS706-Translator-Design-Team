@@ -1,0 +1,53 @@
+"StaticJavaLib.assertTrue(2 == 2 == true)" in "StaticJavaLib.assertTrue(2 == 2 == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(2 == 3 == false)" in "StaticJavaLib.assertTrue(2 == 3 == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(3 == 2 == false)" in "StaticJavaLib.assertTrue(3 == 2 == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(equal(2,2) == true)" in "StaticJavaLib.assertTrue(equal(2,2) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(equal(2,3) == false)" in "StaticJavaLib.assertTrue(equal(2,3) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(equal(3,2) == false)" in "StaticJavaLib.assertTrue(equal(3,2) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"equal(2,2)" in "equal(2,2) == true" ==> static boolean equal(int i,int j){
+"equal(2,3)" in "equal(2,3) == false" ==> static boolean equal(int i,int j){
+"equal(3,2)" in "equal(3,2) == false" ==> static boolean equal(int i,int j){
+"i" in "i == j" ==> int i
+"j" in "i == j" ==> int j
+
+"2 == 2 == true" in "StaticJavaLib.assertTrue(2 == 2 == true)": boolean
+"2 == 2" in "2 == 2 == true": boolean
+"2 == 3 == false" in "StaticJavaLib.assertTrue(2 == 3 == false)": boolean
+"2 == 3" in "2 == 3 == false": boolean
+"2" in "2 == 2": int
+"2" in "2 == 3": int
+"2" in "3 == 2": int
+"2" in "equal(2,2)": int
+"2" in "equal(2,3)": int
+"2" in "equal(3,2)": int
+"3 == 2 == false" in "StaticJavaLib.assertTrue(3 == 2 == false)": boolean
+"3 == 2" in "3 == 2 == false": boolean
+"3" in "2 == 3": int
+"3" in "3 == 2": int
+"3" in "equal(2,3)": int
+"3" in "equal(3,2)": int
+"StaticJavaLib.assertTrue(2 == 2 == true)" in "StaticJavaLib.assertTrue(2 == 2 == true);": void
+"StaticJavaLib.assertTrue(2 == 3 == false)" in "StaticJavaLib.assertTrue(2 == 3 == false);": void
+"StaticJavaLib.assertTrue(3 == 2 == false)" in "StaticJavaLib.assertTrue(3 == 2 == false);": void
+"StaticJavaLib.assertTrue(equal(2,2) == true)" in "StaticJavaLib.assertTrue(equal(2,2) == true);": void
+"StaticJavaLib.assertTrue(equal(2,3) == false)" in "StaticJavaLib.assertTrue(equal(2,3) == false);": void
+"StaticJavaLib.assertTrue(equal(3,2) == false)" in "StaticJavaLib.assertTrue(equal(3,2) == false);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"equal(2,2) == true" in "StaticJavaLib.assertTrue(equal(2,2) == true)": boolean
+"equal(2,2)" in "equal(2,2) == true": boolean
+"equal(2,3) == false" in "StaticJavaLib.assertTrue(equal(2,3) == false)": boolean
+"equal(2,3)" in "equal(2,3) == false": boolean
+"equal(3,2) == false" in "StaticJavaLib.assertTrue(equal(3,2) == false)": boolean
+"equal(3,2)" in "equal(3,2) == false": boolean
+"false" in "2 == 3 == false": boolean
+"false" in "3 == 2 == false": boolean
+"false" in "equal(2,3) == false": boolean
+"false" in "equal(3,2) == false": boolean
+"i == j" in "return i == j;": boolean
+"i" in "i == j": int
+"int i" in "static boolean equal(int i,int j){": int
+"int j" in "static boolean equal(int i,int j){": int
+"j" in "i == j": int
+"public class IntEqual {" in "public class IntEqual {": IntEqual
+"true" in "2 == 2 == true": boolean
+"true" in "equal(2,2) == true": boolean

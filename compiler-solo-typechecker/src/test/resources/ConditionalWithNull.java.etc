@@ -1,0 +1,17 @@
+CWN ==> class CWN {
+"new CWN()" in "o=new CWN()" ==> class CWN {
+"o" in "o=new CWN()" ==> CWN o;
+"o" in "o=true ? null : o" ==> CWN o;
+"o" in "true ? null : o" ==> CWN o;
+
+"CWN o;" in "{": CWN
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"class CWN {" in "class CWN {": CWN
+"new CWN()" in "o=new CWN()": CWN
+"null" in "true ? null : o": null
+"o" in "o=new CWN()": CWN
+"o" in "o=true ? null : o": CWN
+"o" in "true ? null : o": CWN
+"public class ConditionalWithNull {" in "class CWN {": ConditionalWithNull
+"true ? null : o" in "o=true ? null : o": CWN
+"true" in "true ? null : o": boolean

@@ -1,0 +1,42 @@
+"StaticJavaLib.assertTrue(-2 << 1 == -4)" in "StaticJavaLib.assertTrue(-2 << 1 == -4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(2 << 1 == 4)" in "StaticJavaLib.assertTrue(2 << 1 == 4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(shiftLeft(-2,1) == -4)" in "StaticJavaLib.assertTrue(shiftLeft(-2,1) == -4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(shiftLeft(2,1) == 4)" in "StaticJavaLib.assertTrue(shiftLeft(2,1) == 4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"i" in "i << j" ==> int i
+"j" in "i << j" ==> int j
+"shiftLeft(-2,1)" in "shiftLeft(-2,1) == -4" ==> static int shiftLeft(int i,int j){
+"shiftLeft(2,1)" in "shiftLeft(2,1) == 4" ==> static int shiftLeft(int i,int j){
+
+"-2 << 1 == -4" in "StaticJavaLib.assertTrue(-2 << 1 == -4)": boolean
+"-2 << 1" in "-2 << 1 == -4": int
+"-2" in "-2 << 1": int
+"-2" in "shiftLeft(-2,1)": int
+"-4" in "-2 << 1 == -4": int
+"-4" in "shiftLeft(-2,1) == -4": int
+"1" in "-2 << 1": int
+"1" in "2 << 1": int
+"1" in "shiftLeft(-2,1)": int
+"1" in "shiftLeft(2,1)": int
+"2 << 1 == 4" in "StaticJavaLib.assertTrue(2 << 1 == 4)": boolean
+"2 << 1" in "2 << 1 == 4": int
+"2" in "-2": int
+"2" in "2 << 1": int
+"2" in "shiftLeft(2,1)": int
+"4" in "-4": int
+"4" in "2 << 1 == 4": int
+"4" in "shiftLeft(2,1) == 4": int
+"StaticJavaLib.assertTrue(-2 << 1 == -4)" in "StaticJavaLib.assertTrue(-2 << 1 == -4);": void
+"StaticJavaLib.assertTrue(2 << 1 == 4)" in "StaticJavaLib.assertTrue(2 << 1 == 4);": void
+"StaticJavaLib.assertTrue(shiftLeft(-2,1) == -4)" in "StaticJavaLib.assertTrue(shiftLeft(-2,1) == -4);": void
+"StaticJavaLib.assertTrue(shiftLeft(2,1) == 4)" in "StaticJavaLib.assertTrue(shiftLeft(2,1) == 4);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i << j" in "return i << j;": int
+"i" in "i << j": int
+"int i" in "static int shiftLeft(int i,int j){": int
+"int j" in "static int shiftLeft(int i,int j){": int
+"j" in "i << j": int
+"public class IntShiftLeft {" in "public class IntShiftLeft {": IntShiftLeft
+"shiftLeft(-2,1) == -4" in "StaticJavaLib.assertTrue(shiftLeft(-2,1) == -4)": boolean
+"shiftLeft(-2,1)" in "shiftLeft(-2,1) == -4": int
+"shiftLeft(2,1) == 4" in "StaticJavaLib.assertTrue(shiftLeft(2,1) == 4)": boolean
+"shiftLeft(2,1)" in "shiftLeft(2,1) == 4": int

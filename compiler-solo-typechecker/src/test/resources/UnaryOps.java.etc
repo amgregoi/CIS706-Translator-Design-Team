@@ -1,0 +1,77 @@
+"StaticJavaLib.assertTrue(!false)" in "StaticJavaLib.assertTrue(!false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(complement(-5) == 4)" in "StaticJavaLib.assertTrue(complement(-5) == 4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(not(false) == true)" in "StaticJavaLib.assertTrue(not(false) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(not(true) == false)" in "StaticJavaLib.assertTrue(not(true) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(true)" in "StaticJavaLib.assertTrue(true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(unaryMinus(-2) == 2)" in "StaticJavaLib.assertTrue(unaryMinus(-2) == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(unaryMinus(2) == -2)" in "StaticJavaLib.assertTrue(unaryMinus(2) == -2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(unaryPlus(-2) == -2)" in "StaticJavaLib.assertTrue(unaryPlus(-2) == -2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(unaryPlus(2) == 2)" in "StaticJavaLib.assertTrue(unaryPlus(2) == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"b" in "!b" ==> boolean b
+"complement(-5)" in "complement(-5) == 4" ==> static int complement(int i){
+"i" in "+i" ==> int i
+"i" in "-i" ==> int i
+"i" in "~i" ==> int i
+"not(false)" in "not(false) == true" ==> static boolean not(boolean b){
+"not(true)" in "not(true) == false" ==> static boolean not(boolean b){
+"unaryMinus(-2)" in "unaryMinus(-2) == 2" ==> static int unaryMinus(int i){
+"unaryMinus(2)" in "unaryMinus(2) == -2" ==> static int unaryMinus(int i){
+"unaryPlus(-2)" in "unaryPlus(-2) == -2" ==> static int unaryPlus(int i){
+"unaryPlus(2)" in "unaryPlus(2) == 2" ==> static int unaryPlus(int i){
+
+"!b" in "return !b;": boolean
+"!false" in "StaticJavaLib.assertTrue(!false)": boolean
+"+i" in "return +i;": int
+"-2" in "unaryMinus(-2)": int
+"-2" in "unaryMinus(2) == -2": int
+"-2" in "unaryPlus(-2) == -2": int
+"-2" in "unaryPlus(-2)": int
+"-5" in "complement(-5)": int
+"-i" in "return -i;": int
+"2" in "-2": int
+"2" in "unaryMinus(-2) == 2": int
+"2" in "unaryMinus(2)": int
+"2" in "unaryPlus(2) == 2": int
+"2" in "unaryPlus(2)": int
+"4" in "complement(-5) == 4": int
+"5" in "-5": int
+"StaticJavaLib.assertTrue(!false)" in "StaticJavaLib.assertTrue(!false);": void
+"StaticJavaLib.assertTrue(complement(-5) == 4)" in "StaticJavaLib.assertTrue(complement(-5) == 4);": void
+"StaticJavaLib.assertTrue(not(false) == true)" in "StaticJavaLib.assertTrue(not(false) == true);": void
+"StaticJavaLib.assertTrue(not(true) == false)" in "StaticJavaLib.assertTrue(not(true) == false);": void
+"StaticJavaLib.assertTrue(true)" in "StaticJavaLib.assertTrue(true);": void
+"StaticJavaLib.assertTrue(unaryMinus(-2) == 2)" in "StaticJavaLib.assertTrue(unaryMinus(-2) == 2);": void
+"StaticJavaLib.assertTrue(unaryMinus(2) == -2)" in "StaticJavaLib.assertTrue(unaryMinus(2) == -2);": void
+"StaticJavaLib.assertTrue(unaryPlus(-2) == -2)" in "StaticJavaLib.assertTrue(unaryPlus(-2) == -2);": void
+"StaticJavaLib.assertTrue(unaryPlus(2) == 2)" in "StaticJavaLib.assertTrue(unaryPlus(2) == 2);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"b" in "!b": boolean
+"boolean b" in "static boolean not(boolean b){": boolean
+"complement(-5) == 4" in "StaticJavaLib.assertTrue(complement(-5) == 4)": boolean
+"complement(-5)" in "complement(-5) == 4": int
+"false" in "!false": boolean
+"false" in "not(false)": boolean
+"false" in "not(true) == false": boolean
+"i" in "+i": int
+"i" in "-i": int
+"i" in "~i": int
+"int i" in "static int complement(int i){": int
+"int i" in "static int unaryMinus(int i){": int
+"int i" in "static int unaryPlus(int i){": int
+"not(false) == true" in "StaticJavaLib.assertTrue(not(false) == true)": boolean
+"not(false)" in "not(false) == true": boolean
+"not(true) == false" in "StaticJavaLib.assertTrue(not(true) == false)": boolean
+"not(true)" in "not(true) == false": boolean
+"public class UnaryOps {" in "public class UnaryOps {": UnaryOps
+"true" in "StaticJavaLib.assertTrue(true)": boolean
+"true" in "not(false) == true": boolean
+"true" in "not(true)": boolean
+"unaryMinus(-2) == 2" in "StaticJavaLib.assertTrue(unaryMinus(-2) == 2)": boolean
+"unaryMinus(-2)" in "unaryMinus(-2) == 2": int
+"unaryMinus(2) == -2" in "StaticJavaLib.assertTrue(unaryMinus(2) == -2)": boolean
+"unaryMinus(2)" in "unaryMinus(2) == -2": int
+"unaryPlus(-2) == -2" in "StaticJavaLib.assertTrue(unaryPlus(-2) == -2)": boolean
+"unaryPlus(-2)" in "unaryPlus(-2) == -2": int
+"unaryPlus(2) == 2" in "StaticJavaLib.assertTrue(unaryPlus(2) == 2)": boolean
+"unaryPlus(2)" in "unaryPlus(2) == 2": int
+"~i" in "return ~i;": int

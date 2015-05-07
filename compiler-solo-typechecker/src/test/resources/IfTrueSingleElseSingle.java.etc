@@ -1,0 +1,20 @@
+"StaticJavaLib.assertTrue(a == 1)" in "StaticJavaLib.assertTrue(a == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"a" in "a == 1" ==> int a;
+"a" in "a=0" ==> int a;
+"a" in "a=1" ==> int a;
+"a" in "a=2" ==> int a;
+
+"0" in "a=0": int
+"1" in "a == 1": int
+"1" in "a=1": int
+"2" in "a=2": int
+"StaticJavaLib.assertTrue(a == 1)" in "StaticJavaLib.assertTrue(a == 1);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"a == 1" in "StaticJavaLib.assertTrue(a == 1)": boolean
+"a" in "a == 1": int
+"a" in "a=0": int
+"a" in "a=1": int
+"a" in "a=2": int
+"int a;" in "{": int
+"public class IfTrueSingleElseSingle {" in "public class IfTrueSingleElseSingle {": IfTrueSingleElseSingle
+"true" in "if (true) {": boolean

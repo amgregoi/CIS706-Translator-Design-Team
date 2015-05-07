@@ -1,0 +1,51 @@
+"StaticJavaLib.assertTrue(a[i] == (i + 1))" in "StaticJavaLib.assertTrue(a[i] == (i + 1));" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(b == 10)" in "StaticJavaLib.assertTrue(b == 10);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"a" in "a=new int[5]" ==> int[] a;
+"a" in "a[i]" ==> int[] a;
+"b" in "b + a[i]" ==> int b;
+"b" in "b == 10" ==> int b;
+"b" in "b=0" ==> int b;
+"b" in "b=b + a[i]" ==> int b;
+"i" in "a[i]" ==> int i;
+"i" in "a[i]=i" ==> int i;
+"i" in "i + 1" ==> int i;
+"i" in "i < 5" ==> int i;
+"i" in "i++" ==> int i;
+"i" in "i=0" ==> int i;
+
+"(i + 1)" in "a[i] == (i + 1)": int
+"0" in "b=0": int
+"0" in "i=0": int
+"1" in "i + 1": int
+"10" in "b == 10": int
+"5" in "i < 5": int
+"5" in "new int[5]": int
+"StaticJavaLib.assertTrue(a[i] == (i + 1))" in "StaticJavaLib.assertTrue(a[i] == (i + 1));": void
+"StaticJavaLib.assertTrue(b == 10)" in "StaticJavaLib.assertTrue(b == 10);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"a" in "a=new int[5]": int[]
+"a" in "a[i]": int[]
+"a[i] == (i + 1)" in "StaticJavaLib.assertTrue(a[i] == (i + 1))": boolean
+"a[i]" in "a[i] == (i + 1)": int
+"a[i]" in "a[i]++": int
+"a[i]" in "a[i]=i": int
+"a[i]" in "b + a[i]": int
+"b + a[i]" in "b=b + a[i]": int
+"b == 10" in "StaticJavaLib.assertTrue(b == 10)": boolean
+"b" in "b + a[i]": int
+"b" in "b == 10": int
+"b" in "b=0": int
+"b" in "b=b + a[i]": int
+"i + 1" in "(i + 1)": int
+"i < 5" in "for (i=0; i < 5; i++) {": boolean
+"i" in "a[i]": int
+"i" in "a[i]=i": int
+"i" in "i + 1": int
+"i" in "i < 5": int
+"i" in "i++": int
+"i" in "i=0": int
+"int b;" in "{": int
+"int i;" in "{": int
+"int[] a;" in "{": int[]
+"new int[5]" in "a=new int[5]": int[]
+"public class ArrayCreation2 {" in "public class ArrayCreation2 {": ArrayCreation2

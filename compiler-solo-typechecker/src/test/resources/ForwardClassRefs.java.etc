@@ -1,0 +1,27 @@
+LateClass ==> class LateClass {
+"lc" in "lc.next" ==> LateClass lc;
+"lc" in "lc=new LateClass()" ==> LateClass lc;
+"lc.next" in "lc.next.i" ==> public LateClass next;
+"lc.next.i" in "lc.next.i + x" ==> public int i;
+"new LateClass()" in "lc=new LateClass()" ==> class LateClass {
+"x" in "lc.next.i + x" ==> int x;
+"x" in "x=1" ==> int x;
+"x" in "x=lc.next.i + x" ==> int x;
+
+"1" in "x=1": int
+"LateClass lc;" in "{": LateClass
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"class LateClass {" in "public class ForwardClassRefs {": LateClass
+"int x;" in "{": int
+"lc" in "lc.next": LateClass
+"lc" in "lc=new LateClass()": LateClass
+"lc.next" in "lc.next.i": LateClass
+"lc.next.i + x" in "x=lc.next.i + x": int
+"lc.next.i" in "lc.next.i + x": int
+"new LateClass()" in "lc=new LateClass()": LateClass
+"public LateClass next;" in "class LateClass {": LateClass
+"public class ForwardClassRefs {" in "public class ForwardClassRefs {": ForwardClassRefs
+"public int i;" in "class LateClass {": int
+"x" in "lc.next.i + x": int
+"x" in "x=1": int
+"x" in "x=lc.next.i + x": int

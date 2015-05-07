@@ -1,0 +1,44 @@
+NEN ==> class NEN {
+"StaticJavaLib.assertTrue(!(null != null))" in "StaticJavaLib.assertTrue(!(null != null));" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(!(null != returnNull()))" in "StaticJavaLib.assertTrue(!(null != returnNull()));" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(!(returnNull() != null))" in "StaticJavaLib.assertTrue(!(returnNull() != null));" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(null == null)" in "StaticJavaLib.assertTrue(null == null);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(null == returnNull())" in "StaticJavaLib.assertTrue(null == returnNull());" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(returnNull() == null)" in "StaticJavaLib.assertTrue(returnNull() == null);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"returnNull()" in "null != returnNull()" ==> static NEN returnNull(){
+"returnNull()" in "null == returnNull()" ==> static NEN returnNull(){
+"returnNull()" in "returnNull() != null" ==> static NEN returnNull(){
+"returnNull()" in "returnNull() == null" ==> static NEN returnNull(){
+
+"!(null != null)" in "StaticJavaLib.assertTrue(!(null != null))": boolean
+"!(null != returnNull())" in "StaticJavaLib.assertTrue(!(null != returnNull()))": boolean
+"!(returnNull() != null)" in "StaticJavaLib.assertTrue(!(returnNull() != null))": boolean
+"(null != null)" in "!(null != null)": boolean
+"(null != returnNull())" in "!(null != returnNull())": boolean
+"(returnNull() != null)" in "!(returnNull() != null)": boolean
+"StaticJavaLib.assertTrue(!(null != null))" in "StaticJavaLib.assertTrue(!(null != null));": void
+"StaticJavaLib.assertTrue(!(null != returnNull()))" in "StaticJavaLib.assertTrue(!(null != returnNull()));": void
+"StaticJavaLib.assertTrue(!(returnNull() != null))" in "StaticJavaLib.assertTrue(!(returnNull() != null));": void
+"StaticJavaLib.assertTrue(null == null)" in "StaticJavaLib.assertTrue(null == null);": void
+"StaticJavaLib.assertTrue(null == returnNull())" in "StaticJavaLib.assertTrue(null == returnNull());": void
+"StaticJavaLib.assertTrue(returnNull() == null)" in "StaticJavaLib.assertTrue(returnNull() == null);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"class NEN {" in "public class NullEqualsNull {": NEN
+"null != null" in "(null != null)": boolean
+"null != returnNull()" in "(null != returnNull())": boolean
+"null == null" in "StaticJavaLib.assertTrue(null == null)": boolean
+"null == returnNull()" in "StaticJavaLib.assertTrue(null == returnNull())": boolean
+"null" in "null != null": null
+"null" in "null != returnNull()": null
+"null" in "null == null": null
+"null" in "null == returnNull()": null
+"null" in "return null;": null
+"null" in "returnNull() != null": null
+"null" in "returnNull() == null": null
+"public class NullEqualsNull {" in "public class NullEqualsNull {": NullEqualsNull
+"returnNull() != null" in "(returnNull() != null)": boolean
+"returnNull() == null" in "StaticJavaLib.assertTrue(returnNull() == null)": boolean
+"returnNull()" in "null != returnNull()": NEN
+"returnNull()" in "null == returnNull()": NEN
+"returnNull()" in "returnNull() != null": NEN
+"returnNull()" in "returnNull() == null": NEN

@@ -1,0 +1,22 @@
+"StaticJavaLib.assertTrue(i == 2)" in "StaticJavaLib.assertTrue(i == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"i" in "i == 2" ==> int i;
+"i" in "i > 0" ==> int i;
+"i" in "i=1" ==> int i;
+"i" in "i=i > 0 ? 2 : 3" ==> int i;
+
+"0" in "i > 0": int
+"1" in "i=1": int
+"2" in "i == 2": int
+"2" in "i > 0 ? 2 : 3": int
+"3" in "i > 0 ? 2 : 3": int
+"StaticJavaLib.assertTrue(i == 2)" in "StaticJavaLib.assertTrue(i == 2);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i == 2" in "StaticJavaLib.assertTrue(i == 2)": boolean
+"i > 0 ? 2 : 3" in "i=i > 0 ? 2 : 3": int
+"i > 0" in "i > 0 ? 2 : 3": boolean
+"i" in "i == 2": int
+"i" in "i > 0": int
+"i" in "i=1": int
+"i" in "i=i > 0 ? 2 : 3": int
+"int i;" in "{": int
+"public class ConditionalTrue {" in "public class ConditionalTrue {": ConditionalTrue

@@ -1,0 +1,34 @@
+"StaticJavaLib.assertTrue(complement(-5) == 4)" in "StaticJavaLib.assertTrue(complement(-5) == 4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(complement(4) == -5)" in "StaticJavaLib.assertTrue(complement(4) == -5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(~-5 == 4)" in "StaticJavaLib.assertTrue(~-5 == 4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(~4 == -5)" in "StaticJavaLib.assertTrue(~4 == -5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"complement(-5)" in "complement(-5) == 4" ==> static int complement(int i){
+"complement(4)" in "complement(4) == -5" ==> static int complement(int i){
+"i" in "~i" ==> int i
+
+"-5" in "complement(-5)": int
+"-5" in "complement(4) == -5": int
+"-5" in "~-5": int
+"-5" in "~4 == -5": int
+"4" in "complement(-5) == 4": int
+"4" in "complement(4)": int
+"4" in "~-5 == 4": int
+"4" in "~4": int
+"5" in "-5": int
+"StaticJavaLib.assertTrue(complement(-5) == 4)" in "StaticJavaLib.assertTrue(complement(-5) == 4);": void
+"StaticJavaLib.assertTrue(complement(4) == -5)" in "StaticJavaLib.assertTrue(complement(4) == -5);": void
+"StaticJavaLib.assertTrue(~-5 == 4)" in "StaticJavaLib.assertTrue(~-5 == 4);": void
+"StaticJavaLib.assertTrue(~4 == -5)" in "StaticJavaLib.assertTrue(~4 == -5);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"complement(-5) == 4" in "StaticJavaLib.assertTrue(complement(-5) == 4)": boolean
+"complement(-5)" in "complement(-5) == 4": int
+"complement(4) == -5" in "StaticJavaLib.assertTrue(complement(4) == -5)": boolean
+"complement(4)" in "complement(4) == -5": int
+"i" in "~i": int
+"int i" in "static int complement(int i){": int
+"public class IntComplement {" in "public class IntComplement {": IntComplement
+"~-5 == 4" in "StaticJavaLib.assertTrue(~-5 == 4)": boolean
+"~-5" in "~-5 == 4": int
+"~4 == -5" in "StaticJavaLib.assertTrue(~4 == -5)": boolean
+"~4" in "~4 == -5": int
+"~i" in "return ~i;": int

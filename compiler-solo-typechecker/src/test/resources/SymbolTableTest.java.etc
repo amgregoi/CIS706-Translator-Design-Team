@@ -1,0 +1,31 @@
+A ==> class A {
+B ==> class B {
+"a" in "a.x" ==> A a;
+"a" in "a=new A()" ==> A a;
+"a.x" in "a.x + b.x" ==> public int x;
+"b" in "b.x" ==> B b;
+"b" in "b=new B()" ==> B b;
+"b.x" in "a.x + b.x" ==> public int x;
+"new A()" in "a=new A()" ==> class A {
+"new B()" in "b=new B()" ==> class B {
+"z" in "z=a.x + b.x" ==> int z;
+
+"A a;" in "{": A
+"B b;" in "{": B
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"a" in "a.x": A
+"a" in "a=new A()": A
+"a.x + b.x" in "z=a.x + b.x": int
+"a.x" in "a.x + b.x": int
+"b" in "b.x": B
+"b" in "b=new B()": B
+"b.x" in "a.x + b.x": int
+"class A {" in "class A {": A
+"class B {" in "class A {": B
+"int z;" in "{": int
+"new A()" in "a=new A()": A
+"new B()" in "b=new B()": B
+"public class SymbolTableTest {" in "class A {": SymbolTableTest
+"public int x;" in "class A {": int
+"public int x;" in "class B {": int
+"z" in "z=a.x + b.x": int

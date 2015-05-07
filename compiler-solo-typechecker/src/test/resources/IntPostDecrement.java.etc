@@ -1,0 +1,15 @@
+"StaticJavaLib.assertTrue(i == 1)" in "StaticJavaLib.assertTrue(i == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"i" in "i == 1" ==> int i;
+"i" in "i--" ==> int i;
+"i" in "i=2" ==> int i;
+
+"1" in "i == 1": int
+"2" in "i=2": int
+"StaticJavaLib.assertTrue(i == 1)" in "StaticJavaLib.assertTrue(i == 1);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i == 1" in "StaticJavaLib.assertTrue(i == 1)": boolean
+"i" in "i == 1": int
+"i" in "i--": int
+"i" in "i=2": int
+"int i;" in "{": int
+"public class IntPostDecrement {" in "public class IntPostDecrement {": IntPostDecrement

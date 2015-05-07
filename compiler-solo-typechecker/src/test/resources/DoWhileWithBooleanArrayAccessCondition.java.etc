@@ -1,0 +1,18 @@
+"B" in "B=new boolean[]{true,false}" ==> boolean[] B;
+"B" in "B[i]" ==> boolean[] B;
+"i" in "B[i]" ==> int i;
+"i" in "i=1" ==> int i;
+
+"1" in "i=1": int
+"B" in "B=new boolean[]{true,false}": boolean[]
+"B" in "B[i]": boolean[]
+"B[i]" in "do {": boolean
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"boolean[] B;" in "{": boolean[]
+"false" in "{true,false}": boolean
+"i" in "B[i]": int
+"i" in "i=1": int
+"int i;" in "{": int
+"new boolean[]{true,false}" in "B=new boolean[]{true,false}": boolean[]
+"public class DoWhileWithBooleanArrayAccessCondition {" in "public class DoWhileWithBooleanArrayAccessCondition {": DoWhileWithBooleanArrayAccessCondition
+"true" in "{true,false}": boolean

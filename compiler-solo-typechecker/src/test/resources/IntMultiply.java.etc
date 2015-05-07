@@ -1,0 +1,73 @@
+"StaticJavaLib.assertTrue(-2 * -3 == 6)" in "StaticJavaLib.assertTrue(-2 * -3 == 6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(-2 * 3 == -6)" in "StaticJavaLib.assertTrue(-2 * 3 == -6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(2 * -3 == -6)" in "StaticJavaLib.assertTrue(2 * -3 == -6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(2 * 3 == 6)" in "StaticJavaLib.assertTrue(2 * 3 == 6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(multiply(-2,-3) == 6)" in "StaticJavaLib.assertTrue(multiply(-2,-3) == 6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(multiply(-2,3) == -6)" in "StaticJavaLib.assertTrue(multiply(-2,3) == -6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(multiply(2,-3) == -6)" in "StaticJavaLib.assertTrue(multiply(2,-3) == -6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(multiply(2,3) == 6)" in "StaticJavaLib.assertTrue(multiply(2,3) == 6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"i" in "i * j" ==> int i
+"j" in "i * j" ==> int j
+"multiply(-2,-3)" in "multiply(-2,-3) == 6" ==> static int multiply(int i,int j){
+"multiply(-2,3)" in "multiply(-2,3) == -6" ==> static int multiply(int i,int j){
+"multiply(2,-3)" in "multiply(2,-3) == -6" ==> static int multiply(int i,int j){
+"multiply(2,3)" in "multiply(2,3) == 6" ==> static int multiply(int i,int j){
+
+"-2 * -3 == 6" in "StaticJavaLib.assertTrue(-2 * -3 == 6)": boolean
+"-2 * -3" in "-2 * -3 == 6": int
+"-2 * 3 == -6" in "StaticJavaLib.assertTrue(-2 * 3 == -6)": boolean
+"-2 * 3" in "-2 * 3 == -6": int
+"-2" in "-2 * -3": int
+"-2" in "-2 * 3": int
+"-2" in "multiply(-2,-3)": int
+"-2" in "multiply(-2,3)": int
+"-3" in "-2 * -3": int
+"-3" in "2 * -3": int
+"-3" in "multiply(-2,-3)": int
+"-3" in "multiply(2,-3)": int
+"-6" in "-2 * 3 == -6": int
+"-6" in "2 * -3 == -6": int
+"-6" in "multiply(-2,3) == -6": int
+"-6" in "multiply(2,-3) == -6": int
+"2 * -3 == -6" in "StaticJavaLib.assertTrue(2 * -3 == -6)": boolean
+"2 * -3" in "2 * -3 == -6": int
+"2 * 3 == 6" in "StaticJavaLib.assertTrue(2 * 3 == 6)": boolean
+"2 * 3" in "2 * 3 == 6": int
+"2" in "-2": int
+"2" in "2 * -3": int
+"2" in "2 * 3": int
+"2" in "multiply(2,-3)": int
+"2" in "multiply(2,3)": int
+"3" in "-2 * 3": int
+"3" in "-3": int
+"3" in "2 * 3": int
+"3" in "multiply(-2,3)": int
+"3" in "multiply(2,3)": int
+"6" in "-2 * -3 == 6": int
+"6" in "-6": int
+"6" in "2 * 3 == 6": int
+"6" in "multiply(-2,-3) == 6": int
+"6" in "multiply(2,3) == 6": int
+"StaticJavaLib.assertTrue(-2 * -3 == 6)" in "StaticJavaLib.assertTrue(-2 * -3 == 6);": void
+"StaticJavaLib.assertTrue(-2 * 3 == -6)" in "StaticJavaLib.assertTrue(-2 * 3 == -6);": void
+"StaticJavaLib.assertTrue(2 * -3 == -6)" in "StaticJavaLib.assertTrue(2 * -3 == -6);": void
+"StaticJavaLib.assertTrue(2 * 3 == 6)" in "StaticJavaLib.assertTrue(2 * 3 == 6);": void
+"StaticJavaLib.assertTrue(multiply(-2,-3) == 6)" in "StaticJavaLib.assertTrue(multiply(-2,-3) == 6);": void
+"StaticJavaLib.assertTrue(multiply(-2,3) == -6)" in "StaticJavaLib.assertTrue(multiply(-2,3) == -6);": void
+"StaticJavaLib.assertTrue(multiply(2,-3) == -6)" in "StaticJavaLib.assertTrue(multiply(2,-3) == -6);": void
+"StaticJavaLib.assertTrue(multiply(2,3) == 6)" in "StaticJavaLib.assertTrue(multiply(2,3) == 6);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i * j" in "return i * j;": int
+"i" in "i * j": int
+"int i" in "static int multiply(int i,int j){": int
+"int j" in "static int multiply(int i,int j){": int
+"j" in "i * j": int
+"multiply(-2,-3) == 6" in "StaticJavaLib.assertTrue(multiply(-2,-3) == 6)": boolean
+"multiply(-2,-3)" in "multiply(-2,-3) == 6": int
+"multiply(-2,3) == -6" in "StaticJavaLib.assertTrue(multiply(-2,3) == -6)": boolean
+"multiply(-2,3)" in "multiply(-2,3) == -6": int
+"multiply(2,-3) == -6" in "StaticJavaLib.assertTrue(multiply(2,-3) == -6)": boolean
+"multiply(2,-3)" in "multiply(2,-3) == -6": int
+"multiply(2,3) == 6" in "StaticJavaLib.assertTrue(multiply(2,3) == 6)": boolean
+"multiply(2,3)" in "multiply(2,3) == 6": int
+"public class IntMultiply {" in "public class IntMultiply {": IntMultiply

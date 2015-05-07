@@ -1,0 +1,598 @@
+"StaticJavaLib.assertTrue(!false)" in "StaticJavaLib.assertTrue(!false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(add(-2,-3) == -5)" in "StaticJavaLib.assertTrue(add(-2,-3) == -5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(add(-2,3) == 1)" in "StaticJavaLib.assertTrue(add(-2,3) == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(add(2,-3) == -1)" in "StaticJavaLib.assertTrue(add(2,-3) == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(add(2,3) == 5)" in "StaticJavaLib.assertTrue(add(2,3) == 5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(boolAnd(false,false) == false)" in "StaticJavaLib.assertTrue(boolAnd(false,false) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(boolAnd(false,true) == false)" in "StaticJavaLib.assertTrue(boolAnd(false,true) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(boolAnd(true,false) == false)" in "StaticJavaLib.assertTrue(boolAnd(true,false) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(boolAnd(true,true) == true)" in "StaticJavaLib.assertTrue(boolAnd(true,true) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(boolOr(false,false) == false)" in "StaticJavaLib.assertTrue(boolOr(false,false) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(boolOr(false,true) == true)" in "StaticJavaLib.assertTrue(boolOr(false,true) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(boolOr(true,false) == true)" in "StaticJavaLib.assertTrue(boolOr(true,false) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(boolOr(true,true) == true)" in "StaticJavaLib.assertTrue(boolOr(true,true) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(divide(-2,-3) == 0)" in "StaticJavaLib.assertTrue(divide(-2,-3) == 0);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(divide(-2,3) == 0)" in "StaticJavaLib.assertTrue(divide(-2,3) == 0);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(divide(-3,-2) == 1)" in "StaticJavaLib.assertTrue(divide(-3,-2) == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(divide(-3,2) == -1)" in "StaticJavaLib.assertTrue(divide(-3,2) == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(divide(2,-3) == 0)" in "StaticJavaLib.assertTrue(divide(2,-3) == 0);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(divide(2,3) == 0)" in "StaticJavaLib.assertTrue(divide(2,3) == 0);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(divide(3,-2) == -1)" in "StaticJavaLib.assertTrue(divide(3,-2) == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(divide(3,2) == 1)" in "StaticJavaLib.assertTrue(divide(3,2) == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(equal(2,2) == true)" in "StaticJavaLib.assertTrue(equal(2,2) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(equal(2,3) == false)" in "StaticJavaLib.assertTrue(equal(2,3) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(equal(3,2) == false)" in "StaticJavaLib.assertTrue(equal(3,2) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(greaterThan(2,2) == false)" in "StaticJavaLib.assertTrue(greaterThan(2,2) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(greaterThan(2,3) == false)" in "StaticJavaLib.assertTrue(greaterThan(2,3) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(greaterThan(3,2) == true)" in "StaticJavaLib.assertTrue(greaterThan(3,2) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(greaterThanOrEqual(2,2) == true)" in "StaticJavaLib.assertTrue(greaterThanOrEqual(2,2) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(greaterThanOrEqual(2,3) == false)" in "StaticJavaLib.assertTrue(greaterThanOrEqual(2,3) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(greaterThanOrEqual(3,2) == true)" in "StaticJavaLib.assertTrue(greaterThanOrEqual(3,2) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(lessThan(2,2) == false)" in "StaticJavaLib.assertTrue(lessThan(2,2) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(lessThan(2,3) == true)" in "StaticJavaLib.assertTrue(lessThan(2,3) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(lessThan(3,2) == false)" in "StaticJavaLib.assertTrue(lessThan(3,2) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(lessThanOrEqual(2,2) == true)" in "StaticJavaLib.assertTrue(lessThanOrEqual(2,2) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(lessThanOrEqual(2,3) == true)" in "StaticJavaLib.assertTrue(lessThanOrEqual(2,3) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(lessThanOrEqual(3,2) == false)" in "StaticJavaLib.assertTrue(lessThanOrEqual(3,2) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(mod(-2,-3) == -2)" in "StaticJavaLib.assertTrue(mod(-2,-3) == -2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(mod(-2,3) == -2)" in "StaticJavaLib.assertTrue(mod(-2,3) == -2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(mod(-3,-2) == -1)" in "StaticJavaLib.assertTrue(mod(-3,-2) == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(mod(-3,2) == -1)" in "StaticJavaLib.assertTrue(mod(-3,2) == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(mod(2,-3) == 2)" in "StaticJavaLib.assertTrue(mod(2,-3) == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(mod(2,3) == 2)" in "StaticJavaLib.assertTrue(mod(2,3) == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(mod(3,-2) == 1)" in "StaticJavaLib.assertTrue(mod(3,-2) == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(mod(3,2) == 1)" in "StaticJavaLib.assertTrue(mod(3,2) == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(multiply(-2,-3) == 6)" in "StaticJavaLib.assertTrue(multiply(-2,-3) == 6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(multiply(-2,3) == -6)" in "StaticJavaLib.assertTrue(multiply(-2,3) == -6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(multiply(2,-3) == -6)" in "StaticJavaLib.assertTrue(multiply(2,-3) == -6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(multiply(2,3) == 6)" in "StaticJavaLib.assertTrue(multiply(2,3) == 6);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(notEqual(2,2) == false)" in "StaticJavaLib.assertTrue(notEqual(2,2) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(notEqual(2,3) == true)" in "StaticJavaLib.assertTrue(notEqual(2,3) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(notEqual(3,2) == true)" in "StaticJavaLib.assertTrue(notEqual(3,2) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(shiftLeft(-2,1) == -4)" in "StaticJavaLib.assertTrue(shiftLeft(-2,1) == -4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(shiftLeft(2,1) == 4)" in "StaticJavaLib.assertTrue(shiftLeft(2,1) == 4);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(shiftRight(-2,1) == -1)" in "StaticJavaLib.assertTrue(shiftRight(-2,1) == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(shiftRight(2,1) == 1)" in "StaticJavaLib.assertTrue(shiftRight(2,1) == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(subtract(-2,-3) == 1)" in "StaticJavaLib.assertTrue(subtract(-2,-3) == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(subtract(-2,3) == -5)" in "StaticJavaLib.assertTrue(subtract(-2,3) == -5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(subtract(2,-3) == 5)" in "StaticJavaLib.assertTrue(subtract(2,-3) == 5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(subtract(2,3) == -1)" in "StaticJavaLib.assertTrue(subtract(2,3) == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(true)" in "StaticJavaLib.assertTrue(true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(unsignedShiftRight(-2,1) == 2147483647)" in "StaticJavaLib.assertTrue(unsignedShiftRight(-2,1) == 2147483647);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(unsignedShiftRight(2,1) == 1)" in "StaticJavaLib.assertTrue(unsignedShiftRight(2,1) == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"a" in "a != b" ==> int a
+"a" in "a % b" ==> int a
+"a" in "a && b" ==> boolean a
+"a" in "a * b" ==> int a
+"a" in "a + b" ==> int a
+"a" in "a - b" ==> int a
+"a" in "a / b" ==> int a
+"a" in "a < b" ==> int a
+"a" in "a <= b" ==> int a
+"a" in "a == b" ==> int a
+"a" in "a > b" ==> int a
+"a" in "a >= b" ==> int a
+"a" in "a || b" ==> boolean a
+"add(-2,-3)" in "add(-2,-3) == -5" ==> static int add(int a,int b){
+"add(-2,3)" in "add(-2,3) == 1" ==> static int add(int a,int b){
+"add(2,-3)" in "add(2,-3) == -1" ==> static int add(int a,int b){
+"add(2,3)" in "add(2,3) == 5" ==> static int add(int a,int b){
+"b" in "a != b" ==> int b
+"b" in "a % b" ==> int b
+"b" in "a && b" ==> boolean b
+"b" in "a * b" ==> int b
+"b" in "a + b" ==> int b
+"b" in "a - b" ==> int b
+"b" in "a / b" ==> int b
+"b" in "a < b" ==> int b
+"b" in "a <= b" ==> int b
+"b" in "a == b" ==> int b
+"b" in "a > b" ==> int b
+"b" in "a >= b" ==> int b
+"b" in "a || b" ==> boolean b
+"boolAnd(false,false)" in "boolAnd(false,false) == false" ==> static boolean boolAnd(boolean a,boolean b){
+"boolAnd(false,true)" in "boolAnd(false,true) == false" ==> static boolean boolAnd(boolean a,boolean b){
+"boolAnd(true,false)" in "boolAnd(true,false) == false" ==> static boolean boolAnd(boolean a,boolean b){
+"boolAnd(true,true)" in "boolAnd(true,true) == true" ==> static boolean boolAnd(boolean a,boolean b){
+"boolOr(false,false)" in "boolOr(false,false) == false" ==> static boolean boolOr(boolean a,boolean b){
+"boolOr(false,true)" in "boolOr(false,true) == true" ==> static boolean boolOr(boolean a,boolean b){
+"boolOr(true,false)" in "boolOr(true,false) == true" ==> static boolean boolOr(boolean a,boolean b){
+"boolOr(true,true)" in "boolOr(true,true) == true" ==> static boolean boolOr(boolean a,boolean b){
+"divide(-2,-3)" in "divide(-2,-3) == 0" ==> static int divide(int a,int b){
+"divide(-2,3)" in "divide(-2,3) == 0" ==> static int divide(int a,int b){
+"divide(-3,-2)" in "divide(-3,-2) == 1" ==> static int divide(int a,int b){
+"divide(-3,2)" in "divide(-3,2) == -1" ==> static int divide(int a,int b){
+"divide(2,-3)" in "divide(2,-3) == 0" ==> static int divide(int a,int b){
+"divide(2,3)" in "divide(2,3) == 0" ==> static int divide(int a,int b){
+"divide(3,-2)" in "divide(3,-2) == -1" ==> static int divide(int a,int b){
+"divide(3,2)" in "divide(3,2) == 1" ==> static int divide(int a,int b){
+"equal(2,2)" in "equal(2,2) == true" ==> static boolean equal(int a,int b){
+"equal(2,3)" in "equal(2,3) == false" ==> static boolean equal(int a,int b){
+"equal(3,2)" in "equal(3,2) == false" ==> static boolean equal(int a,int b){
+"greaterThan(2,2)" in "greaterThan(2,2) == false" ==> static boolean greaterThan(int a,int b){
+"greaterThan(2,3)" in "greaterThan(2,3) == false" ==> static boolean greaterThan(int a,int b){
+"greaterThan(3,2)" in "greaterThan(3,2) == true" ==> static boolean greaterThan(int a,int b){
+"greaterThanOrEqual(2,2)" in "greaterThanOrEqual(2,2) == true" ==> static boolean greaterThanOrEqual(int a,int b){
+"greaterThanOrEqual(2,3)" in "greaterThanOrEqual(2,3) == false" ==> static boolean greaterThanOrEqual(int a,int b){
+"greaterThanOrEqual(3,2)" in "greaterThanOrEqual(3,2) == true" ==> static boolean greaterThanOrEqual(int a,int b){
+"i" in "i << j" ==> int i
+"i" in "i >> j" ==> int i
+"i" in "i >>> j" ==> int i
+"j" in "i << j" ==> int j
+"j" in "i >> j" ==> int j
+"j" in "i >>> j" ==> int j
+"lessThan(2,2)" in "lessThan(2,2) == false" ==> static boolean lessThan(int a,int b){
+"lessThan(2,3)" in "lessThan(2,3) == true" ==> static boolean lessThan(int a,int b){
+"lessThan(3,2)" in "lessThan(3,2) == false" ==> static boolean lessThan(int a,int b){
+"lessThanOrEqual(2,2)" in "lessThanOrEqual(2,2) == true" ==> static boolean lessThanOrEqual(int a,int b){
+"lessThanOrEqual(2,3)" in "lessThanOrEqual(2,3) == true" ==> static boolean lessThanOrEqual(int a,int b){
+"lessThanOrEqual(3,2)" in "lessThanOrEqual(3,2) == false" ==> static boolean lessThanOrEqual(int a,int b){
+"mod(-2,-3)" in "mod(-2,-3) == -2" ==> static int mod(int a,int b){
+"mod(-2,3)" in "mod(-2,3) == -2" ==> static int mod(int a,int b){
+"mod(-3,-2)" in "mod(-3,-2) == -1" ==> static int mod(int a,int b){
+"mod(-3,2)" in "mod(-3,2) == -1" ==> static int mod(int a,int b){
+"mod(2,-3)" in "mod(2,-3) == 2" ==> static int mod(int a,int b){
+"mod(2,3)" in "mod(2,3) == 2" ==> static int mod(int a,int b){
+"mod(3,-2)" in "mod(3,-2) == 1" ==> static int mod(int a,int b){
+"mod(3,2)" in "mod(3,2) == 1" ==> static int mod(int a,int b){
+"multiply(-2,-3)" in "multiply(-2,-3) == 6" ==> static int multiply(int a,int b){
+"multiply(-2,3)" in "multiply(-2,3) == -6" ==> static int multiply(int a,int b){
+"multiply(2,-3)" in "multiply(2,-3) == -6" ==> static int multiply(int a,int b){
+"multiply(2,3)" in "multiply(2,3) == 6" ==> static int multiply(int a,int b){
+"notEqual(2,2)" in "notEqual(2,2) == false" ==> static boolean notEqual(int a,int b){
+"notEqual(2,3)" in "notEqual(2,3) == true" ==> static boolean notEqual(int a,int b){
+"notEqual(3,2)" in "notEqual(3,2) == true" ==> static boolean notEqual(int a,int b){
+"shiftLeft(-2,1)" in "shiftLeft(-2,1) == -4" ==> static int shiftLeft(int i,int j){
+"shiftLeft(2,1)" in "shiftLeft(2,1) == 4" ==> static int shiftLeft(int i,int j){
+"shiftRight(-2,1)" in "shiftRight(-2,1) == -1" ==> static int shiftRight(int i,int j){
+"shiftRight(2,1)" in "shiftRight(2,1) == 1" ==> static int shiftRight(int i,int j){
+"subtract(-2,-3)" in "subtract(-2,-3) == 1" ==> static int subtract(int a,int b){
+"subtract(-2,3)" in "subtract(-2,3) == -5" ==> static int subtract(int a,int b){
+"subtract(2,-3)" in "subtract(2,-3) == 5" ==> static int subtract(int a,int b){
+"subtract(2,3)" in "subtract(2,3) == -1" ==> static int subtract(int a,int b){
+"unsignedShiftRight(-2,1)" in "unsignedShiftRight(-2,1) == 2147483647" ==> static int unsignedShiftRight(int i,int j){
+"unsignedShiftRight(2,1)" in "unsignedShiftRight(2,1) == 1" ==> static int unsignedShiftRight(int i,int j){
+
+"!false" in "StaticJavaLib.assertTrue(!false)": boolean
+"-1" in "add(2,-3) == -1": int
+"-1" in "divide(-3,2) == -1": int
+"-1" in "divide(3,-2) == -1": int
+"-1" in "mod(-3,-2) == -1": int
+"-1" in "mod(-3,2) == -1": int
+"-1" in "shiftRight(-2,1) == -1": int
+"-1" in "subtract(2,3) == -1": int
+"-2" in "add(-2,-3)": int
+"-2" in "add(-2,3)": int
+"-2" in "divide(-2,-3)": int
+"-2" in "divide(-2,3)": int
+"-2" in "divide(-3,-2)": int
+"-2" in "divide(3,-2)": int
+"-2" in "mod(-2,-3) == -2": int
+"-2" in "mod(-2,-3)": int
+"-2" in "mod(-2,3) == -2": int
+"-2" in "mod(-2,3)": int
+"-2" in "mod(-3,-2)": int
+"-2" in "mod(3,-2)": int
+"-2" in "multiply(-2,-3)": int
+"-2" in "multiply(-2,3)": int
+"-2" in "shiftLeft(-2,1)": int
+"-2" in "shiftRight(-2,1)": int
+"-2" in "subtract(-2,-3)": int
+"-2" in "subtract(-2,3)": int
+"-2" in "unsignedShiftRight(-2,1)": int
+"-3" in "add(-2,-3)": int
+"-3" in "add(2,-3)": int
+"-3" in "divide(-2,-3)": int
+"-3" in "divide(-3,-2)": int
+"-3" in "divide(-3,2)": int
+"-3" in "divide(2,-3)": int
+"-3" in "mod(-2,-3)": int
+"-3" in "mod(-3,-2)": int
+"-3" in "mod(-3,2)": int
+"-3" in "mod(2,-3)": int
+"-3" in "multiply(-2,-3)": int
+"-3" in "multiply(2,-3)": int
+"-3" in "subtract(-2,-3)": int
+"-3" in "subtract(2,-3)": int
+"-4" in "shiftLeft(-2,1) == -4": int
+"-5" in "add(-2,-3) == -5": int
+"-5" in "subtract(-2,3) == -5": int
+"-6" in "multiply(-2,3) == -6": int
+"-6" in "multiply(2,-3) == -6": int
+"0" in "divide(-2,-3) == 0": int
+"0" in "divide(-2,3) == 0": int
+"0" in "divide(2,-3) == 0": int
+"0" in "divide(2,3) == 0": int
+"1" in "-1": int
+"1" in "add(-2,3) == 1": int
+"1" in "divide(-3,-2) == 1": int
+"1" in "divide(3,2) == 1": int
+"1" in "mod(3,-2) == 1": int
+"1" in "mod(3,2) == 1": int
+"1" in "shiftLeft(-2,1)": int
+"1" in "shiftLeft(2,1)": int
+"1" in "shiftRight(-2,1)": int
+"1" in "shiftRight(2,1) == 1": int
+"1" in "shiftRight(2,1)": int
+"1" in "subtract(-2,-3) == 1": int
+"1" in "unsignedShiftRight(-2,1)": int
+"1" in "unsignedShiftRight(2,1) == 1": int
+"1" in "unsignedShiftRight(2,1)": int
+"2" in "-2": int
+"2" in "add(2,-3)": int
+"2" in "add(2,3)": int
+"2" in "divide(-3,2)": int
+"2" in "divide(2,-3)": int
+"2" in "divide(2,3)": int
+"2" in "divide(3,2)": int
+"2" in "equal(2,2)": int
+"2" in "equal(2,3)": int
+"2" in "equal(3,2)": int
+"2" in "greaterThan(2,2)": int
+"2" in "greaterThan(2,3)": int
+"2" in "greaterThan(3,2)": int
+"2" in "greaterThanOrEqual(2,2)": int
+"2" in "greaterThanOrEqual(2,3)": int
+"2" in "greaterThanOrEqual(3,2)": int
+"2" in "lessThan(2,2)": int
+"2" in "lessThan(2,3)": int
+"2" in "lessThan(3,2)": int
+"2" in "lessThanOrEqual(2,2)": int
+"2" in "lessThanOrEqual(2,3)": int
+"2" in "lessThanOrEqual(3,2)": int
+"2" in "mod(-3,2)": int
+"2" in "mod(2,-3) == 2": int
+"2" in "mod(2,-3)": int
+"2" in "mod(2,3) == 2": int
+"2" in "mod(2,3)": int
+"2" in "mod(3,2)": int
+"2" in "multiply(2,-3)": int
+"2" in "multiply(2,3)": int
+"2" in "notEqual(2,2)": int
+"2" in "notEqual(2,3)": int
+"2" in "notEqual(3,2)": int
+"2" in "shiftLeft(2,1)": int
+"2" in "shiftRight(2,1)": int
+"2" in "subtract(2,-3)": int
+"2" in "subtract(2,3)": int
+"2" in "unsignedShiftRight(2,1)": int
+"2147483647" in "unsignedShiftRight(-2,1) == 2147483647": int
+"3" in "-3": int
+"3" in "add(-2,3)": int
+"3" in "add(2,3)": int
+"3" in "divide(-2,3)": int
+"3" in "divide(2,3)": int
+"3" in "divide(3,-2)": int
+"3" in "divide(3,2)": int
+"3" in "equal(2,3)": int
+"3" in "equal(3,2)": int
+"3" in "greaterThan(2,3)": int
+"3" in "greaterThan(3,2)": int
+"3" in "greaterThanOrEqual(2,3)": int
+"3" in "greaterThanOrEqual(3,2)": int
+"3" in "lessThan(2,3)": int
+"3" in "lessThan(3,2)": int
+"3" in "lessThanOrEqual(2,3)": int
+"3" in "lessThanOrEqual(3,2)": int
+"3" in "mod(-2,3)": int
+"3" in "mod(2,3)": int
+"3" in "mod(3,-2)": int
+"3" in "mod(3,2)": int
+"3" in "multiply(-2,3)": int
+"3" in "multiply(2,3)": int
+"3" in "notEqual(2,3)": int
+"3" in "notEqual(3,2)": int
+"3" in "subtract(-2,3)": int
+"3" in "subtract(2,3)": int
+"4" in "-4": int
+"4" in "shiftLeft(2,1) == 4": int
+"5" in "-5": int
+"5" in "add(2,3) == 5": int
+"5" in "subtract(2,-3) == 5": int
+"6" in "-6": int
+"6" in "multiply(-2,-3) == 6": int
+"6" in "multiply(2,3) == 6": int
+"StaticJavaLib.assertTrue(!false)" in "StaticJavaLib.assertTrue(!false);": void
+"StaticJavaLib.assertTrue(add(-2,-3) == -5)" in "StaticJavaLib.assertTrue(add(-2,-3) == -5);": void
+"StaticJavaLib.assertTrue(add(-2,3) == 1)" in "StaticJavaLib.assertTrue(add(-2,3) == 1);": void
+"StaticJavaLib.assertTrue(add(2,-3) == -1)" in "StaticJavaLib.assertTrue(add(2,-3) == -1);": void
+"StaticJavaLib.assertTrue(add(2,3) == 5)" in "StaticJavaLib.assertTrue(add(2,3) == 5);": void
+"StaticJavaLib.assertTrue(boolAnd(false,false) == false)" in "StaticJavaLib.assertTrue(boolAnd(false,false) == false);": void
+"StaticJavaLib.assertTrue(boolAnd(false,true) == false)" in "StaticJavaLib.assertTrue(boolAnd(false,true) == false);": void
+"StaticJavaLib.assertTrue(boolAnd(true,false) == false)" in "StaticJavaLib.assertTrue(boolAnd(true,false) == false);": void
+"StaticJavaLib.assertTrue(boolAnd(true,true) == true)" in "StaticJavaLib.assertTrue(boolAnd(true,true) == true);": void
+"StaticJavaLib.assertTrue(boolOr(false,false) == false)" in "StaticJavaLib.assertTrue(boolOr(false,false) == false);": void
+"StaticJavaLib.assertTrue(boolOr(false,true) == true)" in "StaticJavaLib.assertTrue(boolOr(false,true) == true);": void
+"StaticJavaLib.assertTrue(boolOr(true,false) == true)" in "StaticJavaLib.assertTrue(boolOr(true,false) == true);": void
+"StaticJavaLib.assertTrue(boolOr(true,true) == true)" in "StaticJavaLib.assertTrue(boolOr(true,true) == true);": void
+"StaticJavaLib.assertTrue(divide(-2,-3) == 0)" in "StaticJavaLib.assertTrue(divide(-2,-3) == 0);": void
+"StaticJavaLib.assertTrue(divide(-2,3) == 0)" in "StaticJavaLib.assertTrue(divide(-2,3) == 0);": void
+"StaticJavaLib.assertTrue(divide(-3,-2) == 1)" in "StaticJavaLib.assertTrue(divide(-3,-2) == 1);": void
+"StaticJavaLib.assertTrue(divide(-3,2) == -1)" in "StaticJavaLib.assertTrue(divide(-3,2) == -1);": void
+"StaticJavaLib.assertTrue(divide(2,-3) == 0)" in "StaticJavaLib.assertTrue(divide(2,-3) == 0);": void
+"StaticJavaLib.assertTrue(divide(2,3) == 0)" in "StaticJavaLib.assertTrue(divide(2,3) == 0);": void
+"StaticJavaLib.assertTrue(divide(3,-2) == -1)" in "StaticJavaLib.assertTrue(divide(3,-2) == -1);": void
+"StaticJavaLib.assertTrue(divide(3,2) == 1)" in "StaticJavaLib.assertTrue(divide(3,2) == 1);": void
+"StaticJavaLib.assertTrue(equal(2,2) == true)" in "StaticJavaLib.assertTrue(equal(2,2) == true);": void
+"StaticJavaLib.assertTrue(equal(2,3) == false)" in "StaticJavaLib.assertTrue(equal(2,3) == false);": void
+"StaticJavaLib.assertTrue(equal(3,2) == false)" in "StaticJavaLib.assertTrue(equal(3,2) == false);": void
+"StaticJavaLib.assertTrue(greaterThan(2,2) == false)" in "StaticJavaLib.assertTrue(greaterThan(2,2) == false);": void
+"StaticJavaLib.assertTrue(greaterThan(2,3) == false)" in "StaticJavaLib.assertTrue(greaterThan(2,3) == false);": void
+"StaticJavaLib.assertTrue(greaterThan(3,2) == true)" in "StaticJavaLib.assertTrue(greaterThan(3,2) == true);": void
+"StaticJavaLib.assertTrue(greaterThanOrEqual(2,2) == true)" in "StaticJavaLib.assertTrue(greaterThanOrEqual(2,2) == true);": void
+"StaticJavaLib.assertTrue(greaterThanOrEqual(2,3) == false)" in "StaticJavaLib.assertTrue(greaterThanOrEqual(2,3) == false);": void
+"StaticJavaLib.assertTrue(greaterThanOrEqual(3,2) == true)" in "StaticJavaLib.assertTrue(greaterThanOrEqual(3,2) == true);": void
+"StaticJavaLib.assertTrue(lessThan(2,2) == false)" in "StaticJavaLib.assertTrue(lessThan(2,2) == false);": void
+"StaticJavaLib.assertTrue(lessThan(2,3) == true)" in "StaticJavaLib.assertTrue(lessThan(2,3) == true);": void
+"StaticJavaLib.assertTrue(lessThan(3,2) == false)" in "StaticJavaLib.assertTrue(lessThan(3,2) == false);": void
+"StaticJavaLib.assertTrue(lessThanOrEqual(2,2) == true)" in "StaticJavaLib.assertTrue(lessThanOrEqual(2,2) == true);": void
+"StaticJavaLib.assertTrue(lessThanOrEqual(2,3) == true)" in "StaticJavaLib.assertTrue(lessThanOrEqual(2,3) == true);": void
+"StaticJavaLib.assertTrue(lessThanOrEqual(3,2) == false)" in "StaticJavaLib.assertTrue(lessThanOrEqual(3,2) == false);": void
+"StaticJavaLib.assertTrue(mod(-2,-3) == -2)" in "StaticJavaLib.assertTrue(mod(-2,-3) == -2);": void
+"StaticJavaLib.assertTrue(mod(-2,3) == -2)" in "StaticJavaLib.assertTrue(mod(-2,3) == -2);": void
+"StaticJavaLib.assertTrue(mod(-3,-2) == -1)" in "StaticJavaLib.assertTrue(mod(-3,-2) == -1);": void
+"StaticJavaLib.assertTrue(mod(-3,2) == -1)" in "StaticJavaLib.assertTrue(mod(-3,2) == -1);": void
+"StaticJavaLib.assertTrue(mod(2,-3) == 2)" in "StaticJavaLib.assertTrue(mod(2,-3) == 2);": void
+"StaticJavaLib.assertTrue(mod(2,3) == 2)" in "StaticJavaLib.assertTrue(mod(2,3) == 2);": void
+"StaticJavaLib.assertTrue(mod(3,-2) == 1)" in "StaticJavaLib.assertTrue(mod(3,-2) == 1);": void
+"StaticJavaLib.assertTrue(mod(3,2) == 1)" in "StaticJavaLib.assertTrue(mod(3,2) == 1);": void
+"StaticJavaLib.assertTrue(multiply(-2,-3) == 6)" in "StaticJavaLib.assertTrue(multiply(-2,-3) == 6);": void
+"StaticJavaLib.assertTrue(multiply(-2,3) == -6)" in "StaticJavaLib.assertTrue(multiply(-2,3) == -6);": void
+"StaticJavaLib.assertTrue(multiply(2,-3) == -6)" in "StaticJavaLib.assertTrue(multiply(2,-3) == -6);": void
+"StaticJavaLib.assertTrue(multiply(2,3) == 6)" in "StaticJavaLib.assertTrue(multiply(2,3) == 6);": void
+"StaticJavaLib.assertTrue(notEqual(2,2) == false)" in "StaticJavaLib.assertTrue(notEqual(2,2) == false);": void
+"StaticJavaLib.assertTrue(notEqual(2,3) == true)" in "StaticJavaLib.assertTrue(notEqual(2,3) == true);": void
+"StaticJavaLib.assertTrue(notEqual(3,2) == true)" in "StaticJavaLib.assertTrue(notEqual(3,2) == true);": void
+"StaticJavaLib.assertTrue(shiftLeft(-2,1) == -4)" in "StaticJavaLib.assertTrue(shiftLeft(-2,1) == -4);": void
+"StaticJavaLib.assertTrue(shiftLeft(2,1) == 4)" in "StaticJavaLib.assertTrue(shiftLeft(2,1) == 4);": void
+"StaticJavaLib.assertTrue(shiftRight(-2,1) == -1)" in "StaticJavaLib.assertTrue(shiftRight(-2,1) == -1);": void
+"StaticJavaLib.assertTrue(shiftRight(2,1) == 1)" in "StaticJavaLib.assertTrue(shiftRight(2,1) == 1);": void
+"StaticJavaLib.assertTrue(subtract(-2,-3) == 1)" in "StaticJavaLib.assertTrue(subtract(-2,-3) == 1);": void
+"StaticJavaLib.assertTrue(subtract(-2,3) == -5)" in "StaticJavaLib.assertTrue(subtract(-2,3) == -5);": void
+"StaticJavaLib.assertTrue(subtract(2,-3) == 5)" in "StaticJavaLib.assertTrue(subtract(2,-3) == 5);": void
+"StaticJavaLib.assertTrue(subtract(2,3) == -1)" in "StaticJavaLib.assertTrue(subtract(2,3) == -1);": void
+"StaticJavaLib.assertTrue(true)" in "StaticJavaLib.assertTrue(true);": void
+"StaticJavaLib.assertTrue(unsignedShiftRight(-2,1) == 2147483647)" in "StaticJavaLib.assertTrue(unsignedShiftRight(-2,1) == 2147483647);": void
+"StaticJavaLib.assertTrue(unsignedShiftRight(2,1) == 1)" in "StaticJavaLib.assertTrue(unsignedShiftRight(2,1) == 1);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"a != b" in "return a != b;": boolean
+"a % b" in "return a % b;": int
+"a && b" in "return a && b;": boolean
+"a * b" in "return a * b;": int
+"a + b" in "return a + b;": int
+"a - b" in "return a - b;": int
+"a / b" in "return a / b;": int
+"a < b" in "return a < b;": boolean
+"a <= b" in "return a <= b;": boolean
+"a == b" in "return a == b;": boolean
+"a > b" in "return a > b;": boolean
+"a >= b" in "return a >= b;": boolean
+"a || b" in "return a || b;": boolean
+"a" in "a != b": int
+"a" in "a % b": int
+"a" in "a && b": boolean
+"a" in "a * b": int
+"a" in "a + b": int
+"a" in "a - b": int
+"a" in "a / b": int
+"a" in "a < b": int
+"a" in "a <= b": int
+"a" in "a == b": int
+"a" in "a > b": int
+"a" in "a >= b": int
+"a" in "a || b": boolean
+"add(-2,-3) == -5" in "StaticJavaLib.assertTrue(add(-2,-3) == -5)": boolean
+"add(-2,-3)" in "add(-2,-3) == -5": int
+"add(-2,3) == 1" in "StaticJavaLib.assertTrue(add(-2,3) == 1)": boolean
+"add(-2,3)" in "add(-2,3) == 1": int
+"add(2,-3) == -1" in "StaticJavaLib.assertTrue(add(2,-3) == -1)": boolean
+"add(2,-3)" in "add(2,-3) == -1": int
+"add(2,3) == 5" in "StaticJavaLib.assertTrue(add(2,3) == 5)": boolean
+"add(2,3)" in "add(2,3) == 5": int
+"b" in "a != b": int
+"b" in "a % b": int
+"b" in "a && b": boolean
+"b" in "a * b": int
+"b" in "a + b": int
+"b" in "a - b": int
+"b" in "a / b": int
+"b" in "a < b": int
+"b" in "a <= b": int
+"b" in "a == b": int
+"b" in "a > b": int
+"b" in "a >= b": int
+"b" in "a || b": boolean
+"boolAnd(false,false) == false" in "StaticJavaLib.assertTrue(boolAnd(false,false) == false)": boolean
+"boolAnd(false,false)" in "boolAnd(false,false) == false": boolean
+"boolAnd(false,true) == false" in "StaticJavaLib.assertTrue(boolAnd(false,true) == false)": boolean
+"boolAnd(false,true)" in "boolAnd(false,true) == false": boolean
+"boolAnd(true,false) == false" in "StaticJavaLib.assertTrue(boolAnd(true,false) == false)": boolean
+"boolAnd(true,false)" in "boolAnd(true,false) == false": boolean
+"boolAnd(true,true) == true" in "StaticJavaLib.assertTrue(boolAnd(true,true) == true)": boolean
+"boolAnd(true,true)" in "boolAnd(true,true) == true": boolean
+"boolOr(false,false) == false" in "StaticJavaLib.assertTrue(boolOr(false,false) == false)": boolean
+"boolOr(false,false)" in "boolOr(false,false) == false": boolean
+"boolOr(false,true) == true" in "StaticJavaLib.assertTrue(boolOr(false,true) == true)": boolean
+"boolOr(false,true)" in "boolOr(false,true) == true": boolean
+"boolOr(true,false) == true" in "StaticJavaLib.assertTrue(boolOr(true,false) == true)": boolean
+"boolOr(true,false)" in "boolOr(true,false) == true": boolean
+"boolOr(true,true) == true" in "StaticJavaLib.assertTrue(boolOr(true,true) == true)": boolean
+"boolOr(true,true)" in "boolOr(true,true) == true": boolean
+"boolean a" in "static boolean boolAnd(boolean a,boolean b){": boolean
+"boolean a" in "static boolean boolOr(boolean a,boolean b){": boolean
+"boolean b" in "static boolean boolAnd(boolean a,boolean b){": boolean
+"boolean b" in "static boolean boolOr(boolean a,boolean b){": boolean
+"divide(-2,-3) == 0" in "StaticJavaLib.assertTrue(divide(-2,-3) == 0)": boolean
+"divide(-2,-3)" in "divide(-2,-3) == 0": int
+"divide(-2,3) == 0" in "StaticJavaLib.assertTrue(divide(-2,3) == 0)": boolean
+"divide(-2,3)" in "divide(-2,3) == 0": int
+"divide(-3,-2) == 1" in "StaticJavaLib.assertTrue(divide(-3,-2) == 1)": boolean
+"divide(-3,-2)" in "divide(-3,-2) == 1": int
+"divide(-3,2) == -1" in "StaticJavaLib.assertTrue(divide(-3,2) == -1)": boolean
+"divide(-3,2)" in "divide(-3,2) == -1": int
+"divide(2,-3) == 0" in "StaticJavaLib.assertTrue(divide(2,-3) == 0)": boolean
+"divide(2,-3)" in "divide(2,-3) == 0": int
+"divide(2,3) == 0" in "StaticJavaLib.assertTrue(divide(2,3) == 0)": boolean
+"divide(2,3)" in "divide(2,3) == 0": int
+"divide(3,-2) == -1" in "StaticJavaLib.assertTrue(divide(3,-2) == -1)": boolean
+"divide(3,-2)" in "divide(3,-2) == -1": int
+"divide(3,2) == 1" in "StaticJavaLib.assertTrue(divide(3,2) == 1)": boolean
+"divide(3,2)" in "divide(3,2) == 1": int
+"equal(2,2) == true" in "StaticJavaLib.assertTrue(equal(2,2) == true)": boolean
+"equal(2,2)" in "equal(2,2) == true": boolean
+"equal(2,3) == false" in "StaticJavaLib.assertTrue(equal(2,3) == false)": boolean
+"equal(2,3)" in "equal(2,3) == false": boolean
+"equal(3,2) == false" in "StaticJavaLib.assertTrue(equal(3,2) == false)": boolean
+"equal(3,2)" in "equal(3,2) == false": boolean
+"false" in "!false": boolean
+"false" in "boolAnd(false,false) == false": boolean
+"false" in "boolAnd(false,false)": boolean
+"false" in "boolAnd(false,true) == false": boolean
+"false" in "boolAnd(false,true)": boolean
+"false" in "boolAnd(true,false) == false": boolean
+"false" in "boolAnd(true,false)": boolean
+"false" in "boolOr(false,false) == false": boolean
+"false" in "boolOr(false,false)": boolean
+"false" in "boolOr(false,true)": boolean
+"false" in "boolOr(true,false)": boolean
+"false" in "equal(2,3) == false": boolean
+"false" in "equal(3,2) == false": boolean
+"false" in "greaterThan(2,2) == false": boolean
+"false" in "greaterThan(2,3) == false": boolean
+"false" in "greaterThanOrEqual(2,3) == false": boolean
+"false" in "lessThan(2,2) == false": boolean
+"false" in "lessThan(3,2) == false": boolean
+"false" in "lessThanOrEqual(3,2) == false": boolean
+"false" in "notEqual(2,2) == false": boolean
+"greaterThan(2,2) == false" in "StaticJavaLib.assertTrue(greaterThan(2,2) == false)": boolean
+"greaterThan(2,2)" in "greaterThan(2,2) == false": boolean
+"greaterThan(2,3) == false" in "StaticJavaLib.assertTrue(greaterThan(2,3) == false)": boolean
+"greaterThan(2,3)" in "greaterThan(2,3) == false": boolean
+"greaterThan(3,2) == true" in "StaticJavaLib.assertTrue(greaterThan(3,2) == true)": boolean
+"greaterThan(3,2)" in "greaterThan(3,2) == true": boolean
+"greaterThanOrEqual(2,2) == true" in "StaticJavaLib.assertTrue(greaterThanOrEqual(2,2) == true)": boolean
+"greaterThanOrEqual(2,2)" in "greaterThanOrEqual(2,2) == true": boolean
+"greaterThanOrEqual(2,3) == false" in "StaticJavaLib.assertTrue(greaterThanOrEqual(2,3) == false)": boolean
+"greaterThanOrEqual(2,3)" in "greaterThanOrEqual(2,3) == false": boolean
+"greaterThanOrEqual(3,2) == true" in "StaticJavaLib.assertTrue(greaterThanOrEqual(3,2) == true)": boolean
+"greaterThanOrEqual(3,2)" in "greaterThanOrEqual(3,2) == true": boolean
+"i << j" in "return i << j;": int
+"i >> j" in "return i >> j;": int
+"i >>> j" in "return i >>> j;": int
+"i" in "i << j": int
+"i" in "i >> j": int
+"i" in "i >>> j": int
+"int a" in "static boolean equal(int a,int b){": int
+"int a" in "static boolean greaterThan(int a,int b){": int
+"int a" in "static boolean greaterThanOrEqual(int a,int b){": int
+"int a" in "static boolean lessThan(int a,int b){": int
+"int a" in "static boolean lessThanOrEqual(int a,int b){": int
+"int a" in "static boolean notEqual(int a,int b){": int
+"int a" in "static int add(int a,int b){": int
+"int a" in "static int divide(int a,int b){": int
+"int a" in "static int mod(int a,int b){": int
+"int a" in "static int multiply(int a,int b){": int
+"int a" in "static int subtract(int a,int b){": int
+"int b" in "static boolean equal(int a,int b){": int
+"int b" in "static boolean greaterThan(int a,int b){": int
+"int b" in "static boolean greaterThanOrEqual(int a,int b){": int
+"int b" in "static boolean lessThan(int a,int b){": int
+"int b" in "static boolean lessThanOrEqual(int a,int b){": int
+"int b" in "static boolean notEqual(int a,int b){": int
+"int b" in "static int add(int a,int b){": int
+"int b" in "static int divide(int a,int b){": int
+"int b" in "static int mod(int a,int b){": int
+"int b" in "static int multiply(int a,int b){": int
+"int b" in "static int subtract(int a,int b){": int
+"int i" in "static int shiftLeft(int i,int j){": int
+"int i" in "static int shiftRight(int i,int j){": int
+"int i" in "static int unsignedShiftRight(int i,int j){": int
+"int j" in "static int shiftLeft(int i,int j){": int
+"int j" in "static int shiftRight(int i,int j){": int
+"int j" in "static int unsignedShiftRight(int i,int j){": int
+"j" in "i << j": int
+"j" in "i >> j": int
+"j" in "i >>> j": int
+"lessThan(2,2) == false" in "StaticJavaLib.assertTrue(lessThan(2,2) == false)": boolean
+"lessThan(2,2)" in "lessThan(2,2) == false": boolean
+"lessThan(2,3) == true" in "StaticJavaLib.assertTrue(lessThan(2,3) == true)": boolean
+"lessThan(2,3)" in "lessThan(2,3) == true": boolean
+"lessThan(3,2) == false" in "StaticJavaLib.assertTrue(lessThan(3,2) == false)": boolean
+"lessThan(3,2)" in "lessThan(3,2) == false": boolean
+"lessThanOrEqual(2,2) == true" in "StaticJavaLib.assertTrue(lessThanOrEqual(2,2) == true)": boolean
+"lessThanOrEqual(2,2)" in "lessThanOrEqual(2,2) == true": boolean
+"lessThanOrEqual(2,3) == true" in "StaticJavaLib.assertTrue(lessThanOrEqual(2,3) == true)": boolean
+"lessThanOrEqual(2,3)" in "lessThanOrEqual(2,3) == true": boolean
+"lessThanOrEqual(3,2) == false" in "StaticJavaLib.assertTrue(lessThanOrEqual(3,2) == false)": boolean
+"lessThanOrEqual(3,2)" in "lessThanOrEqual(3,2) == false": boolean
+"mod(-2,-3) == -2" in "StaticJavaLib.assertTrue(mod(-2,-3) == -2)": boolean
+"mod(-2,-3)" in "mod(-2,-3) == -2": int
+"mod(-2,3) == -2" in "StaticJavaLib.assertTrue(mod(-2,3) == -2)": boolean
+"mod(-2,3)" in "mod(-2,3) == -2": int
+"mod(-3,-2) == -1" in "StaticJavaLib.assertTrue(mod(-3,-2) == -1)": boolean
+"mod(-3,-2)" in "mod(-3,-2) == -1": int
+"mod(-3,2) == -1" in "StaticJavaLib.assertTrue(mod(-3,2) == -1)": boolean
+"mod(-3,2)" in "mod(-3,2) == -1": int
+"mod(2,-3) == 2" in "StaticJavaLib.assertTrue(mod(2,-3) == 2)": boolean
+"mod(2,-3)" in "mod(2,-3) == 2": int
+"mod(2,3) == 2" in "StaticJavaLib.assertTrue(mod(2,3) == 2)": boolean
+"mod(2,3)" in "mod(2,3) == 2": int
+"mod(3,-2) == 1" in "StaticJavaLib.assertTrue(mod(3,-2) == 1)": boolean
+"mod(3,-2)" in "mod(3,-2) == 1": int
+"mod(3,2) == 1" in "StaticJavaLib.assertTrue(mod(3,2) == 1)": boolean
+"mod(3,2)" in "mod(3,2) == 1": int
+"multiply(-2,-3) == 6" in "StaticJavaLib.assertTrue(multiply(-2,-3) == 6)": boolean
+"multiply(-2,-3)" in "multiply(-2,-3) == 6": int
+"multiply(-2,3) == -6" in "StaticJavaLib.assertTrue(multiply(-2,3) == -6)": boolean
+"multiply(-2,3)" in "multiply(-2,3) == -6": int
+"multiply(2,-3) == -6" in "StaticJavaLib.assertTrue(multiply(2,-3) == -6)": boolean
+"multiply(2,-3)" in "multiply(2,-3) == -6": int
+"multiply(2,3) == 6" in "StaticJavaLib.assertTrue(multiply(2,3) == 6)": boolean
+"multiply(2,3)" in "multiply(2,3) == 6": int
+"notEqual(2,2) == false" in "StaticJavaLib.assertTrue(notEqual(2,2) == false)": boolean
+"notEqual(2,2)" in "notEqual(2,2) == false": boolean
+"notEqual(2,3) == true" in "StaticJavaLib.assertTrue(notEqual(2,3) == true)": boolean
+"notEqual(2,3)" in "notEqual(2,3) == true": boolean
+"notEqual(3,2) == true" in "StaticJavaLib.assertTrue(notEqual(3,2) == true)": boolean
+"notEqual(3,2)" in "notEqual(3,2) == true": boolean
+"public class BinaryOps {" in "public class BinaryOps {": BinaryOps
+"shiftLeft(-2,1) == -4" in "StaticJavaLib.assertTrue(shiftLeft(-2,1) == -4)": boolean
+"shiftLeft(-2,1)" in "shiftLeft(-2,1) == -4": int
+"shiftLeft(2,1) == 4" in "StaticJavaLib.assertTrue(shiftLeft(2,1) == 4)": boolean
+"shiftLeft(2,1)" in "shiftLeft(2,1) == 4": int
+"shiftRight(-2,1) == -1" in "StaticJavaLib.assertTrue(shiftRight(-2,1) == -1)": boolean
+"shiftRight(-2,1)" in "shiftRight(-2,1) == -1": int
+"shiftRight(2,1) == 1" in "StaticJavaLib.assertTrue(shiftRight(2,1) == 1)": boolean
+"shiftRight(2,1)" in "shiftRight(2,1) == 1": int
+"subtract(-2,-3) == 1" in "StaticJavaLib.assertTrue(subtract(-2,-3) == 1)": boolean
+"subtract(-2,-3)" in "subtract(-2,-3) == 1": int
+"subtract(-2,3) == -5" in "StaticJavaLib.assertTrue(subtract(-2,3) == -5)": boolean
+"subtract(-2,3)" in "subtract(-2,3) == -5": int
+"subtract(2,-3) == 5" in "StaticJavaLib.assertTrue(subtract(2,-3) == 5)": boolean
+"subtract(2,-3)" in "subtract(2,-3) == 5": int
+"subtract(2,3) == -1" in "StaticJavaLib.assertTrue(subtract(2,3) == -1)": boolean
+"subtract(2,3)" in "subtract(2,3) == -1": int
+"true" in "StaticJavaLib.assertTrue(true)": boolean
+"true" in "boolAnd(false,true)": boolean
+"true" in "boolAnd(true,false)": boolean
+"true" in "boolAnd(true,true) == true": boolean
+"true" in "boolAnd(true,true)": boolean
+"true" in "boolOr(false,true) == true": boolean
+"true" in "boolOr(false,true)": boolean
+"true" in "boolOr(true,false) == true": boolean
+"true" in "boolOr(true,false)": boolean
+"true" in "boolOr(true,true) == true": boolean
+"true" in "boolOr(true,true)": boolean
+"true" in "equal(2,2) == true": boolean
+"true" in "greaterThan(3,2) == true": boolean
+"true" in "greaterThanOrEqual(2,2) == true": boolean
+"true" in "greaterThanOrEqual(3,2) == true": boolean
+"true" in "lessThan(2,3) == true": boolean
+"true" in "lessThanOrEqual(2,2) == true": boolean
+"true" in "lessThanOrEqual(2,3) == true": boolean
+"true" in "notEqual(2,3) == true": boolean
+"true" in "notEqual(3,2) == true": boolean
+"unsignedShiftRight(-2,1) == 2147483647" in "StaticJavaLib.assertTrue(unsignedShiftRight(-2,1) == 2147483647)": boolean
+"unsignedShiftRight(-2,1)" in "unsignedShiftRight(-2,1) == 2147483647": int
+"unsignedShiftRight(2,1) == 1" in "StaticJavaLib.assertTrue(unsignedShiftRight(2,1) == 1)": boolean
+"unsignedShiftRight(2,1)" in "unsignedShiftRight(2,1) == 1": int

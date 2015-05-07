@@ -1,0 +1,195 @@
+Solo Project Milestone II: Abstract Syntax Tree for Extended Static Java
+
+Due: March 6, 2015; 11:59pm US Central
+
+
+Problem Description
+===================
+Your task in this milestone is to extend Static Java AST Builder 
+using Eclipse JDT to build Extended Static Java program AST.
+Below is the concrete syntax of Extended Static Java 
+with some comments that give some instructions on what you need to do 
+(*** indicates new/modified production rule wrt. Static Java, and 
+// indicates comment).
+
+// Requirement 1: allows simple class declarations before and after main 
+// class declaration
+*** <program> ::= <simple-class-declaration>* 
+                  <class-declaration> 
+                  <simple-class-declaration>*
+
+// Requirement 2: simple declaration can have zero or more public field 
+// declaration (i.e., no methods)
+*** <simple-class-declaration> ::= "class" ID "{" <public-field-declaration>* "}"
+
+// Requirement 3: public field declaration has one field modifier: public
+// followed by the field's type and name
+*** <public-field-declaration> ::= "public" <type> ID ";"
+
+<class-declaration> ::= "public" "class" ID "{"
+                        <main-method-declaration> 
+                        <field-or-method-declaration>*
+                        "}"
+
+<main-method-declaration> ::= "public" "static" "void" "main" "(" 
+                              "String" "[" "]" ID ")" "{" <method-body> "}"
+
+<field-or-method-declaration> ::= <field-declaration> | <method-declaration>
+
+<field-declaration> ::= "static" <type> ID ";"
+
+<method-declaration> ::= "static" <return-type> ID "(" <params>? ")"
+                         "{" <method-body> "}"
+
+// Requirement 4: SJ type is now renamed as basic-type, and ESJ type can 
+// be basic-type, class type, or an array type (of basic-type or class 
+// type) 
+*** <type> ::= ( <basic-type> | ID ) ( "[" "]" )?
+
+<basic-type> ::= "boolean" | "int"
+
+<return-type> ::= <type> | "void"
+
+<params> ::= <param> ( "," <param> )*
+
+<param> ::= <type> ID
+
+<method-body> ::= <local-declaration>* <statement>*
+
+<local-declaration> ::= <type> ID ";"
+
+// Requirement 5: add do-while-loop, for-loop, and increment/decrement 
+// statements
+*** <statement> ::= <assign-statement> | <if-statement> | <while-statement>
+                  | <invoke-exp-statement> | <return-statement>
+                  | <for-statement> | <do-while-statement> 
+                  | <inc-dec-statement>
+
+<assign-statement> ::= <assign> ";"
+
+<if-statement> ::= "if" "(" <exp> ")" "{" <statement>* "}"
+                   ( "else" "{" <statement>* "}" )?
+
+<while-statement> ::= "while" "(" <exp> ")" "{" <statement>* "}"
+
+<invoke-exp-statement> ::= <invoke-exp> ";"
+
+<return-statement> ::= "return" <exp> ";"
+
+// Requirement 6: 
+*** <inc-dec-statement> := <inc-dec> ";"
+
+// Requirement 7: allow general lhs instead of SJ's identifier as an 
+// assignment's left hand side
+*** <assign> ::= <lhs> "=" <exp>
+
+// Requirement 8: lhs can be variable reference (identifier), a field 
+// access, or an array access, respectively
+*** <lhs> ::= ID | <exp> "." ID | <exp> "[" <exp> "]"
+
+// Requirement 9: for statement: note that as in Java for-inits, loop 
+// condition, and for-updates are optional
+*** <for-statement> ::= "for" "(" <for-inits>? ";" <exp>? ";" <for-updates>? ")"
+                        "{" <statement>* "}"
+
+// Requirement 10: for inits is a comma separated assignments; note that 
+// variable declaration is not allowed here
+*** <for-inits> ::= <assign> ( "," <assign> )*
+
+// Requirement 11: for updates is a comma separated increments/decrements
+*** <for-updates> ::= <inc-dec> ( "," <inc-dec> )*
+
+// Requirement 12: postfix increment/decrement
+*** <inc-dec> ::= <lhs> "++" | <lhs> "--"
+
+// Requirement 13: do while statement
+*** <do-while-statement> ::= "do" "{" <statement>* "}" "while" "(" <exp> ")" ";"
+
+// Requirement 14: add new expression, array access expression, field access expression, and
+// conditional expression
+*** <exp> ::= <literal-exp> | <unary-exp> | <binary-exp> | <paren-exp>
+            | <invoke-exp> | <var-ref> | <new-exp> | <array-access-exp>
+            | <field-access-exp> | <cond-exp>
+
+// Requirement 15: add null literal
+*** <literal-exp> ::= <boolean-literal> | NUM | "null"
+
+<boolean-literal> ::= "true" | "false"
+
+*** <unary-exp> ::= <unary-op> <exp>
+
+// Requirement 16: add bit-complement operator ("~")
+*** <unary-op> ::= "+" | "-" | "!" | "~"
+
+*** <binary-exp> ::= <exp> <binary-op> <exp>
+
+// Requirement 17: add shift operators ("<<" | ">>" | ">>>"), note that you need to enforce
+// correct operator precedence (similar to Java's)
+*** <binary-op> ::= "+" | "-" | "*" | "/" | "%" | ">" | ">=" | "==" | "<"
+                  | "<=" | "!=" | "&&" | "||" | "<<" | ">>" | ">>>"
+
+<paren-exp> ::= "(" <exp> ")"
+
+<invoke-exp> ::= ( ID "." )? ID "(" <args>? ")"
+
+<args> ::= <exp> ( "," <exp> )*
+
+<var-ref> ::= ID
+
+// Requirement 18: add conditional operator
+*** <cond-exp> ::= <exp> "?" <exp> ":" <exp>
+
+// Requirement 19: add simple class instance creation, new array creation with a specified 
+// length, and new array creation with given array elements, respectively
+*** <new-exp> ::= "new" ID "(" ")"
+                | "new" <type> "[" <exp> "]" 
+                | "new" <type> "[" "]" <array-init>
+
+// Requirement 20: array init is a comma separated expressions in curly braces
+*** <array-init> ::= "{" <exp> ( "," <exp> )* "}"
+
+// Requirement 21: field access
+*** <field-access-exp> ::= <exp> "." ID
+
+// Requirement 22: array access
+*** <array-access-exp> ::= <exp> "[" <exp> "]"
+
+ID = ( 'a'..'z' | 'A'..'Z' | '_' | '$' )
+     ( 'a'..'z' | 'A'..'Z' | '_' | '0'..'9' | '$' )*
+
+NUM = '0' | ('1'..'9') ('0'..'9')*
+
+
+Submission/Task Instructions
+============================
+
+* Copy this Eclipse project into the local clone of your private GitHub
+  repository for the course.
+  
+* Do an initial commit and push to GitHub (you can choose a descriptive
+  commit message such as "Initial Commit for Solo Project M2"). 
+
+* Modify ExtendedStaticJavaASTBuilder.java to build Eclipse JDT AST 
+  representing ESJ programs and make sure your solution pass all the 
+  provided JUnit test cases. Commit and push often to GitHub (you can
+  choose descriptive commit messages).
+
+* Once you are ready to actually submit your solution, tag your repository
+  with the following tag name "M2".
+    
+  After successfully tagging, make sure that the tag is visible in your
+  online GitHub repository. To check it, go to the online repository at:
+  
+  https://github.com/ksu-cis-706/<your-username>-coursework
+  
+  Click on the "branch: master" drop down button, and select "Tags".
+  If the tagging is successful, then you should see the tag name there.
+  
+  The TA will look for the tag name when grading (and the associated last 
+  commit time to determine late submission).
+  
+  If somehow you want to make modification after submitting,
+  commit and push your changes, re-tag with a new name: M2a, M2b, and 
+  so on. The TA will choose the last tag revision for grading.
+ 
+Points will be deducted if you do not follow the above instructions.

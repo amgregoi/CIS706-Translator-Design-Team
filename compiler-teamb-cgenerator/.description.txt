@@ -1,0 +1,72 @@
+Solo Project Milestone IV: Bytecode Generator for Extended Static Java
+
+Due: April 8, 2015; 11:59pm US Central
+
+
+Problem Description
+===================
+Your task in this milestone is to extend the Static Java (SJ) bytecode 
+generator to handle Extended Static Java (ESJ) programs. Most of the work
+in this milestone requires you to override the ByteCodeGenerator.Visitor
+visit methods in ExtendedByteCodeGenerator.java to implement the new 
+translation templates for ESJ. The standard JUnit test case is provided in
+ExtendedByteCodeGeneratorTest.java.
+
+In addition, you need to add 14 test cases with the following requirements:
+* 10 test cases that manipulate objects and arrays
+* 4 test cases that manipulate 1 million of objects in various ways.
+
+
+Hints
+=====
+* It is a good idea to write down the translation templates for ESJ
+  statements or expressions before you implement them.
+
+* If you do not know how to exactly compile ESJ a statement/expression, 
+  you can use the ASM/Bytecode Outliner Plugin to see how Eclipse compiles
+  the statement/expression.
+
+* To help with tracing your code generator, you can use
+  org.objectweb.asm.util.TraceClassVisitor and 
+  org.objectweb.asm.util.TraceMethodVisitor temporarily.
+
+
+Submission/Task Instructions
+============================
+
+* Copy this Eclipse project into the local clone of your private GitHub
+  repository for the course.
+  
+* Do an initial commit and push to GitHub (you can choose a descriptive
+  commit message such as "Initial Commit for Solo Project M4"). 
+
+* Modify ExtendedByteCodeGenerator to handle Extended Static Java 
+  programs and make sure your solution pass all the provided JUnit test
+  cases.
+  
+* Add 14 test cases as described above, and make sure your solution pass
+  all your test cases (note: modify ExtendedByteCodeGeneratorTest to add 
+  your test cases).
+  
+* Commit and push often to GitHub (you can choose descriptive commit
+  messages).
+
+* Once you are ready to actually submit your solution, tag your repository
+  with the following tag name "M4".
+    
+  After successfully tagging, make sure that the tag is visible in your
+  online GitHub repository. To check it, go to the online repository at:
+  
+  https://github.com/ksu-cis-706/<your-username>-coursework
+  
+  Click on the "branch: master" drop down button, and select "Tags".
+  If the tagging is successful, then you should see the tag name there.
+  
+  The TA will look for the tag name when grading (and the associated last 
+  commit time to determine late submission).
+  
+  If somehow you want to make modification after submitting,
+  commit and push your changes, re-tag with a new name: M4a, M4b, and 
+  so on. The TA will choose the last tag revision for grading.
+ 
+Points will be deducted if you do not follow the above instructions.

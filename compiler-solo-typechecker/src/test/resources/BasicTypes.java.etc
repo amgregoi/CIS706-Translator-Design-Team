@@ -1,0 +1,11 @@
+"b" in "b=true" ==> boolean b;
+"i" in "i=0" ==> int i;
+
+"0" in "i=0": int
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"b" in "b=true": boolean
+"boolean b;" in "{": boolean
+"i" in "i=0": int
+"int i;" in "{": int
+"public class BasicTypes {" in "public class BasicTypes {": BasicTypes
+"true" in "b=true": boolean

@@ -1,0 +1,42 @@
+"StaticJavaLib.assertTrue(a == 0)" in "StaticJavaLib.assertTrue(a == 0);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(a == 1)" in "StaticJavaLib.assertTrue(a == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(a == 2)" in "StaticJavaLib.assertTrue(a == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(a == 3)" in "StaticJavaLib.assertTrue(a == 3);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"a" in "a == 0" ==> int a;
+"a" in "a == 1" ==> int a;
+"a" in "a == 2" ==> int a;
+"a" in "a == 3" ==> int a;
+"a" in "a=0" ==> int a;
+"a" in "a=1" ==> int a;
+"a" in "a=2" ==> int a;
+"a" in "a=3" ==> int a;
+
+"0" in "a == 0": int
+"0" in "a=0": int
+"1" in "a == 1": int
+"1" in "a=1": int
+"2" in "a == 2": int
+"2" in "a=2": int
+"3" in "a == 3": int
+"3" in "a=3": int
+"StaticJavaLib.assertTrue(a == 0)" in "StaticJavaLib.assertTrue(a == 0);": void
+"StaticJavaLib.assertTrue(a == 1)" in "StaticJavaLib.assertTrue(a == 1);": void
+"StaticJavaLib.assertTrue(a == 2)" in "StaticJavaLib.assertTrue(a == 2);": void
+"StaticJavaLib.assertTrue(a == 3)" in "StaticJavaLib.assertTrue(a == 3);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"a == 0" in "StaticJavaLib.assertTrue(a == 0)": boolean
+"a == 1" in "StaticJavaLib.assertTrue(a == 1)": boolean
+"a == 2" in "StaticJavaLib.assertTrue(a == 2)": boolean
+"a == 3" in "StaticJavaLib.assertTrue(a == 3)": boolean
+"a" in "a == 0": int
+"a" in "a == 1": int
+"a" in "a == 2": int
+"a" in "a == 3": int
+"a" in "a=0": int
+"a" in "a=1": int
+"a" in "a=2": int
+"a" in "a=3": int
+"false" in "if (false) {": boolean
+"int a;" in "{": int
+"public class If {" in "public class If {": If
+"true" in "if (true) {": boolean

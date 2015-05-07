@@ -1,0 +1,33 @@
+"StaticJavaLib.assertTrue(-+-2 == 2)" in "StaticJavaLib.assertTrue(-+-2 == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(-2 == -2)" in "StaticJavaLib.assertTrue(-2 == -2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(negate(-2) == 2)" in "StaticJavaLib.assertTrue(negate(-2) == 2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(negate(2) == -2)" in "StaticJavaLib.assertTrue(negate(2) == -2);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"i" in "-i" ==> int i
+"negate(-2)" in "negate(-2) == 2" ==> static int negate(int i){
+"negate(2)" in "negate(2) == -2" ==> static int negate(int i){
+
+"+-2" in "-+-2": int
+"-+-2 == 2" in "StaticJavaLib.assertTrue(-+-2 == 2)": boolean
+"-+-2" in "-+-2 == 2": int
+"-2 == -2" in "StaticJavaLib.assertTrue(-2 == -2)": boolean
+"-2" in "+-2": int
+"-2" in "-2 == -2": int
+"-2" in "negate(-2)": int
+"-2" in "negate(2) == -2": int
+"-i" in "return -i;": int
+"2" in "-+-2 == 2": int
+"2" in "-2": int
+"2" in "negate(-2) == 2": int
+"2" in "negate(2)": int
+"StaticJavaLib.assertTrue(-+-2 == 2)" in "StaticJavaLib.assertTrue(-+-2 == 2);": void
+"StaticJavaLib.assertTrue(-2 == -2)" in "StaticJavaLib.assertTrue(-2 == -2);": void
+"StaticJavaLib.assertTrue(negate(-2) == 2)" in "StaticJavaLib.assertTrue(negate(-2) == 2);": void
+"StaticJavaLib.assertTrue(negate(2) == -2)" in "StaticJavaLib.assertTrue(negate(2) == -2);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i" in "-i": int
+"int i" in "static int negate(int i){": int
+"negate(-2) == 2" in "StaticJavaLib.assertTrue(negate(-2) == 2)": boolean
+"negate(-2)" in "negate(-2) == 2": int
+"negate(2) == -2" in "StaticJavaLib.assertTrue(negate(2) == -2)": boolean
+"negate(2)" in "negate(2) == -2": int
+"public class IntNegate {" in "public class IntNegate {": IntNegate

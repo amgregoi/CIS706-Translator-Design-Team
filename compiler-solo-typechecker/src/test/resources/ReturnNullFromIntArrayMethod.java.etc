@@ -1,0 +1,9 @@
+"i" in "i=returnIntArray()" ==> int[] i;
+"returnIntArray()" in "i=returnIntArray()" ==> static int[] returnIntArray(){
+
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i" in "i=returnIntArray()": int[]
+"int[] i;" in "{": int[]
+"null" in "return null;": null
+"public class ReturnNullFromIntArrayMethod {" in "public class ReturnNullFromIntArrayMethod {": ReturnNullFromIntArrayMethod
+"returnIntArray()" in "i=returnIntArray()": int[]

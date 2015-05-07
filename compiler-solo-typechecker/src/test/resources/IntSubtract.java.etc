@@ -1,0 +1,74 @@
+"StaticJavaLib.assertTrue(-2 - -3 == 1)" in "StaticJavaLib.assertTrue(-2 - -3 == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(-2 - 3 == -5)" in "StaticJavaLib.assertTrue(-2 - 3 == -5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(2 - -3 == 5)" in "StaticJavaLib.assertTrue(2 - -3 == 5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(2 - 3 == -1)" in "StaticJavaLib.assertTrue(2 - 3 == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(subtract(-2,-3) == 1)" in "StaticJavaLib.assertTrue(subtract(-2,-3) == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(subtract(-2,3) == -5)" in "StaticJavaLib.assertTrue(subtract(-2,3) == -5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(subtract(2,-3) == 5)" in "StaticJavaLib.assertTrue(subtract(2,-3) == 5);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(subtract(2,3) == -1)" in "StaticJavaLib.assertTrue(subtract(2,3) == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"i" in "i - j" ==> int i
+"j" in "i - j" ==> int j
+"subtract(-2,-3)" in "subtract(-2,-3) == 1" ==> static int subtract(int i,int j){
+"subtract(-2,3)" in "subtract(-2,3) == -5" ==> static int subtract(int i,int j){
+"subtract(2,-3)" in "subtract(2,-3) == 5" ==> static int subtract(int i,int j){
+"subtract(2,3)" in "subtract(2,3) == -1" ==> static int subtract(int i,int j){
+
+"-1" in "2 - 3 == -1": int
+"-1" in "subtract(2,3) == -1": int
+"-2 - -3 == 1" in "StaticJavaLib.assertTrue(-2 - -3 == 1)": boolean
+"-2 - -3" in "-2 - -3 == 1": int
+"-2 - 3 == -5" in "StaticJavaLib.assertTrue(-2 - 3 == -5)": boolean
+"-2 - 3" in "-2 - 3 == -5": int
+"-2" in "-2 - -3": int
+"-2" in "-2 - 3": int
+"-2" in "subtract(-2,-3)": int
+"-2" in "subtract(-2,3)": int
+"-3" in "-2 - -3": int
+"-3" in "2 - -3": int
+"-3" in "subtract(-2,-3)": int
+"-3" in "subtract(2,-3)": int
+"-5" in "-2 - 3 == -5": int
+"-5" in "subtract(-2,3) == -5": int
+"1" in "-1": int
+"1" in "-2 - -3 == 1": int
+"1" in "subtract(-2,-3) == 1": int
+"2 - -3 == 5" in "StaticJavaLib.assertTrue(2 - -3 == 5)": boolean
+"2 - -3" in "2 - -3 == 5": int
+"2 - 3 == -1" in "StaticJavaLib.assertTrue(2 - 3 == -1)": boolean
+"2 - 3" in "2 - 3 == -1": int
+"2" in "-2": int
+"2" in "2 - -3": int
+"2" in "2 - 3": int
+"2" in "subtract(2,-3)": int
+"2" in "subtract(2,3)": int
+"3" in "-2 - 3": int
+"3" in "-3": int
+"3" in "2 - 3": int
+"3" in "subtract(-2,3)": int
+"3" in "subtract(2,3)": int
+"5" in "-5": int
+"5" in "2 - -3 == 5": int
+"5" in "subtract(2,-3) == 5": int
+"StaticJavaLib.assertTrue(-2 - -3 == 1)" in "StaticJavaLib.assertTrue(-2 - -3 == 1);": void
+"StaticJavaLib.assertTrue(-2 - 3 == -5)" in "StaticJavaLib.assertTrue(-2 - 3 == -5);": void
+"StaticJavaLib.assertTrue(2 - -3 == 5)" in "StaticJavaLib.assertTrue(2 - -3 == 5);": void
+"StaticJavaLib.assertTrue(2 - 3 == -1)" in "StaticJavaLib.assertTrue(2 - 3 == -1);": void
+"StaticJavaLib.assertTrue(subtract(-2,-3) == 1)" in "StaticJavaLib.assertTrue(subtract(-2,-3) == 1);": void
+"StaticJavaLib.assertTrue(subtract(-2,3) == -5)" in "StaticJavaLib.assertTrue(subtract(-2,3) == -5);": void
+"StaticJavaLib.assertTrue(subtract(2,-3) == 5)" in "StaticJavaLib.assertTrue(subtract(2,-3) == 5);": void
+"StaticJavaLib.assertTrue(subtract(2,3) == -1)" in "StaticJavaLib.assertTrue(subtract(2,3) == -1);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i - j" in "return i - j;": int
+"i" in "i - j": int
+"int i" in "static int subtract(int i,int j){": int
+"int j" in "static int subtract(int i,int j){": int
+"j" in "i - j": int
+"public class IntSubtract {" in "public class IntSubtract {": IntSubtract
+"subtract(-2,-3) == 1" in "StaticJavaLib.assertTrue(subtract(-2,-3) == 1)": boolean
+"subtract(-2,-3)" in "subtract(-2,-3) == 1": int
+"subtract(-2,3) == -5" in "StaticJavaLib.assertTrue(subtract(-2,3) == -5)": boolean
+"subtract(-2,3)" in "subtract(-2,3) == -5": int
+"subtract(2,-3) == 5" in "StaticJavaLib.assertTrue(subtract(2,-3) == 5)": boolean
+"subtract(2,-3)" in "subtract(2,-3) == 5": int
+"subtract(2,3) == -1" in "StaticJavaLib.assertTrue(subtract(2,3) == -1)": boolean
+"subtract(2,3)" in "subtract(2,3) == -1": int

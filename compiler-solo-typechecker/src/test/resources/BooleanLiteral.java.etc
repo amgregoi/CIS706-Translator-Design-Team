@@ -1,0 +1,10 @@
+"StaticJavaLib.assertTrue(!false)" in "StaticJavaLib.assertTrue(!false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(true)" in "StaticJavaLib.assertTrue(true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+
+"!false" in "StaticJavaLib.assertTrue(!false)": boolean
+"StaticJavaLib.assertTrue(!false)" in "StaticJavaLib.assertTrue(!false);": void
+"StaticJavaLib.assertTrue(true)" in "StaticJavaLib.assertTrue(true);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"false" in "!false": boolean
+"public class BooleanLiteral {" in "public class BooleanLiteral {": BooleanLiteral
+"true" in "StaticJavaLib.assertTrue(true)": boolean

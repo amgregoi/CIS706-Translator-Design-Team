@@ -1,0 +1,11 @@
+"x" in "x == 1" ==> int x;
+"x" in "x=2" ==> int x;
+
+"1" in "x == 1": int
+"2" in "x=2": int
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"int x;" in "{": int
+"public class WhileInitRD {" in "public class WhileInitRD {": WhileInitRD
+"x == 1" in "while (x == 1) {": boolean
+"x" in "x == 1": int
+"x" in "x=2": int

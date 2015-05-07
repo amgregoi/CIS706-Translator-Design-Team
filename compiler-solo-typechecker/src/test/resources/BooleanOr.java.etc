@@ -1,0 +1,70 @@
+"StaticJavaLib.assertTrue((false || false) == false)" in "StaticJavaLib.assertTrue((false || false) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue((false || true) == true)" in "StaticJavaLib.assertTrue((false || true) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue((true || false) == true)" in "StaticJavaLib.assertTrue((true || false) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue((true || true) == true)" in "StaticJavaLib.assertTrue((true || true) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(or(false,false) == false)" in "StaticJavaLib.assertTrue(or(false,false) == false);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(or(false,true) == true)" in "StaticJavaLib.assertTrue(or(false,true) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(or(true,false) == true)" in "StaticJavaLib.assertTrue(or(true,false) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(or(true,true) == true)" in "StaticJavaLib.assertTrue(or(true,true) == true);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"b" in "b || c" ==> boolean b
+"c" in "b || c" ==> boolean c
+"or(false,false)" in "or(false,false) == false" ==> static boolean or(boolean b,boolean c){
+"or(false,true)" in "or(false,true) == true" ==> static boolean or(boolean b,boolean c){
+"or(true,false)" in "or(true,false) == true" ==> static boolean or(boolean b,boolean c){
+"or(true,true)" in "or(true,true) == true" ==> static boolean or(boolean b,boolean c){
+
+"(false || false) == false" in "StaticJavaLib.assertTrue((false || false) == false)": boolean
+"(false || false)" in "(false || false) == false": boolean
+"(false || true) == true" in "StaticJavaLib.assertTrue((false || true) == true)": boolean
+"(false || true)" in "(false || true) == true": boolean
+"(true || false) == true" in "StaticJavaLib.assertTrue((true || false) == true)": boolean
+"(true || false)" in "(true || false) == true": boolean
+"(true || true) == true" in "StaticJavaLib.assertTrue((true || true) == true)": boolean
+"(true || true)" in "(true || true) == true": boolean
+"StaticJavaLib.assertTrue((false || false) == false)" in "StaticJavaLib.assertTrue((false || false) == false);": void
+"StaticJavaLib.assertTrue((false || true) == true)" in "StaticJavaLib.assertTrue((false || true) == true);": void
+"StaticJavaLib.assertTrue((true || false) == true)" in "StaticJavaLib.assertTrue((true || false) == true);": void
+"StaticJavaLib.assertTrue((true || true) == true)" in "StaticJavaLib.assertTrue((true || true) == true);": void
+"StaticJavaLib.assertTrue(or(false,false) == false)" in "StaticJavaLib.assertTrue(or(false,false) == false);": void
+"StaticJavaLib.assertTrue(or(false,true) == true)" in "StaticJavaLib.assertTrue(or(false,true) == true);": void
+"StaticJavaLib.assertTrue(or(true,false) == true)" in "StaticJavaLib.assertTrue(or(true,false) == true);": void
+"StaticJavaLib.assertTrue(or(true,true) == true)" in "StaticJavaLib.assertTrue(or(true,true) == true);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"b || c" in "return b || c;": boolean
+"b" in "b || c": boolean
+"boolean b" in "static boolean or(boolean b,boolean c){": boolean
+"boolean c" in "static boolean or(boolean b,boolean c){": boolean
+"c" in "b || c": boolean
+"false || false" in "(false || false)": boolean
+"false || true" in "(false || true)": boolean
+"false" in "(false || false) == false": boolean
+"false" in "false || false": boolean
+"false" in "false || true": boolean
+"false" in "or(false,false) == false": boolean
+"false" in "or(false,false)": boolean
+"false" in "or(false,true)": boolean
+"false" in "or(true,false)": boolean
+"false" in "true || false": boolean
+"or(false,false) == false" in "StaticJavaLib.assertTrue(or(false,false) == false)": boolean
+"or(false,false)" in "or(false,false) == false": boolean
+"or(false,true) == true" in "StaticJavaLib.assertTrue(or(false,true) == true)": boolean
+"or(false,true)" in "or(false,true) == true": boolean
+"or(true,false) == true" in "StaticJavaLib.assertTrue(or(true,false) == true)": boolean
+"or(true,false)" in "or(true,false) == true": boolean
+"or(true,true) == true" in "StaticJavaLib.assertTrue(or(true,true) == true)": boolean
+"or(true,true)" in "or(true,true) == true": boolean
+"public class BooleanOr {" in "public class BooleanOr {": BooleanOr
+"true || false" in "(true || false)": boolean
+"true || true" in "(true || true)": boolean
+"true" in "(false || true) == true": boolean
+"true" in "(true || false) == true": boolean
+"true" in "(true || true) == true": boolean
+"true" in "false || true": boolean
+"true" in "or(false,true) == true": boolean
+"true" in "or(false,true)": boolean
+"true" in "or(true,false) == true": boolean
+"true" in "or(true,false)": boolean
+"true" in "or(true,true) == true": boolean
+"true" in "or(true,true)": boolean
+"true" in "true || false": boolean
+"true" in "true || true": boolean

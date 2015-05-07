@@ -1,0 +1,42 @@
+"StaticJavaLib.assertTrue(-2 >> 1 == -1)" in "StaticJavaLib.assertTrue(-2 >> 1 == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(2 >> 1 == 1)" in "StaticJavaLib.assertTrue(2 >> 1 == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(shiftRight(-2,1) == -1)" in "StaticJavaLib.assertTrue(shiftRight(-2,1) == -1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"StaticJavaLib.assertTrue(shiftRight(2,1) == 1)" in "StaticJavaLib.assertTrue(shiftRight(2,1) == 1);" ==> public static void StaticJavaLib.assertTrue(boolean)
+"i" in "i >> j" ==> int i
+"j" in "i >> j" ==> int j
+"shiftRight(-2,1)" in "shiftRight(-2,1) == -1" ==> static int shiftRight(int i,int j){
+"shiftRight(2,1)" in "shiftRight(2,1) == 1" ==> static int shiftRight(int i,int j){
+
+"-1" in "-2 >> 1 == -1": int
+"-1" in "shiftRight(-2,1) == -1": int
+"-2 >> 1 == -1" in "StaticJavaLib.assertTrue(-2 >> 1 == -1)": boolean
+"-2 >> 1" in "-2 >> 1 == -1": int
+"-2" in "-2 >> 1": int
+"-2" in "shiftRight(-2,1)": int
+"1" in "-1": int
+"1" in "-2 >> 1": int
+"1" in "2 >> 1 == 1": int
+"1" in "2 >> 1": int
+"1" in "shiftRight(-2,1)": int
+"1" in "shiftRight(2,1) == 1": int
+"1" in "shiftRight(2,1)": int
+"2 >> 1 == 1" in "StaticJavaLib.assertTrue(2 >> 1 == 1)": boolean
+"2 >> 1" in "2 >> 1 == 1": int
+"2" in "-2": int
+"2" in "2 >> 1": int
+"2" in "shiftRight(2,1)": int
+"StaticJavaLib.assertTrue(-2 >> 1 == -1)" in "StaticJavaLib.assertTrue(-2 >> 1 == -1);": void
+"StaticJavaLib.assertTrue(2 >> 1 == 1)" in "StaticJavaLib.assertTrue(2 >> 1 == 1);": void
+"StaticJavaLib.assertTrue(shiftRight(-2,1) == -1)" in "StaticJavaLib.assertTrue(shiftRight(-2,1) == -1);": void
+"StaticJavaLib.assertTrue(shiftRight(2,1) == 1)" in "StaticJavaLib.assertTrue(shiftRight(2,1) == 1);": void
+"String[] args" in "public static void main(String[] args){": java.lang.String[]
+"i >> j" in "return i >> j;": int
+"i" in "i >> j": int
+"int i" in "static int shiftRight(int i,int j){": int
+"int j" in "static int shiftRight(int i,int j){": int
+"j" in "i >> j": int
+"public class IntShiftRight {" in "public class IntShiftRight {": IntShiftRight
+"shiftRight(-2,1) == -1" in "StaticJavaLib.assertTrue(shiftRight(-2,1) == -1)": boolean
+"shiftRight(-2,1)" in "shiftRight(-2,1) == -1": int
+"shiftRight(2,1) == 1" in "StaticJavaLib.assertTrue(shiftRight(2,1) == 1)": boolean
+"shiftRight(2,1)" in "shiftRight(2,1) == 1": int
