@@ -4,7 +4,6 @@
 
 #define ARRAYGET(var, type, i) ((type*)var->address[i])
 #define ARRAYSET(var, i) (var->address[i])
-#define PRINT(string) printf(" ##string## ");
 
 typedef struct ssTest{
 	Object* obj;
@@ -35,9 +34,6 @@ Test* New_Test()
 	newTest = gc_malloc(sizeof(Test), obj);
 	
 	newTest->tst = NULL;
-	
-	printf("\t\t&newTest->tst = %p\n", &(newTest->tst));
-	printf("\t\tnewTest->tst = %p\n", newTest->tst);
 	
 	childList[0] = &(newTest->tst);
 	
@@ -74,13 +70,37 @@ void ArrayTest();
 void CyclicReferenceTest();
 void BM_MassAlloc();
 
-int main()
+int main(int argc, char *argv[])
 {
-	//SelfReferentialTest();
-	//BasicStructTest();
-	//ArrayTest();
-	//CyclicReferenceTest();
-	BM_MassAlloc();
+	int num = 0;
+	
+	if(argc > 1) num = atoi(argv[1]);
+	
+	switch(num)
+	{
+		case 0:
+			SelfReferentialTest();
+		break;
+		
+		case 1:
+			BasicStructTest();
+		break;
+		
+		case 2:
+			ArrayTest();
+		break;
+		
+		case 3:
+			CyclicReferenceTest();
+		break;
+		
+		case 4:
+			BM_MassAlloc();
+		break;
+		
+		default:
+		return 0;
+	}
 	
 	gc_dispose();
 	print_header("After Disposal:");
@@ -101,10 +121,6 @@ void BasicStructTest()
 	x->tst = New_sTest();
 	
 	print_header("After first allocation:");
-	
-	x = New_Test();//(Test*)gc_malloc(sizeof(Test), TestObject(1, x));
-	x->tst = New_sTest();//(sTest*)gc_malloc(sizeof(sTest), sTestObject());
-	
 	print_header("After Second Allocation:");
 	
 	gc_collect();
