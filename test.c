@@ -79,22 +79,27 @@ int main(int argc, char *argv[])
 	switch(num)
 	{
 		case 0:
+			printf("Self Referential Test\n");
 			SelfReferentialTest();
 		break;
 		
 		case 1:
+			printf("Basic Struct Test\n");
 			BasicStructTest();
 		break;
 		
 		case 2:
+			printf("Array Test\n");
 			ArrayTest();
 		break;
 		
 		case 3:
+			printf("Cyclic Reference Test\n");
 			CyclicReferenceTest();
 		break;
 		
 		case 4:
+			printf("Bench Mark: Mass Allocation\n");
 			BM_MassAlloc();
 		break;
 		
