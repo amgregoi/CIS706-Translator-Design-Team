@@ -3,8 +3,10 @@
 #include <stdbool.h>
 
 
-void main(){
-   bool* B;bool b;b=false;
+int main(){
+   bool* B;
+   bool b;
+   b=false;
    B=malloc(sizeof(bool)*1);
    B[0]=false;
 
@@ -13,4 +15,5 @@ void main(){
    }
    assert((b == false));
 
+   return 0;
 }

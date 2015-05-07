@@ -5,17 +5,23 @@
 typedef struct SA A;
 typedef struct SB B;
 
-typedef struct SA{
+struct SA{
    int x;
-}A;
 
-typedef struct SB{
+};
+
+struct SB{
    int x;
-}B;
 
-void main(){
-   A* a;B* b;int z;a=malloc(sizeof(A));
+};
+
+int main(){
+   A* a;
+   B* b;
+   int z;
+   a=malloc(sizeof(A));
    b=malloc(sizeof(B));
    z=(a->x + b->x);
 
+   return 0;
 }

@@ -4,13 +4,17 @@
 
 typedef struct SNewIDFoo NewIDFoo;
 
-typedef struct SNewIDFoo{
-}NewIDFoo;
+struct SNewIDFoo{
+};
 
-void main(){
-   NewIDFoo* f;NewIDFoo** g;NewIDFoo** h;f=malloc(sizeof(NewIDFoo));
+int main(){
+   NewIDFoo* f;
+   NewIDFoo** g;
+   NewIDFoo** h;
+   f=malloc(sizeof(NewIDFoo));
    g=malloc(sizeof(NewIDFoo*)*4);
    h=malloc(sizeof(NewIDFoo*));
    h=(NewIDFoo*[2]){f, g[0]};
 
+   return 0;
 }

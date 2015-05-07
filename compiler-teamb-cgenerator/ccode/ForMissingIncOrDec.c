@@ -4,11 +4,13 @@
 
 void* missingIncOrDec();
 
-void main(){
+int main(){
+   return 0;
 }
 
 void* missingIncOrDec(){
    int i;
+
    for(i=0; (i < 10); ){
    }
 

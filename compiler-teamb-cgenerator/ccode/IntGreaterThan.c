@@ -4,7 +4,7 @@
 
 bool greaterThan(int i, int j);
 
-void main(){
+int main(){
    assert(((2 > 3) == false));
    assert(((3 > 2) == true));
    assert(((2 > 2) == false));
@@ -12,6 +12,7 @@ void main(){
    assert((greaterThan(3, 2) == true));
    assert((greaterThan(2, 2) == false));
 
+   return 0;
 }
 
 bool greaterThan(int i, int j){

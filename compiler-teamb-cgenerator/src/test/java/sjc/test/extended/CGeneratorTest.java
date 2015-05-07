@@ -40,9 +40,7 @@ public class CGeneratorTest {
 		pw.flush();
 	}
 
-	@SuppressWarnings("unchecked")
 	public static void testPass(final String filename) {
-		final Object[] args = new Object[] { new String[] {} };
 		try {
 			final String filePath = Util.getResource(CGeneratorTest.class,
 					"../../..", filename);
@@ -64,16 +62,15 @@ public class CGeneratorTest {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			 System.out.println(result); //prints ccode to terminal
+			// System.out.println(result); //prints ccode to terminal
 			cstream.write(result.getBytes());
 			cstream.close();
 
 			System.out.println("*** Begin test: " + file);
-			boolean errors = false;
 			InputStream error;
 			InputStreamReader isr;
 			BufferedReader br;
-			
+
 			// Compiles .c files
 			Process c_proc = Runtime.getRuntime().exec(
 					"gcc -o ccode/cout/" + file + " ccode/" + file + ".c");
@@ -82,24 +79,22 @@ public class CGeneratorTest {
 			isr = new InputStreamReader(error);
 			br = new BufferedReader(isr);
 			String s;
-			if ((s = br.readLine()) != null) {
+			
+			// must read output from process before it will finish executing
+			while ((s = br.readLine()) != null) {
 				System.out.println(s);
-				if (s.contains("error") || s.contains("fail")) {
-					errors = true;
-				}
-				while ((s = br.readLine()) != null) {
-					if (s.contains("error") || s.contains("fail")) {
-						errors = true;
-					}
-					System.out.println(s);
-				}
-				if (errors) {
-					System.out
-							.println("*** End FAILING test: " + file + ".c\n");
-					Assert.assertTrue(false);
-				}
 			}
-			errors = false;
+
+			// wait for process to finish executing
+			c_proc.waitFor();
+
+			// check if it returned properly
+			if (c_proc.exitValue() != 0) {
+				System.out.println("*** End FAILING to run test rawr: " + file
+						+ ".c\n");
+				Assert.assertTrue(false);
+			}
+			
 			br.close();
 			isr.close();
 			error.close();
@@ -110,28 +105,26 @@ public class CGeneratorTest {
 			error = c_run.getErrorStream();
 			isr = new InputStreamReader(error);
 			br = new BufferedReader(isr);
-			if ((s = br.readLine()) != null) {
-				if (s.contains("error") || s.contains("fail")) {
-					errors = true;
-				}
+
+			// must read output from process before it will finish executing
+			while ((s = br.readLine()) != null) {
 				System.out.println(s);
-				while ((s = br.readLine()) != null) {
-					if (s.contains("error") || s.contains("fail")) {
-						errors = true;
-					}
-					System.out.println(s);
-				}
-				if (errors) {
-					System.out.println("*** End FAILING to run test: " + file
-							+ ".c\n");
-					Assert.assertTrue(false);
-				}
 			}
-			errors = false;
+
+			// wait for process to finish executing
+			c_run.waitFor();
+
+			// check if it returned properly
+			if (c_run.exitValue() != 0) {
+				System.out.println("*** End FAILING to run test: " + file
+						+ ".c\n");
+				Assert.assertTrue(false);
+			}
+
 			br.close();
 			isr.close();
 			error.close();
-
+			
 			// Process j_proc = Runtime.getRuntime().exec("javac -d " +
 			// "jclass src/test/resources/" + file + ".java");
 			System.out.println("*** End PASSING test: " + file + "\n");

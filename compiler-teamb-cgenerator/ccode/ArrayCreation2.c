@@ -3,8 +3,11 @@
 #include <stdbool.h>
 
 
-void main(){
-   int* a;int b;int i;a=malloc(sizeof(int)*5);
+int main(){
+   int* a;
+   int b;
+   int i;
+   a=malloc(sizeof(int)*5);
    b=0;
 
    for(i=0; (i < 5); i++){
@@ -22,4 +25,5 @@ void main(){
       assert((a[i] == (i + 1)));
    }
 
+   return 0;
 }

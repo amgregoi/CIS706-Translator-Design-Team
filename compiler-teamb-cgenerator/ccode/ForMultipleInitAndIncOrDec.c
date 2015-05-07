@@ -4,13 +4,17 @@
 
 void* multipleInitAndIncOrDec();
 
-void main(){
+int main(){
    multipleInitAndIncOrDec();
 
+   return 0;
 }
 
 void* multipleInitAndIncOrDec(){
-   int i;int j;int k;
+   int i;
+   int j;
+   int k;
+
    for(i=0, j=0, k=0; (i < 10); i++, j++, k++){
    }
    assert((i == 10));

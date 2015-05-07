@@ -4,7 +4,7 @@
 
 int remainder(int i, int j);
 
-void main(){
+int main(){
    assert(((2 % 3) == 2));
    assert(((2 % -(3)) == 2));
    assert(((-(2) % 3) == -(2)));
@@ -22,6 +22,7 @@ void main(){
    assert((remainder(-(3), 2) == -(1)));
    assert((remainder(-(3), -(2)) == -(1)));
 
+   return 0;
 }
 
 int remainder(int i, int j){

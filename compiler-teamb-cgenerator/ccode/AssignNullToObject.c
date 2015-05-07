@@ -4,10 +4,12 @@
 
 typedef struct SANTO ANTO;
 
-typedef struct SANTO{
-}ANTO;
+struct SANTO{
+};
 
-void main(){
-   ANTO* o;o=NULL;
+int main(){
+   ANTO* o;
+   o=NULL;
 
+   return 0;
 }

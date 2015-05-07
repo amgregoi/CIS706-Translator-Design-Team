@@ -7,7 +7,7 @@ int unaryMinus(int i);
 bool not(bool b);
 int complement(int i);
 
-void main(){
+int main(){
    assert((unaryPlus(2) == 2));
    assert((unaryPlus(-(2)) == -(2)));
    assert((unaryMinus(2) == -(2)));
@@ -18,6 +18,7 @@ void main(){
    assert((not(false) == true));
    assert((complement(-(5)) == 4));
 
+   return 0;
 }
 
 int unaryPlus(int i){

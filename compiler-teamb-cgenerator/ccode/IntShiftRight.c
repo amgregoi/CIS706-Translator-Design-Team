@@ -4,12 +4,13 @@
 
 int shiftRight(int i, int j);
 
-void main(){
+int main(){
    assert(((2 >> 1) == 1));
    assert(((-(2) >> 1) == -(1)));
    assert((shiftRight(2, 1) == 1));
    assert((shiftRight(-(2), 1) == -(1)));
 
+   return 0;
 }
 
 int shiftRight(int i, int j){

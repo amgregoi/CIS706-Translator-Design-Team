@@ -4,7 +4,7 @@
 
 bool lessThanOrEqual(int i, int j);
 
-void main(){
+int main(){
    assert(((2 <= 3) == true));
    assert(((3 <= 2) == false));
    assert(((2 <= 2) == true));
@@ -12,6 +12,7 @@ void main(){
    assert((lessThanOrEqual(3, 2) == false));
    assert((lessThanOrEqual(2, 2) == true));
 
+   return 0;
 }
 
 bool lessThanOrEqual(int i, int j){

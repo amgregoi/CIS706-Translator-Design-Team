@@ -19,7 +19,7 @@ int shiftLeft(int i, int j);
 int shiftRight(int i, int j);
 int unsignedShiftRight(int i, int j);
 
-void main(){
+int main(){
    assert((add(2, 3) == 5));
    assert((add(2, -(3)) == -(1)));
    assert((add(-(2), 3) == 1));
@@ -83,6 +83,7 @@ void main(){
    assert((unsignedShiftRight(2, 1) == 1));
    assert((unsignedShiftRight(-(2), 1) == 2147483647));
 
+   return 0;
 }
 
 int add(int a, int b){

@@ -1,7 +1,7 @@
 group cStringTemplates;
 
 fielddeclaration(type, name)::= <<
-%type% %name%;
+%type% %name%;%\n%
 >>
 
 parameter(type, name) ::= <<
@@ -18,6 +18,14 @@ methoddeclaration(type,mname,args,name,body) ::= <<
 }%\n%
 >>
 
+mainmethoddeclaration(type,mname,args,name,body) ::= <<
+%type% %mname%(%args;separator=", "%){
+   %body%
+   return 0;
+}%\n%
+>>
+
+
 ifstatement(exp, thenbody, elsebody)::= <<
 if(%exp%){
    %thenbody%
@@ -31,9 +39,9 @@ booleanliteral(bool)::= <<
 >>
 
 typedeclaration(tname, body) ::= <<
-typedef struct S%tname%{
-   %body;separator="\n"%
-}%tname%;%\n%
+struct S%tname%{
+   %body%
+};%\n%
 >>
 
 returnstatement(ret) ::= <<

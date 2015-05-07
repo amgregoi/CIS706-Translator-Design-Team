@@ -4,7 +4,7 @@
 
 bool equal(int i, int j);
 
-void main(){
+int main(){
    assert(((2 == 3) == false));
    assert(((3 == 2) == false));
    assert(((2 == 2) == true));
@@ -12,6 +12,7 @@ void main(){
    assert((equal(3, 2) == false));
    assert((equal(2, 2) == true));
 
+   return 0;
 }
 
 bool equal(int i, int j){

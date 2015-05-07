@@ -3,8 +3,9 @@
 #include <stdbool.h>
 
 
-void main(){
+int main(){
    assert(true);
    assert(!(false));
 
+   return 0;
 }

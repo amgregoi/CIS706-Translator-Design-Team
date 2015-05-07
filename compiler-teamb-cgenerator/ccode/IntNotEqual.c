@@ -4,7 +4,7 @@
 
 bool notEqual(int i, int j);
 
-void main(){
+int main(){
    assert(((2 != 3) == true));
    assert(((3 != 2) == true));
    assert(((2 != 2) == false));
@@ -12,6 +12,7 @@ void main(){
    assert((notEqual(3, 2) == true));
    assert((notEqual(2, 2) == false));
 
+   return 0;
 }
 
 bool notEqual(int i, int j){

@@ -6,8 +6,6 @@ public class While {
         while (i < 10) {
             i++;
         }
-        StaticJavaLib.assertTrue(i == 10);
-        
-        return;
+        StaticJavaLib.assertTrue(i == 10); 
     }
 }

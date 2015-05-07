@@ -76,7 +76,6 @@ public class CGenerator {
 		public String ctemp = ""; // temporarily holds code
 		public String doublePtrInit = ""; // holds second part of double ptr
 											// initialization
-
 		protected STGroup stg;
 
 		protected Visitor(@NonNull final ExtendedSymbolTable st,
@@ -87,6 +86,8 @@ public class CGenerator {
 			stg = new STGroupFile("cStringTemplates.stg", '%', '%');
 
 			includes = "#include <stdlib.h>\n#include <assert.h>\n#include <stdbool.h>";
+			//includes = "#include \"gc.h\"\n#include <assert.h>\n#include <stdbool.h>";
+
 		}
 
 		protected void dispose() {
@@ -124,10 +125,12 @@ public class CGenerator {
 
 		// TODO ################ HELPER ################
 
+		/*similar to set used in typeChecker */
 		public void setCode(String c) {
 			this.ctemp += c;
 		}
 
+		/*similar to get used in typeChecker */
 		public String getCode() {
 			String c = this.ctemp;
 			this.ctemp = "";
@@ -156,13 +159,13 @@ public class CGenerator {
 			this.structs += struct;
 		}
 
-		public void addMethod(String method) {
+		public void addCode(String method) {
 			this.code += method;
 		}
 
 		/*
-		 * checks if given string type is a primitive type: 
-		 * 1) returns true if it is a primitive; 
+		 * checks if given string type is a primitive type:
+		 * 1) returns true if it is a primitive;
 		 * 2) return false if it is not
 		 */
 		public boolean primitiveType(String type) {
@@ -179,7 +182,7 @@ public class CGenerator {
 		 * 3) replaces array brackets with a pointer
 		 */
 		public String updateTypeBoolPrimArr(String type) {
-			if (type.contains("boolean")) {
+			if (type.equals("boolean") || type.equals("boolean[]")) {
 				type = type.replace("boolean", "bool");
 			}
 			if (!(primitiveType(type))) {
@@ -200,27 +203,34 @@ public class CGenerator {
 
 			// Makes sure we don't create a struct for the class containing main
 			if (!hasPublicModifier(node.modifiers())) {
-				String name = node.getName().getIdentifier();
+				final String name = node.getName().getIdentifier();
 				td.add("tname", name);
 				for (final Object o : node.getFields()) {
 					((ASTNode) o).accept(this);
 					final String body = getCode();
 					td.add("body", body);
 				}
-				String c = td.render();
+				final String c = td.render();
 				addStruct("\n" + c);
+				
 				// Prototype struct
 				final ST sp = stg.getInstanceOf("structprototype");
 				sp.add("tname", name);
 				final String structProto = sp.render();
 				addStructProto(structProto);
-
 			} else {
-
+				
+				for (final Object o : node.getFields()) {
+					((ASTNode) o).accept(this);
+					final String fd = getCode();
+					addCode("\n" + fd);
+				}
+				final String c = td.render();
+				
 				for (final Object o : node.getMethods()) {
 					((ASTNode) o).accept(this);
 					String method = getCode();
-					addMethod("\n" + method);
+					addCode("\n" + method);
 				}
 			}
 			return false;
@@ -228,14 +238,17 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final MethodDeclaration node) {
-			final ST md = stg.getInstanceOf("methoddeclaration"); // method dec
-			final ST mp = stg.getInstanceOf("methodprototype"); // method proto
-
+			final ST md; // method dec
+			final ST mp; // method proto	
 			final String methodName = node.getName().getIdentifier();
+			
 			if (methodName.equals("main")) {
-				md.add("type", "void");
+				md = stg.getInstanceOf("mainmethoddeclaration");
+				md.add("type", "int");
 				md.add("mname", "main");
 			} else {
+				md = stg.getInstanceOf("methoddeclaration");
+				mp = stg.getInstanceOf("methodprototype");
 				// set up method
 				final String type = updateTypeBoolPrimArr(node.getReturnType2()
 						.toString());
@@ -249,8 +262,9 @@ public class CGenerator {
 				for (final Object o : node.parameters()) {
 					final SingleVariableDeclaration vds = (SingleVariableDeclaration) o;
 					vds.getName().accept(this);
-					final String localName = getCode();					
-					final String ptype = updateTypeBoolPrimArr(vds.getType().toString());
+					final String localName = getCode();
+					final String ptype = updateTypeBoolPrimArr(vds.getType()
+							.toString());
 
 					// build parameter
 					final ST p = stg.getInstanceOf("parameter");
@@ -316,7 +330,7 @@ public class CGenerator {
 			final String name = getCode();
 			((ASTNode) node.getRightHandSide()).accept(this);
 			final String val = getCode();
-
+			
 			a.add("name", name);
 			a.add("val", val);
 			final String dp;
@@ -558,7 +572,7 @@ public class CGenerator {
 			final String exp = getCode();
 			node.getName().accept(this);
 			final String id = getCode();
-
+			
 			fa.add("exp", exp);
 			fa.add("id", id);
 
@@ -636,7 +650,8 @@ public class CGenerator {
 			node.getArray().accept(this);
 			final String exp = getCode();
 			node.getIndex().accept(this);
-			// current string template will always add ';' to postfixexpression (i++;)
+			// current string template will always add ';' to postfixexpression
+			// (i++;)
 			final String index = getCode().replace(";", "");
 
 			aa.add("exp", exp);

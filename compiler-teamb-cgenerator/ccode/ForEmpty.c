@@ -4,7 +4,8 @@
 
 void* empty();
 
-void main(){
+int main(){
+   return 0;
 }
 
 void* empty(){

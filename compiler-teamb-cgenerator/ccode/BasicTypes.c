@@ -3,8 +3,11 @@
 #include <stdbool.h>
 
 
-void main(){
-   int i;bool b;i=0;
+int main(){
+   int i;
+   bool b;
+   i=0;
    b=true;
 
+   return 0;
 }

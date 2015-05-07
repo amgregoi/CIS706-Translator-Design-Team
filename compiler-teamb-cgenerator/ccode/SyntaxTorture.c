@@ -12,20 +12,42 @@ bool* returnBooleanArray(bool* b);
 Empty** returnObjectArray(int* i, Empty** e);
 void* returnVoid();
 
-typedef struct SEmpty{
-}Empty;
+struct SEmpty{
+};
 
-typedef struct SManyTypes{
+struct SManyTypes{
    int i;
    bool b;
    Empty* e;
    int* i_array;
    bool* b_array;
    Empty** e_array;
-}ManyTypes;
 
-void main(){
-   int i;int* i_array;int j;bool b;bool* b_array;ManyTypes* m;ManyTypes** m_array;i=0;
+};
+
+int aa;
+
+bool bb;
+
+Empty* cc;
+
+int* dd;
+
+bool* ee;
+
+Empty** ff;
+
+int g;
+
+int main(){
+   int i;
+   int* i_array;
+   int j;
+   bool b;
+   bool* b_array;
+   ManyTypes* m;
+   ManyTypes** m_array;
+   i=0;
    j=i;
    b=true;
 
@@ -70,31 +92,39 @@ void main(){
    b_array=(bool[1]){true};
    i_array[returnInt()]=i_array[returnIntArray()[2]];
 
+   return 0;
 }
 
 int returnInt(){
-   int i;i=0;
+   int i;
+   i=0;
    return i;
 }
 
 bool returnBoolean(bool b){
-   bool c;int i;c=true;
+   bool c;
+   int i;
+   c=true;
    i=0;
    return !(!(((((!(c) && (false || true)) || ((i > 2) && (i >= -(1)))) || ((3 == i) && (+(4) != i))) || ((3 < 5) && (~(1) <= -(+(~(2))))))));
 }
 
 Empty* returnEmpty(int i, Empty* e){
-   int j;Empty* f;f=malloc(sizeof(Empty));
+   int j;
+   Empty* f;
+   f=malloc(sizeof(Empty));
    return f;
 }
 
 int* returnIntArray(){
-   int* i;i=malloc(sizeof(int)*(((unsigned)((1 + (((2 - 3) * 4) / ((5 % 6) << 7))) >> 8) >> 9) + 3));
+   int* i;
+   i=malloc(sizeof(int)*(((unsigned)((1 + (((2 - 3) * 4) / ((5 % 6) << 7))) >> 8) >> 9) + 3));
    return i;
 }
 
 bool* returnBooleanArray(bool* b){
-   bool* c;c=(bool[3]){true, false, false};
+   bool* c;
+   c=(bool[3]){true, false, false};
    return c;
 }
 

@@ -10,23 +10,29 @@ bool llIsEmpty(LinkedList* ll);
 void* llAddLast(LinkedList* ll, Data* data);
 Data* llRemoveFirst(LinkedList* ll);
 
-typedef struct SData{
+struct SData{
    int i;
-}Data;
 
-typedef struct SLinkedNode{
+};
+
+struct SLinkedNode{
    Data* data;
    LinkedNode* next;
-}LinkedNode;
 
-typedef struct SLinkedList{
+};
+
+struct SLinkedList{
    LinkedNode* head;
    LinkedNode* last;
    int size;
-}LinkedList;
 
-void main(){
-   LinkedList* ll;Data* d;int i;ll=llNewLinkedList();
+};
+
+int main(){
+   LinkedList* ll;
+   Data* d;
+   int i;
+   ll=llNewLinkedList();
 
    for(i=0; (i < 10); i++){
       d=malloc(sizeof(Data));
@@ -37,10 +43,12 @@ void main(){
       d=llRemoveFirst(ll);
    }
 
+   return 0;
 }
 
 LinkedList* llNewLinkedList(){
-   LinkedList* result;result=malloc(sizeof(LinkedList));
+   LinkedList* result;
+   result=malloc(sizeof(LinkedList));
    result->head=malloc(sizeof(LinkedNode));
    result->last=result->head;
    return result;
@@ -61,7 +69,9 @@ void* llAddLast(LinkedList* ll, Data* data){
 }
 
 Data* llRemoveFirst(LinkedList* ll){
-   Data* result;int i;i=0;
+   Data* result;
+   int i;
+   i=0;
    assert((ll->size > 0));
    result=ll->head->next->data;
    ll->head=ll->head->next;

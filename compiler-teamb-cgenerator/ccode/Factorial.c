@@ -4,13 +4,16 @@
 
 int factorial(int n);
 
-void main(){
+int main(){
    factorial(4);
 
+   return 0;
 }
 
 int factorial(int n){
-   int result;int i;assert((n >= 1));
+   int result;
+   int i;
+   assert((n >= 1));
    result=1;
    i=2;
    while((i <= n)){

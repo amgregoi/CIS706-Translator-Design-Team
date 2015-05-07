@@ -4,7 +4,7 @@
 
 int multiply(int i, int j);
 
-void main(){
+int main(){
    assert(((2 * 3) == 6));
    assert(((2 * -(3)) == -(6)));
    assert(((-(2) * 3) == -(6)));
@@ -14,6 +14,7 @@ void main(){
    assert((multiply(-(2), 3) == -(6)));
    assert((multiply(-(2), -(3)) == 6));
 
+   return 0;
 }
 
 int multiply(int i, int j){

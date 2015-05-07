@@ -4,11 +4,13 @@
 
 void* incOrDecOnly();
 
-void main(){
+int main(){
+   return 0;
 }
 
 void* incOrDecOnly(){
-   int i;i=0;
+   int i;
+   i=0;
 
    for(; ; i++){
    }

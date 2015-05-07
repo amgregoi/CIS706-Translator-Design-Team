@@ -4,12 +4,13 @@
 
 int plus(int i);
 
-void main(){
+int main(){
    assert((+(2) == 2));
    assert((+(-(2)) == -(2)));
    assert((plus(2) == 2));
    assert((plus(-(2)) == -(2)));
 
+   return 0;
 }
 
 int plus(int i){

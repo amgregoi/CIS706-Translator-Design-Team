@@ -4,11 +4,13 @@
 
 void* condOnly();
 
-void main(){
+int main(){
+   return 0;
 }
 
 void* condOnly(){
-   int i;i=0;
+   int i;
+   i=0;
 
    for(; (i < 10); ){
    }

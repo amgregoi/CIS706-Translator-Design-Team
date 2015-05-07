@@ -4,12 +4,13 @@
 
 bool not(bool b);
 
-void main(){
+int main(){
    assert((!(false) == true));
    assert((!(true) == false));
    assert((not(false) == true));
    assert((not(true) == false));
 
+   return 0;
 }
 
 bool not(bool b){

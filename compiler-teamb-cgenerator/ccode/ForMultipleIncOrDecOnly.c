@@ -4,11 +4,15 @@
 
 void* multipleIncOrDecOnly();
 
-void main(){
+int main(){
+   return 0;
 }
 
 void* multipleIncOrDecOnly(){
-   int i;int j;int k;i=0;
+   int i;
+   int j;
+   int k;
+   i=0;
    j=0;
    k=0;
 

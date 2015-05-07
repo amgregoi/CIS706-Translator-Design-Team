@@ -4,7 +4,7 @@
 
 int divide(int i, int j);
 
-void main(){
+int main(){
    assert(((2 / 3) == 0));
    assert(((2 / -(3)) == 0));
    assert(((-(2) / 3) == 0));
@@ -22,6 +22,7 @@ void main(){
    assert((divide(-(3), 2) == -(1)));
    assert((divide(-(3), -(2)) == 1));
 
+   return 0;
 }
 
 int divide(int i, int j){

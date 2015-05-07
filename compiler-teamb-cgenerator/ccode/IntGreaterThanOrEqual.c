@@ -4,7 +4,7 @@
 
 bool greaterThanOrEqual(int i, int j);
 
-void main(){
+int main(){
    assert(((2 >= 3) == false));
    assert(((3 >= 2) == true));
    assert(((2 >= 2) == true));
@@ -12,6 +12,7 @@ void main(){
    assert((greaterThanOrEqual(3, 2) == true));
    assert((greaterThanOrEqual(2, 2) == true));
 
+   return 0;
 }
 
 bool greaterThanOrEqual(int i, int j){

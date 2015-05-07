@@ -3,10 +3,12 @@
 #include <stdbool.h>
 
 
-void main(){
-   int a;a=0;
+int main(){
+   int a;
+   a=0;
 
    if(false){
    }assert((a == 0));
 
+   return 0;
 }

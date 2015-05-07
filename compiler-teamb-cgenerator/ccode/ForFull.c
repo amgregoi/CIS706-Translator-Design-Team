@@ -4,8 +4,10 @@
 
 void* full();
 
-void main(){
+int main(){
    full();
+
+   return 0;
 }
 
 void* full(){
@@ -13,6 +15,6 @@ void* full(){
 
    for(i=0; (i < 10); i++){
    }
-
    assert((i == 10));
+
 }

@@ -3,6 +3,9 @@
 #include <stdbool.h>
 
 
-void main(){
-   int i;bool b;
+int main(){
+   int i;
+   bool b;
+
+   return 0;
 }

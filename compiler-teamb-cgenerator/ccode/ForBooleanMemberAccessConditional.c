@@ -4,12 +4,15 @@
 
 typedef struct SFBMAC FBMAC;
 
-typedef struct SFBMAC{
+struct SFBMAC{
    bool b;
-}FBMAC;
 
-void main(){
-   FBMAC* o;bool b;b=false;
+};
+
+int main(){
+   FBMAC* o;
+   bool b;
+   b=false;
    o=malloc(sizeof(FBMAC));
    o->b=false;
 
@@ -18,4 +21,5 @@ void main(){
    }
    assert((b == false));
 
+   return 0;
 }

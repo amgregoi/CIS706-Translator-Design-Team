@@ -5,13 +5,15 @@
 typedef struct SObject64 Object64;
 Object64* returnObject(Object64* o);
 
-typedef struct SObject64{
-}Object64;
+struct SObject64{
+};
 
-void main(){
-   Object64* o;o=malloc(sizeof(Object64));
+int main(){
+   Object64* o;
+   o=malloc(sizeof(Object64));
    assert((o == returnObject(o)));
 
+   return 0;
 }
 
 Object64* returnObject(Object64* o){

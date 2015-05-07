@@ -3,9 +3,11 @@
 #include <stdbool.h>
 
 
-void main(){
-   int i;i=2;
+int main(){
+   int i;
+   i=2;
    i--;
    assert((i == 1));
 
+   return 0;
 }

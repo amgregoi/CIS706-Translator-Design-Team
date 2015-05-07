@@ -4,9 +4,10 @@
 
 void* takeIntArray(int* I);
 
-void main(){
+int main(){
    takeIntArray(NULL);
 
+   return 0;
 }
 
 void* takeIntArray(int* I){

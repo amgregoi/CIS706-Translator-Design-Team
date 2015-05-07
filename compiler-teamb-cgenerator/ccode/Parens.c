@@ -3,8 +3,11 @@
 #include <stdbool.h>
 
 
-void main(){
-   int i;int j;int* a;i=2;
+int main(){
+   int i;
+   int j;
+   int* a;
+   i=2;
    i=2;
    j=i;
    i=(i + 0);
@@ -15,4 +18,5 @@ void main(){
    assert((i == 2));
    a=malloc(sizeof(int)*4);
 
+   return 0;
 }

@@ -4,7 +4,7 @@
 
 bool or(bool b, bool c);
 
-void main(){
+int main(){
    assert(((true || true) == true));
    assert(((true || false) == true));
    assert(((false || true) == true));
@@ -14,6 +14,7 @@ void main(){
    assert((or(false, true) == true));
    assert((or(false, false) == false));
 
+   return 0;
 }
 
 bool or(bool b, bool c){

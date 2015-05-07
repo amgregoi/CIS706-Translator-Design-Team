@@ -4,9 +4,12 @@
 
 typedef struct SFoo Foo;
 
-typedef struct SFoo{
-}Foo;
+struct SFoo{
+};
 
-void main(){
-   Foo* f;Foo** g;
+int main(){
+   Foo* f;
+   Foo** g;
+
+   return 0;
 }

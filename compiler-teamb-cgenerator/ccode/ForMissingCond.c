@@ -4,11 +4,13 @@
 
 void* missingCond();
 
-void main(){
+int main(){
+   return 0;
 }
 
 void* missingCond(){
    int i;
+
    for(i=0; ; i++){
    }
 

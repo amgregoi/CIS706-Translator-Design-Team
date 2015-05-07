@@ -4,9 +4,11 @@
 
 int* returnIntArray();
 
-void main(){
-   int* i;i=returnIntArray();
+int main(){
+   int* i;
+   i=returnIntArray();
 
+   return 0;
 }
 
 int* returnIntArray(){

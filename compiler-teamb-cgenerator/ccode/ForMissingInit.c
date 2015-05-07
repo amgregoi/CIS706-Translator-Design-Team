@@ -4,13 +4,15 @@
 
 void* missingInit();
 
-void main(){
+int main(){
    missingInit();
 
+   return 0;
 }
 
 void* missingInit(){
-   int i;i=0;
+   int i;
+   i=0;
 
    for(; (i < 10); i++){
    }

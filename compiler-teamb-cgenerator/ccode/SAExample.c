@@ -6,11 +6,14 @@ void* ae(int a, int b);
 void* vbe(int a, int b);
 void* lv();
 
-void main(){
+int main(){
+   return 0;
 }
 
 void* ae(int a, int b){
-   int x;int y;x=(a + b);
+   int x;
+   int y;
+   x=(a + b);
    y=(a * b);
    while((y > (a + b))){
       a=(a + 1);
@@ -20,7 +23,9 @@ void* ae(int a, int b){
 }
 
 void* vbe(int a, int b){
-   int x;int y;
+   int x;
+   int y;
+
    if((a > b)){
       x=(b - a);
       y=(a - b);
@@ -33,7 +38,10 @@ void* vbe(int a, int b){
 }
 
 void* lv(){
-   int x;int y;int z;x=2;
+   int x;
+   int y;
+   int z;
+   x=2;
    y=4;
    x=1;
 

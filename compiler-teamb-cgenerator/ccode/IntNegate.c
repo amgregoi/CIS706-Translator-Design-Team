@@ -4,12 +4,13 @@
 
 int negate(int i);
 
-void main(){
+int main(){
    assert((-(2) == -(2)));
    assert((-(+(-(2))) == 2));
    assert((negate(2) == -(2)));
    assert((negate(-(2)) == 2));
 
+   return 0;
 }
 
 int negate(int i){

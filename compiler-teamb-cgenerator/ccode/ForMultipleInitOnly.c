@@ -4,11 +4,15 @@
 
 void* multipleInitOnly();
 
-void main(){
+int main(){
+   return 0;
 }
 
 void* multipleInitOnly(){
-   int i;int j;int k;
+   int i;
+   int j;
+   int k;
+
    for(i=0, j=0, k=0; ; ){
    }
 

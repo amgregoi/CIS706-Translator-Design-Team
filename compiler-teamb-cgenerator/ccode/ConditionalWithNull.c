@@ -4,11 +4,13 @@
 
 typedef struct SCWN CWN;
 
-typedef struct SCWN{
-}CWN;
+struct SCWN{
+};
 
-void main(){
-   CWN* o;o=malloc(sizeof(CWN));
+int main(){
+   CWN* o;
+   o=malloc(sizeof(CWN));
    o=true ? NULL : o;
 
+   return 0;
 }

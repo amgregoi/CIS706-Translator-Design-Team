@@ -5,10 +5,10 @@
 typedef struct SNEN NEN;
 NEN* returnNull();
 
-typedef struct SNEN{
-}NEN;
+struct SNEN{
+};
 
-void main(){
+int main(){
    assert((NULL == returnNull()));
    assert((returnNull() == NULL));
    assert((NULL == NULL));
@@ -17,6 +17,7 @@ void main(){
    assert(!((NULL != NULL)));
    assert((NULL == returnNull()));
 
+   return 0;
 }
 
 NEN* returnNull(){

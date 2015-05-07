@@ -4,8 +4,9 @@
 
 int subtract(int i, int j);
 
-void main(){
-   int x;assert(((2 - 3) == -(1)));
+int main(){
+   int x;
+   assert(((2 - 3) == -(1)));
    assert(((2 - -(3)) == 5));
    assert(((-(2) - 3) == -(5)));
    assert(((-(2) - -(3)) == 1));
@@ -19,6 +20,7 @@ void main(){
 
    }x=2;
 
+   return 0;
 }
 
 int subtract(int i, int j){

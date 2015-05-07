@@ -4,11 +4,13 @@
 
 void* initOnly();
 
-void main(){
+int main(){
+   return 0;
 }
 
 void* initOnly(){
    int i;
+
    for(i=0; ; ){
    }
 
