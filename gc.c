@@ -2,6 +2,18 @@
 #include <stdio.h>
 #include <string.h> //for memcpy()
 
+//"private" methods
+void obj_mark(Object* obj);
+void ref_add(void* ptr);
+void ref_remove(Reference* ref);
+void var_disposeAll();
+void ref_disposeAll();
+void var_dispose(Variable* var);
+void ref_dispose(Reference* ref);
+void obj_dispose(Object* obj);
+void freeReferences();
+Object* var_getObject(Variable* var);
+
 //Global Variables
 VarStack 	variableStack = {0,NULL};
 RefList 	referenceList = {0,NULL,NULL};
@@ -10,7 +22,7 @@ unsigned char	currentMark;
 
 Variable* new_variable(int ID, void* addr)
 {
-	Variable* newVar = malloc(sizeof(Variable));
+	Variable* newVar = allocate_mem(sizeof(Variable));
 	if(newVar == NULL){
 		printf("New Variable failed to be allocated\n");
 		return NULL;
@@ -24,7 +36,7 @@ Variable* new_variable(int ID, void* addr)
 
 Reference* new_reference(void* obj)
 {
-	Reference* newRef = malloc(sizeof(Reference));
+	Reference* newRef = allocate_mem(sizeof(Reference));
 	if(newRef == NULL){
 		printf("New Reference failed to be allocated\n");
 		return NULL;
@@ -39,7 +51,7 @@ Reference* new_reference(void* obj)
 
 Object* new_object(int childNum, void** childList)
 {
-	Object* newObj = malloc(sizeof(Object));
+	Object* newObj = allocate_mem(sizeof(Object));
 	if(newObj == NULL){
 		printf("New Object failed to be allocated\n");
 		return NULL;
@@ -50,6 +62,25 @@ Object* new_object(int childNum, void** childList)
 	newObj->childList = (Object**) childList;
 
 	return newObj;
+}
+
+void* allocate_mem(size_t size)
+{
+	void* ptr = malloc(size);
+	
+	if(ptr != NULL) return ptr;
+	
+	gc_collect();
+	
+	ptr = malloc(size);
+	
+	if(ptr == NULL)
+	{
+		printf("Cannot allocate memory\n");
+		return NULL;
+	}
+	
+	return ptr;
 }
 
 Object* var_getObject(Variable* var)
@@ -88,7 +119,7 @@ void var_pop()
 
 void* gc_malloc(size_t size, Object* obj)
 {
-	void** ptr = malloc(size);
+	void** ptr = allocate_mem(size);
 
 	if(ptr == NULL){
 		printf("Could not allocate memory\n");
@@ -156,9 +187,7 @@ void gc_collect()
 	gc_mark();
 	gc_sweep();
 	freeReferences();
-#ifdef DEBUG
-	//print_gc();
-#endif
+	print_gc();
 }
 
 void ref_add(void* ptr)
@@ -267,6 +296,42 @@ void freeReferences()
 	freeList.size = 0;
 }
 
+IntElement* New_Integer(int x)
+{
+	Object* obj = new_object(0,NULL);
+	IntElement* ptr = gc_malloc(sizeof(IntElement), obj);
+	ptr->value = x;
+	return ptr;
+}
+
+BoolElement* New_Boolean(bool x)
+{
+	Object* obj = new_object(0, NULL);
+	BoolElement* ptr = gc_malloc(sizeof(BoolElement), obj);
+	ptr->value = x;
+	return ptr;
+}
+
+Array* New_Array(int n)
+{
+	Object* obj;
+	Array* ptr;
+	void** childList = allocate_mem(sizeof(void*) * n);
+	int i;
+	
+	obj = new_object(n, childList);
+	ptr = gc_malloc(sizeof(Array), obj);
+	
+	ptr->address = allocate_mem(sizeof(void*) * n);
+	for(i = 0; i < n; i++)
+	{
+		ptr->address[i] = NULL;
+		childList[i] = &(ptr->address[i]);
+	}
+	
+	return ptr;
+}
+
 #ifdef DEBUG
 void print_object(int tabNum, Object* obj)
 {
@@ -325,9 +390,11 @@ void print_array(int size, void** array)
 
 	printf("}");
 }
+#endif
 
 void print_refList()
 {
+	#ifdef DEBUG
 	Reference* currentNode = referenceList.head;
 
 	printf("Reference List:\n");
@@ -337,10 +404,12 @@ void print_refList()
 		print_reference(1, currentNode);
 		currentNode = currentNode->next;
 	}
+	#endif
 }
 
 void print_varStack()
 {
+	#ifdef DEBUG
 	Variable* currentNode = variableStack.head;
 
 	printf("Variable Stack:\n");
@@ -350,10 +419,12 @@ void print_varStack()
 		print_variable(1, currentNode);
 		currentNode = currentNode->next;
 	}
+	#endif
 }
 
 void print_freeList()
 {
+	#ifdef DEBUG
 	Reference* currentNode = freeList.head;
 	printf("FreeList:\n");
 
@@ -362,13 +433,16 @@ void print_freeList()
 		print_reference(1, currentNode);
 		currentNode = currentNode->next;
 	}
+	#endif
 }
 
 void print_gc()
 {
-	printf("Current Mark = %d\n", currentMark);
+	#ifdef DEBUG
+	printf("\nCurrent Mark = %d\n", currentMark);
 	print_varStack();
 	print_refList();
 	print_freeList();
+	printf("\n");
+	#endif
 }
-#endif
