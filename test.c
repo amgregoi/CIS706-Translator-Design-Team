@@ -67,12 +67,14 @@ void print_header(char header[])
 void BasicStructTest();
 void SelfReferentialTest();
 void ArrayTest();
+void CyclicReferenceTest();
 
 int main()
 {
 	//SelfReferentialTest();
 	//BasicStructTest();
-	ArrayTest();
+	//ArrayTest();
+	CyclicReferenceTest();
 	
 	gc_dispose();
 	print_header("After Disposal:");
@@ -253,6 +255,7 @@ void ArrayTest()
 {
 	Array* arr;
 	Array* arr_2;
+	Array* arr_data;
 	int n,i,j;
 
 	n = 5;
@@ -287,4 +290,115 @@ void ArrayTest()
 	}
 
 	print2DArray(arr_2, n, n);
+	
+	arr_2->address[2] = arr;
+	
+	print_header("After Changing an array:");
+	
+	print2DArray(arr_2, n, n);
+	
+	arr_2->address[0] = arr_2;
+	
+	print_header ("After Creating a Circular Reference:");
+	
+	var_pop();
+	gc_collect();
+	
+	print_header("After popping arr_2:");
+	
+	var_pop();
+	gc_collect();
+	
+	print_header("After popping arr:");
+	
+	var_push(0, &arr_data);
+	arr_data = New_Array(n);
+	for(i = 0; i < n; i++)
+	{
+		arr_data->address[i] = New_Data();
+	}
+	
+	print_header("After assigning arr_data:");
+	
+	var_pop();
+	gc_collect();
+	
+	print_header("After popping arr_data:");
+}
+
+typedef struct sTypeB TypeB;
+typedef struct sTypeA TypeA;
+
+struct sTypeB
+{
+	Object* obj;
+	TypeA* ref;
+};
+
+struct sTypeA
+{
+	Object* obj;
+	TypeB* ref;
+};
+
+TypeB* New_TypeB()
+{
+	int childNum = 1;
+	void** childList = malloc(sizeof(void*) * childNum);
+	Object* obj = new_object(childNum, childList);
+	TypeB* ptr = gc_malloc(sizeof(TypeB), obj);
+	
+	ptr->ref = NULL;
+	
+	childList[0] = &(ptr->ref);
+	
+	return ptr;
+}
+
+TypeA* New_TypeA()
+{
+	int childNum = 1;
+	void** childList = malloc(sizeof(void*) * childNum);
+	Object* obj = new_object(childNum, childList);
+	TypeA* ptr = gc_malloc(sizeof(TypeB), obj);
+	
+	ptr->ref = NULL;
+	
+	childList[0] = &(ptr->ref);
+	
+	return ptr;
+}
+
+void CyclicReferenceTest()
+{
+	TypeA* ta;
+	
+	var_push(0, &ta);
+	
+	ta = New_TypeA();
+	
+	ta->ref = New_TypeB();
+	
+	ta->ref->ref = New_TypeA();
+	
+	ta->ref->ref->ref = New_TypeB();
+	
+	ta->ref->ref->ref->ref = ta;
+	
+	print_header("After allocating:");
+	
+	ta->ref = New_TypeB();
+	ta->ref->ref = New_TypeA();
+	ta->ref->ref->ref = New_TypeB();
+	ta->ref->ref->ref->ref = New_TypeA();
+	ta->ref->ref->ref->ref->ref = ta->ref->ref->ref;
+	
+	print_header("After reallocating:");
+	
+	gc_collect();
+	
+	print_header("After collection:");
+	
+	
+	
 }
