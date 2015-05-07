@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include "gc.h"
 
+#define ARRAYGET(var, type, i) ((type*)var->address[i])
+#define ARRAYSET(var, i) (var->address[i])
+#define PRINT(string) printf(" ##string## ");
+
 typedef struct ssTest{
 	Object* obj;
 } sTest;
@@ -24,7 +28,7 @@ Test* New_Test()
 	Test* newTest;
 	Object* obj;
 	int childNum = 1;
-	void** childList = malloc(sizeof(void*) * childNum);
+	void** childList = allocate_mem(sizeof(void*) * childNum);
 		
 	obj = new_object(childNum, childList);
 	
@@ -68,13 +72,15 @@ void BasicStructTest();
 void SelfReferentialTest();
 void ArrayTest();
 void CyclicReferenceTest();
+void BM_MassAlloc();
 
 int main()
 {
 	//SelfReferentialTest();
 	//BasicStructTest();
 	//ArrayTest();
-	CyclicReferenceTest();
+	//CyclicReferenceTest();
+	BM_MassAlloc();
 	
 	gc_dispose();
 	print_header("After Disposal:");
@@ -119,7 +125,7 @@ ToSelf* New_ToSelf()
 	ToSelf* ptr;
 	Object* obj;
 	int childNum = 1;
-	void** childList = malloc(sizeof(void*) * childNum);
+	void** childList = allocate_mem(sizeof(void*) * childNum);
 	
 	obj = new_object(childNum, childList);
 	
@@ -174,61 +180,6 @@ Data* New_Data()
 	return ptr;
 }
 
-typedef struct sIntElement
-{
-	Object* obj;
-	int value;
-} IntElement;
-
-IntElement* New_Integer(int x)
-{
-	Object* obj = new_object(0,NULL);
-	IntElement* ptr = gc_malloc(sizeof(IntElement), obj);
-	ptr->value = x;
-	return ptr;
-}
-
-typedef struct sBoolElement
-{
-	Object* obj;
-	bool value;
-} BoolElement;
-
-BoolElement* New_Boolean(bool x)
-{
-	Object* obj = new_object(0, NULL);
-	BoolElement* ptr = gc_malloc(sizeof(BoolElement), obj);
-	ptr->value = x;
-	return ptr;
-}
-
-typedef struct sArray
-{
-	Object* obj;
-	int elemNum;
-	void** address;
-} Array;
-
-Array* New_Array(int n)
-{
-	Object* obj;
-	Array* ptr;
-	void** childList = malloc(sizeof(void*) * n);
-	int i;
-	
-	obj = new_object(n, childList);
-	ptr = gc_malloc(sizeof(Array), obj);
-	
-	ptr->address = malloc(sizeof(void*) * n);
-	for(i = 0; i < n; i++)
-	{
-		ptr->address[i] = NULL;
-		childList[i] = &(ptr->address[i]);
-	}
-	
-	return ptr;
-}
-
 void print2DArray(Array* arr, int l1, int l2)
 {
 	int i,j;
@@ -238,11 +189,12 @@ void print2DArray(Array* arr, int l1, int l2)
 	printf("Printing 2D Array: {\n");
 	for(i = 0; i < l1; i++)
 	{
-		tempArray = (Array*)arr->address[i];
+		//tempArray = (Array*)arr->address[i];
 		printf("\tarr->address[%d] = {", i);
 		for(j = 0; j < l2; j++)
 		{
-			tempElement = (IntElement*)tempArray->address[j];
+			//tempElement = (IntElement*)tempArray->address[j];
+			tempElement = ARRAYGET(ARRAYGET(arr, Array, i), IntElement, j);
 			printf("%d", tempElement->value);
 			if(j < l2-1) printf(", ");
 			else printf("}\n");
@@ -270,11 +222,12 @@ void ArrayTest()
 
 	for(i = 0; i < n; i++)
 	{
-		arr->address[i] = New_Integer(i*i);
-		arr_2->address[i] = New_Array(n);
+		ARRAYSET(arr, i) = New_Integer(i*i);
+		ARRAYSET(arr_2, i) = New_Array(n);
 		for(j=0; j < n; j++)
 		{
-			((Array*)arr_2->address[i])->address[j] = New_Integer(i+j);
+			ARRAYSET(ARRAYGET(arr_2, Array, i), j) = New_Integer(i+j);
+			//((Array*)arr_2->address[i])->address[j] = New_Integer(i+j);
 		}
 	}
 
@@ -284,20 +237,23 @@ void ArrayTest()
 	
 	for(i = 0; i < n; i++)
 	{
-		printf("%d", ((IntElement*)arr->address[i])->value);
+		printf("%d", ARRAYGET(arr, IntElement, i)->value);
+		//printf("%d", ((IntElement*)arr->address[i])->value);
 		if(i != n-1)printf(",");
 		else printf("}\n");
 	}
 
 	print2DArray(arr_2, n, n);
 	
-	arr_2->address[2] = arr;
+	ARRAYSET(arr_2, 2) = arr;
+	//arr_2->address[2] = arr;
 	
 	print_header("After Changing an array:");
 	
 	print2DArray(arr_2, n, n);
 	
-	arr_2->address[0] = arr_2;
+	ARRAYSET(arr_2,0) = arr_2;
+	//arr_2->address[0] = arr_2;
 	
 	print_header ("After Creating a Circular Reference:");
 	
@@ -315,7 +271,8 @@ void ArrayTest()
 	arr_data = New_Array(n);
 	for(i = 0; i < n; i++)
 	{
-		arr_data->address[i] = New_Data();
+		ARRAYSET(arr_data, i) = New_Data();
+		//arr_data->address[i] = New_Data();
 	}
 	
 	print_header("After assigning arr_data:");
@@ -344,7 +301,7 @@ struct sTypeA
 TypeB* New_TypeB()
 {
 	int childNum = 1;
-	void** childList = malloc(sizeof(void*) * childNum);
+	void** childList = allocate_mem(sizeof(void*) * childNum);
 	Object* obj = new_object(childNum, childList);
 	TypeB* ptr = gc_malloc(sizeof(TypeB), obj);
 	
@@ -358,7 +315,7 @@ TypeB* New_TypeB()
 TypeA* New_TypeA()
 {
 	int childNum = 1;
-	void** childList = malloc(sizeof(void*) * childNum);
+	void** childList = allocate_mem(sizeof(void*) * childNum);
 	Object* obj = new_object(childNum, childList);
 	TypeA* ptr = gc_malloc(sizeof(TypeB), obj);
 	
@@ -398,7 +355,35 @@ void CyclicReferenceTest()
 	gc_collect();
 	
 	print_header("After collection:");
+}
+
+
+
+void BM_MassAlloc()
+{
+	Array* arr;
+	int n = 5000000, i;
 	
+	var_push(0, &arr);
 	
+	arr = New_Array(n);
+	
+	printf("Allocating %d objects...", n);
+	for(i = 0; i < n; i++)
+	{
+		ARRAYSET(arr, i) = New_Data();
+		
+		if(ARRAYGET(arr, Data, i) == NULL)
+		{
+			n = i;
+			break;
+		}
+	}
+	printf("Done.\n");
+	
+	printf("Freeing %d objects...", n);
+	var_pop();
+	gc_collect();
+	printf("Done.\n");
 	
 }
