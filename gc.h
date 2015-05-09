@@ -1,14 +1,15 @@
 #pragma once
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
-//#define DEBUG
+#define DEBUG
 
 //This macro is to set a size to allow the free list to grow
 //to before freeing everything. This can save time as trying
 //to free everything everytime the garbage collector sweeps 
 //could be time consuming
-#define MAXFREELIST 1000
+#define MAXFREELIST 1
 
 //Struct typedefs and forward declarations
 typedef struct sStack 		VarStack;
@@ -39,6 +40,7 @@ void* allocate_mem(size_t size);
 IntElement* New_Integer(int x);
 BoolElement* New_Boolean(bool x);
 Array* New_Array(int n);
+void init_struct(void** childList, int count, ...);
 
 //Global so there's no need for parameters
 void print_refList();
