@@ -101,7 +101,7 @@ void BasicStructTest()
 
 	print_header("Initial:");
 
-	var_push(1, (void**)&x);
+	var_push((void**)&x);
 
 	//gc_print(); //This gc_print breaks because print_varStack() can't handle code that hasn't been initialized
 
@@ -124,8 +124,8 @@ void SelfReferentialTest()
 
 	print_header("Initial:");
 
-	var_push(1, &x);
-	var_push(2, &y);
+	var_push(&x);
+	var_push(&y);
 
 	x = New_ToSelf();
 	y = New_ToSelf();
@@ -179,8 +179,8 @@ void ArrayTest()
 
 	n = 5;
 
-	var_push(1, &arr);
-	var_push(2, &arr_2);
+	var_push(&arr);
+	var_push(&arr_2);
 
 	arr = New_Array(n);
 	arr_2 = New_Array(n);
@@ -234,7 +234,7 @@ void ArrayTest()
 	
 	print_header("After popping arr:");
 	
-	var_push(0, &arr_data);
+	var_push(&arr_data);
 	arr_data = New_Array(n);
 	for(i = 0; i < n; i++)
 	{
@@ -255,7 +255,7 @@ void CyclicReferenceTest()
 {
 	TypeA* ta;
 	
-	var_push(0, &ta);
+	var_push(&ta);
 	
 	ta = New_TypeA();
 	
@@ -289,7 +289,7 @@ void BM_MassAlloc()
 	Array* arr;
 	int n = 5000000, i;
 	
-	var_push(0, &arr);
+	var_push(&arr);
 	
 	arr = New_Array(n);
 	
