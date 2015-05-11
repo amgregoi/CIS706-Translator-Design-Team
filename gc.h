@@ -1,14 +1,42 @@
 #pragma once
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
-#define DEBUG
+
+//#define DEBUG
+
+
+
+#define ARRAYGET(var, type, i) ((type*)var->address[i])
+
+#define ARRAYSET(var, i) (var->address[i])
+
+#define NEW_STRUCT(name, ...)  struct name {Object* obj; __VA_ARGS__};
+
+#define NEW_SIMPLECONST(name) name* New_ ##name(){\
+	Object* obj = new_object(0,NULL); \
+	name* newPtr = gc_malloc(sizeof(name), obj); \
+	return newPtr;\
+}
+
+#define NEW_CONST(name, num_children, ptrName, ...) name* New_ ##name(){ \
+	name* ptrName;\
+	Object* obj;\
+	int childNum = num_children;\
+	void** childList = allocate_mem(sizeof(void*) * childNum);\
+	obj = new_object(childNum, childList);\
+	ptrName = gc_malloc(sizeof(name), obj);\
+	init_struct(childList, childNum, __VA_ARGS__);\
+	return ptrName;\
+}
+
 
 //This macro is to set a size to allow the free list to grow
 //to before freeing everything. This can save time as trying
 //to free everything everytime the garbage collector sweeps 
 //could be time consuming
-#define MAXFREELIST 1000
+#define MAXFREELIST 1
 
 //Struct typedefs and forward declarations
 typedef struct sStack 		VarStack;
@@ -39,6 +67,7 @@ void* allocate_mem(size_t size);
 IntElement* New_Integer(int x);
 BoolElement* New_Boolean(bool x);
 Array* New_Array(int n);
+void init_struct(void** childList, int count, ...);
 
 //Global so there's no need for parameters
 void print_refList();

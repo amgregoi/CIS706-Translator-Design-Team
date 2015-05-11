@@ -446,3 +446,22 @@ void print_gc()
 	printf("\n");
 	#endif
 }
+
+void init_struct(void** childList, int childNum, ...)
+{
+	//Variadic variables here are the address pointers to the structs members
+	void** tempArg;
+	int argNum;
+	va_list args;
+	va_start(args, childNum);
+
+	argNum = childNum;
+
+	while(childNum--)
+	{
+		tempArg = va_arg(args, void**);
+		*tempArg = NULL;
+		childList[argNum - childNum - 1] = tempArg;
+	}
+	va_end(args);
+}
