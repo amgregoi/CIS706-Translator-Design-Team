@@ -2,26 +2,6 @@
 #include <stdio.h>
 #include "gc.h"
 
-#define ARRAYGET(var, type, i) ((type*)var->address[i])
-#define ARRAYSET(var, i) (var->address[i])
-#define NEW_STRUCT(name, ...)  struct name {Object* obj; __VA_ARGS__};
-#define NEW_SIMPLECONST(name) name* New_ ##name(){\
-	Object* obj = new_object(0,NULL); \
-	name* newPtr = gc_malloc(sizeof(name), obj); \
-	return newPtr;\
-}
-
-#define NEW_CONST(name, num_children, ptrName, ...) name* New_ ##name(){ \
-	name* ptrName;\
-	Object* obj;\
-	int childNum = num_children;\
-	void** childList = allocate_mem(sizeof(void*) * childNum);\
-	obj = new_object(childNum, childList);\
-	ptrName = gc_malloc(sizeof(name), obj);\
-	init_struct(childList, childNum, __VA_ARGS__);\
-	return ptrName;\
-}
-
 typedef struct sTest Test;
 typedef struct ssTest sTest;
 typedef struct sTypeB TypeB;
