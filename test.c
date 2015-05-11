@@ -2,43 +2,26 @@
 #include <stdio.h>
 #include "gc.h"
 
-#define ARRAYGET(var, type, i) ((type*)var->address[i])
-#define ARRAYSET(var, i) (var->address[i])
+typedef struct sTest Test;
+typedef struct ssTest sTest;
+typedef struct sTypeB TypeB;
+typedef struct sTypeA TypeA;
+typedef struct sToSelf ToSelf;
+typedef struct sData Data;
 
-typedef struct ssTest{
-	Object* obj;
-} sTest;
+NEW_STRUCT(sData, int value;)
+NEW_STRUCT(sToSelf, struct sToSelf* self;)
+NEW_STRUCT(sTypeB, TypeA* ref;)
+NEW_STRUCT(sTypeA, TypeB* ref;)
+NEW_STRUCT(ssTest,)
+NEW_STRUCT(sTest, sTest* tst;)
 
-typedef struct sTest{
-	Object* obj;
-	sTest* tst;
-} Test;
-
-sTest* New_sTest()
-{
-	Object* obj = new_object(0,NULL);
-	sTest* newTest = gc_malloc(sizeof(sTest), obj);
-	
-	return newTest;
-}
-
-Test* New_Test()
-{
-	Test* newTest;
-	Object* obj;
-	int childNum = 1;
-	void** childList = allocate_mem(sizeof(void*) * childNum);
-		
-	obj = new_object(childNum, childList);
-	
-	newTest = gc_malloc(sizeof(Test), obj);
-	
-	newTest->tst = NULL;
-	
-	childList[0] = &(newTest->tst);
-	
-	return newTest;
-}
+NEW_SIMPLECONST(sTest);
+NEW_CONST(Test, 1, ptr, &(ptr->tst))
+NEW_CONST(ToSelf, 1, ptr, &(ptr->self));
+NEW_SIMPLECONST(Data)
+NEW_CONST(TypeB, 1, ptr, &(ptr->ref))
+NEW_CONST(TypeA, 1, ptr, &(ptr->ref))
 
 void print_var(void* ptr)
 {
@@ -73,40 +56,40 @@ void BM_MassAlloc();
 int main(int argc, char *argv[])
 {
 	int num = 0;
-	
+
 	if(argc > 1) num = atoi(argv[1]);
-	
+
 	switch(num)
 	{
 		case 0:
 			printf("Self Referential Test\n");
 			SelfReferentialTest();
-		break;
-		
+			break;
+
 		case 1:
 			printf("Basic Struct Test\n");
 			BasicStructTest();
-		break;
-		
+			break;
+
 		case 2:
 			printf("Array Test\n");
 			ArrayTest();
-		break;
-		
+			break;
+
 		case 3:
 			printf("Cyclic Reference Test\n");
 			CyclicReferenceTest();
-		break;
-		
+			break;
+
 		case 4:
 			printf("Bench Mark: Mass Allocation\n");
 			BM_MassAlloc();
-		break;
-		
+			break;
+
 		default:
-		return 0;
+			return 0;
 	}
-	
+
 	gc_dispose();
 	print_header("After Disposal:");
 	return 0;
@@ -115,59 +98,35 @@ int main(int argc, char *argv[])
 void BasicStructTest()
 {
 	Test* x;
-	
+
 	print_header("Initial:");
-	
+
 	var_push(1, (void**)&x);
-	
+
 	//gc_print(); //This gc_print breaks because print_varStack() can't handle code that hasn't been initialized
-	
+
 	x = New_Test();
 	x->tst = New_sTest();
-	
+
 	print_header("After first allocation:");
 	print_header("After Second Allocation:");
-	
+
 	gc_collect();
 	print_header("After Collection:");
-	
+
 	gc_dispose();
 	print_header("After Disposal:");
-}
-
-typedef struct sToSelf
-{
-	Object* obj;
-	struct sToSelf* self;
-} ToSelf;
-
-ToSelf* New_ToSelf()
-{
-	ToSelf* ptr;
-	Object* obj;
-	int childNum = 1;
-	void** childList = allocate_mem(sizeof(void*) * childNum);
-	
-	obj = new_object(childNum, childList);
-	
-	ptr = gc_malloc(sizeof(ToSelf), obj);
-	
-	ptr->self = NULL;
-	
-	childList[0] = &(ptr->self);
-	
-	return ptr;
 }
 
 void SelfReferentialTest()
 {
 	ToSelf* x,*y;
-	
+
 	print_header("Initial:");
-	
+
 	var_push(1, &x);
 	var_push(2, &y);
-	
+
 	x = New_ToSelf();
 	y = New_ToSelf();
 	print_header("After allocating:");
@@ -181,25 +140,12 @@ void SelfReferentialTest()
 	print_header("After setting clearing variables:");
 	gc_collect();
 	print_header("After collection:");
-	
+
 }
 
 //May need to construct 2 structs to deal with arrays
 //One as an array sentinel and another for the objects
 
-typedef struct sData
-{
-	Object* obj;
-	int value;
-} Data;
-
-Data* New_Data()
-{
-	Object* obj = new_object(0, NULL);
-	Data* ptr = gc_malloc(sizeof(Data), obj);
-	
-	return ptr;
-}
 
 void print2DArray(Array* arr, int l1, int l2)
 {
@@ -304,48 +250,6 @@ void ArrayTest()
 	print_header("After popping arr_data:");
 }
 
-typedef struct sTypeB TypeB;
-typedef struct sTypeA TypeA;
-
-struct sTypeB
-{
-	Object* obj;
-	TypeA* ref;
-};
-
-struct sTypeA
-{
-	Object* obj;
-	TypeB* ref;
-};
-
-TypeB* New_TypeB()
-{
-	int childNum = 1;
-	void** childList = allocate_mem(sizeof(void*) * childNum);
-	Object* obj = new_object(childNum, childList);
-	TypeB* ptr = gc_malloc(sizeof(TypeB), obj);
-	
-	ptr->ref = NULL;
-	
-	childList[0] = &(ptr->ref);
-	
-	return ptr;
-}
-
-TypeA* New_TypeA()
-{
-	int childNum = 1;
-	void** childList = allocate_mem(sizeof(void*) * childNum);
-	Object* obj = new_object(childNum, childList);
-	TypeA* ptr = gc_malloc(sizeof(TypeB), obj);
-	
-	ptr->ref = NULL;
-	
-	childList[0] = &(ptr->ref);
-	
-	return ptr;
-}
 
 void CyclicReferenceTest()
 {
