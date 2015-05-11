@@ -73,7 +73,7 @@ public class CGeneratorTest {
 
 			// Compiles .c files
 			Process c_proc = Runtime.getRuntime().exec(
-					"gcc -o ccode/cout/" + file + " ccode/" + file + ".c");
+					"gcc -o ccode/cout/" + file + " ccode/" + file + ".c ../gc.c");
 
 			error = c_proc.getErrorStream();
 			isr = new InputStreamReader(error);

@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include "../../gc.h"
 #include <assert.h>
 #include <stdbool.h>
 

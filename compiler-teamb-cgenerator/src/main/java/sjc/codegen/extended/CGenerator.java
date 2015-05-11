@@ -85,13 +85,13 @@ public class CGenerator {
 			this.typeMap = tt.typeMap;
 			stg = new STGroupFile("cStringTemplates.stg", '%', '%');
 
-			includes = "#include <stdlib.h>\n#include <assert.h>\n#include <stdbool.h>";
-			//includes = "#include \"gc.h\"\n#include <assert.h>\n#include <stdbool.h>";
+			//includes = "#include <stdlib.h>\n#include <assert.h>\n#include <stdbool.h>";
+			includes = "#include \"../../gc.h\"\n#include <assert.h>\n#include <stdbool.h>";
 
 		}
 
 		protected void dispose() {
-			this.classMap = null;
+			this.classMap = null;	
 			this.fieldMap = null;
 			this.typeMap = null;
 			this.stg = null;
@@ -225,7 +225,6 @@ public class CGenerator {
 					final String fd = getCode();
 					addCode("\n" + fd);
 				}
-				final String c = td.render();
 				
 				for (final Object o : node.getMethods()) {
 					((ASTNode) o).accept(this);
@@ -568,6 +567,7 @@ public class CGenerator {
 		@Override
 		public boolean visit(final FieldAccess node) {
 			final ST fa = stg.getInstanceOf("fieldaccess");
+			
 			node.getExpression().accept(this);
 			final String exp = getCode();
 			node.getName().accept(this);

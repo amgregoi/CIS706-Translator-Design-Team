@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define DEBUG
+//#define DEBUG
 
 //This macro is to set a size to allow the free list to grow
 //to before freeing everything. This can save time as trying
