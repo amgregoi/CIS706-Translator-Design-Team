@@ -51,12 +51,12 @@ typedef struct sArray Array;
 //Constructor prototypes
 //can be moved to the .c file as "private" methods
 //since they will be used internally
-Variable* 	new_variable(int ID, void* addr);
+Variable* 	new_variable(void* addr);
 Reference* 	new_reference(void* value);
 Object* 	new_object(int childNum, void** childList);
 
 //Method prototypes
-void var_push(int ID, void* addr);
+void var_push(void* addr);
 void var_pop();
 void* gc_malloc(size_t size, Object* obj);
 void gc_mark();
@@ -93,7 +93,6 @@ struct sStack
 
 struct sVariable
 {
-	int ID;
 	void*** address;
 	Variable* next;
 };

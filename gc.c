@@ -20,7 +20,7 @@ RefList 	referenceList = {0,NULL,NULL};
 RefList		freeList = {0,NULL,NULL};
 unsigned char	currentMark;
 
-Variable* new_variable(int ID, void* addr)
+Variable* new_variable(void* addr)
 {
 	Variable* newVar = allocate_mem(sizeof(Variable));
 	if(newVar == NULL){
@@ -28,7 +28,6 @@ Variable* new_variable(int ID, void* addr)
 		return NULL;
 	}
 
-	newVar->ID = ID;
 	newVar->next = NULL;
 	newVar->address = (void***)addr;
 	return newVar;
@@ -98,9 +97,9 @@ Object* obj_getChild(void* ptr)
 	return (Object*)**((void***)ptr);
 }
 
-void var_push(int ID, void* addr)
+void var_push(void* addr)
 {
-	Variable* newVar = new_variable(ID, addr);
+	Variable* newVar = new_variable(addr);
 
 	newVar->next = variableStack.head;
 	variableStack.head = newVar;
@@ -351,7 +350,6 @@ void print_reference(int tabNum, Reference* ref)
 void print_variable(int tabNum, Variable* var)
 {
 	print_tabs(tabNum); printf("var = %p\n", var);
-	print_tabs(tabNum); printf("ID = %d\n", var->ID);
 	print_tabs(tabNum); printf("addr = %p\n", var->address);
 	print_object(tabNum+1, var_getObject(var));
 }
