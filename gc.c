@@ -462,4 +462,5 @@ void init_struct(void** childList, int childNum, ...)
 		childList[argNum - childNum - 1] = tempArg;
 	}
 	va_end(args);
+
 }

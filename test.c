@@ -161,7 +161,7 @@ void print2DArray(Array* arr, int l1, int l2)
 		for(j = 0; j < l2; j++)
 		{
 			//tempElement = (IntElement*)tempArray->address[j];
-			tempElement = ARRAYGET(ARRAYGET(arr, Array, i), IntElement, j);
+			tempElement = ARRAYGET(ARRAYGET(arr, i), j);
 			printf("%d", tempElement->value);
 			if(j < l2-1) printf(", ");
 			else printf("}\n");
@@ -189,11 +189,11 @@ void ArrayTest()
 
 	for(i = 0; i < n; i++)
 	{
-		ARRAYSET(arr, i) = New_Integer(i*i);
-		ARRAYSET(arr_2, i) = New_Array(n);
+		ARRAYGET(arr, i) = New_Integer(i*i);
+		ARRAYGET(arr_2, i) = New_Array(n);
 		for(j=0; j < n; j++)
 		{
-			ARRAYSET(ARRAYGET(arr_2, Array, i), j) = New_Integer(i+j);
+			ARRAYGET(ARRAYGET(arr_2, i), j) = New_Integer(i+j);
 			//((Array*)arr_2->address[i])->address[j] = New_Integer(i+j);
 		}
 	}
@@ -204,7 +204,7 @@ void ArrayTest()
 	
 	for(i = 0; i < n; i++)
 	{
-		printf("%d", ARRAYGET(arr, IntElement, i)->value);
+		printf("%d", ((IntElement*)ARRAYGET(arr, i))->value);
 		//printf("%d", ((IntElement*)arr->address[i])->value);
 		if(i != n-1)printf(",");
 		else printf("}\n");
@@ -212,14 +212,14 @@ void ArrayTest()
 
 	print2DArray(arr_2, n, n);
 	
-	ARRAYSET(arr_2, 2) = arr;
+	ARRAYGET(arr_2, 2) = arr;
 	//arr_2->address[2] = arr;
 	
 	print_header("After Changing an array:");
 	
 	print2DArray(arr_2, n, n);
 	
-	ARRAYSET(arr_2,0) = arr_2;
+	ARRAYGET(arr_2,0) = arr_2;
 	//arr_2->address[0] = arr_2;
 	
 	print_header ("After Creating a Circular Reference:");
@@ -238,7 +238,7 @@ void ArrayTest()
 	arr_data = New_Array(n);
 	for(i = 0; i < n; i++)
 	{
-		ARRAYSET(arr_data, i) = New_Data();
+		ARRAYGET(arr_data, i) = New_Data();
 		//arr_data->address[i] = New_Data();
 	}
 	
@@ -296,9 +296,9 @@ void BM_MassAlloc()
 	printf("Allocating %d objects...", n);
 	for(i = 0; i < n; i++)
 	{
-		ARRAYSET(arr, i) = New_Data();
+		ARRAYGET(arr, i) = New_Data();
 		
-		if(ARRAYGET(arr, Data, i) == NULL)
+		if(ARRAYGET(arr, i) == NULL)
 		{
 			n = i;
 			break;

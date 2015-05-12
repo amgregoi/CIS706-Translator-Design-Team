@@ -8,9 +8,9 @@
 
 
 
-#define ARRAYGET(var, type, i) ((type*)var->address[i])
+//#define ARRAYGET(var, type, i) ((type*)var->address[i])
 
-#define ARRAYSET(var, i) (var->address[i])
+#define ARRAYGET(var, i) (((Array*) var)->address[i])
 
 #define NEW_STRUCT(name, ...)  struct name {Object* obj; __VA_ARGS__};
 
