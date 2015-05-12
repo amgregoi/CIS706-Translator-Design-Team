@@ -118,7 +118,7 @@ malloc(sizeof(%type%)%if(size)%*%size%%endif%)
 >>
 
 objectcreation(type, size) ::= <<
-New_%type%()
+New_%type%(%size%)
 >>
 
 objectcreationaray(type, size) ::= <<

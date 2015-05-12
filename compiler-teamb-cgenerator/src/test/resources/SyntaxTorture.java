@@ -26,8 +26,6 @@ public class SyntaxTorture {
 		boolean[] b_array;
 		ManyTypes m;
 		ManyTypes[] m_array;
-		int x1;
-		int x2;
 
 		i = 0;
 		j = i;
@@ -59,7 +57,7 @@ public class SyntaxTorture {
 		i = 4;
 		m_array = new ManyTypes[i];
 		m_array[0] = m;
-		i_array = new int[] { 0, i, 0, 7 };
+		i_array = new int[] { 0, i, j, 7 };
 		j = 0;
 		m.i = 0;
 		m_array[i_array[m.i]] = m_array[j];
@@ -75,8 +73,7 @@ public class SyntaxTorture {
 		b_array = returnBooleanArray(m.b_array);
 		m = null;
 		b_array = new boolean[] { true };
-		x1 = returnInt();
-		x2 = returnIntArray()[2];
+		i_array[returnInt()] = i_array[returnIntArray()[2]];
 	}
 
 	static int aa;
