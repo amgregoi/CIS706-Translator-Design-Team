@@ -783,7 +783,7 @@ public class CGenerator {
 			Type t = this.typeMap.get(node);
 			aa.add("exp", exp);
 			aa.add("index", index);
-			if (!(node.getParent() instanceof Assignment)) {
+			if (!(node.getParent() instanceof Assignment)) {				
 				if (t instanceof IntType) {
 					aa.add("type", "IntElement*");
 				} else if (t instanceof BooleanType) {
@@ -791,6 +791,13 @@ public class CGenerator {
 				} else {
 					aa.add("type2", t.toString() + "*");
 				}
+			}else{
+				Assignment a = (Assignment)node.getParent();
+				ASTNode b = a.getRightHandSide();
+				Type t2 = this.typeMap.get(b);
+				t2 = null;
+				
+				
 			}
 
 			final String c = aa.render();

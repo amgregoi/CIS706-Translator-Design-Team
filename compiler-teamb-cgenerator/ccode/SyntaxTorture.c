@@ -47,7 +47,7 @@ int main(){
    ManyTypes* m = New_ManyTypes();var_push(&m);
     Array* m_array = NULL;
    ;var_push(&m_array);
-   i=0;
+   int x1;int x2;i=0;
    j=i;
    b=true;
 
@@ -100,7 +100,7 @@ int main(){
    ARRAYGET(m_array, 0)=m;
    i_array=New_Array(0); ARRAYGET(i_array, 0) = New_Integer(0);
    ARRAYGET(i_array, 1) = New_Integer(i);
-   ARRAYGET(i_array, 2) = New_Integer(j);
+   ARRAYGET(i_array, 2) = New_Integer(0);
    ARRAYGET(i_array, 3) = New_Integer(7);
    ;
    j=0;
@@ -122,7 +122,8 @@ int main(){
    m=NULL;
    b_array=New_Array(0); ARRAYGET(b_array, 0) = New_Boolean(true);
    ;
-   ARRAYGET(i_array, returnInt())=ARRAYGET(i_array, ((IntElement*)ARRAYGET(returnIntArray(), 2))->value);
+   x1=returnInt();
+   x2=ARRAYGET(i_array, 2);
 
 
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
