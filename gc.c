@@ -20,6 +20,21 @@ RefList 	referenceList = {0,NULL,NULL};
 RefList		freeList = {0,NULL,NULL};
 unsigned char	currentMark;
 
+#ifdef DIAGNOSTIC
+unsigned int 	diag_totalObjectsAllocated = 0;
+unsigned long 	diag_totalMemAllocated = 0;
+unsigned int	diag_totalVarsPushed = 0;
+unsigned int	diag_totalVarsPopped = 0;
+unsigned int	diag_totalCollected = 0;
+unsigned int 	diag_totalFreed = 0;
+unsigned int 	diag_allocatedObjectsSinceLastCheck = 0;
+unsigned int	diag_pushedVarsSinceLastCheck = 0;
+unsigned int	diag_poppedVarsSinceLastCheck = 0;
+unsigned int	diag_allocatedMemSinceLastCheck = 0;
+unsigned int	diag_collectedSinceLastCheck = 0;
+unsigned int	diag_freedSinceLastCheck = 0;
+#endif
+
 Variable* new_variable(void* addr)
 {
 	Variable* newVar = allocate_mem(sizeof(Variable));
@@ -103,6 +118,11 @@ void var_push(void* addr)
 
 	newVar->next = variableStack.head;
 	variableStack.head = newVar;
+	
+	#ifdef DIAGNOSTIC
+	diag_totalVarsPushed++;
+	diag_pushedVarsSinceLastCheck++;
+	#endif
 }
 
 void var_pop()
@@ -114,12 +134,24 @@ void var_pop()
 	variableStack.head = variableStack.head->next;
 
 	var_dispose(poppedVar);
+	
+	#ifdef DIAGNOSTIC
+	diag_totalVarsPopped++;
+	diag_poppedVarsSinceLastCheck++;
+	#endif
 }
 
 void* gc_malloc(size_t size, Object* obj)
 {
 	void** ptr = allocate_mem(size);
 
+	#ifdef DIAGNOSTIC
+	diag_allocatedMemSinceLastCheck += size + sizeof(Reference);
+	diag_allocatedObjectsSinceLastCheck++;
+	diag_totalMemAllocated += size + sizeof(Reference);
+	diag_totalObjectsAllocated++;
+	#endif
+	
 	if(ptr == NULL){
 		printf("Could not allocate memory\n");
 		return NULL;
@@ -170,6 +202,11 @@ void gc_sweep()
 		if(currentNode->value->mark != currentMark)
 		{
 			ref_remove(currentNode);
+
+			#ifdef DIAGNOSTIC
+			diag_collectedSinceLastCheck++;
+			diag_totalCollected++;
+			#endif
 		}
 		currentNode = nextNode;
 	}
@@ -290,6 +327,11 @@ void freeReferences()
 		currentNode = freeList.head->next;
 		ref_dispose(freeList.head);
 		freeList.head = currentNode;
+
+		#ifdef DIAGNOSTIC
+		diag_freedSinceLastCheck++;
+		diag_totalFreed++;
+		#endif
 	}
 
 	freeList.size = 0;
@@ -321,6 +363,7 @@ Array* New_Array(int n)
 	obj = new_object(n, childList);
 	ptr = gc_malloc(sizeof(Array), obj);
 	
+	ptr->elemNum = n;
 	ptr->address = allocate_mem(sizeof(void*) * n);
 	for(i = 0; i < n; i++)
 	{
@@ -335,6 +378,7 @@ Array* New_Array(int n)
 void print_object(int tabNum, Object* obj)
 {
 	print_tabs(tabNum); printf("obj = %p\n", obj);
+	if(obj == NULL) return;
 	print_tabs(tabNum); printf("mark = %d\n", obj->mark);
 	print_tabs(tabNum); printf("childNum = %d\n", obj->childNum);
 	print_tabs(tabNum); printf("childList = ");
@@ -436,6 +480,9 @@ void print_freeList()
 
 void print_gc()
 {
+	#ifdef DIAGNOSTIC
+	print_diagnostics();
+	#endif
 	#ifdef DEBUG
 	printf("\nCurrent Mark = %d\n", currentMark);
 	print_varStack();
@@ -462,5 +509,26 @@ void init_struct(void** childList, int childNum, ...)
 		childList[argNum - childNum - 1] = tempArg;
 	}
 	va_end(args);
+}
 
+void print_diagnostics()
+{
+	#ifdef DIAGNOSTIC
+	
+	printf("Allocated\t%d objects (%d bytes) since last print\n", diag_allocatedObjectsSinceLastCheck, diag_allocatedMemSinceLastCheck);
+	printf("Allocated\t%d objects (%d bytes) total\n", diag_totalObjectsAllocated, diag_totalMemAllocated);
+	printf("Pushed\t\t%d Variables and Popped %d Variables since last print\n", diag_pushedVarsSinceLastCheck, diag_poppedVarsSinceLastCheck);
+	printf("Pushed\t\t%d Variables and Popped %d Variables total\n", diag_totalVarsPushed, diag_totalVarsPopped);
+	printf("Collected\t%d Objects for freeing since last print\n", diag_collectedSinceLastCheck);
+	printf("Collected\t%d Object for freeing in total\n", diag_totalCollected);
+	printf("Freed\t\t%d objects since last print\n", diag_freedSinceLastCheck);
+	printf("Freed\t\t%d Objects total\n\n", diag_totalFreed);
+	
+	diag_allocatedObjectsSinceLastCheck = 0;
+	diag_allocatedMemSinceLastCheck = 0;
+	diag_freedSinceLastCheck = 0;
+	diag_poppedVarsSinceLastCheck = 0;
+	diag_pushedVarsSinceLastCheck = 0;
+	
+	#endif
 }

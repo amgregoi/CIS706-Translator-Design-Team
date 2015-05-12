@@ -4,6 +4,7 @@
 #include <stdarg.h>
 
 //#define DEBUG
+#define DIAGNOSTIC
 
 //#define ARRAYGET(var, type, i) ((type*)var->address[i])
 
@@ -70,6 +71,7 @@ void print_refList();
 void print_varStack();
 void print_freeList();
 void print_gc();
+void print_diagnostics();
 
 #ifdef DEBUG
 	#include <stdio.h>
