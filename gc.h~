@@ -3,10 +3,21 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
+//Define DEBUG to output information on the gc data structures
+//as they are processed
+//#define DEBUG
 
-#define DEBUG
+<<<<<<< HEAD
+//#define DEBUG
+=======
+//Define DIAGNOSTIC to output diagnostic information about how
+//many objects and how much memory has been allocated/deallocated
+//#define DIAGNOSTIC
+>>>>>>> branch 'master' of https://github.com/ksu-cis-706/team-b.git
 
-
+//Define TRACE to output a stack trace for each method that gets called-
+//as well as its inputs and return value;
+#define TRACE
 
 //#define ARRAYGET(var, type, i) ((type*)var->address[i])
 
@@ -74,13 +85,14 @@ void print_refList();
 void print_varStack();
 void print_freeList();
 void print_gc();
+void print_diagnostics();
+void print_tabs(int tabNum);
 
 #ifdef DEBUG
 	#include <stdio.h>
 	void print_object(int tabNum, Object* obj);
 	void print_reference(int tabNum, Reference* ref);
 	void print_variable(int tabNum, Variable* var);
-	void print_tabs(int tabNum);
 	void print_array(int size, void** array);
 #endif
 

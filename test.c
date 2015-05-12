@@ -241,7 +241,7 @@ void ArrayTest()
 		ARRAYGET(arr_data, i) = New_Data();
 		//arr_data->address[i] = New_Data();
 	}
-	
+	printf("elemNum = %d\n", arr_data->elemNum);
 	print_header("After assigning arr_data:");
 	
 	var_pop();
