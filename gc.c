@@ -35,24 +35,55 @@ unsigned int	diag_collectedSinceLastCheck = 0;
 unsigned int	diag_freedSinceLastCheck = 0;
 #endif
 
+#ifdef TRACE
+int tabCount = 0;
+#endif
+
 Variable* new_variable(void* addr)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("new_variable(%p)\n", addr);
+	#endif
+	
 	Variable* newVar = allocate_mem(sizeof(Variable));
 	if(newVar == NULL){
 		printf("New Variable failed to be allocated\n");
+		
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return NULL\n");
+		tabCount--;
+		#endif
+		
 		return NULL;
 	}
 
 	newVar->next = NULL;
 	newVar->address = (void***)addr;
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return %p\n", newVar);
+	tabCount--;
+	#endif
 	return newVar;
 }
 
 Reference* new_reference(void* obj)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("new_reference(%p)\n", obj);
+	#endif
+	
 	Reference* newRef = allocate_mem(sizeof(Reference));
 	if(newRef == NULL){
 		printf("New Reference failed to be allocated\n");
+		
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return NULL\n");
+		tabCount--;
+		#endif
+		
 		return NULL;
 	}
 
@@ -60,29 +91,61 @@ Reference* new_reference(void* obj)
 	newRef->prev = NULL;
 	newRef->value = (Object*)obj;
 
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return %p\n", newRef);
+	tabCount--;
+	#endif
+	
 	return newRef;
 }
 
 Object* new_object(int childNum, void** childList)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("new_object(%d, %p)\n", childNum, childList);
+	#endif
+	
 	Object* newObj = allocate_mem(sizeof(Object));
 	if(newObj == NULL){
 		printf("New Object failed to be allocated\n");
+		
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return NULL\n");
+		tabCount--;
+		#endif
 		return NULL;
 	}
 
 	newObj->mark = currentMark;
 	newObj->childNum = childNum;
 	newObj->childList = (Object**) childList;
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return %p\n", newObj);
+	tabCount--;
+	#endif
 
 	return newObj;
 }
 
 void* allocate_mem(size_t size)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("allocate_mem(%d)\n", size);
+	#endif
+	
 	void* ptr = malloc(size);
 	
-	if(ptr != NULL) return ptr;
+	if(ptr != NULL)
+	{
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return %p\n", ptr);
+		tabCount--;
+		#endif
+		return ptr;
+	}
 	
 	gc_collect();
 	
@@ -91,29 +154,77 @@ void* allocate_mem(size_t size)
 	if(ptr == NULL)
 	{
 		printf("Cannot allocate memory\n");
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return NULL\n");
+		tabCount--;
+		#endif
 		return NULL;
 	}
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return %p\n", ptr);
+	tabCount--;
+	#endif
 	
 	return ptr;
 }
 
 Object* var_getObject(Variable* var)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("var_getObject(%p)\n", var);
+	#endif
+	
 	if(*(var->address) != NULL)
+	{
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return (%p)\n", (Object*)**(var->address));
+		tabCount--;
+		#endif
 		return (Object*)**(var->address);
+	}
 	else
+	{
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return NULL;\n");
+		tabCount--;
+		#endif
 		return NULL;
+	}
 }
 
 Object* obj_getChild(void* ptr)
 {
-	if(*(void**) ptr == NULL) return NULL;
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("obj_getChild(%p)\n", ptr);
+	#endif
+	
+	if(*(void**) ptr == NULL)
+	{
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return NULL\n");
+		tabCount--;
+		#endif
+		return NULL;
+	}
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return %p\n", (Object*)**((void***)ptr));
+	tabCount--;
+	#endif
 	
 	return (Object*)**((void***)ptr);
 }
 
 void var_push(void* addr)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("var_push(%p)\n", addr);
+	#endif
+	
 	Variable* newVar = new_variable(addr);
 
 	newVar->next = variableStack.head;
@@ -123,13 +234,30 @@ void var_push(void* addr)
 	diag_totalVarsPushed++;
 	diag_pushedVarsSinceLastCheck++;
 	#endif
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void var_pop()
 {
 	Variable* poppedVar = variableStack.head;
 
-	if(poppedVar == NULL) return;
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("var_pop()\n");
+	#endif
+	
+	if(poppedVar == NULL)
+	{
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return (premature)\n");
+		tabCount--;
+		#endif
+		return;
+	}
 
 	variableStack.head = variableStack.head->next;
 
@@ -138,6 +266,10 @@ void var_pop()
 	#ifdef DIAGNOSTIC
 	diag_totalVarsPopped++;
 	diag_poppedVarsSinceLastCheck++;
+	#endif
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
 	#endif
 }
 
@@ -151,8 +283,16 @@ void* gc_malloc(size_t size, Object* obj)
 	diag_totalMemAllocated += size + sizeof(Reference);
 	diag_totalObjectsAllocated++;
 	#endif
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("gc_malloc(%d,%p)\n", size, obj);
+	#endif
 	
 	if(ptr == NULL){
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return NULL\n");
+		tabCount--;
+		#endif
 		printf("Could not allocate memory\n");
 		return NULL;
 	}
@@ -160,12 +300,22 @@ void* gc_malloc(size_t size, Object* obj)
 	ptr[0] = (void*) obj;
 
 	ref_add(*ptr);
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return %p\n", (void*)ptr);
+	tabCount--;
+	#endif
 
 	return (void*)ptr;
 }
 
 void gc_mark()
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("gc_mark()\n");
+	#endif
+	
 	currentMark++;
 
 	Variable* currentNode = variableStack.head;
@@ -175,13 +325,30 @@ void gc_mark()
 		obj_mark(var_getObject(currentNode));
 		currentNode = currentNode->next;
 	}
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void obj_mark(Object* obj)
 {
 	int i;
-
-	if(obj == NULL || obj->mark == currentMark) return;
+	
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("obj_mark(%p)\n", obj);
+	#endif
+	
+	if(obj == NULL || obj->mark == currentMark)
+	{
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return (premature)\n");
+		tabCount--;
+		#endif
+		return;
+	}
 
 	obj->mark = currentMark;
 
@@ -189,6 +356,11 @@ void obj_mark(Object* obj)
 	{
 		obj_mark(obj_getChild(obj->childList[i]));
 	}
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void gc_sweep()
@@ -196,6 +368,11 @@ void gc_sweep()
 	Reference* currentNode = referenceList.head;
 	Reference* nextNode;
 
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("gc_sweep()\n");
+	#endif
+	
 	while(currentNode != NULL)
 	{
 		nextNode = currentNode->next;
@@ -210,24 +387,54 @@ void gc_sweep()
 		}
 		currentNode = nextNode;
 	}
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void gc_dispose()
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("gc_dispose()\n");
+	#endif
+	
 	var_disposeAll();
 	ref_disposeAll();
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void gc_collect()
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("gc_collect()\n");
+	#endif
+	
 	gc_mark();
 	gc_sweep();
 	freeReferences();
 	print_gc();
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void ref_add(void* ptr)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("ref_add(%p)\n", ptr);
+	#endif
+	
 	Reference* ref = new_reference(ptr);
 
 	if(referenceList.head == NULL && referenceList.tail == NULL)
@@ -245,10 +452,20 @@ void ref_add(void* ptr)
 	}
 
 	referenceList.size++;
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void ref_remove(Reference* ref)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("ref_remove(%p)\n", ref);
+	#endif
+	
 	if(referenceList.tail == ref)
 		referenceList.tail = ref->prev;
 
@@ -264,15 +481,30 @@ void ref_remove(Reference* ref)
 	ref->next = freeList.head;
 	freeList.head = ref;
 	freeList.size++;
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void var_disposeAll()
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("var_disposeAll()\n");
+	#endif
+	
 	while(variableStack.head != NULL)
 	{
 		var_pop();
 	}
 	variableStack.size = 0;
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void ref_disposeAll()
@@ -280,6 +512,11 @@ void ref_disposeAll()
 	Reference* currentNode = referenceList.head;
 	Reference* nextNode;
 
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("ref_disposeAll()\n");
+	#endif
+	
 	while(currentNode != NULL)
 	{
 		nextNode = currentNode->next;
@@ -290,6 +527,11 @@ void ref_disposeAll()
 	referenceList.head = NULL;
 	referenceList.tail = NULL;
 	referenceList.size = 0;
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void var_dispose(Variable* var)
@@ -298,29 +540,72 @@ void var_dispose(Variable* var)
 	//the reference list will handle that
 	//obj_dispose(var->value);
 
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("var_dispose(%p)\n", var);
+	#endif
+	
 	free(var);
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void ref_dispose(Reference* ref)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("ref_dispose(%p)\n", ref);
+	#endif
+	
 	obj_dispose(ref->value);
 
 	free(ref);
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void obj_dispose(Object* obj)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("obj_dispose(%p)\n", obj);
+	#endif
+	
 	if(obj->childList != NULL)
 		free(obj->childList);
 
 	free(obj);
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void freeReferences()
 {
 	Reference* currentNode;
 
-	if(freeList.size < MAXFREELIST) return;
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("freeReferences()\n");
+	#endif
+	
+	if(freeList.size < MAXFREELIST)
+	{
+		#ifdef TRACE
+		print_tabs(tabCount); printf("return (premature)\n");
+		tabCount--;
+		#endif
+		
+		return;
+	}
 
 	while(freeList.head != NULL)
 	{
@@ -335,26 +620,58 @@ void freeReferences()
 	}
 
 	freeList.size = 0;
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 IntElement* New_Integer(int x)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("New_Integer(%d)\n", x);
+	#endif
+	
 	Object* obj = new_object(0,NULL);
 	IntElement* ptr = gc_malloc(sizeof(IntElement), obj);
 	ptr->value = x;
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return %p\n", ptr);
+	tabCount--;
+	#endif
+	
 	return ptr;
 }
 
 BoolElement* New_Boolean(bool x)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("New_Boolean(%d)\n", x);
+	#endif
+	
 	Object* obj = new_object(0, NULL);
 	BoolElement* ptr = gc_malloc(sizeof(BoolElement), obj);
 	ptr->value = x;
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return %p\n", ptr);
+	tabCount--;
+	#endif
+	
 	return ptr;
 }
 
 Array* New_Array(int n)
 {
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("New_Array(%d)\n", n);
+	#endif
+	
 	Object* obj;
 	Array* ptr;
 	void** childList = allocate_mem(sizeof(void*) * n);
@@ -370,6 +687,11 @@ Array* New_Array(int n)
 		ptr->address[i] = NULL;
 		childList[i] = &(ptr->address[i]);
 	}
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return %p\n", ptr);
+	tabCount--;
+	#endif
 	
 	return ptr;
 }
@@ -396,16 +718,6 @@ void print_variable(int tabNum, Variable* var)
 	print_tabs(tabNum); printf("var = %p\n", var);
 	print_tabs(tabNum); printf("addr = %p\n", var->address);
 	print_object(tabNum+1, var_getObject(var));
-}
-
-void print_tabs(int tabNum)
-{
-	int i;
-
-	for(i = 0; i < tabNum; i++)
-	{
-		printf("\t");
-	}
 }
 
 void print_array(int size, void** array)
@@ -478,6 +790,16 @@ void print_freeList()
 	#endif
 }
 
+void print_tabs(int tabNum)
+{
+	int i;
+
+	for(i = 0; i < tabNum; i++)
+	{
+		printf("\t");
+	}
+}
+
 void print_gc()
 {
 	#ifdef DIAGNOSTIC
@@ -500,6 +822,11 @@ void init_struct(void** childList, int childNum, ...)
 	va_list args;
 	va_start(args, childNum);
 
+	#ifdef TRACE
+	tabCount++;
+	print_tabs(tabCount); printf("init_struct(%p, %d, ...)\n", childList, childNum);
+	#endif
+	
 	argNum = childNum;
 
 	while(childNum--)
@@ -509,6 +836,11 @@ void init_struct(void** childList, int childNum, ...)
 		childList[argNum - childNum - 1] = tempArg;
 	}
 	va_end(args);
+	
+	#ifdef TRACE
+	print_tabs(tabCount); printf("return\n");
+	tabCount--;
+	#endif
 }
 
 void print_diagnostics()
