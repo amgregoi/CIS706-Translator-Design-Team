@@ -335,7 +335,6 @@ Array* New_Array(int n)
 void print_object(int tabNum, Object* obj)
 {
 	print_tabs(tabNum); printf("obj = %p\n", obj);
-	if(obj == NULL) return;
 	print_tabs(tabNum); printf("mark = %d\n", obj->mark);
 	print_tabs(tabNum); printf("childNum = %d\n", obj->childNum);
 	print_tabs(tabNum); printf("childList = ");

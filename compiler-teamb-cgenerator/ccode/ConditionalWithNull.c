@@ -4,14 +4,23 @@
 
 typedef struct SCWN CWN;
 
-struct SCWN{
-};
+NEW_STRUCT (SCWN, );
 
+ NEW_SIMPLECONST(CWN);
 int main(){
-    CWN* o;
-    var_push(&o);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 1;
+   CWN* o = New_CWN();var_push(&o);
    o=New_CWN();
    o=true ? NULL : o;
 
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }

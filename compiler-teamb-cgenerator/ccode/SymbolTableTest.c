@@ -5,28 +5,28 @@
 typedef struct SA A;
 typedef struct SB B;
 
-struct SA{
-    int x;
-    var_push(&x);
+NEW_STRUCT (SA, int x;);
 
-};
+ NEW_SIMPLECONST(A);
+NEW_STRUCT (SB, int x;);
 
-struct SB{
-    int x;
-    var_push(&x);
-
-};
-
+ NEW_SIMPLECONST(B);
 int main(){
-    A* a;
-    var_push(&a);
-    B* b;
-    var_push(&b);
-    int z;
-    var_push(&z);
-   a=New_A();
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 2;
+   A* a = New_A();var_push(&a);
+   B* b = New_B();var_push(&b);
+   int z;a=New_A();
    b=New_B();
    z=(a->x + b->x);
 
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }

@@ -4,12 +4,23 @@
 
 
 int main(){
-    int a;
-    var_push(&a);
-   a=0;
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   int a;a=0;
 
    if(true){
-   }assert((a == 0));
+      gc_mark();
+      gc_sweep();
+   }print_gc();gc_collect();
+   assert((a == 0));
 
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }

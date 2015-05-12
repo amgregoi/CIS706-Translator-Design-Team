@@ -5,9 +5,12 @@
 int subtract(int i, int j);
 
 int main(){
-    int x;
-    var_push(&x);
-   assert(((2 - 3) == -(1)));
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   int x;assert(((2 - 3) == -(1)));
    assert(((2 - -(3)) == 5));
    assert(((-(2) - 3) == -(5)));
    assert(((-(2) - -(3)) == 1));
@@ -19,11 +22,28 @@ int main(){
    if(((2 - 3) < (5 - (2 + 3)))){
       x=5;
 
-   }x=2;
+      gc_mark();
+      gc_sweep();
+   }print_gc();gc_collect();
+   x=2;
 
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }
 
 int subtract(int i, int j){
-   return (i - j);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (i - j);
 }

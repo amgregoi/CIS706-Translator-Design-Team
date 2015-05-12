@@ -4,16 +4,28 @@
 
 
 int main(){
-   Array* B;
-    int i;
-    var_push(&i);
-   B=New_Array(0); ARRAYSET(B, 0) = true;
-   ARRAYSET(B, 1) = false;
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 1;
+    Array* B = NULL;
+   ;var_push(&B);
+   int i;B=New_Array(0); ARRAYGET(B, 0) = New_Boolean(true);
+   ARRAYGET(B, 1) = New_Boolean(false);
    ;
    i=1;
 
    do{
-   }while(B[i]);
+      gc_mark();
+      gc_sweep();}while(((BoolElement*)ARRAYGET(B, i))->value);
 
+      print_gc();gc_collect();
+      
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }

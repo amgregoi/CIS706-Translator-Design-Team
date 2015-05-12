@@ -5,18 +5,36 @@
 typedef struct SObject64 Object64;
 Object64* returnObject(Object64* o);
 
-struct SObject64{
-};
+NEW_STRUCT (SObject64, );
 
+ NEW_SIMPLECONST(Object64);
 int main(){
-    Object64* o;
-    var_push(&o);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 1;
+   Object64* o = New_Object64();var_push(&o);
    o=New_Object64();
    assert((o == returnObject(o)));
 
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }
 
 Object64* returnObject(Object64* o){
-   return o;
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return o;
 }

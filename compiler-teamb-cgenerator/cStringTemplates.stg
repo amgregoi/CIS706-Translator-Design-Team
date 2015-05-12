@@ -1,8 +1,19 @@
 group cStringTemplates;
 
-fielddeclaration(type, name, arr)::= <<
+fielddeclaration(type, name, arr, ptr)::= <<
+%if(arr)% Array* %name%%else%%type% %name%%endif%%if(arr)% = NULL;%\n%%endif%%if(ptr)% = NULL;%\n%%else%;%endif%
+>>
 
-%if(arr)%Array* %name%;%\n%%else% %type% %name%;%\n% var_push(&%name%);%\n%%endif%
+varpush(name) ::= <<
+var_push(&%name%);%\n%
+>>
+
+varpop() ::= <<
+for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   
+   
 >>
 
 parameter(type, name) ::= <<
@@ -13,15 +24,32 @@ assignment(name, val)::= <<
 %name%=%val%
 >>
 
-methoddeclaration(type,mname,args,name,body) ::= <<
+methoddeclaration(type,mname,args,name,body, numpush) ::= <<
 %type% %mname%(%args;separator=", "%){
+   int numOfPush;
+   int length;
+   int indexX;
+   
+   numOfPush = %numpush%;
    %body%
 }%\n%
 >>
 
-mainmethoddeclaration(type,mname,args,name,body) ::= <<
+
+
+mainmethoddeclaration(type,mname,args,name,body, numpush) ::= <<
 %type% %mname%(%args;separator=", "%){
+   int numOfPush;
+   int length;
+   int indexX;
+   
+   numOfPush = %numpush%;
    %body%
+   
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }%\n%
 >>
@@ -30,16 +58,22 @@ mainmethoddeclaration(type,mname,args,name,body) ::= <<
 ifstatement(exp, thenbody, elsebody)::= <<
 if(%exp%){
    %thenbody%
+   gc_mark();
+   gc_sweep();
 }%if(elsebody)%else{
    %elsebody%
+   gc_mark();
+   gc_sweep();
 }%endif%
+print_gc();gc_collect();
+
 >>
 
 booleanliteral(bool)::= <<
 %bool%
 >>
 
-typedeclaration(tname, body) ::= <<
+typedeclaration2(tname, body) ::= <<
 struct S%tname%{
    %body%
 };%\n%
@@ -55,7 +89,12 @@ infixexpression(left, op, right) ::= <<
 
 forstatement(decl, exp, incdec, body) ::= <<
 for(%decl;separator=", "%; %exp%; %incdec;separator=", "%){
-   %body%}%\n%
+   %body%
+   gc_mark();
+   gc_sweep();
+   }%\n%
+   print_gc();gc_collect();
+   
 >>
 
 postfix(name, type) ::= <<
@@ -100,25 +139,45 @@ conditionalexpression(exp, then, elsee) ::= <<
 
 whilestatement(exp, body) ::= <<
 while(%exp%){
-   %body%}%\n%
+   %body%
+   gc_mark();
+   gc_sweep();
+   }%\n%
+   print_gc();gc_collect();
+   
 >>
 
 dostatement(body, exp) ::= <<
 do{
-   %body%}while(%exp%);%\n%
+   %body%
+   gc_mark();
+   gc_sweep();}while(%exp%);%\n%
+   print_gc();gc_collect();
+   
 >>
 
 arrayaccess2(exp, index) ::= <<
 %exp%[%index%]
 >>
 
-arrayaccess(exp, index) ::= <<
-
+arrayaccess(exp, index, type, type2) ::= <<
+%if(type2)%((%type2%)%endif%%if(type)%((%type%)%endif%ARRAYGET(%exp%, %index%)%if(type)%)->value%endif%%if(type2)%)%endif%
 >>
 
 structprototype(tname) ::= <<
 typedef struct S%tname% %tname%;
 >>
+
+typedeclaration(tname, body, numref, ptrs) ::= <<
+NEW_STRUCT (S%tname%, %body%);%\n%
+%if(numref)%NEW_CONST(%tname%, %numref%, ptr, %ptrs;separator=", "%);
+%else% NEW_SIMPLECONST(%tname%);%endif%
+>>
+
+buildptr(name) ::= <<
+&(ptr->%name%)
+>>
+
 
 methodprototype(type,mname,args) ::= <<
 %type% %mname%(%args;separator=", "%);
@@ -130,4 +189,16 @@ expressionstatement(exp) ::= <<
 
 assert(exp) ::= <<
 assert(%exp%)
+>>
+
+forloopinitarray(name, val, init) ::= <<
+length = %name%->elemNum;
+for(indexX=0; indexX<length; indexX++)
+{
+	ARRAYGET(%name%, indexX) = %init%(%val%);
+	gc_mark();
+	gc_sweep();
+}
+print_gc();gc_collect();
+
 >>

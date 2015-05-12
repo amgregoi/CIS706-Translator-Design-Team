@@ -5,10 +5,15 @@
 typedef struct SNEN NEN;
 NEN* returnNull();
 
-struct SNEN{
-};
+NEW_STRUCT (SNEN, );
 
+ NEW_SIMPLECONST(NEN);
 int main(){
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
    assert((NULL == returnNull()));
    assert((returnNull() == NULL));
    assert((NULL == NULL));
@@ -17,9 +22,23 @@ int main(){
    assert(!((NULL != NULL)));
    assert((NULL == returnNull()));
 
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }
 
 NEN* returnNull(){
-   return NULL;
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return NULL;
 }

@@ -4,18 +4,36 @@
 
 
 int main(){
-    int i;
-    var_push(&i);
-   Array* a;
-   Array* b;
-   i=0;
-   a=New_Array(0); ARRAYSET(a, 0) = 1;
-   ARRAYSET(a, 1) = 2;
-   ARRAYSET(a, 2) = 3;
-   ;
-   b=New_Array(3); ;
-   b[i]=a[a[i]];
-   b[(a[i] * i)]=a[b[a[i]]];
+   int numOfPush;
+   int length;
+   int indexX;
 
+   numOfPush = 2;
+   int i; Array* a = NULL;
+   ;var_push(&a);
+    Array* b = NULL;
+   ;var_push(&b);
+   i=0;
+   a=New_Array(0); ARRAYGET(a, 0) = New_Integer(1);
+   ARRAYGET(a, 1) = New_Integer(2);
+   ARRAYGET(a, 2) = New_Integer(3);
+   ;
+   b=New_Array(3); length = b->elemNum;
+   for(indexX=0; indexX<length; indexX++)
+   {
+   	ARRAYGET(b, indexX) = New_Integer(0);
+   	gc_mark();
+   	gc_sweep();
+   }
+   print_gc();gc_collect();
+   ;
+   ARRAYGET(b, i)=ARRAYGET(a, ((IntElement*)ARRAYGET(a, i))->value);
+   ARRAYGET(b, (((IntElement*)ARRAYGET(a, i))->value * i))=ARRAYGET(a, ((IntElement*)ARRAYGET(b, ((IntElement*)ARRAYGET(a, i))->value))->value);
+
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }

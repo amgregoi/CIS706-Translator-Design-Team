@@ -4,12 +4,18 @@
 
 
 int main(){
-    int i;
-    var_push(&i);
-    bool b;
-    var_push(&b);
-   i=0;
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   int i;bool b;i=0;
    b=true;
 
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }

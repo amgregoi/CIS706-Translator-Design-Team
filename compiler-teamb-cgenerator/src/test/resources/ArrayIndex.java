@@ -9,9 +9,9 @@ public class ArrayIndex {
 		i = 0;
 		a = new int[] {1, 2, 3};
 		b = new int[3];
-		
-        b[i] = a[a[i]];
-		b[a[i]*i] = a[b[a[i]]];
+		b[i] = a[i];
+		b[2] = 5;
+
 		
     }
 }
