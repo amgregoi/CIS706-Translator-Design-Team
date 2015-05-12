@@ -1,12 +1,16 @@
-#include <stdlib.h>
+#include "../../gc.h"
 #include <assert.h>
 #include <stdbool.h>
 
 
 int main(){
-   int i;
-   int j;
-   int* a;
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 1;
+   int i;int j; Array* a = NULL;
+   ;var_push(&a);
    i=2;
    i=2;
    j=i;
@@ -16,7 +20,20 @@ int main(){
    assert((i == 4));
    i=((i / 2) - 0);
    assert((i == 2));
-   a=malloc(sizeof(int)*4);
+   a=New_Array(4); length = a->elemNum;
+   for(indexX=0; indexX<length; indexX++)
+   {
+   	ARRAYGET(a, indexX) = New_Integer(0);
+   	gc_mark();
+   	gc_sweep();
+   }
+   print_gc();gc_collect();
+   ;
 
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }

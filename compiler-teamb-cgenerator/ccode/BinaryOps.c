@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include "../../gc.h"
 #include <assert.h>
 #include <stdbool.h>
 
@@ -20,6 +20,11 @@ int shiftRight(int i, int j);
 int unsignedShiftRight(int i, int j);
 
 int main(){
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
    assert((add(2, 3) == 5));
    assert((add(2, -(3)) == -(1)));
    assert((add(-(2), 3) == 1));
@@ -83,69 +88,218 @@ int main(){
    assert((unsignedShiftRight(2, 1) == 1));
    assert((unsignedShiftRight(-(2), 1) == 2147483647));
 
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }
 
 int add(int a, int b){
-   return (a + b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a + b);
 }
 
 int subtract(int a, int b){
-   return (a - b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a - b);
 }
 
 int multiply(int a, int b){
-   return (a * b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a * b);
 }
 
 int divide(int a, int b){
-   return (a / b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a / b);
 }
 
 int mod(int a, int b){
-   return (a % b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a % b);
 }
 
 bool greaterThan(int a, int b){
-   return (a > b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a > b);
 }
 
 bool greaterThanOrEqual(int a, int b){
-   return (a >= b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a >= b);
 }
 
 bool equal(int a, int b){
-   return (a == b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a == b);
 }
 
 bool lessThan(int a, int b){
-   return (a < b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a < b);
 }
 
 bool lessThanOrEqual(int a, int b){
-   return (a <= b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a <= b);
 }
 
 bool notEqual(int a, int b){
-   return (a != b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a != b);
 }
 
 bool boolAnd(bool a, bool b){
-   return (a && b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a && b);
 }
 
 bool boolOr(bool a, bool b){
-   return (a || b);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (a || b);
 }
 
 int shiftLeft(int i, int j){
-   return (i << j);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (i << j);
 }
 
 int shiftRight(int i, int j){
-   return (i >> j);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return (i >> j);
 }
 
 int unsignedShiftRight(int i, int j){
-   return ((unsigned)i >> j);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return ((unsigned)i >> j);
 }

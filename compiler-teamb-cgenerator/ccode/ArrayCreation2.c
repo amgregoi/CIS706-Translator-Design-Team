@@ -1,29 +1,61 @@
-#include <stdlib.h>
+#include "../../gc.h"
 #include <assert.h>
 #include <stdbool.h>
 
 
 int main(){
-   int* a;
-   int b;
-   int i;
-   a=malloc(sizeof(int)*5);
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 1;
+    Array* a = NULL;
+   ;var_push(&a);
+   int b;int i;a=New_Array(5); length = a->elemNum;
+   for(indexX=0; indexX<length; indexX++)
+   {
+   	ARRAYGET(a, indexX) = New_Integer(0);
+   	gc_mark();
+   	gc_sweep();
+   }
+   print_gc();gc_collect();
+   ;
    b=0;
 
    for(i=0; (i < 5); i++){
-      a[i]=i;
-      b=(b + a[i]);
-   }
-   assert((b == 10));
+      ARRAYGET(a, i)=New_Integer(i);
+      b=(b + ((IntElement*)ARRAYGET(a, i))->value);
+
+      gc_mark();
+      gc_sweep();
+      }
+
+      print_gc();gc_collect();
+      assert((b == 10));
 
    for(i=0; (i < 5); i++){
-      a[i]++;
-   }
-   i=0;
+      ((IntElement*)ARRAYGET(a, i))->value++;
+
+      gc_mark();
+      gc_sweep();
+      }
+
+      print_gc();gc_collect();
+      i=0;
 
    for(i=0; (i < 5); i++){
-      assert((a[i] == (i + 1)));
-   }
+      assert((((IntElement*)ARRAYGET(a, i))->value == (i + 1)));
 
+      gc_mark();
+      gc_sweep();
+      }
+
+      print_gc();gc_collect();
+      
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }

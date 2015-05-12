@@ -1,4 +1,9 @@
 class NewIDFoo {
+	public NewIDFoo x;
+	public NewIDFoo x2;
+	public NewIDFoo x3;
+	public int x4;
+	public boolean y;
 }
 
 public class NewID {

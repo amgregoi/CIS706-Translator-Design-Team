@@ -14,6 +14,7 @@ import org.eclipse.jdt.core.dom.ClassInstanceCreation;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ConditionalExpression;
 import org.eclipse.jdt.core.dom.DoStatement;
+import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.ExpressionStatement;
 import org.eclipse.jdt.core.dom.FieldAccess;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
@@ -41,6 +42,8 @@ import sjc.annotation.NonNullElements;
 import sjc.annotation.ReadOnlyElements;
 import sjc.codegen.ByteCodeGenerator;
 import sjc.symboltable.extended.ExtendedSymbolTable;
+import sjc.type.BooleanType;
+import sjc.type.IntType;
 import sjc.type.Type;
 import sjc.type.checker.extended.ExtendedTypeTable;
 import sjc.util.Pair;
@@ -85,8 +88,9 @@ public class CGenerator {
 			this.typeMap = tt.typeMap;
 			stg = new STGroupFile("cStringTemplates.stg", '%', '%');
 
-			includes = "#include <stdlib.h>\n#include <assert.h>\n#include <stdbool.h>";
-			//includes = "#include \"gc.h\"\n#include <assert.h>\n#include <stdbool.h>";
+			// includes =
+			// "#include <stdlib.h>\n#include <assert.h>\n#include <stdbool.h>";
+			includes = "#include \"../../gc.h\"\n#include <assert.h>\n#include <stdbool.h>";
 
 		}
 
@@ -125,12 +129,12 @@ public class CGenerator {
 
 		// TODO ################ HELPER ################
 
-		/*similar to set used in typeChecker */
+		/* similar to set used in typeChecker */
 		public void setCode(String c) {
 			this.ctemp += c;
 		}
 
-		/*similar to get used in typeChecker */
+		/* similar to get used in typeChecker */
 		public String getCode() {
 			String c = this.ctemp;
 			this.ctemp = "";
@@ -189,7 +193,7 @@ public class CGenerator {
 				type = type + "*";
 			}
 			if (type.contains("[]")) {
-				type = type.replace("[]", "*");
+				type = "Array*";
 			}
 
 			return type;
@@ -200,33 +204,51 @@ public class CGenerator {
 		@Override
 		public boolean visit(final TypeDeclaration node) {
 			final ST td = stg.getInstanceOf("typedeclaration");
-
+			int numberOfRefs = 0;
 			// Makes sure we don't create a struct for the class containing main
 			if (!hasPublicModifier(node.modifiers())) {
 				final String name = node.getName().getIdentifier();
 				td.add("tname", name);
 				for (final Object o : node.getFields()) {
 					((ASTNode) o).accept(this);
-					final String body = getCode();
+					final String body = getCode().replace("= NULL", "");
 					td.add("body", body);
+				}
+
+				ST sb;
+
+				for (final Object o : node.getFields()) {
+					sb = stg.getInstanceOf("buildptr");
+					FieldDeclaration e = (FieldDeclaration) o;
+					String t = updateTypeBoolPrimArr(e.getType().toString());
+
+					String refname = e.fragments().get(0).toString();
+					if (!primitiveType(t)) {
+						sb.add("name", refname);
+						td.add("ptrs", sb.render());
+						numberOfRefs++;
+					}
+
+				}
+				if (numberOfRefs > 0) {
+					td.add("numref", Integer.toString(numberOfRefs));
 				}
 				final String c = td.render();
 				addStruct("\n" + c);
-				
+
 				// Prototype struct
 				final ST sp = stg.getInstanceOf("structprototype");
+
 				sp.add("tname", name);
 				final String structProto = sp.render();
 				addStructProto(structProto);
 			} else {
-				
 				for (final Object o : node.getFields()) {
 					((ASTNode) o).accept(this);
 					final String fd = getCode();
 					addCode("\n" + fd);
 				}
-				final String c = td.render();
-				
+
 				for (final Object o : node.getMethods()) {
 					((ASTNode) o).accept(this);
 					String method = getCode();
@@ -239,9 +261,9 @@ public class CGenerator {
 		@Override
 		public boolean visit(final MethodDeclaration node) {
 			final ST md; // method dec
-			final ST mp; // method proto	
+			final ST mp; // method proto
 			final String methodName = node.getName().getIdentifier();
-			
+			int numpush = 0;
 			if (methodName.equals("main")) {
 				md = stg.getInstanceOf("mainmethoddeclaration");
 				md.add("type", "int");
@@ -280,27 +302,71 @@ public class CGenerator {
 			}
 
 			// body
+			boolean b = false;
+			boolean callCollect = false;
 			for (final Object o : node.getBody().statements()) {
 				if (!(o instanceof VariableDeclarationStatement)) {
 					((ASTNode) o).accept(this);
+					
+					if(o instanceof ReturnStatement)
+					{
+						ST vp = stg.getInstanceOf("varpop");
+						md.add("body", vp.render());
+						b = true;
+					}
+					if(callCollect)
+					{
+						md.add("body", "\n gc_collect()");
+					}
+					if(o instanceof MethodInvocation)
+					{
+						callCollect = true;
+					}
+					
 					final String body = getCode();
 					md.add("body", body);
 				} else {
+					
 					// variable declarations
 					final ST fd = stg.getInstanceOf("fielddeclaration");
 					final VariableDeclarationStatement vds = (VariableDeclarationStatement) o;
 					final VariableDeclarationFragment vdf = (VariableDeclarationFragment) vds
 							.fragments().get(0);
 					final String localName = vdf.getName().getIdentifier();
+
 					final String type = updateTypeBoolPrimArr(this.typeMap
 							.get(vds).name);
 
-					fd.add("name", localName);
-					fd.add("type", type);
+					
+					
+					if(!type.equals("Array*") && !primitiveType(type)){
+						fd.add("name", localName + " = New_" + type.replace("*", "")+"()");
+						fd.add("type", type);
+					}else
+					{
+						fd.add("name", localName);
+						fd.add("type", type);
+					}
+					if (this.typeMap.get(vds).name.contains("[]"))
+						fd.add("arr", "true");
 
 					final String body = fd.render();
 					md.add("body", body);
+					if(!primitiveType(type))
+					{
+						numpush++;
+						final ST vp = stg.getInstanceOf("varpush");
+						vp.add("name", localName);
+						md.add("body", vp.render());
+					}
+					
 				}
+			}
+			md.add("numpush", numpush);
+			if(!b && !methodName.equals("main"))
+			{
+				ST vp = stg.getInstanceOf("varpop");
+				md.add("body", vp.render());
 			}
 			final String c = md.render();
 			setCode(c);
@@ -312,8 +378,21 @@ public class CGenerator {
 			final ST fd = stg.getInstanceOf("fielddeclaration");
 			((ASTNode) node.fragments().get(0)).accept(this);
 			final String name = getCode();
+			
+			
+			
 			final String type = updateTypeBoolPrimArr(this.typeMap.get(node).name);
 
+			if(this.typeMap.get(node).name.contains("[]"))
+			{
+				fd.add("arr", "true");
+			}
+			else if(!primitiveType(type))
+			{
+				fd.add("ptr", "true");
+			}
+			
+			
 			fd.add("type", type);
 			fd.add("name", name);
 
@@ -330,20 +409,26 @@ public class CGenerator {
 			final String name = getCode();
 			((ASTNode) node.getRightHandSide()).accept(this);
 			final String val = getCode();
-			
+
 			a.add("name", name);
-			a.add("val", val);
-			final String dp;
-			if (!((dp = getDoublePtr()).equals(""))) {
-				final String c = a.render();
-				final ST a2 = stg.getInstanceOf("assignment");
 
-				a2.add("name", name);
-				a2.add("val", dp);
+			if (!(node.getRightHandSide() instanceof ArrayAccess)
+					&& (node.getLeftHandSide() instanceof ArrayAccess)
+					&& ((node.getRightHandSide() instanceof NumberLiteral)
+							|| (node.getRightHandSide() instanceof BooleanLiteral) || (this.typeMap
+								.get(node.getRightHandSide()) instanceof IntType))
+					&& !(node.getRightHandSide() instanceof InfixExpression)) {
+				if (this.typeMap.get(node.getRightHandSide()) instanceof IntType) {
+					a.add("val", "New_Integer(" + val + ")");
 
-				String c2 = a2.render();
-				setCode(c + ";\n" + c2);
-				return false;
+				} else if (this.typeMap.get(node.getRightHandSide()) instanceof BooleanType) {
+					a.add("val", "New_Boolean(" + val + ")");
+				} else {
+					a.add("val", val);
+				}
+
+			} else {
+				a.add("val", val);
 			}
 
 			String c = a.render();
@@ -568,11 +653,12 @@ public class CGenerator {
 		@Override
 		public boolean visit(final FieldAccess node) {
 			final ST fa = stg.getInstanceOf("fieldaccess");
+
 			node.getExpression().accept(this);
 			final String exp = getCode();
 			node.getName().accept(this);
 			final String id = getCode();
-			
+
 			fa.add("exp", exp);
 			fa.add("id", id);
 
@@ -583,13 +669,13 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final ArrayCreation node) {
-			final ST ac = stg.getInstanceOf("objectcreation");
-			final ST ac2 = stg.getInstanceOf("arrayinit");
-
+			final ST ac = stg.getInstanceOf("objectcreationaray");
+			ST ac2;
+			final ST aci = stg.getInstanceOf("arrayinit2");
+			String arrInits = "";
 			final String type = updateTypeBoolPrimArr(this.typeMap.get(node).name
 					.replace("[]", ""));
 			ac.add("type", type);
-
 			if (node.dimensions() != null) {
 				for (int i = 0; i < node.dimensions().size(); i++) {
 					((ASTNode) node.dimensions().get(0)).accept(this);
@@ -601,26 +687,67 @@ public class CGenerator {
 			if (node.getInitializer() != null) {
 				final String size = Integer.toString((node.getInitializer()
 						.expressions().size()));
-				ac2.add("size", size);
-				ac2.add("type", type);
+				// ac2.add("size", size);
+				// ac2.add("type", type);
 
+				Assignment a = (Assignment) node.getParent();
+				a.getLeftHandSide().accept(this);
+				String name = getCode();
+
+				int i = 0;
 				for (final Object o : node.getInitializer().expressions()) {
+					ac2 = stg.getInstanceOf("arrayinit");
+					ac2.add("name", name);
 					((ASTNode) o).accept(this);
-					final String arg = getCode();
+					String arg = getCode();
+					if (type.equals("int")) {
+						arg = "New_Integer(" + arg + ")";
+					} else if (type.equals("bool")) {
+						arg = "New_Boolean(" + arg + ")";
+					}
+
 					ac2.add("args", arg);
+					ac2.add("index", Integer.toString(i));
+					final String c = ac2.render();
+					aci.add("exp", c);
+					i++;
 				}
 
-				if (!(primitiveType(type))) {
-					setDoublePtr(ac2.render());
-				} else {
-					final String c = ac2.render();
-					setCode(c);
-					return false;
+				arrInits = aci.render();
+
+				/*
+				 * if (!(primitiveType(type))) {
+				 * setDoublePtr(ac2.render());
+				 * } else {
+				 * final String c = ac2.render();
+				 * setCode(c);
+				 * return false;
+				 * }
+				 */
+			} else {
+				if (type.equals("int") || type.equals("bool")) {
+					Assignment a = (Assignment) node.getParent();
+					a.getLeftHandSide().accept(this);
+					String name = getCode();
+
+					ST flai = stg.getInstanceOf("forloopinitarray");
+					flai.add("name", name);
+					if (type.equals("int")) {
+						flai.add("init", "New_Integer");
+						flai.add("val", "0");
+					} else if (type.equals("bool")) {
+						flai.add("init", "New_Boolean");
+						flai.add("val", "false");
+					}
+
+					arrInits = flai.render();
+
 				}
 			}
 
 			final String c = ac.render();
-			setCode(c);
+
+			setCode(c + "; " + arrInits);
 			return false;
 		}
 
@@ -653,11 +780,21 @@ public class CGenerator {
 			// current string template will always add ';' to postfixexpression
 			// (i++;)
 			final String index = getCode().replace(";", "");
-
+			Type t = this.typeMap.get(node);
 			aa.add("exp", exp);
 			aa.add("index", index);
+			if (!(node.getParent() instanceof Assignment)) {
+				if (t instanceof IntType) {
+					aa.add("type", "IntElement*");
+				} else if (t instanceof BooleanType) {
+					aa.add("type", "BoolElement*");
+				} else {
+					aa.add("type2", t.toString() + "*");
+				}
+			}
 
 			final String c = aa.render();
+
 			setCode(c);
 			return false;
 		}

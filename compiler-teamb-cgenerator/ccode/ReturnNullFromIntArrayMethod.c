@@ -1,16 +1,36 @@
-#include <stdlib.h>
+#include "../../gc.h"
 #include <assert.h>
 #include <stdbool.h>
 
-int* returnIntArray();
+Array* returnIntArray();
 
 int main(){
-   int* i;
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 1;
+    Array* i = NULL;
+   ;var_push(&i);
    i=returnIntArray();
 
+
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+   	  var_pop();
+   }
+   gc_dispose();
    return 0;
 }
 
-int* returnIntArray(){
-   return NULL;
+Array* returnIntArray(){
+   int numOfPush;
+   int length;
+   int indexX;
+
+   numOfPush = 0;
+   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+      	  var_pop();
+      }
+
+      return NULL;
 }
