@@ -11,7 +11,8 @@ int main(){
 }
 
 void* missingInit(){
-   int i;
+    int i;
+    var_push(&i);
    i=0;
 
    for(; (i < 10); i++){

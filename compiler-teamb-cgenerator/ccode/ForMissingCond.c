@@ -9,7 +9,8 @@ int main(){
 }
 
 void* missingCond(){
-   int i;
+    int i;
+    var_push(&i);
 
    for(i=0; ; i++){
    }

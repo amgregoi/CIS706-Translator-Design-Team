@@ -8,8 +8,9 @@ struct SCWN{
 };
 
 int main(){
-   CWN* o;
-   o=malloc(sizeof(CWN));
+    CWN* o;
+    var_push(&o);
+   o=New_CWN();
    o=true ? NULL : o;
 
    return 0;

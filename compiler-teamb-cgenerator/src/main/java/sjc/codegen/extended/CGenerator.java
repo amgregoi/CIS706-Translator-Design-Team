@@ -291,12 +291,17 @@ public class CGenerator {
 					final VariableDeclarationFragment vdf = (VariableDeclarationFragment) vds
 							.fragments().get(0);
 					final String localName = vdf.getName().getIdentifier();
+					
+					
+					
 					final String type = updateTypeBoolPrimArr(this.typeMap
 							.get(vds).name);
 
 					fd.add("name", localName);
 					fd.add("type", type);
-
+					if(this.typeMap.get(vds).name.contains("[]")) fd.add("arr", "true");
+					
+					
 					final String body = fd.render();
 					md.add("body", body);
 				}
@@ -583,13 +588,13 @@ public class CGenerator {
 
 		@Override
 		public boolean visit(final ArrayCreation node) {
-			final ST ac = stg.getInstanceOf("objectcreation");
-			final ST ac2 = stg.getInstanceOf("arrayinit");
-
+			final ST ac = stg.getInstanceOf("objectcreationaray");
+			ST ac2;
+			final ST aci = stg.getInstanceOf("arrayinit2");
+			String arrInits =  "";
 			final String type = updateTypeBoolPrimArr(this.typeMap.get(node).name
 					.replace("[]", ""));
 			ac.add("type", type);
-
 			if (node.dimensions() != null) {
 				for (int i = 0; i < node.dimensions().size(); i++) {
 					((ASTNode) node.dimensions().get(0)).accept(this);
@@ -597,30 +602,50 @@ public class CGenerator {
 					ac.add("size", size);
 				}
 			}
+			
 
 			if (node.getInitializer() != null) {
 				final String size = Integer.toString((node.getInitializer()
 						.expressions().size()));
-				ac2.add("size", size);
-				ac2.add("type", type);
+				//ac2.add("size", size);
+				//ac2.add("type", type);
 
+				Assignment a = (Assignment)node.getParent();
+				a.getLeftHandSide().accept(this);
+				String name = getCode();
+				
+				
+
+				int i = 0;
 				for (final Object o : node.getInitializer().expressions()) {
+					ac2 = stg.getInstanceOf("arrayinit");
+					ac2.add("name", name);
 					((ASTNode) o).accept(this);
 					final String arg = getCode();
 					ac2.add("args", arg);
+					ac2.add("index", Integer.toString(i));
+					final String c = ac2.render();
+					aci.add("exp", c);
+					i++;
 				}
-
+				
+				arrInits = aci.render();
+				
+				
+				
+				/*
 				if (!(primitiveType(type))) {
 					setDoublePtr(ac2.render());
 				} else {
 					final String c = ac2.render();
 					setCode(c);
 					return false;
-				}
+				}*/
 			}
 
 			final String c = ac.render();
-			setCode(c);
+			
+			setCode(c+"; " + arrInits);
 			return false;
 		}
 

@@ -5,7 +5,7 @@
 int* returnIntArray();
 
 int main(){
-   int* i;
+   Array* i;
    i=returnIntArray();
 
    return 0;

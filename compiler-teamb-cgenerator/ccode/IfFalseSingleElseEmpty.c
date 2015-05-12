@@ -4,7 +4,8 @@
 
 
 int main(){
-   int a;
+    int a;
+    var_push(&a);
    a=0;
 
    if(false){

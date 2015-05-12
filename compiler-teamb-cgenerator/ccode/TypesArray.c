@@ -4,8 +4,8 @@
 
 
 int main(){
-   int* i;
-   bool* b;
+   Array* i;
+   Array* b;
 
    return 0;
 }

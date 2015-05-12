@@ -4,9 +4,11 @@
 
 
 int main(){
-   int i;
-   int j;
-   int* a;
+    int i;
+    var_push(&i);
+    int j;
+    var_push(&j);
+   Array* a;
    i=2;
    i=2;
    j=i;
@@ -16,7 +18,7 @@ int main(){
    assert((i == 4));
    i=((i / 2) - 0);
    assert((i == 2));
-   a=malloc(sizeof(int)*4);
+   a=New_Array(4); ;
 
    return 0;
 }

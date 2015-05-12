@@ -9,7 +9,8 @@ int main(){
 }
 
 void* initOnly(){
-   int i;
+    int i;
+    var_push(&i);
 
    for(i=0; ; ){
    }

@@ -4,9 +4,12 @@
 
 
 int main(){
-   bool* B;
-   int i;
-   B=(bool[2]){true, false};
+   Array* B;
+    int i;
+    var_push(&i);
+   B=New_Array(0); ARRAYSET(B, 0) = true;
+   ARRAYSET(B, 1) = false;
+   ;
    i=1;
 
    do{

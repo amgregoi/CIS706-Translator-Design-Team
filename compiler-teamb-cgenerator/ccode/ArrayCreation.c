@@ -5,16 +5,22 @@
 typedef struct SAC AC;
 
 struct SAC{
-   int* temp;
-   int x;
+    int* temp;
+    var_push(&temp);
+    int x;
+    var_push(&x);
 
 };
 
 int main(){
-   AC** acs;
-   acs=malloc(sizeof(AC*));
-   acs=(AC*[2]){NULL, malloc(sizeof(AC))};
-   acs[1]->temp=(int[3]){1, 2, 3};
+   Array* acs;
+   acs=New_Array(0); ARRAYSET(acs, 0) = NULL;
+   ARRAYSET(acs, 1) = New_AC();
+   ;
+   acs[1]->temp=New_Array(0); ARRAYSET(acs[1]->temp, 0) = 1;
+   ARRAYSET(acs[1]->temp, 1) = 2;
+   ARRAYSET(acs[1]->temp, 2) = 3;
+   ;
    acs[1]->x=5;
 
    return 0;

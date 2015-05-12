@@ -30,7 +30,8 @@ void* emptyFor(){
 }
 
 void* initOnlyFor(){
-   int i;
+    int i;
+    var_push(&i);
 
    for(i=0; ; ){
    }
@@ -38,7 +39,8 @@ void* initOnlyFor(){
 }
 
 void* condOnlyFor(){
-   int i;
+    int i;
+    var_push(&i);
    i=0;
 
    for(; (i < 10); ){
@@ -47,7 +49,8 @@ void* condOnlyFor(){
 }
 
 void* incOrDecOnlyFor(){
-   int i;
+    int i;
+    var_push(&i);
    i=0;
 
    for(; ; i++){
@@ -56,7 +59,8 @@ void* incOrDecOnlyFor(){
 }
 
 void* missingIncOrDecFor(){
-   int i;
+    int i;
+    var_push(&i);
 
    for(i=0; (i < 10); ){
    }
@@ -64,7 +68,8 @@ void* missingIncOrDecFor(){
 }
 
 void* missingCondFor(){
-   int i;
+    int i;
+    var_push(&i);
 
    for(i=0; ; i++){
    }
@@ -72,7 +77,8 @@ void* missingCondFor(){
 }
 
 void* missingInitFor(){
-   int i;
+    int i;
+    var_push(&i);
    i=0;
 
    for(; (i < 10); i++){
@@ -82,7 +88,8 @@ void* missingInitFor(){
 }
 
 void* forFor(){
-   int i;
+    int i;
+    var_push(&i);
 
    for(i=0; (i < 10); i++){
    }
@@ -91,9 +98,12 @@ void* forFor(){
 }
 
 void* multipleInitOnlyFor(){
-   int i;
-   int j;
-   int k;
+    int i;
+    var_push(&i);
+    int j;
+    var_push(&j);
+    int k;
+    var_push(&k);
 
    for(i=0, j=0, k=0; ; ){
    }
@@ -101,9 +111,12 @@ void* multipleInitOnlyFor(){
 }
 
 void* multipleIncOrDecOnlyFor(){
-   int i;
-   int j;
-   int k;
+    int i;
+    var_push(&i);
+    int j;
+    var_push(&j);
+    int k;
+    var_push(&k);
    i=0;
    j=0;
    k=0;
@@ -114,9 +127,12 @@ void* multipleIncOrDecOnlyFor(){
 }
 
 void* multipleFor(){
-   int i;
-   int j;
-   int k;
+    int i;
+    var_push(&i);
+    int j;
+    var_push(&j);
+    int k;
+    var_push(&k);
 
    for(i=0, j=0, k=0; (i < 10); i++, j++, k++){
    }

@@ -4,8 +4,10 @@
 
 
 int main(){
-   int i;
-   bool b;
+    int i;
+    var_push(&i);
+    bool b;
+    var_push(&b);
 
    return 0;
 }

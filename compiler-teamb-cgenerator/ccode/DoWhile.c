@@ -4,7 +4,8 @@
 
 
 int main(){
-   int i;
+    int i;
+    var_push(&i);
    i=0;
 
    do{

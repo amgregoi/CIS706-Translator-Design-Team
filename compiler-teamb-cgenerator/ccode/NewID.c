@@ -8,13 +8,15 @@ struct SNewIDFoo{
 };
 
 int main(){
-   NewIDFoo* f;
-   NewIDFoo** g;
-   NewIDFoo** h;
-   f=malloc(sizeof(NewIDFoo));
-   g=malloc(sizeof(NewIDFoo*)*4);
-   h=malloc(sizeof(NewIDFoo*));
-   h=(NewIDFoo*[2]){f, g[0]};
+    NewIDFoo* f;
+    var_push(&f);
+   Array* g;
+   Array* h;
+   f=New_NewIDFoo();
+   g=New_Array(4); ;
+   h=New_Array(0); ARRAYSET(h, 0) = f;
+   ARRAYSET(h, 1) = g[0];
+   ;
 
    return 0;
 }

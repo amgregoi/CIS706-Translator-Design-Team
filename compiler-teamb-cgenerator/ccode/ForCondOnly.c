@@ -9,7 +9,8 @@ int main(){
 }
 
 void* condOnly(){
-   int i;
+    int i;
+    var_push(&i);
    i=0;
 
    for(; (i < 10); ){

@@ -11,8 +11,10 @@ int main(){
 }
 
 int factorial(int n){
-   int result;
-   int i;
+    int result;
+    var_push(&result);
+    int i;
+    var_push(&i);
    assert((n >= 1));
    result=1;
    i=2;

@@ -4,8 +4,11 @@
 
 
 int main(){
-   int* i_array;
-   i_array=(int[3]){1, 2, 3};
+   Array* i_array;
+   i_array=New_Array(0); ARRAYSET(i_array, 0) = 1;
+   ARRAYSET(i_array, 1) = 2;
+   ARRAYSET(i_array, 2) = 3;
+   ;
    i_array[0]=1;
 
    return 0;

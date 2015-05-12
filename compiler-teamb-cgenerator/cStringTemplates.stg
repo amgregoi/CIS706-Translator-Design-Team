@@ -1,7 +1,8 @@
 group cStringTemplates;
 
-fielddeclaration(type, name)::= <<
-%type% %name%;%\n%
+fielddeclaration(type, name, arr)::= <<
+
+%if(arr)%Array* %name%;%\n%%else% %type% %name%;%\n% var_push(&%name%);%\n%%endif%
 >>
 
 parameter(type, name) ::= <<
@@ -73,12 +74,24 @@ fieldaccess(exp, id) ::= <<
 %exp%->%id%
 >>
 
-objectcreation(type, size) ::= <<
+objectcreation2(type, size) ::= <<
 malloc(sizeof(%type%)%if(size)%*%size%%endif%)
 >>
 
-arrayinit(args, size, type) ::= <<
-(%type%[%size%]){%args;separator=", "%}
+objectcreation(type, size) ::= <<
+New_%type%()
+>>
+
+objectcreationaray(type, size) ::= <<
+New_Array(%if(size)%%size%%else%0%endif%)
+>>
+
+arrayinit(args, index, name) ::= <<
+ARRAYSET(%name%, %index%) = %args%;%\n%
+>>
+
+arrayinit2(exp) ::= <<
+%exp;separator=""%
 >>
 
 conditionalexpression(exp, then, elsee) ::= <<
@@ -95,8 +108,12 @@ do{
    %body%}while(%exp%);%\n%
 >>
 
-arrayaccess(exp, index) ::= <<
+arrayaccess2(exp, index) ::= <<
 %exp%[%index%]
+>>
+
+arrayaccess(exp, index) ::= <<
+
 >>
 
 structprototype(tname) ::= <<

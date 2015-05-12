@@ -8,8 +8,9 @@ struct SFoo{
 };
 
 int main(){
-   Foo* f;
-   Foo** g;
+    Foo* f;
+    var_push(&f);
+   Array* g;
 
    return 0;
 }

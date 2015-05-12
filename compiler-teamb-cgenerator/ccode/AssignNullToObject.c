@@ -8,7 +8,8 @@ struct SANTO{
 };
 
 int main(){
-   ANTO* o;
+    ANTO* o;
+    var_push(&o);
    o=NULL;
 
    return 0;

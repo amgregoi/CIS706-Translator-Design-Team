@@ -4,7 +4,8 @@
 
 
 int main(){
-   int i;
+    int i;
+    var_push(&i);
    i=-(1);
    i=(i > 0) ? 2 : 3;
    assert((i == 3));

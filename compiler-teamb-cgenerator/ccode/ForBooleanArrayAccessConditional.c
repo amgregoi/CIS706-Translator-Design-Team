@@ -4,10 +4,11 @@
 
 
 int main(){
-   bool* B;
-   bool b;
+   Array* B;
+    bool b;
+    var_push(&b);
    b=false;
-   B=malloc(sizeof(bool)*1);
+   B=New_Array(1); ;
    B[0]=false;
 
    for(; B[0]; ){

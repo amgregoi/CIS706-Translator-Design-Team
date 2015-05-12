@@ -4,14 +4,19 @@
 
 
 int main(){
-   int* i;
-   int* j;
-   bool* b;
-   bool* c;
-   i=malloc(sizeof(int)*4);
-   j=(int[3]){1, 2, 3};
-   b=malloc(sizeof(bool)*4);
-   c=(bool[2]){true, false};
+   Array* i;
+   Array* j;
+   Array* b;
+   Array* c;
+   i=New_Array(4); ;
+   j=New_Array(0); ARRAYSET(j, 0) = 1;
+   ARRAYSET(j, 1) = 2;
+   ARRAYSET(j, 2) = 3;
+   ;
+   b=New_Array(4); ;
+   c=New_Array(0); ARRAYSET(c, 0) = true;
+   ARRAYSET(c, 1) = false;
+   ;
 
    return 0;
 }

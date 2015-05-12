@@ -4,10 +4,12 @@
 
 
 int main(){
-   int* a;
-   int b;
-   int i;
-   a=malloc(sizeof(int)*5);
+   Array* a;
+    int b;
+    var_push(&b);
+    int i;
+    var_push(&i);
+   a=New_Array(5); ;
    b=0;
 
    for(i=0; (i < 5); i++){

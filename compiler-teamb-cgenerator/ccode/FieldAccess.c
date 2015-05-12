@@ -6,26 +6,32 @@ typedef struct SFieldAccessFoo FieldAccessFoo;
 typedef struct SFieldAccessBar FieldAccessBar;
 
 struct SFieldAccessFoo{
-   int i;
+    int i;
+    var_push(&i);
 
 };
 
 struct SFieldAccessBar{
-   int i;
-   FieldAccessFoo* f;
+    int i;
+    var_push(&i);
+    FieldAccessFoo* f;
+    var_push(&f);
 
 };
 
 int main(){
-   int i;
-   FieldAccessFoo* f;
-   FieldAccessBar* b;
-   f=malloc(sizeof(FieldAccessFoo));
+    int i;
+    var_push(&i);
+    FieldAccessFoo* f;
+    var_push(&f);
+    FieldAccessBar* b;
+    var_push(&b);
+   f=New_FieldAccessFoo();
    f->i=0;
    i=f->i;
    assert((f->i == 0));
    assert((i == 0));
-   b=malloc(sizeof(FieldAccessBar));
+   b=New_FieldAccessBar();
    b->i=1;
    i=b->i;
    assert((b->i == 1));

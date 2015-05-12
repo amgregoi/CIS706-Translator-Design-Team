@@ -62,7 +62,7 @@ public class CGeneratorTest {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			// System.out.println(result); //prints ccode to terminal
+			 System.out.println(result); //prints ccode to terminal
 			cstream.write(result.getBytes());
 			cstream.close();
 

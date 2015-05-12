@@ -4,9 +4,12 @@
 
 
 int main(){
-   int x;
-   int y;
-   bool b;
+    int x;
+    var_push(&x);
+    int y;
+    var_push(&y);
+    bool b;
+    var_push(&b);
    x=1;
    y=2;
    b=((x + y) > 2);

@@ -5,7 +5,8 @@
 int subtract(int i, int j);
 
 int main(){
-   int x;
+    int x;
+    var_push(&x);
    assert(((2 - 3) == -(1)));
    assert(((2 - -(3)) == 5));
    assert(((-(2) - 3) == -(5)));

@@ -11,7 +11,8 @@ int main(){
 }
 
 void* full(){
-   int i;
+    int i;
+    var_push(&i);
 
    for(i=0; (i < 10); i++){
    }

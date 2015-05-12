@@ -5,15 +5,18 @@
 typedef struct SFBMAC FBMAC;
 
 struct SFBMAC{
-   bool b;
+    bool b;
+    var_push(&b);
 
 };
 
 int main(){
-   FBMAC* o;
-   bool b;
+    FBMAC* o;
+    var_push(&o);
+    bool b;
+    var_push(&b);
    b=false;
-   o=malloc(sizeof(FBMAC));
+   o=New_FBMAC();
    o->b=false;
 
    for(; o->b; ){

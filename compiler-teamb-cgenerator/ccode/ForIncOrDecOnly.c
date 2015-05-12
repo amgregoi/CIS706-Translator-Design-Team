@@ -9,7 +9,8 @@ int main(){
 }
 
 void* incOrDecOnly(){
-   int i;
+    int i;
+    var_push(&i);
    i=0;
 
    for(; ; i++){

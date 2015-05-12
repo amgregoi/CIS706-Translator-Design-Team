@@ -9,8 +9,9 @@ struct SObject64{
 };
 
 int main(){
-   Object64* o;
-   o=malloc(sizeof(Object64));
+    Object64* o;
+    var_push(&o);
+   o=New_Object64();
    assert((o == returnObject(o)));
 
    return 0;

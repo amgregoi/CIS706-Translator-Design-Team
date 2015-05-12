@@ -11,8 +11,10 @@ int main(){
 }
 
 void* ae(int a, int b){
-   int x;
-   int y;
+    int x;
+    var_push(&x);
+    int y;
+    var_push(&y);
    x=(a + b);
    y=(a * b);
    while((y > (a + b))){
@@ -23,8 +25,10 @@ void* ae(int a, int b){
 }
 
 void* vbe(int a, int b){
-   int x;
-   int y;
+    int x;
+    var_push(&x);
+    int y;
+    var_push(&y);
 
    if((a > b)){
       x=(b - a);
@@ -38,9 +42,12 @@ void* vbe(int a, int b){
 }
 
 void* lv(){
-   int x;
-   int y;
-   int z;
+    int x;
+    var_push(&x);
+    int y;
+    var_push(&y);
+    int z;
+    var_push(&z);
    x=2;
    y=4;
    x=1;
