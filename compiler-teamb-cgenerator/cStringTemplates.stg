@@ -87,7 +87,7 @@ New_Array(%if(size)%%size%%else%0%endif%)
 >>
 
 arrayinit(args, index, name) ::= <<
-ARRAYSET(%name%, %index%) = %args%;%\n%
+ARRAYGET(%name%, %index%) = %args%;%\n%
 >>
 
 arrayinit2(exp) ::= <<
