@@ -7,11 +7,9 @@
 //as they are processed
 //#define DEBUG
 
-
 //Define DIAGNOSTIC to output diagnostic information about how
 //many objects and how much memory has been allocated/deallocated
-//#define DIAGNOSTIC
-
+#define DIAGNOSTIC
 
 //Define TRACE to output a stack trace for each method that gets called-
 //as well as its inputs and return value;
