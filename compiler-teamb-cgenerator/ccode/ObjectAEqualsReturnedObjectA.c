@@ -15,6 +15,7 @@ int main(){
 
    numOfPush = 1;
    Object64* o = New_Object64();var_push(&o);
+
    o=New_Object64();
    assert((o == returnObject(o)));
 

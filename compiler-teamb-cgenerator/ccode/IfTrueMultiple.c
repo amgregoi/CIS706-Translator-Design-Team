@@ -9,16 +9,18 @@ int main(){
    int indexX;
 
    numOfPush = 0;
-   int a;a=0;
+   int a;
+   a=0;
 
    if(true){
+
       a=1;
+
       a=2;
 
-      gc_mark();
-      gc_sweep();
-   }print_gc();gc_collect();
-   assert((a == 2));
+
+
+   }assert((a == 2));
 
 
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){

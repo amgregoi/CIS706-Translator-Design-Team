@@ -27,17 +27,21 @@ int factorial(int n){
 
    numOfPush = 0;
    int result;int i;assert((n >= 1));
+
    result=1;
+
    i=2;
    while((i <= n)){
+
       result=(result * i);
+
       i=(i + 1);
 
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }

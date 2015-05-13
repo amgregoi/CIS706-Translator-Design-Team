@@ -14,6 +14,7 @@ int main(){
 
    numOfPush = 1;
    ANTO* o = New_ANTO();var_push(&o);
+
    o=NULL;
 
 

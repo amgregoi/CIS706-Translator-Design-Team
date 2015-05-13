@@ -20,8 +20,11 @@ int main(){
 
    numOfPush = 1;
    Foo2* a = New_Foo2();var_push(&a);
+
    a=New_Foo2();
+
    a->b=New_Bar();
+
    a->b->x=5;
 
 

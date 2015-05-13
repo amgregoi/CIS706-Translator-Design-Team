@@ -58,14 +58,13 @@ mainmethoddeclaration(type,mname,args,name,body, numpush) ::= <<
 ifstatement(exp, thenbody, elsebody)::= <<
 if(%exp%){
    %thenbody%
-   gc_mark();
-   gc_sweep();
+     
+     
 }%if(elsebody)%else{
    %elsebody%
-   gc_mark();
-   gc_sweep();
+     
+     
 }%endif%
-print_gc();gc_collect();
 
 >>
 
@@ -90,10 +89,10 @@ infixexpression(left, op, right) ::= <<
 forstatement(decl, exp, incdec, body) ::= <<
 for(%decl;separator=", "%; %exp%; %incdec;separator=", "%){
    %body%
-   gc_mark();
-   gc_sweep();
+     
+     
    }%\n%
-   print_gc();gc_collect();
+   gc_collect();
    
 >>
 
@@ -140,19 +139,19 @@ conditionalexpression(exp, then, elsee) ::= <<
 whilestatement(exp, body) ::= <<
 while(%exp%){
    %body%
-   gc_mark();
-   gc_sweep();
+     
+     
    }%\n%
-   print_gc();gc_collect();
+   gc_collect();
    
 >>
 
 dostatement(body, exp) ::= <<
 do{
    %body%
-   gc_mark();
-   gc_sweep();}while(%exp%);%\n%
-   print_gc();gc_collect();
+     
+     }while(%exp%);%\n%
+   gc_collect();
    
 >>
 
@@ -196,9 +195,9 @@ length = %name%->elemNum;
 for(indexX=0; indexX<length; indexX++)
 {
 	ARRAYGET(%name%, indexX) = %init%(%val%);
-	gc_mark();
-	gc_sweep();
+	  
+	  
 }
-print_gc();gc_collect();
+gc_collect();
 
 >>

@@ -33,26 +33,31 @@ int main(){
    numOfPush = 2;
    LinkedList* ll = New_LinkedList();var_push(&ll);
    Data* d = New_Data();var_push(&d);
-   int i;ll=llNewLinkedList();
+   int i;
+   ll=llNewLinkedList();
 
-   for(i=0; (i < 10); i++){
+   for(
+   i=0; (i < 10); i++){
+
       d=New_Data();
+
       d->i=(i + 1);
       llAddLast(ll, d);
 
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       while(!(llIsEmpty(ll))){
+
       d=llRemoveFirst(ll);
 
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       
 
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
@@ -69,8 +74,11 @@ LinkedList* llNewLinkedList(){
 
    numOfPush = 1;
    LinkedList* result = New_LinkedList();var_push(&result);
+
    result=New_LinkedList();
+
    result->head=New_LinkedNode();
+
    result->last=result->head;
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
@@ -100,8 +108,11 @@ void* llAddLast(LinkedList* ll, Data* data){
 
    numOfPush = 0;
    assert(((ll != NULL) && (data != NULL)));
+
    ll->last->next=New_LinkedNode();
+
    ll->last=ll->last->next;
+
    ll->last->data=data;
    ll->size++;
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
@@ -118,9 +129,12 @@ Data* llRemoveFirst(LinkedList* ll){
 
    numOfPush = 1;
    Data* result = New_Data();var_push(&result);
-   int i;i=0;
+   int i;
+   i=0;
    assert((ll->size > 0));
+
    result=ll->head->next->data;
+
    ll->head=ll->head->next;
    ll->size--;
 
@@ -129,10 +143,10 @@ Data* llRemoveFirst(LinkedList* ll){
       i++;
       i--;
 
-      gc_mark();
-      gc_sweep();}while((i < 10));
 
-      print_gc();gc_collect();
+        }while((i < 10));
+
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }

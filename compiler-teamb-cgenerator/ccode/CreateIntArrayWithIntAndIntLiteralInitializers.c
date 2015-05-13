@@ -11,8 +11,10 @@ int main(){
    numOfPush = 1;
     Array* I = NULL;
    ;var_push(&I);
-   int i;i=0;
-   I=New_Array(0); ARRAYGET(I, 0) = New_Integer(i);
+   int i;
+   i=0;
+
+   I=New_Array(2); ARRAYGET(I, 0) = New_Integer(i);
    ARRAYGET(I, 1) = New_Integer(1);
    ;
 

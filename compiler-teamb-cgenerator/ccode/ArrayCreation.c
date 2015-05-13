@@ -17,13 +17,16 @@ int main(){
    numOfPush = 1;
     Array* acs = NULL;
    ;var_push(&acs);
-   acs=New_Array(0); ARRAYGET(acs, 0) = NULL;
+
+   acs=New_Array(2); ARRAYGET(acs, 0) = NULL;
    ARRAYGET(acs, 1) = New_AC();
    ;
-   ((AC*)ARRAYGET(acs, 1))->temp=New_Array(0); ARRAYGET(((AC*)ARRAYGET(acs, 1))->temp, 0) = New_Integer(1);
+
+   ((AC*)ARRAYGET(acs, 1))->temp=New_Array(3); ARRAYGET(((AC*)ARRAYGET(acs, 1))->temp, 0) = New_Integer(1);
    ARRAYGET(((AC*)ARRAYGET(acs, 1))->temp, 1) = New_Integer(2);
    ARRAYGET(((AC*)ARRAYGET(acs, 1))->temp, 2) = New_Integer(3);
    ;
+
    ((AC*)ARRAYGET(acs, 1))->x=5;
 
 

@@ -25,12 +25,15 @@ void* multipleInitOnly(){
 
    numOfPush = 0;
    int i;int j;int k;
-   for(i=0, j=0, k=0; ; ){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0, 
+   j=0, 
+   k=0; ; ){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }

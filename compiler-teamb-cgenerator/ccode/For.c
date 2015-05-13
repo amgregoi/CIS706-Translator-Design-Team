@@ -40,11 +40,11 @@ void* emptyFor(){
    numOfPush = 0;
 
    for(; ; ){
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
@@ -59,12 +59,13 @@ void* initOnlyFor(){
 
    numOfPush = 0;
    int i;
-   for(i=0; ; ){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0; ; ){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
@@ -78,14 +79,15 @@ void* condOnlyFor(){
    int indexX;
 
    numOfPush = 0;
-   int i;i=0;
+   int i;
+   i=0;
 
    for(; (i < 10); ){
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
@@ -99,14 +101,15 @@ void* incOrDecOnlyFor(){
    int indexX;
 
    numOfPush = 0;
-   int i;i=0;
+   int i;
+   i=0;
 
    for(; ; i++){
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
@@ -121,12 +124,13 @@ void* missingIncOrDecFor(){
 
    numOfPush = 0;
    int i;
-   for(i=0; (i < 10); ){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0; (i < 10); ){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
@@ -141,12 +145,13 @@ void* missingCondFor(){
 
    numOfPush = 0;
    int i;
-   for(i=0; ; i++){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0; ; i++){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
@@ -160,14 +165,15 @@ void* missingInitFor(){
    int indexX;
 
    numOfPush = 0;
-   int i;i=0;
+   int i;
+   i=0;
 
    for(; (i < 10); i++){
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       assert((i == 10));
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
@@ -183,12 +189,13 @@ void* forFor(){
 
    numOfPush = 0;
    int i;
-   for(i=0; (i < 10); i++){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0; (i < 10); i++){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       assert((i == 10));
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
@@ -204,12 +211,15 @@ void* multipleInitOnlyFor(){
 
    numOfPush = 0;
    int i;int j;int k;
-   for(i=0, j=0, k=0; ; ){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0, 
+   j=0, 
+   k=0; ; ){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
@@ -223,16 +233,19 @@ void* multipleIncOrDecOnlyFor(){
    int indexX;
 
    numOfPush = 0;
-   int i;int j;int k;i=0;
+   int i;int j;int k;
+   i=0;
+
    j=0;
+
    k=0;
 
    for(; ; i++, j++, k++){
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
@@ -247,12 +260,15 @@ void* multipleFor(){
 
    numOfPush = 0;
    int i;int j;int k;
-   for(i=0, j=0, k=0; (i < 10); i++, j++, k++){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0, 
+   j=0, 
+   k=0; (i < 10); i++, j++, k++){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       assert((i == 10));
    assert((j == 10));
    assert((k == 10));

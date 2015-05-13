@@ -25,12 +25,13 @@ void* missingCond(){
 
    numOfPush = 0;
    int i;
-   for(i=0; ; i++){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0; ; i++){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }

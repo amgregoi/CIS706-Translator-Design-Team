@@ -307,26 +307,23 @@ public class CGenerator {
 			for (final Object o : node.getBody().statements()) {
 				if (!(o instanceof VariableDeclarationStatement)) {
 					((ASTNode) o).accept(this);
-					
-					if(o instanceof ReturnStatement)
-					{
+
+					if (o instanceof ReturnStatement) {
 						ST vp = stg.getInstanceOf("varpop");
 						md.add("body", vp.render());
 						b = true;
 					}
-					if(callCollect)
-					{
+					if (callCollect) {
 						md.add("body", "\n gc_collect()");
 					}
-					if(o instanceof MethodInvocation)
-					{
+					if (o instanceof MethodInvocation) {
 						callCollect = true;
 					}
-					
+
 					final String body = getCode();
 					md.add("body", body);
 				} else {
-					
+
 					// variable declarations
 					final ST fd = stg.getInstanceOf("fielddeclaration");
 					final VariableDeclarationStatement vds = (VariableDeclarationStatement) o;
@@ -337,13 +334,12 @@ public class CGenerator {
 					final String type = updateTypeBoolPrimArr(this.typeMap
 							.get(vds).name);
 
-					
-					
-					if(!type.equals("Array*") && !primitiveType(type)){
-						fd.add("name", localName + " = New_" + type.replace("*", "")+"()");
+					if (!type.equals("Array*") && !primitiveType(type)) {
+						fd.add("name",
+								localName + " = New_" + type.replace("*", "")
+										+ "()");
 						fd.add("type", type);
-					}else
-					{
+					} else {
 						fd.add("name", localName);
 						fd.add("type", type);
 					}
@@ -352,19 +348,17 @@ public class CGenerator {
 
 					final String body = fd.render();
 					md.add("body", body);
-					if(!primitiveType(type))
-					{
+					if (!primitiveType(type)) {
 						numpush++;
 						final ST vp = stg.getInstanceOf("varpush");
 						vp.add("name", localName);
 						md.add("body", vp.render());
 					}
-					
+
 				}
 			}
 			md.add("numpush", numpush);
-			if(!b && !methodName.equals("main"))
-			{
+			if (!b && !methodName.equals("main")) {
 				ST vp = stg.getInstanceOf("varpop");
 				md.add("body", vp.render());
 			}
@@ -378,21 +372,15 @@ public class CGenerator {
 			final ST fd = stg.getInstanceOf("fielddeclaration");
 			((ASTNode) node.fragments().get(0)).accept(this);
 			final String name = getCode();
-			
-			
-			
+
 			final String type = updateTypeBoolPrimArr(this.typeMap.get(node).name);
 
-			if(this.typeMap.get(node).name.contains("[]"))
-			{
+			if (this.typeMap.get(node).name.contains("[]")) {
 				fd.add("arr", "true");
-			}
-			else if(!primitiveType(type))
-			{
+			} else if (!primitiveType(type)) {
 				fd.add("ptr", "true");
 			}
-			
-			
+
 			fd.add("type", type);
 			fd.add("name", name);
 
@@ -404,7 +392,7 @@ public class CGenerator {
 		@Override
 		public boolean visit(final Assignment node) {
 			final ST a = stg.getInstanceOf("assignment");
-
+			String prev = getCode();
 			((ASTNode) node.getLeftHandSide()).accept(this);
 			final String name = getCode();
 			((ASTNode) node.getRightHandSide()).accept(this);
@@ -415,9 +403,10 @@ public class CGenerator {
 			if (!(node.getRightHandSide() instanceof ArrayAccess)
 					&& (node.getLeftHandSide() instanceof ArrayAccess)
 					&& ((node.getRightHandSide() instanceof NumberLiteral)
-							|| (node.getRightHandSide() instanceof BooleanLiteral) || (this.typeMap
-								.get(node.getRightHandSide()) instanceof IntType))
-					&& !(node.getRightHandSide() instanceof InfixExpression)) {
+							|| (node.getRightHandSide() instanceof BooleanLiteral)
+							|| (this.typeMap.get(node.getRightHandSide()) instanceof IntType) || (this.typeMap
+							.get(node.getRightHandSide()) instanceof BooleanType)
+							&& !(node.getRightHandSide() instanceof InfixExpression))) {
 				if (this.typeMap.get(node.getRightHandSide()) instanceof IntType) {
 					a.add("val", "New_Integer(" + val + ")");
 
@@ -432,7 +421,7 @@ public class CGenerator {
 			}
 
 			String c = a.render();
-			setCode(c);
+			setCode(prev + "\n" + c);
 			return false;
 		}
 

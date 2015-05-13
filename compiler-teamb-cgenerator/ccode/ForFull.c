@@ -27,12 +27,13 @@ void* full(){
 
    numOfPush = 0;
    int i;
-   for(i=0; (i < 10); i++){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0; (i < 10); i++){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       assert((i == 10));
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();

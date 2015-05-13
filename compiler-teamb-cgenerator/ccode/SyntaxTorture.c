@@ -47,81 +47,106 @@ int main(){
    ManyTypes* m = New_ManyTypes();var_push(&m);
     Array* m_array = NULL;
    ;var_push(&m_array);
+
    i=0;
+
    j=i;
+
    b=true;
 
    if((i <= 0)){
       while(((~(9) <= i) && (i == -(1)))){
+
          i=(i + i);
 
-         gc_mark();
-         gc_sweep();
+
+
          }
 
-         print_gc();gc_collect();
-         b=false;
+         gc_collect();
+         
+      b=false;
       while((true && b)){
          i++;
 
-         gc_mark();
-         gc_sweep();
+
+
          }
 
-         print_gc();gc_collect();
+         gc_collect();
          i--;
 
-      for(i=0; !((i != 0)); i--, i++, i--){
+      for(
+      i=0; !((i != 0)); i--, i++, i--){
+
          i=((unsigned)i >> +(-(1)));
          returnInt();
          returnVoid();
 
-         gc_mark();
-         gc_sweep();
+
+
          }
 
-         print_gc();gc_collect();
+         gc_collect();
          
-      gc_mark();
-      gc_sweep();
-   }print_gc();gc_collect();
 
+
+   }
    do{
       i++;
 
-      gc_mark();
-      gc_sweep();}while(((+(7) << ~(-(5))) == j));
 
-      print_gc();gc_collect();
-      m=New_ManyTypes();
+        }while(((+(7) << ~(-(5))) == j));
+
+      gc_collect();
+      
+   m=New_ManyTypes();
+
    m->b=false;
+
    i=4;
+
    m_array=New_Array(i); ;
+
    ARRAYGET(m_array, 0)=m;
+
    i_array=New_Array(4); ARRAYGET(i_array, 0) = New_Integer(0);
    ARRAYGET(i_array, 1) = New_Integer(i);
    ARRAYGET(i_array, 2) = New_Integer(j);
    ARRAYGET(i_array, 3) = New_Integer(7);
    ;
+
    j=0;
+
    m->i=0;
+
    ARRAYGET(m_array, ((IntElement*)ARRAYGET(i_array, m->i))->value)=ARRAYGET(m_array, j);
 
-   for(i=2, i=j; ((j < (+(i) << 4)) && (j == i)); j++, i--){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=2, 
+   i=j; ((j < (+(i) << 4)) && (j == i)); j++, i--){
+
+
       }
 
-      print_gc();gc_collect();
-      b=false;
+      gc_collect();
+      
+   b=false;
+
    m=b ? NULL : m;
+
    b_array=New_Array(1); ARRAYGET(b_array, 0) = New_Boolean(true);
    ;
+
    m->b_array=b_array;
+
    b_array=returnBooleanArray(m->b_array);
+
    m=NULL;
+
    b_array=New_Array(1); ARRAYGET(b_array, 0) = New_Boolean(true);
    ;
+
    ARRAYGET(i_array, returnInt())=ARRAYGET(i_array, ((IntElement*)ARRAYGET(returnIntArray(), 2))->value);
 
 
@@ -138,7 +163,8 @@ int returnInt(){
    int indexX;
 
    numOfPush = 0;
-   int i;i=0;
+   int i;
+   i=0;
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
@@ -152,7 +178,9 @@ bool returnBoolean(bool b){
    int indexX;
 
    numOfPush = 0;
-   bool c;int i;c=true;
+   bool c;int i;
+   c=true;
+
    i=0;
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
@@ -168,6 +196,7 @@ Empty* returnEmpty(int i, Empty* e){
 
    numOfPush = 1;
    int j;Empty* f = New_Empty();var_push(&f);
+
    f=New_Empty();
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
@@ -184,14 +213,15 @@ Array* returnIntArray(){
    numOfPush = 1;
     Array* i = NULL;
    ;var_push(&i);
+
    i=New_Array((((unsigned)((1 + (((2 - 3) * 4) / ((5 % 6) << 7))) >> 8) >> 9) + 3)); length = i->elemNum;
    for(indexX=0; indexX<length; indexX++)
    {
    	ARRAYGET(i, indexX) = New_Integer(0);
-   	gc_mark();
-   	gc_sweep();
+
+
    }
-   print_gc();gc_collect();
+   gc_collect();
    ;
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
@@ -208,6 +238,7 @@ Array* returnBooleanArray(Array* b){
    numOfPush = 1;
     Array* c = NULL;
    ;var_push(&c);
+
    c=New_Array(3); ARRAYGET(c, 0) = New_Boolean(true);
    ARRAYGET(c, 1) = New_Boolean(false);
    ARRAYGET(c, 2) = New_Boolean(false);

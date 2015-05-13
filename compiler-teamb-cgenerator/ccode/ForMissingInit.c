@@ -26,14 +26,15 @@ void* missingInit(){
    int indexX;
 
    numOfPush = 0;
-   int i;i=0;
+   int i;
+   i=0;
 
    for(; (i < 10); i++){
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       assert((i == 10));
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();

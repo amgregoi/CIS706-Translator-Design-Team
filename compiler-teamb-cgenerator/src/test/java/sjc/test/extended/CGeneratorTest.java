@@ -62,7 +62,7 @@ public class CGeneratorTest {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			 System.out.println(result); //prints ccode to terminal
+			 //System.out.println(result); //prints ccode to terminal
 			cstream.write(result.getBytes());
 			cstream.close();
 
@@ -566,5 +566,81 @@ public class CGeneratorTest {
 	public void testWhile() {
 		testPass("While.java");
 	}
+	
+	@Test
+	  public void testBinaryTree(){
+	  testPass("myBinaryTree.java");
+	  }
+	  
+	  @Test
+	  public void testList(){
+	  testPass("myList.java");
+	  }
+	  
+	  @Test
+	  public void testStack(){
+	  testPass("myStack.java");
+	  }
+	  
+	  @Test
+	  public void testDoublyLinkedList(){
+	  testPass("myDoublyLinkedList.java");
+	  }
+	  
+	  
+	  
+	  @Test
+	  public void testMultiDimensionalArray(){
+	  testPass("myMultiDimensionalArray.java");
+	  }
+	  
+	  @Test
+	  public void testParallelArrays(){
+	  testPass("myParallelArrays.java");
+	  }
+	  
+	  @Test
+	  public void testCardDeck(){
+	  testPass("myCardDeck.java");
+	  }
+	  
+	  @Test
+	  public void testArray(){
+	  testPass("myArray.java");
+	  }
+	  
+	  @Test
+	  public void testBaseCase(){
+	  testPass("myBaseCase.java");
+	  }
+	  
+	  @Test
+	  public void testSelectionSort(){
+	  testPass("mySelectionSort.java");
+	  }
+	  
+	  @Test
+	  public void testMergeSortMillions(){
+	  testPass("myMergeSortMillions.java");
+	  }
+	  
+	  @Test
+	  public void testBinarySearchMillions(){
+	  testPass("myBinarySearchMillions.java");
+	  }
+	  
+	  @Test
+	  public void testHeapSortMillions(){
+	  testPass("myHeapSortMillions.java");
+	  }
+	  
+	  @Test
+	  public void testAllocateMillions(){
+	  testPass("myAllocateMillions.java");
+	  }
+	  
+	}
 
-}
+	
+
+

@@ -12,6 +12,7 @@ int main(){
    numOfPush = 1;
     Array* i = NULL;
    ;var_push(&i);
+
    i=returnIntArray();
 
 

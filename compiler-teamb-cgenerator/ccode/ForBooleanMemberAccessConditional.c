@@ -14,18 +14,22 @@ int main(){
 
    numOfPush = 1;
    FBMAC* o = New_FBMAC();var_push(&o);
-   bool b;b=false;
+   bool b;
+   b=false;
+
    o=New_FBMAC();
+
    o->b=false;
 
    for(; o->b; ){
+
       b=true;
 
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       assert((b == false));
 
 

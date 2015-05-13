@@ -22,9 +22,12 @@ int main(){
    ;var_push(&g);
     Array* h = NULL;
    ;var_push(&h);
+
    f=New_NewIDFoo();
+
    g=New_Array(4); ;
-   h=New_Array(0); ARRAYGET(h, 0) = f;
+
+   h=New_Array(2); ARRAYGET(h, 0) = f;
    ARRAYGET(h, 1) = ((NewIDFoo*)ARRAYGET(g, 0));
    ;
 

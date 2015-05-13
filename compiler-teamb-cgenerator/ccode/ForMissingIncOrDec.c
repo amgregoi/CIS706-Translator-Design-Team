@@ -25,12 +25,13 @@ void* missingIncOrDec(){
 
    numOfPush = 0;
    int i;
-   for(i=0; (i < 10); ){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0; (i < 10); ){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }

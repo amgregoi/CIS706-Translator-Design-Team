@@ -20,11 +20,12 @@ int main(){
    assert((subtract(-(2), -(3)) == 1));
 
    if(((2 - 3) < (5 - (2 + 3)))){
+
       x=5;
 
-      gc_mark();
-      gc_sweep();
-   }print_gc();gc_collect();
+
+
+   }
    x=2;
 
 

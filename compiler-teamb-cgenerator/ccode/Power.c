@@ -27,17 +27,21 @@ int power(int m, int n){
 
    numOfPush = 0;
    int result;int i;assert((n >= 1));
+
    result=1;
+
    i=0;
    while((i < n)){
+
       result=(result * m);
+
       i=(i + 1);
 
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }

@@ -26,17 +26,21 @@ void* ae(int a, int b){
    int indexX;
 
    numOfPush = 0;
-   int x;int y;x=(a + b);
+   int x;int y;
+   x=(a + b);
+
    y=(a * b);
    while((y > (a + b))){
+
       a=(a + 1);
+
       x=(a + b);
 
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
@@ -52,19 +56,22 @@ void* vbe(int a, int b){
    numOfPush = 0;
    int x;int y;
    if((a > b)){
+
       x=(b - a);
+
       y=(a - b);
 
-      gc_mark();
-      gc_sweep();
+
+
    }else{
+
       y=(b - a);
+
       x=(a - b);
 
-      gc_mark();
-      gc_sweep();
-   }print_gc();gc_collect();
-   for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
+
+
+   }for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }
 
@@ -77,21 +84,26 @@ void* lv(){
    int indexX;
 
    numOfPush = 0;
-   int x;int y;int z;x=2;
+   int x;int y;int z;
+   x=2;
+
    y=4;
+
    x=1;
 
    if((y > x)){
+
       z=y;
 
-      gc_mark();
-      gc_sweep();
+
+
    }else{
+
       z=(y * y);
 
-      gc_mark();
-      gc_sweep();
-   }print_gc();gc_collect();
+
+
+   }
    x=z;
    for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();

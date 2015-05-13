@@ -14,7 +14,9 @@ int main(){
 
    numOfPush = 1;
    CWN* o = New_CWN();var_push(&o);
+
    o=New_CWN();
+
    o=true ? NULL : o;
 
 

@@ -27,12 +27,15 @@ void* multipleInitAndIncOrDec(){
 
    numOfPush = 0;
    int i;int j;int k;
-   for(i=0, j=0, k=0; (i < 10); i++, j++, k++){
-      gc_mark();
-      gc_sweep();
+   for(
+   i=0, 
+   j=0, 
+   k=0; (i < 10); i++, j++, k++){
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       assert((i == 10));
    assert((j == 10));
    assert((k == 10));

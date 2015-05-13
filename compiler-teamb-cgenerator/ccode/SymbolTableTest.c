@@ -19,8 +19,11 @@ int main(){
    numOfPush = 2;
    A* a = New_A();var_push(&a);
    B* b = New_B();var_push(&b);
-   int z;a=New_A();
+   int z;
+   a=New_A();
+
    b=New_B();
+
    z=(a->x + b->x);
 
 

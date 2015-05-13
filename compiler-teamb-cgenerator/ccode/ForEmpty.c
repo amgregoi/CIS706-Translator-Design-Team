@@ -26,11 +26,11 @@ void* empty(){
    numOfPush = 0;
 
    for(; ; ){
-      gc_mark();
-      gc_sweep();
+
+
       }
 
-      print_gc();gc_collect();
+      gc_collect();
       for(numOfPush -= 1; numOfPush>= 0; numOfPush--){
       	  var_pop();
       }

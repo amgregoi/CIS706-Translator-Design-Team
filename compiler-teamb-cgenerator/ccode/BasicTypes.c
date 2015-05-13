@@ -9,7 +9,9 @@ int main(){
    int indexX;
 
    numOfPush = 0;
-   int i;bool b;i=0;
+   int i;bool b;
+   i=0;
+
    b=true;
 
 

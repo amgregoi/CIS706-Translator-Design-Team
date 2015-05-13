@@ -9,15 +9,16 @@ int main(){
    int indexX;
 
    numOfPush = 0;
-   int i;i=0;
+   int i;
+   i=0;
 
    do{
       i++;
 
-      gc_mark();
-      gc_sweep();}while((i < 10));
 
-      print_gc();gc_collect();
+        }while((i < 10));
+
+      gc_collect();
       assert((i == 10));
 
 

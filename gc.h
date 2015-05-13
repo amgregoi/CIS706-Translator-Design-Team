@@ -15,7 +15,7 @@
 
 //Define TRACE to output a stack trace for each method that gets called-
 //as well as its inputs and return value;
-#define TRACE
+//#define TRACE
 
 //#define ARRAYGET(var, type, i) ((type*)var->address[i])
 

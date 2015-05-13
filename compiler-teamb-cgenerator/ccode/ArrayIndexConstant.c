@@ -11,10 +11,12 @@ int main(){
    numOfPush = 1;
     Array* i_array = NULL;
    ;var_push(&i_array);
-   i_array=New_Array(0); ARRAYGET(i_array, 0) = New_Integer(1);
+
+   i_array=New_Array(3); ARRAYGET(i_array, 0) = New_Integer(1);
    ARRAYGET(i_array, 1) = New_Integer(2);
    ARRAYGET(i_array, 2) = New_Integer(3);
    ;
+
    ARRAYGET(i_array, 0)=New_Integer(1);
 
 

@@ -9,7 +9,8 @@ int main(){
    int indexX;
 
    numOfPush = 0;
-   int i;i=2;
+   int i;
+   i=2;
    i++;
    assert((i == 3));
 
